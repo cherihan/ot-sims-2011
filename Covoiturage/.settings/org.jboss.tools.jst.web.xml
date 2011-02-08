@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-systems VERSION="2.0.0" application-name="Covoiturage"
+ model-entity="FileSystems" workspace-home="./WebContent/WEB-INF">
+ <file-system NAME="WEB-INF" location="%workspace.home%" model-entity="FileSystemFolder"/>
+ <file-system NAME="WEB-ROOT" info="Content-Type=Web"
+  location="%workspace.home%/.." model-entity="FileSystemFolder"/>
+ <file-system NAME="src" location="%workspace.home%/../../src" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib" location="%workspace.home%/lib" model-entity="FileSystemFolder"/>
+ <file-system NAME="classes" location="%workspace.home%/classes" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-resources.jar"
+  location="C:\Program Files\Java\jre6\lib\resources.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dnsns.jar"
+  location="C:\Program Files\Java\jre6\lib\ext\dnsns.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-localedata.jar"
+  location="C:\Program Files\Java\jre6\lib\ext\localedata.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunjce_provider.jar"
+  location="C:\Program Files\Java\jre6\lib\ext\sunjce_provider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunmscapi.jar"
+  location="C:\Program Files\Java\jre6\lib\ext\sunmscapi.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunpkcs11.jar"
+  location="C:\Program Files\Java\jre6\lib\ext\sunpkcs11.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-common-annotations.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\common-annotations.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-beanutils.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\commons-beanutils.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-collections.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\commons-collections.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-digester.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\commons-digester.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-logging.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\commons-logging.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jsf-api.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\jsf-api.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jsf-impl.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\jsf-impl.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jstl.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\jstl.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-standard.jar"
+  location="A:\PFA\Eclipse and LibJSF\Sun JSF 1.2 RI libs\standard.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="Covoiturage" location="%eclipse.project%" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-jsf-facelets.jar" info="hidden=yes"
+  location="%workspace.home%/lib/jsf-facelets.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-richfaces-api-3.3.0.GA.jar" info="hidden=yes"
+  location="%workspace.home%/lib/richfaces-api-3.3.0.GA.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-richfaces-impl-3.3.0.GA.jar" info="hidden=yes"
+  location="%workspace.home%/lib/richfaces-impl-3.3.0.GA.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-richfaces-ui-3.3.0.GA.jar" info="hidden=yes"
+  location="%workspace.home%/lib/richfaces-ui-3.3.0.GA.jar" model-entity="FileSystemJar"/>
+ <web SERVLET_VERSION="2.4" model-entity="JstWeb" model-path="/web.xml">
+  <module URI="/WEB-INF/faces-config.xml" model-entity="WebJSFModule"
+   model-path="/faces-config.xml" src="src" web-root="WEB-ROOT"/>
+ </web>
+</file-systems>
