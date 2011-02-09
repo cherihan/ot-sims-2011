@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <title>GoGoGo!</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <section class=page>
+    <h1>GoGoGo!</h1>
+    <nav>
+      <a href="{{ url_for('home') }}">home</a>
+    </nav>
+    {% for message in get_flashed_messages() %}
+      <section class=flash>{{ message }}</section>
+    {% endfor %}
+    {% block body %}{% endblock %}
+  </section>
+</body>
+</html>
+
