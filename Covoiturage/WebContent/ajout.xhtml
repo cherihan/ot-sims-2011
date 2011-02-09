@@ -12,12 +12,12 @@
 
 		<h:form>
 			<h:panelGrid columns="2">
-				<h:outputLabel value="Depart" /> <h:inputText value="" />
-				<h:outputLabel value="arivee" /> <h:inputText value="" />
-				<h:outputLabel value="Date" /> <rich:calendar />
+				<h:outputLabel value="Depart" /> <h:inputText value="#{annonce.depart}" />
+				<h:outputLabel value="arivee" /> <h:inputText value="#{annonce.arrive}" />
+				<h:outputLabel value="Date" /> <rich:calendar datePattern="yyyy-MM-dd" value="#{annonce.date}" />
 			</h:panelGrid>
 			
-			<h:commandButton action="list" value="Ajouter" />
+			<h:commandButton action="#{annonce.insert}" value="Ajouter" />
 		</h:form>
 		
 	</ui:composition>

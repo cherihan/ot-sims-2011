@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:#accueil.xhtml" PATH="/accueil.xhtml"
-  SHAPE="256,152,50,57" model-entity="JSFProcessGroup">
+  SHAPE="184,128,50,57" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#accueil.xhtml:0" NAME="item"
    PATH="/accueil.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="ajout::#ajout.xhtml" NAME="output"
@@ -11,13 +11,19 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#ajout.xhtml" PATH="/ajout.xhtml"
-  SHAPE="488,64,50,25" model-entity="JSFProcessGroup">
+  SHAPE="560,32,50,57" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#ajout.xhtml:0" NAME="item"
    PATH="/ajout.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="actuel::#ajout.xhtml" NAME="output1"
+    PATH="/ajout.xhtml"
+    SHAPE="609,64,632,64,632,128,554,128,554,40,559,40"
+    TARGET="rules:#ajout.xhtml" TITLE="actuel" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="list::#list.xhtml" NAME="output"
-    PATH="/list.xhtml" TARGET="rules:#list.xhtml" TITLE="list" model-entity="JSFProcessItemOutput"/>
+    PATH="/list.xhtml"
+    SHAPE="609,80,696,80,696,192,560,192,560,304,575,304"
+    TARGET="rules:#list.xhtml" TITLE="list" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#list.xhtml" PATH="/list.xhtml"
-  SHAPE="488,296,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+  SHAPE="576,296,50,25" model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
