@@ -10,25 +10,26 @@
 		
 		List
 
-		<rich:dataTable value="table" var="var" style="width:500px">
+		<rich:dataTable value="#{listofAnnonces.annonces}" var="item" style="width:500px">
 		
 			<h:column>
 				<f:facet name="header">depart</f:facet>
-					La doua gaston berger
+					#{item.depart}	
+									
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">arrivee</f:facet>
-					Part dieu
+				<f:facet name="header">arrive</f:facet>
+					#{item.arrive}
 			</h:column>
 			
 			<h:column>
 				<f:facet name="header">Quand ?</f:facet>
-					12/02/2011
-			</h:column>
-			
+				#{item.date}
+			</h:column>			
+					
 		</rich:dataTable>
-
+				
 	</ui:composition>
 
 </html>
