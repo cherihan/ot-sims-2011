@@ -6,7 +6,7 @@
 How to add SVN support in Eclipse Ganymede
 
 = Details =
-<br/>*Step1*
+*Step1*
 <br/>1.1 Add source http://download.eclipse.org/technology/subversive/0.7/update-site/ to your available software list in Eclipse (Help->Software Updates...->Available Software->Add Site...)
 1.2 Select _Subversive SVN Team Provider Plugin (Incubation)_ under _Subversive Site_
 1.3 
