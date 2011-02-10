@@ -16,7 +16,8 @@ How to add SVN support in Eclipse *_Ganymede_* - For those who want to use SVN u
 <br/>2.3 Click *Install...* and finish the installation progress. You will be demanded to restart the Eclipse when the installation is finished, follow the instruction.
 == Step 3 ==
 3.1 Now you are ready to use SVN under Eclipse. Create a new SVN project : File->New->Project...->SVN->Project from SVN...
-3.2 Click next, in the configuration panel fill the URL with 
+<br/>3.2 Click next, in the configuration panel fill the *URL* with https://ot-sims-2011.googlecode.com/svn/ and enter your account name and password (_NOTE: This is the password for your SVN commit not the one for your login account_)
+<br/>3.3 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
