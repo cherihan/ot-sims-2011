@@ -3,7 +3,7 @@
 
 = Introduction =
 
-How to add SVN support in Eclipse Ganymede
+How to add SVN support in Eclipse *_Ganymede_* - For those who want to use SVN inside Eclipse
 
 = Details =
 *Step1*
