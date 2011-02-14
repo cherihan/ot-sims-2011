@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS route_rte (
 	rte_owner INT(11) NOT NULL COMMENT 'Proprietaire du trajet',
 	rte_seat INT(2) NULL DEFAULT NULL COMMENT 'Number of seat needed / proposed. NULL <=> not set',
 	rte_car INT(11) NULL DEFAULT NULL COMMENT 'Optional - Car used for this traject',
+	rte_deletedate BIGINT(20) NULL DEFAULT NULL COMMENT 'Delete date, null if this route is not deleted',
 	
 
 	INDEX(rte_type),
@@ -160,7 +161,7 @@ CREATE TABLE IF NOT EXISTS googlecache_gch (
 	gch_latitude FLOAT(10,6) NULL DEFAULT NULL,
 	gch_longitude FLOAT(10,6) NULL DEFAULT NULL,
 							  
-	INDEX(gch_address),
+	UNIQUE(gch_address),
 	INDEX(gch_latitude),
 	INDEX(gch_longitude)
 
@@ -219,7 +220,7 @@ ALTER TABLE passager_psg
 	ADD CONSTRAINT passager_route_constraint FOREIGN KEY (psg_route) REFERENCES route_rte (rte_id);
 	
 ALTER TABLE passager_psg
-	ADD CONSTRAINT passager_user_constraint FOREIGN KEY (psg_user) REFERENCES passager_psg (psg_id);
+	ADD CONSTRAINT passager_user_constraint FOREIGN KEY (psg_user) REFERENCES user_usr (usr_id);
 	
 ALTER TABLE comment_cmn
 	ADD CONSTRAINT comment_user_from_constraint FOREIGN KEY (cmn_user_from) REFERENCES user_usr (usr_id);
