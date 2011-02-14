@@ -57,7 +57,8 @@ CREATE TABLE IF NOT EXISTS user_usr (
 	usr_mobilphone VARCHAR(100) NOT NULL,
 --	usr_reputation INT(11) NOT NULL,
 	usr_note INT(2) NULL DEFAULT NULL COMMENT 'Member review average of this member, null for none', 
-	
+	usr_registrationdate BIGINT(20) NOT NULL,
+	usr_lastlogindate BIGINT(20) NOT NULL,
 					   
 					   
 	UNIQUE(usr_email),
@@ -84,7 +85,7 @@ CREATE TABLE IF NOT EXISTS position_pos (
 	
 	INDEX(pos_latitude),
 	INDEX(pos_longitude),
-	INDEX(pos_address)
+	UNIQUE(pos_address)
 )type=InnoDb;
 
 CREATE TABLE IF NOT EXISTS car_car (
