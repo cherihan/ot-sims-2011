@@ -19,8 +19,8 @@ end //
 
 -- Check if the tuple user - password is valid
 -- Return the user if valid or NULL if not
-DROP PROCEDURE IF EXISTS user_get_user_by_email //
-CREATE PROCEDURE user_get_user_by_email (
+DROP PROCEDURE IF EXISTS user_check_authentification //
+CREATE PROCEDURE user_check_authentification (
 	IN _usr_email VARCHAR(100),
 	IN _usr_password_not_encrypted VARCHAR(100)
 )
