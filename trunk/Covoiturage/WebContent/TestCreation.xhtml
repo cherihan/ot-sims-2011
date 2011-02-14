@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition>
+
+<h:panelGrid columns="2">
+	<h:outputText value="email: " />
+	<h:outputText value="#{user.email}" />
+	
+	<h:outputText value="password: " />
+	<h:outputText value="#{user.passWord}" />
+	
+	<h:outputText value="first name: " />
+	<h:outputText value="#{user.firstName}" />
+	
+	<h:outputText value="Last name: " />
+	<h:outputText value="#{user.lastName}" />
+	
+	<h:outputText value="sexe: " />
+	<h:outputText value="#{user.sexe}" />
+</h:panelGrid>	
+	</ui:composition>
+</html>
