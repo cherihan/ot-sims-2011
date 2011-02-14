@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+      
+   		
+		<head>
+		<title><ui:insert name="title">Title</ui:insert></title>
+		<style type="text/css">
+			body {
+				  font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 14px;
+			}
+			.header {
+				  font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 18px;
+			}
+			.bottom {
+				  font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 9px;
+				  text-align: center;
+				  vertical-align: middle;
+				  color: #8E969D;
+			}
+		body,td,th {
+	color: #33CCFF;
+}
+</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /></head>
+
+<body bgcolor="#ffffff" style="width : 755px; height : 269px;">
+<table style="border:1px solid #CAD6E0"  align="center" cellpadding="0" cellspacing="0" border="1" width="1358" >
+
+<tbody>
+
+	<tr>
+		<td class="header" height="51" align="center" valign="middle" width="100%" bgcolor="#E4EBEB">
+	    	<ui:insert name="header">
+	    		Header
+	    	</ui:insert>
+	    </td>
+	</tr>
+		
+
+	<tr style=" width : 452px;">
+		<td width="100%" height="299"  colspan="2"><table width="100%" style="height:150px" align="left" cellpadding="0" cellspacing="0" border="0">
+			<tbody>
+				<tr style=" height : 158px;">				
+				
+					<td align="center" width="1292" valign="middle" style=" width : 1097px;">
+					
+				  <ui:insert name="body">Body</ui:insert>					</td>
+			  </tr>
+			</tbody>
+	  </table>		</td>
+	</tr>	
+	
+	<tr style=" height : 31px;">
+		<td  align="center" colspan="2"  valign="bottom" height="30" width="100%" bgcolor="#CAD6E0">
+		<ui:insert name="pied">(c)INSA 2010-2011</ui:insert>		</td>
+	</tr>
+</tbody>
+</table>
+</body>
+		
+</html>
