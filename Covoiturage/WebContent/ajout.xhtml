@@ -17,6 +17,11 @@
 				<h:outputLabel value="Date" /> <rich:calendar datePattern="dd MMM yyyy" value="#{annonce.date}" />
 			</h:panelGrid>
 			
+			<h:panelGrid columns="4">
+				<h:outputLabel value="Heure" /> <rich:inputNumberSpinner maxValue="23" minValue="0" value=""/>
+				<h:outputLabel value="Munute" /> <rich:inputNumberSpinner maxValue="59" minValue="0" value=""/>				
+			</h:panelGrid>
+			
 			<h:commandButton action="#{annonce.insert}" value="Ajouter" />
 		</h:form>
 		
