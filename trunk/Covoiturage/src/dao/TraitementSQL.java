@@ -1,111 +1,84 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
 import beans.Annonce;
+import beans.User;
 
 public class TraitementSQL {
+	
+	public static ConnexionBD con;	
+	public static String url="jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod=";  //  @jve:decl-index=0:
+	public static String nomDriver="com.mysql.jdbc.Driver";  //  @jve:decl-index=0:
 
+	
+	/**
+	 * 
+	 * @param depart
+	 * @param arrive
+	 * @param date
+	 * @return
+	 */
 	public static String insert(String depart, String arrive, Date date)
 	{
-		Connection con = null;
-        String lien= "actuel";
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/sims", "root", "");
-		
-			if (!con.isClosed())
-			{
-				
-				Statement sta=null;
-									
-				sta = con.createStatement();
-				
-				
-				//DateFormat dateForme = new SimpleDateFormat("yyyy-MM-dd");
-				
-				//String formatteur = dateForme.format(date);
-				long formatteur =  date.getTime();
-				
-				System.out.println("Test DateTime" + formatteur);
-				
-				sta.executeUpdate("INSERT INTO chemin (depart, arrivee, date) values ('"+ depart +"', '" + arrive +"', '" + formatteur +"');");
-				
-									
-				lien= "list";
-				
-			}
-			else{
-//					output = "Connection echouer...";
-					lien= "actuel";
-			}
-				
+		con = null;
+        String lien= "list";
+        
+		try {			
+			con=new ConnexionBD(url,nomDriver);		
+
+			long formatteur =  date.getTime();			
+			System.out.println("Test DateTime" + formatteur);
 			
-		} catch (Exception e) {
+			String query="INSERT INTO chemin (depart, arrivee, date) values ('"+ depart +"', '" + arrive +"', '" + formatteur +"');";
+			con.insert(query);
+			
+		}catch(Exception e)
+		{			
 			System.err.println("Exception: " + e.getMessage());
-//			output = "Connection echouer.............";
-			lien= "actuel";
-		} finally {
-			try {
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-			}
+			System.out.println("Connection echouer.............");
+			lien= "actuel";	
+				
 		}
-					
 		
+		con.close();		
 		return lien;
 
 	}
 	
-	
-	
-
-
+/**
+ * 
+ * @return
+ */
 public static ArrayList<Annonce> loadData()
 {
 	
 	ArrayList<Annonce> listofAnnonces = new ArrayList<Annonce>();
-	Connection con = null;
+	con = null;
 
 	try {
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+		con=new ConnexionBD(url,nomDriver);	
+		String query = "SELECT * FROM chemin";
 		
-		con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/sims", "root", "");
+		ResultSet curseur = con.search(query);
 		
-	
-	if (!con.isClosed())
-	{
-		
-		Statement sta=null;
-		ResultSet re=null;
-		
-		sta = con.createStatement();
-		re=sta.executeQuery("SELECT * FROM chemin");
-		
-							
-		while(re.next())
+					
+		while(curseur.next())
 		{					
-			  String depart =re.getString(2);
-			  String arrive =re.getString(3);
+			  String depart =curseur.getString(2);
+			  String arrive =curseur.getString(3);
 			  
 			  System.out.println("arrive :" +arrive);
 			  
-			  Date date  =new Date(re.getLong(4));
+			  Date date  =new Date(curseur.getLong(4));
 			  
 			  
 			  System.out.println("Daaaate :" +date);
-			  			  
-			  
-//			DateFormat dateForme = new SimpleDateFormat("yyyy-MM-dd");
-//				
-//				String formatteur = dateForme.format(date);
+
 			  
 			  listofAnnonces.add(new Annonce(depart, arrive, date));
 			  
@@ -113,36 +86,87 @@ public static ArrayList<Annonce> loadData()
 			
 		}
 		
-		
-		
+	}catch(Exception e) {
+		System.err.println("Exception!: " + e.getMessage());
+		System.out.println("Connection echouer.............");
 	}
-
+	
+	con.close();
 	return listofAnnonces;
 		
-	
-} catch (Exception e) {
-	System.err.println("Exception!: " + e.getMessage());
-//	output = "Connection echouer.............";
-//	lien= "actuel";
-} finally {
-	try {
-		if (con != null)
-			con.close();
-	} catch (SQLException e) {
-	}
 }
-return listofAnnonces;
+
+/**
+ *  
+ * @param email
+ * @param passWord
+ * @param firstName
+ * @param lastName
+ * @param sexe
+ * @return
+ */
+public static String creatUser(String email, String passWord, String firstName, String lastName, String sexe)
+{
+	String lien="ok";
+	con = null;
+	
+try{
+		
+		con = new ConnexionBD(url, nomDriver );
+		
+		String query = "call user_create('" + email + "', '" + passWord +"', '" + firstName	+ "', '" + lastName + "', '" + sexe + "')";
+		con.insert(query);
+		
+	}catch(Exception e){
+		System.err.println("Exception: " + e.getMessage());
+		System.out.println("Connection echouer.............");
+		lien = "actuel"; 
+	}
+	
+	con.close();	
+	
+	return lien;
+	
+}
+
+public static User authentification(String email, String passWord)
+{
+	con = null;	
+	User utilisateur = null;
+	
+	try{
+						
+		con = new ConnexionBD(url, nomDriver );
+		
+		String query = "call user_get_user_by_email('" + email + "', '" + passWord +"')";
+		ResultSet curseur = con.search(query);
+		
+		while(curseur.next())
+		{					
+			  String firstName =curseur.getString(2);
+			  String lastName =curseur.getString(3);
+			  String sexe =curseur.getString(7);
+			  
+			  utilisateur = new User(email, passWord, firstName, lastName, sexe);			
+		}
+		
+	}catch(Exception e){
+		System.err.println("Exception: " + e.getMessage());
+		System.out.println("Connection echouer.............");		
+	}
+	
+	con.close();	
+	
+	return utilisateur;
+	
 }
 
 
 public static void main(String[] args) {
 	
-	//TraitementSQL.loadData();
+	User test = TraitementSQL.authentification("othman.bentria@gmail.com", "root");
 	
-	//Date date = new Date()
-	
-	 
-	
+	System.out.println(test.getFirstName());
 	
 	
 }
