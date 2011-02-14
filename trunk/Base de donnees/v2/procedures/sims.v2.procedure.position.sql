@@ -46,3 +46,33 @@ BEGIN
 	
 END //
 
+
+-- Store a new position in googlecache
+DROP PROCEDURE IF EXISTS googlecache_create_or_update //
+CREATE PROCEDURE googlecache_create_or_update (
+	IN _address VARCHAR(255),
+	IN _latitude FLOAT(10,6),
+	IN _longitude FLOAT(10,6)
+)
+BEGIN
+
+	INSERT INTO googlecache_gch 	(gch_id, gch_address, gch_latitude, gch_longitude) VALUES 
+									(NULL, _address, _latitude, _longitude) 
+		ON DUPLICATE KEY 
+			UPDATE gch_latitude=_latitude, gch_longitude=_longitude;
+	
+END //
+
+
+-- Return position of an address or nothing if it's not found
+DROP PROCEDURE IF EXISTS googlecache_get_by_address //
+CREATE PROCEDURE googlecache_get_by_address (
+	IN _address VARCHAR(255)
+)
+BEGIN
+	DECLARE __gch_id INT(11);
+	
+	SELECT * FROM googlecache_gch WHERE gch_address = _address;
+	
+end //
+
