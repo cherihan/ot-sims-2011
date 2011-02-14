@@ -4,7 +4,6 @@
 
 -- From Simon Minotto
 
-DELIMITER //
 
 DROP PROCEDURE IF EXISTS _criterion_update_crt_crt //
 CREATE PROCEDURE _criterion_update_crt_crt ()
