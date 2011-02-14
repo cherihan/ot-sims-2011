@@ -22,21 +22,30 @@
 				
 		<h:panelGrid columns="2">
 		
-			<h:outputText value="username" />
-			<h:inputText value="#{user.name}" id="name" />
+			<h:outputText value="Email" />
+			<h:inputText value="#{user.email}" />
 			
-			<h:outputText value="mail" />
-			<h:inputText value="" id="mail" />				
-					
-			<h:outputText value="password" />			
-			<h:inputSecret value="#{user.passWord}" id="password" />				
+			<h:outputText value="First name" />
+			<h:inputText value="#{user.firstName}" />						
+
+			<h:outputText value="Last name" />
+			<h:inputText value="#{user.lastName}"/>	
+			
+			<h:outputText value="Sexe" />			
+			<rich:comboBox value="#{user.sexe}">
+				<f:selectItem itemValue="male"/>
+				<f:selectItem itemValue="female"/>
+			</rich:comboBox>
+								
+			<h:outputText value="Password" />			
+			<h:inputSecret value="#{user.passWord}" />				
 						
-			<h:outputText value="confirm" />			
-			<h:inputSecret value="#{user.confirmPassWord}" id="confirm" />				
+			<h:outputText value="confirm password" />			
+			<h:inputSecret value="#{user.confirmPassWord}" />				
 			
 			
 		</h:panelGrid>
-		<h:commandButton action="#{user.authentication}" value="Save" id="action"/>
+		<h:commandButton action="#{user.creatUser}" value="Save"/>
 					
 		</rich:panel>
 		
