@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="/template/template.xhtml" >
+		
+		<ui:define name="header">List</ui:define>
+
+<ui:define name="body">
+		<rich:dataTable value="#{listofAnnonces.annonces}" var="item" style="width:500px">
+		
+			<h:column>
+				<f:facet name="header">depart</f:facet>
+					#{item.depart}	
+									
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">arrive</f:facet>
+					#{item.arrive}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Quand ?</f:facet>
+				#{item.dateString}
+			</h:column>			
+					
+		</rich:dataTable>
+	</ui:define>	
+					
+	</ui:composition>
+
+</html>

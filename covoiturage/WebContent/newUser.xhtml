@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/template/template.xhtml">
+
+
+<ui:define name="header">New account</ui:define>
+
+<ui:define name="body">
+	<h:form>
+		<rich:panel id="panel">		
+		
+		<f:facet name="header">
+			<h:panelGroup>
+				<h:outputText value="Authentification"/>
+				(<h:commandLink action="authentification" value="s'authentifier" />)
+			</h:panelGroup>
+		</f:facet>		
+				
+		<h:panelGrid columns="2">
+		
+			<h:outputText value="username" />
+			<h:inputText value="#{user.name}" id="name" />
+			
+			<h:outputText value="mail" />
+			<h:inputText value="" id="mail" />				
+					
+			<h:outputText value="password" />			
+			<h:inputSecret value="#{user.passWord}" id="password" />				
+						
+			<h:outputText value="confirm" />			
+			<h:inputSecret value="#{user.confirmPassWord}" id="confirm" />				
+			
+			
+		</h:panelGrid>
+		<h:commandButton action="#{user.authentication}" value="Save" id="action"/>
+					
+		</rich:panel>
+		
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
