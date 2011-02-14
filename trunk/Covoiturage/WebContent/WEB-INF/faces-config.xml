@@ -23,12 +23,28 @@
    <from-outcome>newUser</from-outcome>
    <to-view-id>/newUser.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>ok</from-outcome>
+   <to-view-id>/TestCreation.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>actuel</from-outcome>
+   <to-view-id>/authentification.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/newUser.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>authentification</from-outcome>
    <to-view-id>/authentification.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ok</from-outcome>
+   <to-view-id>/TestCreation.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>actuel</from-outcome>
+   <to-view-id>/newUser.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
