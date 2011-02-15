@@ -1,7 +1,7 @@
 package beans;
 
 
-import java.util.ArrayList;
+import java.util.Date;
 
 import utilities.Constantes;
 
@@ -15,13 +15,13 @@ public class User {
 	}
 
 	public User(String email, String passWord, String firstName,
-			String lastName, String sexe) {
+			String lastName, String genre) {
 		super();
 		this.email = email;
 		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.sexe = sexe;		
+		this.genre = genre;		
 	}
 
 
@@ -32,7 +32,12 @@ public class User {
 	String confirmPassWord;
 	String firstName;
 	String lastName;
-	String sexe;
+	String genre;
+	Date birthDay;
+	String description;
+	String mobilePhone;
+	String note;
+	int currentPosition;
 		
 	//à afficher dans notre page web lors d'un erreur
 	String messageErr;
@@ -93,22 +98,69 @@ public class User {
 
 	
 	
-	public String getSexe() {
-		return sexe;
+	public String getGenre() {
+		return genre;
 	}
-
-	public void setSexe(String sexe) {
-		this.sexe = sexe;
-	}
-
 	
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	
+		
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public int getCurrentPosition() {
+		return currentPosition;
+	}
+
+	public void setCurrentPosition(int currentPosition) {
+		this.currentPosition = currentPosition;
+	}
+
+	public void setMessageErr(String messageErr) {
+		this.messageErr = messageErr;
+	}
+	
+	
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+	
+	
+
 	/**
 	 * 
 	 */
 	public String creatUser()
 	{
 				
-		if(email.equals("") || firstName.equals("") || lastName.equals("") || sexe.equals("") ){
+		if(email.equals("") || firstName.equals("") || lastName.equals("") || genre.equals("") ){
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 			
@@ -117,12 +169,15 @@ public class User {
 			return "actuel";
 		}
 		
-		ArrayList<String> result = TraitementSQL.creatUser(email, confirmPassWord, firstName, lastName, sexe);		
+		String lien = "";
 		
-		String lien= result.get(0);	
-		messageErr = result.get(1);	
+		try {
+			lien = TraitementSQL.creatUser(email, passWord, firstName, lastName, genre);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			messageErr = e.getMessage();
+		}		
 		
-		if(lien.equals("ok")) messageErr="";
 		
 		return lien;
 	}
@@ -133,7 +188,8 @@ public class User {
 	 * 
 	 */
 	public String authentication(){		
-			
+					
+		messageErr = "";
 			
 		if(!passWord.equals(confirmPassWord) || passWord.equals("") || confirmPassWord.equals("") || email.equals("") ){
 			
@@ -142,19 +198,24 @@ public class User {
 			return "actuel";
 		}		
 		
-		ArrayList<String> result = TraitementSQL.authentification(email, passWord);
-					
-		if(result.size()==1) messageErr = result.get(0); 
+		User utilisateur = null ;
+		try {
+			utilisateur = TraitementSQL.authentification(email, passWord);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			messageErr = e.getMessage();
+		}	
 		
-		if(result.size() > 1){
-			
-			email = result.get(1);
-			firstName = result.get(2);
-			lastName = result.get(3);
-			sexe = result.get(4);					
+		if(utilisateur.getFirstName() != null){			
+			email = utilisateur.getEmail();
+			firstName = utilisateur.getFirstName();
+			lastName = utilisateur.getLastName();
+			genre = utilisateur.getGenre();				
 			messageErr = "";
 			return "ok";
-		}		
+		}
+		
+		messageErr = Constantes.PASSWORD_OR_USER_NOT_GOOD;
 		
 		return "actuel";
 	}
