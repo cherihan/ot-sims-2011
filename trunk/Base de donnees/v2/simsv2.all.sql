@@ -324,6 +324,7 @@ INSERT IGNORE INTO _criterion_crt (crt_id, crt_type, crt_label, crt_root_criteri
 
 -- From Simon Minotto
 
+DELIMITER //
 
 DROP PROCEDURE IF EXISTS _criterion_update_crt_crt //
 CREATE PROCEDURE _criterion_update_crt_crt ()
@@ -365,12 +366,17 @@ BEGIN
 	END LOOP;
 	CLOSE cur1;
     
-end //-- sims SQL V2, Sprint 2
+end //
+
+DELIMITER ;
+
+-- sims SQL V2, Sprint 2
 
 -- Procedures stokes - position
 
 -- From Simon Minotto
 
+DELIMITER //
 
 -- Return position of an address or nothing if it's not found
 DROP PROCEDURE IF EXISTS position_get_by_address //
@@ -443,11 +449,16 @@ BEGIN
 	
 end //
 
+DELIMITER ;
+
 -- sims SQL V2, Sprint 2
 
 -- Procedures stokes, route
 
 -- From Simon Minotto
+
+
+DELIMITER //
 
 
 -- Return user_id of associated user or null if not
@@ -635,13 +646,16 @@ BEGIN
 
 END //
 
-
+DELIMITER ;
 
 -- sims SQL V2, Sprint 2
 
 -- Procedures stokes
 
 -- From Simon Minotto
+
+
+DELIMITER //
 
 
 -- Return user_id of associated user or null if not
@@ -826,6 +840,7 @@ END //
 
 
 
+DELIMITER ;
 
 
 

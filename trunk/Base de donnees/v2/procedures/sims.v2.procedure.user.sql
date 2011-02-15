@@ -5,6 +5,9 @@
 -- From Simon Minotto
 
 
+DELIMITER //
+
+
 -- Return user_id of associated user or null if not
 DROP PROCEDURE IF EXISTS user_get_user_by_email //
 CREATE PROCEDURE user_get_user_by_email (
@@ -187,6 +190,7 @@ END //
 
 
 
+DELIMITER ;
 
 
 

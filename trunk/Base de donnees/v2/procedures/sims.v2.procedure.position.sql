@@ -4,6 +4,7 @@
 
 -- From Simon Minotto
 
+DELIMITER //
 
 -- Return position of an address or nothing if it's not found
 DROP PROCEDURE IF EXISTS position_get_by_address //
@@ -75,4 +76,6 @@ BEGIN
 	SELECT * FROM googlecache_gch WHERE gch_address = _address;
 	
 end //
+
+DELIMITER ;
 
