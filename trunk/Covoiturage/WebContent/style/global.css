@@ -6,19 +6,18 @@ body {
 }
 
 #body {
-	width: 100%;
 }
 
 #body > div,
 #body > form {
-	padding : 10px;
+	margin : 10px;
 }
 
 /* Header */
 
 #header {
 	background-color: #DDD;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 	padding: 10px;
 }
 
@@ -28,8 +27,14 @@ body {
 
 h1 {
 	margin: 0px 0px 0px 10px;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	font-weight: normal;
+}
+
+/* Content */
+
+hr {
+	margin: 17px 10px 25px 10px;
 }
 
 /* Form */
@@ -40,14 +45,15 @@ label {
 }
 
 input {
-	display: block;
+	display: inline-block;
 	width: 100%;
 	font-size: 1em;
-	margin-bottom: 20px;
+	margin: 0px 0px 20px 0px;
+	padding: 3px 0px 3px 0px;
 }
 
 input[type="submit"] {
 	-webkit-appearance: button;
-	margin-top: 30px;
-	padding: 6px;
+	margin-top: 20px;
+	padding: 6px 0px 6px 0px;
 }
