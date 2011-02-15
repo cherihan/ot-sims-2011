@@ -19,6 +19,9 @@ body {
 	background-color: #DDD;
 	margin-bottom: 20px;
 	padding: 10px;
+	border: 1px solid gray;
+	-moz-border-radius		: 10px;
+	-webkit-border-radius	: 10px;
 }
 
 #header > div {
@@ -29,6 +32,7 @@ h1 {
 	margin: 0px 0px 0px 10px;
 	font-size: 1.2em;
 	font-weight: normal;
+	text-shadow: 1px 1px 1px white;
 }
 
 /* Content */
