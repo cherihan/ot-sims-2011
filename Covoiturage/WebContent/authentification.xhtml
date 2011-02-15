@@ -28,6 +28,10 @@
 		<h:inputSecret value="#{user.confirmPassWord}" />
 		<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
 		
+		
+		<br/>		
+		<h:outputText value="#{user.messageErr}" />
+		
 		</h:form>	
 		
 	</ui:define>	
