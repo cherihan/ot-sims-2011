@@ -34,6 +34,15 @@
 			<f:selectItem itemValue="male"/>
 			<f:selectItem itemValue="female"/>
 		</h:selectOneMenu>
+		
+		<h:outputText value="Birthday" />
+		<rich:calendar value="#{user.birthDay}"/>	
+		<br/>
+		<h:outputText value="Mobile phone" />
+		<h:inputText value="#{user.mobilePhone}"/>	
+		
+		<h:outputText value="Description" />
+		<h:inputTextarea value="#{user.description}"/>
 								
 		<h:outputText value="Password" />			
 		<h:inputSecret value="#{user.passWord}" />				
