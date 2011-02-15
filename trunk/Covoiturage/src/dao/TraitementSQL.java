@@ -6,10 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import utilities.Constantes;
-
-import com.mysql.jdbc.Messages;
-
 import beans.Annonce;
 import beans.User;
 
@@ -106,85 +105,71 @@ public static ArrayList<Annonce> loadData()
  * @param passWord
  * @param firstName
  * @param lastName
- * @param sexe
+ * @param genre
  * @return
+ * @throws Exception 
  */
-public static ArrayList<String> creatUser(String email, String passWord, String firstName, String lastName, String sexe)
+public static String creatUser(String email, String passWord, String firstName, String lastName, String genre) throws Exception
 {
 	String lien="ok";
 	con = null;
-	String messageErr= null;
-	
-	ArrayList<String> result = new ArrayList<String>();
+	String messageErr= null;	
 	
 try{
 		
 		con = new ConnexionBD(url, nomDriver );
 		
-		String query = "call user_create('" + email + "', '" + passWord +"', '" + firstName	+ "', '" + lastName + "', '" + sexe + "')";
+		String query = "call user_create('" + email + "', '" + passWord +"', '" + firstName	+ "', '" + lastName + "', '" + genre + "')";
 		
 		try{
 			con.insert(query);
 		}
-		catch(SQLException ex)
+		catch(MySQLIntegrityConstraintViolationException ex)
 		{
 			messageErr= Constantes.USER_ALREADY_SAVED;			
 			lien="acteul";
 			System.err.println(messageErr + " : " + ex );
-			result.add(lien);
-	    	result.add(messageErr);
-	    	return result;  
+			throw new Exception(messageErr);
 		}		
 	}catch (ClassNotFoundException ex) {        
-        messageErr = Constantes.CLASS_DB_NOT_FOUNDED;         
+        messageErr = Constantes.CLASS_DB_NOT_FOUND;         
         lien="acteul";
         System.err.println(messageErr + " : " + ex );
-    	result.add(lien);
-    	result.add(messageErr);
-    	return result;    	
+        throw new Exception(messageErr);  	
     }
     catch (SQLException ex) {
     	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
         lien="acteul";
         System.err.println(messageErr + " : " + ex );
-    	result.add(lien);
-    	result.add(messageErr);
-    	return result;
-    }catch(Exception e){		
-		messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;
-		lien = "actuel";
-		System.err.println(messageErr + " : " + e );
-		result.add(lien);
-		result.add(messageErr);
-		return result;
-	}
+        throw new Exception(messageErr);
+    }
+
 	
 	
-	if(con != null) con.close();
+	if(con != null) con.close();	
 	
-	result.add(lien);
-	result.add("");
 	
-	return result;
+	return lien;
 	
 }
 
 /**
- * cette fonction retourne une list qui contient (messageErr, email, firstName, lastName, sexe)
+ * cette fonction retourne une list qui contient (messageErr, email, firstName, lastName, genre)
  * @param email
  * @param passWord
  * @return
+ * @throws Exception 
  */
-public static ArrayList<String> authentification(String email, String passWord)
+public static User authentification(String email, String passWord) throws Exception
 {
 	con = null;	
 	
 	String messageErr = null;
 	String firstName = null;
 	String lastName = null;
-	String sexe = null;
+	String genre = null;
 	
-	ArrayList<String> result = new ArrayList<String>();;
+	User utilisateur = null;
 	
 	
 	try{
@@ -196,50 +181,35 @@ public static ArrayList<String> authentification(String email, String passWord)
 		
 		while(curseur.next())
 		{					
-			  firstName =curseur.getString(2);
-			  lastName =curseur.getString(3);
-			  sexe =curseur.getString(7);
+			  firstName =curseur.getString("usr_firstname");
+			  lastName =curseur.getString("usr_lastname");
+			  genre =curseur.getString("usr_genre");
 			  			
 		}
 		
 	}catch (ClassNotFoundException ex) {        
-        messageErr = Constantes.CLASS_DB_NOT_FOUNDED;
-        System.err.println(messageErr + " : " + ex );
-        result.add(messageErr);
-        return result;
+        messageErr = Constantes.CLASS_DB_NOT_FOUND;
+        System.err.println(messageErr + " : " + ex );        
+        throw new Exception(messageErr);
     }
     catch (SQLException ex) {
     	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
-        System.err.println(messageErr + " : " + ex );
-        result.add(messageErr);
-        return result;
+        System.err.println(messageErr + " : " + ex );        
+        throw new Exception(messageErr);
     }catch(Exception e){		
 		messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;		
-		System.err.println(messageErr + " : " + e );
-		result.add(messageErr);
-		return result;
+		System.err.println(messageErr + " : " + e );		
+		throw new Exception(messageErr);
+		
 	}
 	
-	
-    
+       
 	if(con != null){		
-						
-		if(firstName != null || lastName != null || sexe != null ){
-			result.add("");
-			result.add(email);		
-			result.add(firstName);
-			result.add(lastName);
-			result.add(sexe);
-		}
-		else{
-			result.add(Constantes.PASSWORD_OR_USER_NOT_GOOD);
-		}
-				
-		
+		utilisateur = new User(email, passWord, firstName, lastName, genre);		
 		con.close();		
 	}
 	
-	return result;
+	return utilisateur;
 	
 }
 
