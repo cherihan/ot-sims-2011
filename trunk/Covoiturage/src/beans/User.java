@@ -15,14 +15,13 @@ public class User {
 	}
 
 	public User(String email, String passWord, String firstName,
-			String lastName, String sexe, String messageErr) {
+			String lastName, String sexe) {
 		super();
 		this.email = email;
 		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.sexe = sexe;
-		this.messageErr = messageErr;
+		this.sexe = sexe;		
 	}
 
 
