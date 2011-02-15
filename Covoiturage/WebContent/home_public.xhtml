@@ -17,9 +17,10 @@ Accueil
 			<br/>
 			<h:commandLink action="list" value="List" />
 			<br/>
-			<h:commandLink action="login" value="Login" />
+			<h:commandLink action="#{user.toLogin}" value="Login" />
 			<br/>
-			<h:commandLink action="creat_account" value="Creer compte" />
+			<h:commandLink action="#{user.toCreatAccount}" value="Creer compte" />			
+		
 		</h:form>
 </ui:define>
 	</ui:composition>
