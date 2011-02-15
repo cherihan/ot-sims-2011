@@ -6,12 +6,11 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/template/template.xhtml">
 
-<ui:define name="header"> Authentification </ui:define>
+<ui:define name="title"> Authentification </ui:define>
 
 <ui:define name="body">
 
-	<h:form>
-		<rich:panel id="panel">		
+	<h:form>	
 		
 		<f:facet name="header">
 			<h:panelGroup>
@@ -19,22 +18,15 @@
 				(<h:commandLink action="newUser" value="creat new account" />)
 			</h:panelGroup>
 		</f:facet>		
+		<h:outputText value="Email" />
+		<h:inputText value="#{user.email}"/>				
 				
-		<h:panelGrid columns="2">
-			<h:outputText value="Email" />
-			<h:inputText value="#{user.email}"/>				
+		<h:outputText value="Password" />			
+		<h:inputSecret value="#{user.passWord}" />				
 					
-			<h:outputText value="Password" />			
-			<h:inputSecret value="#{user.passWord}" />				
-						
-			<h:outputText value="confirm" />			
-			<h:inputSecret value="#{user.confirmPassWord}" />
-			
-		</h:panelGrid>
-		
+		<h:outputText value="confirm" />			
+		<h:inputSecret value="#{user.confirmPassWord}" />
 		<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
-					
-		</rich:panel>
 		
 		</h:form>	
 		
