@@ -13,11 +13,10 @@ Accueil
 
 <ui:define name="body">
 	<h:form>
-			<h:commandLink action="ajout" value="Ajout" />
-			<br/>
-			<h:commandLink action="list" value="List" />
-			<br/>
-			<h:commandLink action="authentification" value="Authentification" />
+			<div><h:commandButton action="list" value="Consulter les trajets" /></div>
+			<hr />
+			<div><h:commandButton action="authentification" value="S’identifier" />
+			<h:commandButton action="newUser" value="Créer un compte" /></div>
 		</h:form>
 </ui:define>
 	</ui:composition>
