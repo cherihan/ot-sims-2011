@@ -25,7 +25,8 @@
 	
 	function geolocalisation_detectPosition() {
 		if (geolocalisation_isSupported()) {
-			navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000,timeout:5000});
+			//maximum age of 10 minutes = 600000 milliseconds
+			navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000});
 		} else {
 			error('not supported');
 		}
