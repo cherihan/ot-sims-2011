@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS _criterion_type_ctt (
 								  
 	INDEX(ctt_label)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS _criterion_crt (
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS _criterion_crt (
 	INDEX(crt_label),
 	INDEX(crt_order)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 -- Table de cache permettant de faire des recherches arborescentes plus facilement
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS crt_crt (
 	INDEX(crt_container),
 	INDEX(crt_contained)
 	
-) type=InnoDb;
+)  ENGINE = InnoDb;
 
 
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS user_usr (
 					   
 	UNIQUE(usr_email),
 	INDEX(usr_current_position)
-) type=InnoDb;
+)  ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS usr_crt (
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS usr_crt (
 	INDEX(usr_id),
 	INDEX(crt_id)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS position_pos (
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS position_pos (
 	INDEX(pos_latitude),
 	INDEX(pos_longitude),
 	UNIQUE(pos_address)
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS car_car (
 	car_id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -118,14 +118,14 @@ CREATE TABLE IF NOT EXISTS car_car (
 					  
 	INDEX(car_owner)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS _route_type_rtp (
 	rtp_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	rtp_label VARCHAR(100) NOT NULL,
 							  
 	INDEX(rtp_label)
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS route_rte (
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS route_rte (
 	rte_pos_end INT(11) NOT NULL,
 	rte_date_begin BIGINT(20) NOT NULL,
 	rte_date_end BIGINT(20) NULL DEFAULT NULL,
-	rte_comment TEXT NOT NULL DEFAULT '' COMMENT 'textual comment of the owner about the route',
+	rte_comment TEXT NOT NULL COMMENT 'textual comment of the owner about the route',
 	rte_owner INT(11) NOT NULL COMMENT 'Proprietaire du trajet',
 	rte_seat INT(2) NULL DEFAULT NULL COMMENT 'Number of seat needed / proposed. NULL <=> not set',
 	rte_car INT(11) NULL DEFAULT NULL COMMENT 'Optional - Car used for this traject',
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS route_rte (
 	INDEX(rte_seat),
 	INDEX(rte_car)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS user_fav_pos_ufp (
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS user_fav_pos_ufp (
 	INDEX(ufp_user),
 	INDEX(ufp_position)
 	
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS passager_psg (
 	psg_id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS passager_psg (
 	INDEX(psg_route),
 	INDEX(psg_user)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS googlecache_gch (
 	INDEX(gch_longitude)
 
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 
@@ -197,14 +197,14 @@ CREATE TABLE IF NOT EXISTS comment_cmn (
 	cmn_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	cmn_user_from INT(11) NOT NULL,
 	cmn_user_to INT(11) NOT NULL,
-	cmn_comment_text TEXT NULL DEFAULT NULL COMMENT 'Textual comment about the owner',
+	cmn_comment_text TEXT NULL COMMENT 'Textual comment about the owner',
 	cmn_comment_note INT(2) NULL DEFAULT NULL COMMENT 'A value between 1-5 to evaluate the conductor',
 
 	INDEX(cmn_user_from),
 	INDEX(cmn_user_to),
 	INDEX(cmn_comment_note)
 						  
-)type=innoDb;
+) ENGINE = InnoDb;
 
 
 
@@ -579,6 +579,43 @@ BEGIN
 		WHERE 
 				rte_pos_begin = _position_begin_id
 			AND	rte_pos_end = _position_end_id
+			AND	rte_deletedate IS NULL
+			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure;
+		
+
+END //
+
+
+
+DROP PROCEDURE IF EXISTS route_search_with_date_and_delta //
+CREATE PROCEDURE route_search_with_date_and_delta (
+	IN _position_begin_id INT(11),
+	IN _position_end_id INT(11),
+	IN _begin_date_departure BIGINT(11),
+	IN _end_date_departure BIGINT(11),
+	IN _location_approximate_nb_meters INT(11)
+)
+BEGIN
+	
+	DECLARE __delta_deg_x FLOAT(10,6);
+	DECLARE __delta_deg_y FLOAT(10,6);
+	
+	SELECT (_location_approximate_nb_meters * 0.0009) INTO __delta_deg_x;
+	SELECT (_location_approximate_nb_meters * 0,0014) INTO __delta_deg_y;
+	
+	SELECT * 
+		FROM route_rte 
+			INNER JOIN position_pos AS posbeg ON posbeg.pos_id = rte_pos_begin
+			INNER JOIN position_pos AS posend ON posend.pos_id = rte_pos_end
+			INNER JOIN position_pos AS posbegask ON posbegask = _position_begin_id
+			INNER JOIN position_pos AS posendask ON posendask = _position_end_id
+		WHERE 
+				posbeg.pos_latitude BETWEEN (posbegask.pos_latitude -  __delta_deg_x) AND (posbegask.pos_latitude +  __delta_deg_x)
+			AND	posbeg.pos_latitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
+			
+				posend.pos_latitude BETWEEN (posendask.pos_latitude -  __delta_deg_x) AND (posendask.pos_latitude +  __delta_deg_x)
+			AND	posend.pos_latitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
+			
 			AND	rte_deletedate IS NULL
 			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure;
 		
