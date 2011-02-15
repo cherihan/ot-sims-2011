@@ -48,7 +48,9 @@ label {
 	margin-bottom: 4px;
 }
 
-input {
+input,
+select,
+button {
 	display: inline-block;
 	width: 100%;
 	font-size: 1em;
