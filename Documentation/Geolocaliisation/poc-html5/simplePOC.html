@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>POC geo</title>
+
+<script type="text/javascript">
+
+	var __geolocalisation_success_detected = false;
+	
+	function geolocalisation_success(position) {
+		if (__geolocalisation_success_detected) {
+			// not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back
+			return;
+		}
+		
+		__geolocalisation_success_detected=true;
+		
+		alert('Position : '+position.coords.latitude+' - '+position.coords.longitude); 
+		document.getElementById('localisation').value=+position.coords.latitude+';'+position.coords.longitude;
+	}
+
+	function geolocalisation_error(msg) {
+		alert('your position cannot be determined');
+	}
+	
+	function geolocalisation_detectPosition() {
+		if (geolocalisation_isSupported()) {
+			navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000,timeout:5000});
+		} else {
+			error('not supported');
+		}
+	}
+	
+	function geolocalisation_isSupported() {
+		return navigator.geolocation;
+	}
+	
+	
+
+</script>
+
+<body>
+<section id="wrapper">
+      <h1>Geolocation POC</h1>
+      <form method="post">
+		<div>
+			<label for="">
+				Votre localisation
+				<input type="text" value="" name="" id="localisation" />
+			<label>
+		</div>
+		<a id="geolocalisationDetectButton" style="display:none;" href="#" onclick="geolocalisation_detectPosition();return false;">Detect position </a>
+	
+</section>
+
+
+<script type="text/javascript">
+	
+	if(geolocalisation_isSupported()) {
+		document.getElementById('geolocalisationDetectButton').style.display='block';
+	}
+
+</script>
+
+</body>
+</html>
