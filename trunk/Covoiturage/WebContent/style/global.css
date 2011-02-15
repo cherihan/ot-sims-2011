@@ -54,7 +54,9 @@ label {
 
 input,
 select,
-button {
+textarea,
+button,
+ {
 	display: inline-block;
 	width: 100%;
 	font-size: 1em;
