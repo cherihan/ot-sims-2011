@@ -1,1 +1,53 @@
 /* CSS OT SIMS */
+
+body {
+	font-size: 1.2em;
+	font-family: Verdana, sans-serif;
+}
+
+#body {
+	width: 100%;
+}
+
+#body > div,
+#body > form {
+	padding : 10px;
+}
+
+/* Header */
+
+#header {
+	background-color: #DDD;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+#header > div {
+	display: inline-block;
+}
+
+h1 {
+	margin: 0px 0px 0px 10px;
+	font-size: 1.3em;
+	font-weight: normal;
+}
+
+/* Form */
+
+label {
+	display: block;
+	margin-bottom: 4px;
+}
+
+input {
+	display: block;
+	width: 100%;
+	font-size: 1em;
+	margin-bottom: 20px;
+}
+
+input[type="submit"] {
+	-webkit-appearance: button;
+	margin-top: 30px;
+	padding: 6px;
+}

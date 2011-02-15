@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<title><ui:insert name="title">Title</ui:insert></title>
+		<link rel="stylesheet" type="text/css" href="style/global.css"/>
+		<meta name="viewport" content="width=device-width" />
+	</head>
+	<body>
+		<div id="header">
+			<div id="home_logo">
+				<a href="./">
+					<img src="img/car_50px.png" alt="logo"/>
+				</a>
+			</div>
+			<div id="page_title">
+				<h1>Page de test</h1>
+			</div>
+		</div>
+		<div id="body">
+			<form>
+				<div>
+					<label for="usr_email">E-mail :</label>
+					<input id="usr_email" type="email" placeholder="moi@mail.com"/>
+				</div>
+				<div>
+					<label for="usr_password">Mot de passe :</label>
+					<input id="usr_password" type="password" placeholder="password" />
+				</div>
+				<div>
+					<input type="submit" value="Connexion" />
+				</div>
+			</form>
+		</div>
+		<div id="footer">
+			
+		</div>
+	</body>	
+</html>
