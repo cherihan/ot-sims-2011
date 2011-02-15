@@ -1,6 +1,10 @@
 package beans;
 
 
+import java.util.ArrayList;
+
+import utilities.Constantes;
+
 import dao.TraitementSQL;
 
 public class User {
@@ -11,13 +15,14 @@ public class User {
 	}
 
 	public User(String email, String passWord, String firstName,
-			String lastName, String sexe) {
+			String lastName, String sexe, String messageErr) {
 		super();
 		this.email = email;
 		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.sexe = sexe;
+		this.messageErr = messageErr;
 	}
 
 
@@ -29,8 +34,15 @@ public class User {
 	String firstName;
 	String lastName;
 	String sexe;
-	
-	
+		
+	//à afficher dans notre page web lors d'un erreur
+	String messageErr;
+	public String getMessageErr() {
+		return messageErr;
+	}
+	public void setMessageErreur(String messageErreur) {
+		this.messageErr = messageErreur;
+	}
 	
 	public String getEmail() {
 		return email;
@@ -97,9 +109,23 @@ public class User {
 	public String creatUser()
 	{
 				
-		if(!passWord.equals(confirmPassWord)) return "actuel";
+		if(email.equals("") || firstName.equals("") || lastName.equals("") || sexe.equals("") ){
+			messageErr = Constantes.DATAS_NOT_FILL_IN;
+			return "actuel";
+			
+		}else if(!passWord.equals(confirmPassWord) || passWord.equals("") || confirmPassWord.equals("") || email.equals("") ){
+			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
+			return "actuel";
+		}
 		
-		return TraitementSQL.creatUser(email, passWord, firstName, lastName, sexe);
+		ArrayList<String> result = TraitementSQL.creatUser(email, confirmPassWord, firstName, lastName, sexe);		
+		
+		String lien= result.get(0);	
+		messageErr = result.get(1);	
+		
+		if(lien.equals("ok")) messageErr="";
+		
+		return lien;
 	}
 	
 	
@@ -107,22 +133,29 @@ public class User {
 	/**
 	 * 
 	 */
-	public String authentication(){
-		
+	public String authentication(){		
 			
-		if(!passWord.equals(confirmPassWord)) return "actuel";
-		
-		User utilisateur = TraitementSQL.authentification(email, passWord);
-		
-		if(utilisateur != null){
 			
-			email = utilisateur.getEmail();
-			firstName = utilisateur.getFirstName();
-			lastName = utilisateur.getLastName();
-			sexe = utilisateur.getSexe();
+		if(!passWord.equals(confirmPassWord) || passWord.equals("") || confirmPassWord.equals("") || email.equals("") ){
 			
+			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
+			
+			return "actuel";
+		}		
+		
+		ArrayList<String> result = TraitementSQL.authentification(email, passWord);
+					
+		if(result.size()==1) messageErr = result.get(0); 
+		
+		if(result.size() > 1){
+			
+			email = result.get(1);
+			firstName = result.get(2);
+			lastName = result.get(3);
+			sexe = result.get(4);					
+			messageErr = "";
 			return "ok";
-		}
+		}		
 		
 		return "actuel";
 	}
