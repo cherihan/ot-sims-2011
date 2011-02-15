@@ -2,8 +2,13 @@ package dao;
 
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import utilities.Constantes;
+
+import com.mysql.jdbc.Messages;
 
 import beans.Annonce;
 import beans.User;
@@ -31,8 +36,7 @@ public class TraitementSQL {
 			con=new ConnexionBD(url,nomDriver);		
 
 			long formatteur =  date.getTime();			
-			System.out.println("Test DateTime" + formatteur);
-			
+						
 			String query="INSERT INTO chemin (depart, arrivee, date) values ('"+ depart +"', '" + arrive +"', '" + formatteur +"');";
 			con.insert(query);
 			
@@ -105,34 +109,83 @@ public static ArrayList<Annonce> loadData()
  * @param sexe
  * @return
  */
-public static String creatUser(String email, String passWord, String firstName, String lastName, String sexe)
+public static ArrayList<String> creatUser(String email, String passWord, String firstName, String lastName, String sexe)
 {
 	String lien="ok";
 	con = null;
+	String messageErr= null;
+	
+	ArrayList<String> result = new ArrayList<String>();
 	
 try{
 		
 		con = new ConnexionBD(url, nomDriver );
 		
 		String query = "call user_create('" + email + "', '" + passWord +"', '" + firstName	+ "', '" + lastName + "', '" + sexe + "')";
-		con.insert(query);
 		
-	}catch(Exception e){
-		System.err.println("Exception: " + e.getMessage());
-		System.out.println("Connection echouer.............");
-		lien = "actuel"; 
+		try{
+			con.insert(query);
+		}
+		catch(SQLException ex)
+		{
+			messageErr= Constantes.USER_ALREADY_SAVED;			
+			lien="acteul";
+			System.err.println(messageErr + " : " + ex );
+			result.add(lien);
+	    	result.add(messageErr);
+	    	return result;  
+		}		
+	}catch (ClassNotFoundException ex) {        
+        messageErr = Constantes.CLASS_DB_NOT_FOUNDED;         
+        lien="acteul";
+        System.err.println(messageErr + " : " + ex );
+    	result.add(lien);
+    	result.add(messageErr);
+    	return result;    	
+    }
+    catch (SQLException ex) {
+    	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
+        lien="acteul";
+        System.err.println(messageErr + " : " + ex );
+    	result.add(lien);
+    	result.add(messageErr);
+    	return result;
+    }catch(Exception e){		
+		messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;
+		lien = "actuel";
+		System.err.println(messageErr + " : " + e );
+		result.add(lien);
+		result.add(messageErr);
+		return result;
 	}
 	
-	con.close();	
 	
-	return lien;
+	if(con != null) con.close();
+	
+	result.add(lien);
+	result.add("");
+	
+	return result;
 	
 }
 
-public static User authentification(String email, String passWord)
+/**
+ * cette fonction retourne une list qui contient (messageErr, email, firstName, lastName, sexe)
+ * @param email
+ * @param passWord
+ * @return
+ */
+public static ArrayList<String> authentification(String email, String passWord)
 {
 	con = null;	
-	User utilisateur = null;
+	
+	String messageErr = null;
+	String firstName = null;
+	String lastName = null;
+	String sexe = null;
+	
+	ArrayList<String> result = new ArrayList<String>();;
+	
 	
 	try{
 						
@@ -143,30 +196,59 @@ public static User authentification(String email, String passWord)
 		
 		while(curseur.next())
 		{					
-			  String firstName =curseur.getString(2);
-			  String lastName =curseur.getString(3);
-			  String sexe =curseur.getString(7);
-			  
-			  utilisateur = new User(email, passWord, firstName, lastName, sexe);			
+			  firstName =curseur.getString(2);
+			  lastName =curseur.getString(3);
+			  sexe =curseur.getString(7);
+			  			
 		}
 		
-	}catch(Exception e){
-		System.err.println("Exception: " + e.getMessage());
-		System.out.println("Connection echouer.............");		
+	}catch (ClassNotFoundException ex) {        
+        messageErr = Constantes.CLASS_DB_NOT_FOUNDED;
+        System.err.println(messageErr + " : " + ex );
+        result.add(messageErr);
+        return result;
+    }
+    catch (SQLException ex) {
+    	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
+        System.err.println(messageErr + " : " + ex );
+        result.add(messageErr);
+        return result;
+    }catch(Exception e){		
+		messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;		
+		System.err.println(messageErr + " : " + e );
+		result.add(messageErr);
+		return result;
 	}
 	
-	con.close();	
 	
-	return utilisateur;
+    
+	if(con != null){		
+						
+		if(firstName != null || lastName != null || sexe != null ){
+			result.add("");
+			result.add(email);		
+			result.add(firstName);
+			result.add(lastName);
+			result.add(sexe);
+		}
+		else{
+			result.add(Constantes.PASSWORD_OR_USER_NOT_GOOD);
+		}
+				
+		
+		con.close();		
+	}
+	
+	return result;
 	
 }
 
 
 public static void main(String[] args) {
 	
-	User test = TraitementSQL.authentification("othman.bentria@gmail.com", "root");
-	
-	System.out.println(test.getFirstName());
+//	User test = TraitementSQL.authentification("othman.bentria@gmail.com", "root");
+//	
+//	System.out.println(test.getFirstName());
 	
 	
 }
