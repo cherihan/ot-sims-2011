@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/template/template.xhtml">
+
+<ui:define name="title"> Creation du compte </ui:define>
+
+<ui:define name="header">
+	<h:form>
+		<h:panelGroup>
+			<h:outputText value="Creation du compte"/>
+			(<h:commandLink action="#{user.toLogin}" value="se connecter" />)
+		</h:panelGroup>
+	</h:form>
+</ui:define>
+
+
+<ui:define name="body">
+	<h:form>		
+		<h:outputText value="Email" />
+		<h:inputText value="#{user.email}" />
+			
+		<h:outputText value="First name" />
+		<h:inputText value="#{user.firstName}" />						
+
+		<h:outputText value="Last name" />
+		<h:inputText value="#{user.lastName}"/>	
+			
+		<h:outputText value="Sexe" />			
+		<h:selectOneMenu value="#{user.genre}">
+			<f:selectItem itemValue="male"/>
+			<f:selectItem itemValue="female"/>
+		</h:selectOneMenu>
+								
+		<h:outputText value="Password" />			
+		<h:inputSecret value="#{user.passWord}" />				
+						
+		<h:outputText value="confirm password" />			
+		<h:inputSecret value="#{user.confirmPassWord}" />						
+
+		<h:commandButton action="#{user.creatUser}" value="Save"/>
+		
+		<br/>		
+		<h:outputText value="#{user.messageErr}" />	
+		
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
