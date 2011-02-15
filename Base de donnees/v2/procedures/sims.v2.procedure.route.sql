@@ -5,6 +5,9 @@
 -- From Simon Minotto
 
 
+DELIMITER //
+
+
 -- Return user_id of associated user or null if not
 DROP PROCEDURE IF EXISTS route_create //
 CREATE PROCEDURE route_create (
@@ -190,5 +193,5 @@ BEGIN
 
 END //
 
-
+DELIMITER ;
 
