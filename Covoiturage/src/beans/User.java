@@ -152,6 +152,18 @@ public class User {
 		this.birthDay = birthDay;
 	}
 	
+	public String toLogin()
+	{
+		messageErr = "";
+		return "login";
+	}
+	
+	public String toCreatAccount()
+	{
+		messageErr = "";
+		return "creat_account";
+	}
+	
 	
 
 	/**
@@ -204,16 +216,16 @@ public class User {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
-		}	
-		
-		if(utilisateur.getFirstName() != null){			
-			email = utilisateur.getEmail();
-			firstName = utilisateur.getFirstName();
-			lastName = utilisateur.getLastName();
-			genre = utilisateur.getGenre();				
-			messageErr = "";
-			return "ok";
-		}
+		}			
+	
+			if(utilisateur != null && utilisateur.getFirstName() != null){			
+				email = utilisateur.getEmail();
+				firstName = utilisateur.getFirstName();
+				lastName = utilisateur.getLastName();
+				genre = utilisateur.getGenre();				
+				messageErr = "";
+				return "ok";
+			}
 		
 		messageErr = Constantes.PASSWORD_OR_USER_NOT_GOOD;
 		
