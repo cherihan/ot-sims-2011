@@ -24,10 +24,6 @@
    <to-view-id>/newUser.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>ok</from-outcome>
-   <to-view-id>/TestCreation.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
    <from-outcome>actuel</from-outcome>
    <to-view-id>/authentification.xhtml</to-view-id>
   </navigation-case>
@@ -37,10 +33,6 @@
   <navigation-case>
    <from-outcome>authentification</from-outcome>
    <to-view-id>/authentification.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>ok</from-outcome>
-   <to-view-id>/TestCreation.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>actuel</from-outcome>
@@ -72,6 +64,22 @@
    <from-outcome>authentification</from-outcome>
    <to-view-id>/authentification.xhtml</to-view-id>
   </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>authentification.xhtml</display-name>
+ 	<from-view-id>/authentification.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<from-outcome>ok</from-outcome>
+ 		<to-view-id>/accueil.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>newUser.xhtml</display-name>
+ 	<from-view-id>/newUser.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<from-outcome>ok</from-outcome>
+ 		<to-view-id>/accueil.xhtml</to-view-id>
+ 	</navigation-case>
  </navigation-rule>
  <application>
   <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
