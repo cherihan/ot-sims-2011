@@ -33,6 +33,10 @@ h1 {
 
 /* Content */
 
+img {
+	border: 0px;
+}
+
 hr {
 	margin: 17px 10px 25px 10px;
 }
@@ -56,4 +60,13 @@ input[type="submit"] {
 	-webkit-appearance: button;
 	margin-top: 20px;
 	padding: 6px 0px 6px 0px;
+}
+
+/* Footer */
+
+#footer {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 0.8em;
+	color: gray;
 }
