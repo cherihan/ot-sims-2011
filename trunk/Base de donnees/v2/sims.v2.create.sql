@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS _criterion_type_ctt (
 								  
 	INDEX(ctt_label)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS _criterion_crt (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS _criterion_crt (
 	INDEX(crt_label),
 	INDEX(crt_order)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 -- Table de cache permettant de faire des recherches arborescentes plus facilement
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS crt_crt (
 	INDEX(crt_container),
 	INDEX(crt_contained)
 	
-) type=InnoDb;
+)  ENGINE = InnoDb;
 
 
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS user_usr (
 					   
 	UNIQUE(usr_email),
 	INDEX(usr_current_position)
-) type=InnoDb;
+)  ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS usr_crt (
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS usr_crt (
 	INDEX(usr_id),
 	INDEX(crt_id)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS position_pos (
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS position_pos (
 	INDEX(pos_latitude),
 	INDEX(pos_longitude),
 	UNIQUE(pos_address)
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS car_car (
 	car_id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -96,14 +96,14 @@ CREATE TABLE IF NOT EXISTS car_car (
 					  
 	INDEX(car_owner)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS _route_type_rtp (
 	rtp_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	rtp_label VARCHAR(100) NOT NULL,
 							  
 	INDEX(rtp_label)
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS route_rte (
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS route_rte (
 	rte_pos_end INT(11) NOT NULL,
 	rte_date_begin BIGINT(20) NOT NULL,
 	rte_date_end BIGINT(20) NULL DEFAULT NULL,
-	rte_comment TEXT NOT NULL DEFAULT '' COMMENT 'textual comment of the owner about the route',
+	rte_comment TEXT NOT NULL COMMENT 'textual comment of the owner about the route',
 	rte_owner INT(11) NOT NULL COMMENT 'Proprietaire du trajet',
 	rte_seat INT(2) NULL DEFAULT NULL COMMENT 'Number of seat needed / proposed. NULL <=> not set',
 	rte_car INT(11) NULL DEFAULT NULL COMMENT 'Optional - Car used for this traject',
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS route_rte (
 	INDEX(rte_seat),
 	INDEX(rte_car)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 CREATE TABLE IF NOT EXISTS user_fav_pos_ufp (
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS user_fav_pos_ufp (
 	INDEX(ufp_user),
 	INDEX(ufp_position)
 	
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS passager_psg (
 	psg_id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS passager_psg (
 	INDEX(psg_route),
 	INDEX(psg_user)
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS googlecache_gch (
 	INDEX(gch_longitude)
 
 
-)type=InnoDb;
+) ENGINE = InnoDb;
 
 
 
@@ -175,14 +175,14 @@ CREATE TABLE IF NOT EXISTS comment_cmn (
 	cmn_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	cmn_user_from INT(11) NOT NULL,
 	cmn_user_to INT(11) NOT NULL,
-	cmn_comment_text TEXT NULL DEFAULT NULL COMMENT 'Textual comment about the owner',
+	cmn_comment_text TEXT NULL COMMENT 'Textual comment about the owner',
 	cmn_comment_note INT(2) NULL DEFAULT NULL COMMENT 'A value between 1-5 to evaluate the conductor',
 
 	INDEX(cmn_user_from),
 	INDEX(cmn_user_to),
 	INDEX(cmn_comment_note)
 						  
-)type=innoDb;
+) ENGINE = InnoDb;
 
 
 
