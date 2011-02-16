@@ -6,18 +6,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import model.User;
-
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
 import beans.Annonce;
 import beans.BeansUser;
+import model.User;
 
 public class TraitementSQL {
 	
 	public static ConnexionBD con;	
-	public static String url="jdbc:mysql://127.0.0.1:3306/sims?user=root&password=";  //  @jve:decl-index=0:
+	public static String url="jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod=";  //  @jve:decl-index=0:
 	public static String nomDriver="com.mysql.jdbc.Driver";  //  @jve:decl-index=0:
 
 	
@@ -111,47 +110,44 @@ public static ArrayList<Annonce> loadData()
  * @return
  * @throws Exception 
  */
-public static String creatUser(String email, String passWord, String firstName, String lastName, String genre) throws Exception
+public static User creatUser(String email, String password) throws Exception
 {
-	String lien="ok";
+	
 	con = null;
-	String messageErr= null;	
+	String messageErr= null;
+	ResultSet res;
 	
 try{
 		
 		con = new ConnexionBD(url, nomDriver );
 		
-		String query = "call user_create('" + email + "', '" + passWord +"', '" + firstName	+ "', '" + lastName + "', '" + genre + "')";
+		String query = "call user_create_short('" + email + "', '" + password + "')" ;
 		
 		try{
-			con.insert(query);
+			res = con.execute(query);
 		}
 		catch(MySQLIntegrityConstraintViolationException ex)
 		{
 			messageErr= Constantes.USER_ALREADY_SAVED;			
-			lien="acteul";
 			System.err.println(messageErr + " : " + ex );
 			throw new Exception(messageErr);
 		}		
 	}catch (ClassNotFoundException ex) {        
-        messageErr = Constantes.CLASS_DB_NOT_FOUND;         
-        lien="acteul";
+        messageErr = Constantes.CLASS_DB_NOT_FOUND;
         System.err.println(messageErr + " : " + ex );
         throw new Exception(messageErr);  	
     }
     catch (SQLException ex) {
-    	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
-        lien="acteul";
+    	messageErr = Constantes.PROBLEME_CONNECTION_DB;
         System.err.println(messageErr + " : " + ex );
         throw new Exception(messageErr);
-    }
-
-	
+    }	
 	
 	if(con != null) con.close();	
 	
+	User utilisateur = new User(res);
 	
-	return lien;
+	return utilisateur;
 	
 }
 
@@ -214,45 +210,6 @@ public static BeansUser authentification(String email, String passWord) throws E
 	return utilisateur;
 	
 }
-
-public static User getUserById(int userid) throws Exception
-{
-	con = null;	
-	User user = null;
-	String messageErr;
-	
-	try{
-						
-		con = new ConnexionBD(url, nomDriver );
-		
-		String query = "SELECT * FROM user_usr WHERE usr_id="+userid+"";
-		ResultSet curseur = con.search(query);
-		
-		while(curseur.next())
-		{
-			user=new User(curseur);
-		}
-		
-	}catch (ClassNotFoundException ex) {        
-        messageErr = Constantes.CLASS_DB_NOT_FOUND;
-        System.err.println(messageErr + " : " + ex );        
-        throw new Exception(messageErr);
-    }
-    catch (SQLException ex) {
-    	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
-        System.err.println(messageErr + " : " + ex );        
-        throw new Exception(messageErr);
-    }catch(Exception e){		
-		messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;		
-		System.err.println(messageErr + " : " + e );		
-		throw new Exception(messageErr);
-		
-	}
-		
-	return user;
-	
-}
-
 
 
 public static void main(String[] args) {
