@@ -13,7 +13,7 @@
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>user</managed-bean-name>
+  <managed-bean-name>beansUser</managed-bean-name>
   <managed-bean-class>beans.BeansUser</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
@@ -40,6 +40,14 @@
    <from-outcome>home</from-outcome>
    <to-view-id>/home.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>actuel</from-outcome>
+   <to-view-id>/create_account.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ok</from-outcome>
+   <to-view-id>/TestCreation.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <display-name>list_route.xhtml</display-name>
@@ -54,6 +62,14 @@
   <navigation-case>
    <from-outcome>home</from-outcome>
    <to-view-id>/home.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>actuel</from-outcome>
+   <to-view-id>/login.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ok</from-outcome>
+   <to-view-id>/TestCreation.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
