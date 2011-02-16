@@ -1,10 +1,5 @@
 package beans;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.connector.Request;
 
 import model.User;
 
@@ -18,230 +13,27 @@ public class BeansUser {
 	
 	protected User user = new User();
 	
-	protected String confirmPassword;
+	public User getUser() {
+		return user;
+	}
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return this.user.getId();
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(int id) {
-		this.user.setId(id);
-	}
-
-	/**
-	 * @return the firstname
-	 */
-	public String getFirstname() {
-		return this.user.getFirstname();
-	}
-
-	/**
-	 * @param firstname
-	 *            the firstname to set
-	 */
-	public void setFirstname(String firstname) {
-		this.user.setFirstname(firstname);
-	}
-
-	/**
-	 * @return the lastname
-	 */
-	public String getLastname() {
-		return this.user.getLastname();
-	}
-
-	/**
-	 * @param lastname
-	 *            the lastname to set
-	 */
-	public void setLastname(String lastname) {
-		this.user.setLastname(lastname);
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return this.user.getEmail();
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.setEmail(email);
-	}
-
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return user.getPassword();
-	}
-
-	/**
-	 * @param password
-	 *            the password to set
-	 */
-	public void setPassword(String password) {
-		this.user.setPassword(password);
-	}
-
-	/**
-	 * @return the confirmPassword
-	 */
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	/**
-	 * @param confirmPassword
-	 *            the confirmPassword to set
-	 */
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-
-	/**
-	 * @return the current_position
-	 */
-	public int getCurrent_position() {
-		return user.getCurrent_position();
-	}
-
-	/**
-	 * @param current_position
-	 *            the current_position to set
-	 */
-	public void setCurrent_position(int current_position) {
-		this.user.setCurrent_position(current_position);
-	}
-
-	/**
-	 * @return the genre
-	 */
-	public String getGenre() {
-		return user.getGenre();
-	}
-
-	/**
-	 * @param genre
-	 *            the genre to set
-	 */
-	public void setGenre(String genre) {
-		this.setGenre(genre);
-	}
-
-	/**
-	 * @return the birthdate
-	 */
-	public Date getBirthdate() {
-		return user.getBirthdate();
-	}
-
-	/**
-	 * @param birthdate
-	 *            the birthdate to set
-	 */
-	public void setBirthdate(Date birthdate) {
-		this.user.setBirthdate(birthdate);
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return user.getDescription();
-	}
-
-	/**
-	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.user.setDescription(description);
-	}
-
-	/**
-	 * @return the mobilphone
-	 */
-	public String getMobilphone() {
-		return user.getMobilphone();
-	}
-
-	/**
-	 * @param mobilphone
-	 *            the mobilphone to set
-	 */
-	public void setMobilphone(String mobilphone) {
-		this.user.setMobilphone(mobilphone);
-	}
-
-	/**
-	 * @return the note
-	 */
-	public int getNote() {
-		return user.getNote();
-	}
-
-	/**
-	 * @param note
-	 *            the note to set
-	 */
-	public void setNote(int note) {
-		this.user.setNote(note);
-	}
-
-	/**
-	 * @return the registrationdate
-	 */
-	public String getRegistrationdate() {
-		return user.getRegistrationdate().toString();
-	}
-
-	/**
-	 * @param registrationdate
-	 *            the registrationdate to set
-	 */
-	public void setRegistrationdate(String registrationdate) {
-		//this.registrationdate = registrationdate;
-	}
-
-	/**
-	 * @return the lastlogindate
-	 */
-	public String getLastlogindate() {
-		return user.getLastlogindate().toString();
-	}
-
-	/**
-	 * @param lastlogindate
-	 *            the lastlogindate to set
-	 */
-	public void setLastlogindate(String lastlogindate) {
-		//this.lastlogindate = lastlogindate;
-	}
-
+	
+	
 	public BeansUser() {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public BeansUser(String email, String password, String firstname,
-			String lastname, String genre) {
-		super();
-		this.setEmail(email);
-		this.setPassword(password);
-		this.setFirstname(firstname);
-		this.setLastname(lastname);
-		this.setGenre(genre);
+			String lastname, String genre) {		
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
+		user.setGenre(genre);
 	}
 
 	// afficher dans notre page web lorsqu'il y a un erreur
@@ -274,24 +66,24 @@ public class BeansUser {
 	 */
 	public String creatUser() {
 		User userCreated;
-		if (!ValidatorOfData.validateEMail(this.getEmail())) {
+		if (!ValidatorOfData.validateEMail(user.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
 			return "actuel";
 		}
 
 		// /// TODO
-		if (!ValidatorOfData.validateData(this.getFirstname())) {
+		if (!ValidatorOfData.validateData(user.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
 			return "actuel";
 		}
 		// ///
 
-		if (this.getEmail().equals("")) {
+		if (user.getEmail().equals("")) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 
-		} else if (!this.getPassword().equals(this.getConfirmPassword()) || this.getPassword().equals("")
-				|| this.getConfirmPassword().equals("") || this.getEmail().equals("")) {
+		} else if (!user.getPassword().equals(user.getConfirmPassword()) || user.getPassword().equals("")
+				|| user.getConfirmPassword().equals("") || user.getEmail().equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
 			return "actuel";
 		}
@@ -302,7 +94,7 @@ public class BeansUser {
 		
 		try {
 
-			userCreated = TraitementSQL.createUser(this.getEmail(), this.getPassword());
+			userCreated = TraitementSQL.createUser(user.getEmail(), user.getPassword());
 			
 			this.user=userCreated;
 			//HttpSession session = Request.getSession(true);
@@ -329,7 +121,7 @@ public class BeansUser {
 
 		User userLogged = null;
 		try {
-			userLogged = TraitementSQL.authentification(this.getEmail(), this.getPassword());
+			userLogged = TraitementSQL.authentification(user.getEmail(), user.getPassword());
 			this.user=userLogged;
 			
 			return "ok";
