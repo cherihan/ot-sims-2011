@@ -2,6 +2,10 @@ package beans;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Request;
+
 import model.User;
 
 import utilities.Constantes;
@@ -10,7 +14,10 @@ import utilities.ValidatorOfData;
 import dao.TraitementSQL;
 
 public class BeansUser {
-
+	
+	
+	protected User user = new User();
+	
 	protected int id;
 	protected String firstname;
 	protected String lastname;
@@ -30,7 +37,7 @@ public class BeansUser {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return this.user.getId();
 	}
 
 	/**
@@ -38,14 +45,14 @@ public class BeansUser {
 	 *            the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.user.setId(id);
 	}
 
 	/**
 	 * @return the firstname
 	 */
 	public String getFirstname() {
-		return firstname;
+		return this.user.getFirstname();
 	}
 
 	/**
@@ -53,14 +60,14 @@ public class BeansUser {
 	 *            the firstname to set
 	 */
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.user.setFirstname(firstname);
 	}
 
 	/**
 	 * @return the lastname
 	 */
 	public String getLastname() {
-		return lastname;
+		return this.user.getLastname();
 	}
 
 	/**
@@ -75,7 +82,7 @@ public class BeansUser {
 	 * @return the email
 	 */
 	public String getEmail() {
-		return email;
+		return this.user.getEmail();
 	}
 
 	/**
@@ -83,7 +90,7 @@ public class BeansUser {
 	 *            the email to set
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		this.setEmail(email);
 	}
 
 	/**
@@ -310,7 +317,10 @@ public class BeansUser {
 		try {
 
 			userCreated = TraitementSQL.createUser(email, password);
-
+			
+			this.user=userCreated;
+			//HttpSession session = Request.getSession(true);
+			
 			// TODO sauvegarder en session
 
 
@@ -334,6 +344,8 @@ public class BeansUser {
 		User userLogged = null;
 		try {
 			userLogged = TraitementSQL.authentification(email, password);
+			this.user=userLogged;
+			
 			return "ok";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -343,5 +355,9 @@ public class BeansUser {
 		messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
 
 		return "actuel";
+	}
+	
+	public User getLoggedUser() {
+		return this.user;		
 	}
 }
