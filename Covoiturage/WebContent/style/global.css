@@ -74,6 +74,13 @@ input[type="submit"] {
 	padding: 6px 0px 6px 0px;
 }
 
+form .timestamp {
+	float: left;
+	margin: 0 10px 0 0;
+	display: inline;
+	width: auto;
+}
+
 /* Footer */
 
 #footer {
