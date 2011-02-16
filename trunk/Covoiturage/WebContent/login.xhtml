@@ -12,18 +12,18 @@
 	<ui:define name="body">
 		<h:form id="login_form">
 			<div class="msg">
-				<h:outputText value="#{user.messageErr}" />
+				<h:outputText value="#{beansUser.messageErr}" />
 			</div>
 			<div>
 				<label for="login_form:usr_email">E-mail :</label>	
-				<h:inputText id="usr_email" value="#{user.email}" type="email" />
+				<h:inputText id="usr_email" value="#{beansUser.user.email}" type="email" />
 			</div>
 			<div>
 				<label for="login_form:usr_password">Password :</label>
-				<h:inputSecret id="usr_password" value="#{user.password}" />
+				<h:inputSecret id="usr_password" value="#{beansUser.user.password}" />
 			</div>
 			<div>
-				<h:commandButton action="#{user.authentication}" value="Se connecter" id="action"/>
+				<h:commandButton action="#{beansUser.authentication}" value="Se connecter" id="action"/>
 			</div>
 			</h:form>	
 		</ui:define>
