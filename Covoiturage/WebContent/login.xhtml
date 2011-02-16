@@ -18,11 +18,11 @@
 				<h:inputText id="usr_email" value="#{user.email}" type="email" />
 			</div>
 			<div>
-				<label for="usr_password">Password :</label>
-				<h:inputSecret value="#{user.password}" />
+				<label for="login_form:usr_password">Password :</label>
+				<h:inputSecret id="usr_password" value="#{user.password}" />
 			</div>
 			<div>
-				<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
+				<h:commandButton action="#{user.authentication}" value="Se connecter" id="action"/>
 			</div>
 			</h:form>	
 		</ui:define>
