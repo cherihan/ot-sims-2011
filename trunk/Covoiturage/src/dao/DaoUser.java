@@ -2,8 +2,6 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -14,13 +12,7 @@ public class DaoUser {
 
 	public static ConnexionBD con;
 
-	/*
-	 * public static String url =
-	 * "jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod="; //
-	 * 
-	 * @jve:decl-index=0: public static String nomDriver =
-	 * "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
-	 */
+	
 
 	/**
 	 * 
