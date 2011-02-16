@@ -8,17 +8,20 @@ import java.util.Date;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
-import beans.Annonce;
 import model.User;
 
 public class DaoUser {
 
 	public static ConnexionBD con;
+
 	/*
-	public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod="; // @jve:decl-index=0:
-	public static String nomDriver = "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
-	*/
-	
+	 * public static String url =
+	 * "jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod="; //
+	 * 
+	 * @jve:decl-index=0: public static String nomDriver =
+	 * "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
+	 */
+
 	/**
 	 * 
 	 * @param email
@@ -38,13 +41,21 @@ public class DaoUser {
 
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call user_create_short('" + email + "', '"
-					+ password + "')";
+			String query ;
 
 			try {
-				res = con.execute(query);				
-				if(res.first())  
-					user = new User(res);				
+				query = "user_get_user_by_email('" + email + "')";
+
+				res = con.execute(query);
+				if (res.first())//There is result -> email is already used
+					throw new Exception(Constantes.USER_ALREADY_SAVED);
+
+				query = "call user_create_short('" + email + "', '" + password
+						+ "')";
+
+				res = con.execute(query);
+				if (res.first())
+					user = new User(res);
 			} catch (MySQLIntegrityConstraintViolationException ex) {
 				messageErr = Constantes.USER_ALREADY_SAVED;
 				System.err.println(messageErr + " : " + ex);
@@ -68,7 +79,7 @@ public class DaoUser {
 	}
 
 	/**
-	 *  
+	 * 
 	 * @param email
 	 * @param passWord
 	 * @return
@@ -85,12 +96,15 @@ public class DaoUser {
 
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call user_check_authentification('" + email + "', '"
-					+ passWord + "')";
+			String query = "call user_check_authentification('" + email
+					+ "', '" + passWord + "')";
 			ResultSet curseur = con.execute(query);
 
-			if(curseur.next()) {
+			if (curseur.first()) {
 				userLogged = new User(curseur);
+			} else {
+				messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
+				throw new Exception(messageErr);
 			}
 
 		} catch (ClassNotFoundException ex) {
@@ -115,28 +129,28 @@ public class DaoUser {
 		return userLogged;
 
 	}
-	
+
 	public static User getUser(int usr_id) {
-		User usr=null;
+		User usr = null;
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "SELECT * FROM user_usr WHERE usr_id= " + usr_id + "";
+			String query = "SELECT * FROM user_usr WHERE usr_id= " + usr_id
+					+ "";
 
 			ResultSet curseur = con.execute(query);
-			if(curseur.first()){
+			if (curseur.first()) {
 				usr = new User(curseur);
 				return usr;
-			}else{
+			} else {
 				return null;
 			}
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	public static User getUser(User usr) {
 		return DaoUser.getUser(usr.getId());
 	}
 }
-

@@ -4,19 +4,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
 import model.User;
 
-public class TraitementSQL {
+public class DaoGoogleGeo {
 
 	public static ConnexionBD con;
-	public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod="; // @jve:decl-index=0:
-	public static String nomDriver = "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
 
-	
 	/**
 	 * 
 	 * @param email
@@ -24,7 +22,7 @@ public class TraitementSQL {
 	 * @return User
 	 * @throws Exception
 	 */
-	public static User createUser(String email, String password)
+	public static User createOrUpdateGoogleGeo(String address, Hashtable<String, Double> coords)
 			throws Exception {
 
 		con = null;
@@ -34,14 +32,22 @@ public class TraitementSQL {
 
 		try {
 
-			con = new ConnexionBD(url, nomDriver);
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call user_create_short('" + email + "', '"
-					+ password + "')";
+			String query ;
 
 			try {
-				res = con.execute(query);				
-				if(res.next())  user = new User(res);				
+				query = "googlecache_create_or_update('" + address + "')";
+
+				res = con.execute(query);
+				if (res.first())//There is result -> email is already used
+					throw new Exception(Constantes.USER_ALREADY_SAVED);
+
+				
+
+				res = con.execute(query);
+				if (res.first())
+					user = new User(res);
 			} catch (MySQLIntegrityConstraintViolationException ex) {
 				messageErr = Constantes.USER_ALREADY_SAVED;
 				System.err.println(messageErr + " : " + ex);
@@ -65,8 +71,6 @@ public class TraitementSQL {
 	}
 
 	/**
-	 * cette fonction retourne une list qui contient (messageErr, email,
-	 * firstName, lastName, genre)
 	 * 
 	 * @param email
 	 * @param passWord
@@ -82,15 +86,15 @@ public class TraitementSQL {
 
 		try {
 
-			con = new ConnexionBD(url, nomDriver);
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call user_check_authentification('" + email + "', '"
-					+ passWord + "')";
+			String query = "call user_check_authentification('" + email
+					+ "', '" + passWord + "')";
 			ResultSet curseur = con.execute(query);
 
-			if(curseur.next()) {
+			if (curseur.first()) {
 				userLogged = new User(curseur);
-			}else{
+			} else {
 				messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
 				throw new Exception(messageErr);
 			}
@@ -118,13 +122,27 @@ public class TraitementSQL {
 
 	}
 
-	public static void main(String[] args) {
+	public static User getUser(int usr_id) {
+		User usr = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-		// User test =
-		// TraitementSQL.authentification("othman.bentria@gmail.com", "root");
-		//
-		// System.out.println(test.getFirstName());
+			String query = "SELECT * FROM user_usr WHERE usr_id= " + usr_id
+					+ "";
 
+			ResultSet curseur = con.execute(query);
+			if (curseur.first()) {
+				usr = new User(curseur);
+				return usr;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
+	public static User getUser(User usr) {
+		return DaoGoogleGeo.getUser(usr.getId());
+	}
 }
