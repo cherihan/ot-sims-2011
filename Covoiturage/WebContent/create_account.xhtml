@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,24 +7,24 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/template/template.xhtml">
 
-<ui:define name="title"> Creation du compte </ui:define>
+<ui:define name="title">Nouveau compte</ui:define>
 
 <ui:define name="body">
-	<h:form>		
-		<h:outputText value="Email" />
-		<h:inputText value="#{beansUser.user.email}" />		
-								
-		<h:outputText value="Password" />			
-		<h:inputSecret value="#{beansUser.user.password}" />				
-						
-		<h:outputText value="confirm password" />			
-		<h:inputSecret value="#{beansUser.confirmPassword}" />						
-
-		<h:commandButton action="#{beansUser.creatUser}" value="Save"/>
-		
-		<br/>		
-		<h:outputText value="#{beansUser.messageErr}" />	
-		
+	<h:form id="create_account_form">
+		<div class="msg">
+			<h:outputText value="#{beansUser.messageErr}" />
+		</div>
+		<div>
+			<label for="create_account_form:usr_email">E-mail :</label>	
+			<h:inputText id="usr_email" value="#{beansUser.user.email}" type="email" />
+			<label for="create_account_form:usr_password">Mot de passe :</label>
+			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" />
+			<label for="create_account_form:usr_confirm_password">Confirmation :</label>
+			<h:inputSecret id="usr_confirm_password" value="#{beansUser.confirmPassword}" />
+		</div>				
+		<div>
+			<h:commandButton action="#{beansUser.creatUser}" value="Créer le compte" />
+		</div>
 		</h:form>
 	</ui:define>
 	
