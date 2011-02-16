@@ -20,69 +20,135 @@
  <navigation-rule>
   <from-view-id>/login.xhtml</from-view-id>
   <navigation-case>
-   <from-outcome>creat_account</from-outcome>
-   <to-view-id>/creat_account.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
    <from-outcome>ok</from-outcome>
    <to-view-id>/home.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>actuel</from-outcome>
-   <to-view-id>/login.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/creat_account.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>login</from-outcome>
-   <to-view-id>/login.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>ok</from-outcome>
-   <to-view-id>/home.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>actuel</from-outcome>
-   <to-view-id>/creat_account.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/ajout.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>list</from-outcome>
-   <to-view-id>/list.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>actuel</from-outcome>
-   <to-view-id>/ajout.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/home_public.xhtml</from-view-id>
   <navigation-case>
-   <from-outcome>ajout</from-outcome>
-   <to-view-id>/ajout.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>list</from-outcome>
-   <to-view-id>/list.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
    <from-outcome>login</from-outcome>
    <to-view-id>/login.xhtml</to-view-id>
   </navigation-case>
-  <navigation-case>
-   <from-outcome>creat_account</from-outcome>
-   <to-view-id>/creat_account.xhtml</to-view-id>
-  </navigation-case>
  </navigation-rule>
  <navigation-rule>
-  <from-view-id>/home.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>actuel</from-outcome>
-   <to-view-id>/home.xhtml</to-view-id>
-  </navigation-case>
+ 	<display-name>home_public.xhtml</display-name>
+ 	<from-view-id>/home_public.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/list_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>edit_profile.xhtml</display-name>
+ 	<from-view-id>/edit_profile.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/profile.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>profile.xhtml</display-name>
+ 	<from-view-id>/profile.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/edit_profile.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>home_public.xhtml</display-name>
+ 	<from-view-id>/home_public.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/create_account.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>login.xhtml</display-name>
+ 	<from-view-id>/login.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/home_public.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>create_account.xhtml</display-name>
+ 	<from-view-id>/create_account.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/home_public.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>create_account.xhtml</display-name>
+ 	<from-view-id>/create_account.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/home.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>home.xhtml</display-name>
+ 	<from-view-id>/home.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/list_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>home.xhtml</display-name>
+ 	<from-view-id>/home.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/home_public.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>profile.xhtml</display-name>
+ 	<from-view-id>/profile.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/home_public.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>list_route.xhtml</display-name>
+ 	<from-view-id>/list_route.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/info_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>info_route.xhtml</display-name>
+ 	<from-view-id>/info_route.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/list_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>home.xhtml</display-name>
+ 	<from-view-id>/home.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/add_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>add_route.xhtml</display-name>
+ 	<from-view-id>/add_route.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/list_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>list_route.xhtml</display-name>
+ 	<from-view-id>/list_route.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/add_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>profile.xhtml</display-name>
+ 	<from-view-id>/profile.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/list_route.xhtml</to-view-id>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<display-name>info_route.xhtml</display-name>
+ 	<from-view-id>/info_route.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<to-view-id>/profile.xhtml</to-view-id>
+ 	</navigation-case>
  </navigation-rule>
  <application>
   <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
