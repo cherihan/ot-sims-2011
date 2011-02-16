@@ -44,7 +44,7 @@ public class DaoUser {
 			String query ;
 
 			try {
-				query = "user_get_user_by_email('" + email + "')";
+				query = "call user_get_user_by_email('" + email + "')";
 
 				res = con.execute(query);
 				if (res.first())//There is result -> email is already used
