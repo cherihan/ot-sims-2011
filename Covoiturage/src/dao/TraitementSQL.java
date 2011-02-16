@@ -9,7 +9,6 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import utilities.Constantes;
 import beans.Annonce;
-import beans.BeansUser;
 import model.User;
 
 public class TraitementSQL {
@@ -115,8 +114,8 @@ public class TraitementSQL {
 					+ password + "')";
 
 			try {
-				res = con.execute(query);
-				user = new User(res);
+				res = con.execute(query);				
+				if(res.next())  user = new User(res);				
 			} catch (MySQLIntegrityConstraintViolationException ex) {
 				messageErr = Constantes.USER_ALREADY_SAVED;
 				System.err.println(messageErr + " : " + ex);
