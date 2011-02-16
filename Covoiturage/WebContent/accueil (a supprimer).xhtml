@@ -7,18 +7,15 @@
       xmlns:a4j="http://richfaces.org/a4j">
 
 	<ui:composition template="/template/template.xhtml">
-<ui:define name="title">
-Accueil	
-</ui:define>
-
-<ui:define name="body">
-	<h:form>
-			<div><h:commandButton action="list" value="Consulter les trajets" /></div>
-			<hr />
-			<div><h:commandButton action="authentification" value="S’identifier" />
-			<h:commandButton action="newUser" value="Créer un compte" /></div>
-		</h:form>
-</ui:define>
+		<ui:define name="title">Accueil</ui:define>
+		<ui:define name="body">
+			<h:form>
+					<div><h:commandButton action="list" value="Consulter les trajets" /></div>
+					<hr />
+					<div><h:commandButton action="authentification" value="S’identifier" />
+					<h:commandButton action="newUser" value="Créer un compte" /></div>
+				</h:form>
+		</ui:define>
 	</ui:composition>
 
 </html>
