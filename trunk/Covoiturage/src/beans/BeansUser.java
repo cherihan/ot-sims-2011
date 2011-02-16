@@ -18,21 +18,8 @@ public class BeansUser {
 	
 	protected User user = new User();
 	
-	protected int id;
-	protected String firstname;
-	protected String lastname;
-	protected String email;
-	protected String password;
 	protected String confirmPassword;
-	protected int current_position;
-	protected String genre;
-	protected Date birthdate;
-	protected String description;
-	protected String mobilphone;
-	protected int note;
-	protected String registrationdate;
-	protected String lastlogindate;
-
+	
 	/**
 	 * @return the id
 	 */
@@ -75,7 +62,7 @@ public class BeansUser {
 	 *            the lastname to set
 	 */
 	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		this.user.setLastname(lastname);
 	}
 
 	/**
@@ -97,7 +84,7 @@ public class BeansUser {
 	 * @return the password
 	 */
 	public String getPassword() {
-		return password;
+		return user.getPassword();
 	}
 
 	/**
@@ -105,7 +92,7 @@ public class BeansUser {
 	 *            the password to set
 	 */
 	public void setPassword(String password) {
-		this.password = password;
+		this.user.setPassword(password);
 	}
 
 	/**
@@ -127,7 +114,7 @@ public class BeansUser {
 	 * @return the current_position
 	 */
 	public int getCurrent_position() {
-		return current_position;
+		return user.getCurrent_position();
 	}
 
 	/**
@@ -135,14 +122,14 @@ public class BeansUser {
 	 *            the current_position to set
 	 */
 	public void setCurrent_position(int current_position) {
-		this.current_position = current_position;
+		this.user.setCurrent_position(current_position);
 	}
 
 	/**
 	 * @return the genre
 	 */
 	public String getGenre() {
-		return genre;
+		return user.getGenre();
 	}
 
 	/**
@@ -150,14 +137,14 @@ public class BeansUser {
 	 *            the genre to set
 	 */
 	public void setGenre(String genre) {
-		this.genre = genre;
+		this.setGenre(genre);
 	}
 
 	/**
 	 * @return the birthdate
 	 */
 	public Date getBirthdate() {
-		return birthdate;
+		return user.getBirthdate();
 	}
 
 	/**
@@ -165,14 +152,14 @@ public class BeansUser {
 	 *            the birthdate to set
 	 */
 	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+		this.user.setBirthdate(birthdate);
 	}
 
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
-		return description;
+		return user.getDescription();
 	}
 
 	/**
@@ -180,14 +167,14 @@ public class BeansUser {
 	 *            the description to set
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.user.setDescription(description);
 	}
 
 	/**
 	 * @return the mobilphone
 	 */
 	public String getMobilphone() {
-		return mobilphone;
+		return user.getMobilphone();
 	}
 
 	/**
@@ -195,14 +182,14 @@ public class BeansUser {
 	 *            the mobilphone to set
 	 */
 	public void setMobilphone(String mobilphone) {
-		this.mobilphone = mobilphone;
+		this.user.setMobilphone(mobilphone);
 	}
 
 	/**
 	 * @return the note
 	 */
 	public int getNote() {
-		return note;
+		return user.getNote();
 	}
 
 	/**
@@ -210,14 +197,14 @@ public class BeansUser {
 	 *            the note to set
 	 */
 	public void setNote(int note) {
-		this.note = note;
+		this.user.setNote(note);
 	}
 
 	/**
 	 * @return the registrationdate
 	 */
 	public String getRegistrationdate() {
-		return registrationdate;
+		return user.getRegistrationdate().toString();
 	}
 
 	/**
@@ -225,14 +212,14 @@ public class BeansUser {
 	 *            the registrationdate to set
 	 */
 	public void setRegistrationdate(String registrationdate) {
-		this.registrationdate = registrationdate;
+		//this.registrationdate = registrationdate;
 	}
 
 	/**
 	 * @return the lastlogindate
 	 */
 	public String getLastlogindate() {
-		return lastlogindate;
+		return user.getLastlogindate().toString();
 	}
 
 	/**
@@ -240,7 +227,7 @@ public class BeansUser {
 	 *            the lastlogindate to set
 	 */
 	public void setLastlogindate(String lastlogindate) {
-		this.lastlogindate = lastlogindate;
+		//this.lastlogindate = lastlogindate;
 	}
 
 	public BeansUser() {
@@ -250,11 +237,11 @@ public class BeansUser {
 	public BeansUser(String email, String password, String firstname,
 			String lastname, String genre) {
 		super();
-		this.email = email;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.genre = genre;
+		this.setEmail(email);
+		this.setPassword(password);
+		this.setFirstname(firstname);
+		this.setLastname(lastname);
+		this.setGenre(genre);
 	}
 
 	// afficher dans notre page web lorsqu'il y a un erreur
@@ -287,25 +274,24 @@ public class BeansUser {
 	 */
 	public String creatUser() {
 		User userCreated;
-		if (!ValidatorOfData.validateEMail(email)) {
+		if (!ValidatorOfData.validateEMail(this.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
 			return "actuel";
 		}
 
 		// /// TODO
-		if (!ValidatorOfData.validateData(firstname)) {
+		if (!ValidatorOfData.validateData(this.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
 			return "actuel";
 		}
 		// ///
 
-		if (email.equals("") || firstname.equals("") || lastname.equals("")
-				|| genre.equals("")) {
+		if (this.getEmail().equals("")) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 
-		} else if (!password.equals(confirmPassword) || password.equals("")
-				|| confirmPassword.equals("") || email.equals("")) {
+		} else if (!this.getPassword().equals(this.getConfirmPassword()) || this.getPassword().equals("")
+				|| this.getConfirmPassword().equals("") || this.getEmail().equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
 			return "actuel";
 		}
@@ -316,7 +302,7 @@ public class BeansUser {
 		
 		try {
 
-			userCreated = TraitementSQL.createUser(email, password);
+			userCreated = TraitementSQL.createUser(this.getEmail(), this.getPassword());
 			
 			this.user=userCreated;
 			//HttpSession session = Request.getSession(true);
@@ -343,7 +329,7 @@ public class BeansUser {
 
 		User userLogged = null;
 		try {
-			userLogged = TraitementSQL.authentification(email, password);
+			userLogged = TraitementSQL.authentification(this.getEmail(), this.getPassword());
 			this.user=userLogged;
 			
 			return "ok";
