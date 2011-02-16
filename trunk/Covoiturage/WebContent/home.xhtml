@@ -10,20 +10,17 @@
 		<ui:define name="header">Accueil</ui:define>
 		
 		<ui:define name="body">
-			<h:outputText value="email: " />
-			<h:outputText value="#{user.email}" />
-			<br/>
-			<h:outputText value="password: " />
-			<h:outputText value="#{user.password}" />
-			<br/>	
-			<h:outputText value="first name: " />
-			<h:outputText value="#{user.firstname}" />
-			<br/>	
-			<h:outputText value="Last name: " />
-			<h:outputText value="#{user.lastname}" />
-			<br/>	
-			<h:outputText value="sexe: " />
-			<h:outputText value="#{user.genre}" />		
+			<h:form>
+				<div>
+					<h:commandButton action="add_route" value="Ajouter un trajet" />
+					<h:commandButton action="list_route" value="Chercher un trajet" />
+				</div>
+				<hr />
+				<div>
+					<h:commandButton action="profile" value="Mon profil" />
+					<h:commandButton action="disconnect" value="DŽconnexion" />
+				</div>
+			</h:form>
 		</ui:define>
 		
 	</ui:composition>
