@@ -1,4 +1,5 @@
 /* CSS OT SIMS */
+/* Thème couleur : http://0to255.com/5d8dfc */
 
 body {
 	font-size: 1.2em;
@@ -16,7 +17,7 @@ body {
 /* Header */
 
 #header {
-	background-color: #DDD;
+	background-color: #e2ebfe;
 	margin-bottom: 20px;
 	padding: 10px;
 	border: 1px solid gray;
@@ -43,6 +44,10 @@ img {
 
 hr {
 	margin: 17px 10px 25px 10px;
+}
+
+.msg {
+	font-style: italic;
 }
 
 /* Form */
