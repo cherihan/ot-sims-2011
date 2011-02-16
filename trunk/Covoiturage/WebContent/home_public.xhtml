@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -10,18 +10,18 @@
 	
 		<ui:define name="title">Accueil</ui:define>
 
-		<ui:define name="body">
-			<h:form>
-				<div>
-					<h:commandButton action="list_route" value="Chercher un trajet" />
-				</div>
-				<hr />
-				<div>
-					<h:commandButton action="login" value="S’identifier" />
-					<h:commandButton action="create_account" value="Créer un compte" />
-				</div>
-			</h:form>
-		</ui:define>
+<ui:define name="body">
+	<h:form>
+		<div>
+			<h:commandButton action="list_route" value="Chercher un trajet" />
+		</div>
+		<hr />
+		<div>
+			<h:commandLink action="#{beansUser.toLogin}" value="S'identifier" />
+			<h:commandLink action="#{beansUser.toCreatAccount}" value="Creer compte" />			
+		<div>
+		</h:form>
+</ui:define>
 	</ui:composition>
 
 </html>
