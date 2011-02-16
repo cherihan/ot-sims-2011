@@ -4,6 +4,7 @@ package beans;
 import java.util.Date;
 
 import utilities.Constantes;
+import utilities.ValidatorOfData;
 
 import dao.TraitementSQL;
 
@@ -172,6 +173,19 @@ public class User {
 	public String creatUser()
 	{
 				
+		if(!ValidatorOfData.validateEMail(email)){
+			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
+			return "actuel";
+		}
+		
+		///// TODO
+		if(!ValidatorOfData.validateData(firstName)){
+			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
+			return "actuel";
+		}
+		/////
+		
+		
 		if(email.equals("") || firstName.equals("") || lastName.equals("") || genre.equals("") ){
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
@@ -203,12 +217,6 @@ public class User {
 					
 		messageErr = "";
 			
-		if(!passWord.equals(confirmPassWord) || passWord.equals("") || confirmPassWord.equals("") || email.equals("") ){
-			
-			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
-			
-			return "actuel";
-		}		
 		
 		User utilisateur = null ;
 		try {
@@ -227,7 +235,7 @@ public class User {
 				return "ok";
 			}
 		
-		messageErr = Constantes.PASSWORD_OR_USER_NOT_GOOD;
+		messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
 		
 		return "actuel";
 	}
