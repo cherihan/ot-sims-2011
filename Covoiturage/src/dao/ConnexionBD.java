@@ -66,4 +66,8 @@ public class ConnexionBD {
 		}
         System.out.println("Base de donn�es F�rmer");
     }
+    
+    public static String escape(String input) {
+    	return input.replaceAll("'", "''");
+    }
 }

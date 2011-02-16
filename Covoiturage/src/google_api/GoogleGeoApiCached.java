@@ -1,13 +1,6 @@
 package google_api;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Hashtable;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class GoogleGeoApiCached {
 	
