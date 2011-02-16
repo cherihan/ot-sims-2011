@@ -98,7 +98,7 @@ public class BeansUser {
 		}
 
 		try {
-			userCreated = DaoUser.createUser(user.getEmail(), user.getPassword());
+			userCreated = DaoUser.createUser(user.getEmail(), user.getPassword().replaceAll("'", "''"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
@@ -120,9 +120,8 @@ public class BeansUser {
 
 		User userLogged = null;
 		try {
-			userLogged = DaoUser.authentification(user.getEmail(), user.getPassword());
-			this.user=userLogged;
-			
+			userLogged = DaoUser.authentification(user.getEmail(), user.getPassword().replaceAll("'", "''"));
+			this.user=userLogged;			
 			return "ok";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
