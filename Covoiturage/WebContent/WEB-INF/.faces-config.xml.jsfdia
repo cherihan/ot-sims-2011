@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#authentification.xhtml"
-  PATH="/authentification.xhtml" SHAPE="272,33,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#authentification.xhtml:0" NAME="item"
-   PATH="/authentification.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="newUser::#newUser.xhtml" NAME="output"
-    PATH="/newUser.xhtml" TARGET="rules:#newUser.xhtml" TITLE="newUser" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#newUser.xhtml" PATH="/newUser.xhtml"
-  SHAPE="544,80,50,41" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#newUser.xhtml:0" NAME="item"
-   PATH="/newUser.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="authentification::#authentification.xhtml"
-    NAME="output" PATH="/authentification.xhtml"
-    TARGET="rules:#authentification.xhtml" TITLE="authentification" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#ajout.xhtml" PATH="/ajout.xhtml"
   SHAPE="224,320,50,57" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#ajout.xhtml:0" NAME="item"
@@ -27,19 +10,54 @@
     PATH="/ajout.xhtml" TARGET="rules:#ajout.xhtml" TITLE="actuel" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#accueil.xhtml" PATH="/accueil.xhtml"
-  SHAPE="40,112,50,73" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#accueil.xhtml:0" NAME="item"
-   PATH="/accueil.xhtml" model-entity="JSFProcessItem">
+ <PROCESS-ITEM NAME="rules:#list.xhtml" PATH="/list.xhtml"
+  SHAPE="592,192,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="320,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="creat_account::#creat_account.xhtml"
+    NAME="output" PATH="/creat_account.xhtml"
+    TARGET="rules:#creat_account.xhtml" TITLE="creat_account" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ok::#home.xhtml" NAME="output1"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="ok" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="actuel::#login.xhtml" NAME="output2"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="actuel" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#creat_account.xhtml"
+  PATH="/creat_account.xhtml" SHAPE="64,449,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#creat_account.xhtml:0" NAME="item"
+   PATH="/creat_account.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ok::#home.xhtml" NAME="output1"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="ok" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="actuel::#creat_account.xhtml" NAME="output2"
+    PATH="/creat_account.xhtml" TARGET="rules:#creat_account.xhtml"
+    TITLE="actuel" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#home_public.xhtml" PATH="/home_public.xhtml"
+  SHAPE="64,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#home_public.xhtml:0" NAME="item"
+   PATH="/home_public.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="ajout::#ajout.xhtml" NAME="output"
     PATH="/ajout.xhtml" TARGET="rules:#ajout.xhtml" TITLE="ajout" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="list::#list.xhtml" NAME="output1"
     PATH="/list.xhtml" TARGET="rules:#list.xhtml" TITLE="list" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="authentification::#authentification.xhtml"
-    NAME="output2" PATH="/authentification.xhtml"
-    TARGET="rules:#authentification.xhtml" TITLE="authentification" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output2"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="creat_account::#creat_account.xhtml"
+    NAME="output3" PATH="/creat_account.xhtml"
+    TARGET="rules:#creat_account.xhtml" TITLE="creat_account" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#list.xhtml" PATH="/list.xhtml"
-  SHAPE="592,192,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#home.xhtml" PATH="/home.xhtml"
+  SHAPE="320,641,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#home.xhtml:0" NAME="item" PATH="/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="actuel::#home.xhtml" NAME="output"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="actuel" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

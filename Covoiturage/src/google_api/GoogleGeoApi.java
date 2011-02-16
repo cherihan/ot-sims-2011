@@ -57,8 +57,7 @@ public class GoogleGeoApi {
 		return null;
 	}
 
-	public static String getNearAddressFromCoord(
-			Hashtable<String, Double> coords) {
+	public static String getNearAddressFromCoord(Hashtable<String, Double> coords) {
 		try {
 			String uri = new String(
 					"http://maps.googleapis.com/maps/api/geocode/json?sensor=false");
@@ -99,7 +98,7 @@ public class GoogleGeoApi {
 		return null;
 	}
 
-	public static String execHttpRequest(String url) throws Exception {
+	protected static String execHttpRequest(String url) throws Exception {
 		URL yahoo = new URL(url);
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				yahoo.openStream()));
