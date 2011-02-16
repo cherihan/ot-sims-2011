@@ -11,39 +11,18 @@
 <ui:define name="body">
 	<h:form>		
 		<h:outputText value="Email" />
-		<h:inputText value="#{user.email}" />
-			
-		<h:outputText value="First name" />
-		<h:inputText value="#{user.firstname}" />						
-
-		<h:outputText value="Last name" />
-		<h:inputText value="#{user.lastname}"/>	
-			
-		<h:outputText value="Sexe" />			
-		<h:selectOneMenu value="#{user.genre}">
-			<f:selectItem itemValue="male"/>
-			<f:selectItem itemValue="female"/>
-		</h:selectOneMenu>
-		
-		<h:outputText value="Birthday" />
-		<rich:calendar value="#{user.birthdate}"/>	
-		<br/>
-		<h:outputText value="Mobile phone" />
-		<h:inputText value="#{user.mobilphone}"/>	
-		
-		<h:outputText value="Description" />
-		<h:inputTextarea value="#{user.description}"/>
+		<h:inputText value="#{beansUser.user.email}" />		
 								
 		<h:outputText value="Password" />			
-		<h:inputSecret value="#{user.password}" />				
+		<h:inputSecret value="#{beansUser.user.password}" />				
 						
 		<h:outputText value="confirm password" />			
-		<h:inputSecret value="#{user.confirmPassword}" />						
+		<h:inputSecret value="#{beansUser.confirmPassword}" />						
 
-		<h:commandButton action="#{user.creatUser}" value="Save"/>
+		<h:commandButton action="#{beansUser.creatUser}" value="Save"/>
 		
 		<br/>		
-		<h:outputText value="#{user.messageErr}" />	
+		<h:outputText value="#{beansUser.messageErr}" />	
 		
 		</h:form>
 	</ui:define>
