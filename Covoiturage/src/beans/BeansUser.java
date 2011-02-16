@@ -7,7 +7,6 @@ import utilities.Constantes;
 import utilities.ValidatorOfData;
 
 import dao.DaoUser;
-import dao.TraitementSQL;
 
 public class BeansUser {
 	

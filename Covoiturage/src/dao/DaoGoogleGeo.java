@@ -1,148 +1,97 @@
 package dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Hashtable;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-import utilities.Constantes;
-import model.User;
+import model.Google_cache;
 
 public class DaoGoogleGeo {
 
 	public static ConnexionBD con;
 
-	/**
-	 * 
-	 * @param email
-	 * @param passWord
-	 * @return User
-	 * @throws Exception
-	 */
-	public static User createOrUpdateGoogleGeo(String address, Hashtable<String, Double> coords)
-			throws Exception {
+	public static void createOrUpdateGoogleGeo(String address,
+			Hashtable<String, Double> coords)  {
 
 		con = null;
-		String messageErr = null;
-		ResultSet res;
-		User user = null;
 
 		try {
 
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query ;
+			String query;
 
-			try {
-				query = "googlecache_create_or_update('" + address + "')";
+				query = "googlecache_create_or_update('"
+						+ ConnexionBD.escape(address) + "', "
+						+ coords.get("latitude") + ", "
+						+ coords.get("longitude") + ")";
 
-				res = con.execute(query);
-				if (res.first())//There is result -> email is already used
-					throw new Exception(Constantes.USER_ALREADY_SAVED);
-
+				con.execute(query);
 				
 
-				res = con.execute(query);
-				if (res.first())
-					user = new User(res);
-			} catch (MySQLIntegrityConstraintViolationException ex) {
-				messageErr = Constantes.USER_ALREADY_SAVED;
-				System.err.println(messageErr + " : " + ex);
-				throw new Exception(messageErr);
-			}
-		} catch (ClassNotFoundException ex) {
-			messageErr = Constantes.CLASS_DB_NOT_FOUND;
-			System.err.println(messageErr + " : " + ex);
-			throw new Exception(messageErr);
-		} catch (SQLException ex) {
-			messageErr = Constantes.PROBLEME_CONNECTION_DB;
-			System.err.println(messageErr + " : " + ex);
-			throw new Exception(messageErr);
+		} catch (Exception ex) {
 		}
 
 		if (con != null)
 			con.close();
 
-		return user;
-
 	}
 
-	/**
-	 * 
-	 * @param email
-	 * @param passWord
-	 * @return
-	 * @throws Exception
-	 */
-	public static User authentification(String email, String passWord)
-			throws Exception {
+	public static Google_cache getByAddress(String address) {
 		con = null;
 
-		String messageErr = null;
-		User userLogged = null;
+		Google_cache gch = null;
 
 		try {
 
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call user_check_authentification('" + email
-					+ "', '" + passWord + "')";
+			String query = "call googlecache_get_by_address('"
+					+ ConnexionBD.escape(address) + "')";
 			ResultSet curseur = con.execute(query);
 
 			if (curseur.first()) {
-				userLogged = new User(curseur);
-			} else {
-				messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
-				throw new Exception(messageErr);
-			}
-
-		} catch (ClassNotFoundException ex) {
-			messageErr = Constantes.CLASS_DB_NOT_FOUND;
-			System.err.println(messageErr + " : " + ex);
-			throw new Exception(messageErr);
-		} catch (SQLException ex) {
-			messageErr = Constantes.PROBLEME_CONNECTION_DB;
-			System.err.println(messageErr + " : " + ex);
-			throw new Exception(messageErr);
-		} catch (Exception e) {
-			messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;
-			System.err.println(messageErr + " : " + e);
-			throw new Exception(messageErr);
-
-		}
-
-		if (con != null) {
-			con.close();
-		}
-
-		return userLogged;
-
-	}
-
-	public static User getUser(int usr_id) {
-		User usr = null;
-		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
-
-			String query = "SELECT * FROM user_usr WHERE usr_id= " + usr_id
-					+ "";
-
-			ResultSet curseur = con.execute(query);
-			if (curseur.first()) {
-				usr = new User(curseur);
-				return usr;
+				gch = new Google_cache(curseur);
 			} else {
 				return null;
 			}
 		} catch (Exception e) {
 			return null;
 		}
+
+		if (con != null) {
+			con.close();
+		}
+
+		return gch;
 	}
 
-	public static User getUser(User usr) {
-		return DaoGoogleGeo.getUser(usr.getId());
+	public static Google_cache getByCoords(Hashtable<String, Double> coords) {
+		con = null;
+
+		Google_cache gch = null;
+
+		try {
+
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call googlecache_get_by_coords(" + coords.get("latitude") + ", "
+			+ coords.get("longitude") + ")";
+			ResultSet curseur = con.execute(query);
+
+			if (curseur.first()) {
+				gch = new Google_cache(curseur);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+
+		if (con != null) {
+			con.close();
+		}
+
+		return gch;
 	}
 }
