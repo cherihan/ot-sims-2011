@@ -9,7 +9,7 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#home_public.xhtml" PATH="/home_public.xhtml"
-  SHAPE="96,80,50,73" model-entity="JSFProcessGroup" persistent="true">
+  SHAPE="152,80,50,73" model-entity="JSFProcessGroup" persistent="true">
   <PROCESS-ITEM ID="rules:#home_public.xhtml:2" NAME="item"
    PATH="/home_public.xhtml" SHAPE="200,174,47,15" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
@@ -23,7 +23,7 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#home.xhtml" PATH="/home.xhtml"
-  SHAPE="96,272,50,73" model-entity="JSFProcessGroup">
+  SHAPE="32,264,50,89" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#home.xhtml:0" NAME="item" PATH="/home.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="profile::#profile.xhtml" NAME="output"
     PATH="/profile.xhtml" TARGET="rules:#profile.xhtml" TITLE="profile" model-entity="JSFProcessItemOutput"/>
@@ -33,6 +33,9 @@
    <PROCESS-ITEM-OUTPUT ID="list_route::#list_route.xhtml"
     NAME="output2" PATH="/list_route.xhtml"
     TARGET="rules:#list_route.xhtml" TITLE="list_route" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="disconnect::#home_public.xhtml"
+    NAME="output3" PATH="/home_public.xhtml"
+    TARGET="rules:#home_public.xhtml" TITLE="disconnect" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#edit_profile.xhtml"
