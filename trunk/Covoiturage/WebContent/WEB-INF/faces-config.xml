@@ -3,16 +3,6 @@
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
  <managed-bean>
-  <managed-bean-name>annonce</managed-bean-name>
-  <managed-bean-class>beans.Annonce</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>
- <managed-bean>
-  <managed-bean-name>listofAnnonces</managed-bean-name>
-  <managed-bean-class>beans.ListofAnnonces</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>
- <managed-bean>
   <managed-bean-name>user</managed-bean-name>
   <managed-bean-class>beans.BeansUser</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
