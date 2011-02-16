@@ -2,7 +2,10 @@ package model;
 
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.Hashtable;
 
 
 public class Route {
@@ -48,6 +51,46 @@ public class Route {
 		this.seat = seat;
 		this.car = car;
 	}
+	
+	public Route(int id) {
+		super();
+		this.id = id;
+	}
+
+	public Route(Hashtable<String, String> sqlrow) {
+		super();
+		this.id = Integer.parseInt(sqlrow.get("rte_id"));
+		this.type = Integer.parseInt(sqlrow.get("rte_type"));
+		this.position_begin = Integer.parseInt(sqlrow.get("rte_position_begin"));
+		this.position_end = Integer.parseInt(sqlrow.get("rte_position_end"));
+		//this.date_begin = sqlrow.get("rte_date_begin");
+		//this.date_end = sqlrow.get("rte_date_end");
+		this.comment = sqlrow.get("rte_comment");
+		this.route_owner = Integer.parseInt(sqlrow.get("rte_route_owner"));
+		this.seat = Integer.parseInt(sqlrow.get("rte_seat"));
+		this.car = Integer.parseInt(sqlrow.get("rte_car"));
+	}
+
+	public Route(ResultSet sqlrow) {
+		super();
+		try {
+			this.id = sqlrow.getInt("rte_id");
+			this.type = sqlrow.getInt("rte_type");
+			this.position_begin = sqlrow.getInt("rte_position_begin");
+			this.position_end = sqlrow.getInt("rte_position_end");
+			this.date_begin = sqlrow.getDate("rte_date_begin");
+			this.date_end = sqlrow.getDate("rte_date_end");
+			this.comment = sqlrow.getString("rte_comment");
+			this.route_owner = sqlrow.getInt("rte_route_owner");
+			this.seat = sqlrow.getInt("rte_seat");
+			this.car = sqlrow.getInt("rte_car");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
 	/**
 	 * @return the type
 	 */
