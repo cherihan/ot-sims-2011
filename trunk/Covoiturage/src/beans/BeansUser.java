@@ -25,8 +25,7 @@ public class BeansUser {
 	protected int note;
 	protected String registrationdate;
 	protected String lastlogindate;
-	
-	
+
 	/**
 	 * @return the id
 	 */
@@ -35,7 +34,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -49,7 +49,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param firstname the firstname to set
+	 * @param firstname
+	 *            the firstname to set
 	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
@@ -63,7 +64,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param lastname the lastname to set
+	 * @param lastname
+	 *            the lastname to set
 	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
@@ -77,7 +79,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -91,7 +94,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -105,7 +109,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param confirmPassword the confirmPassword to set
+	 * @param confirmPassword
+	 *            the confirmPassword to set
 	 */
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
@@ -119,7 +124,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param current_position the current_position to set
+	 * @param current_position
+	 *            the current_position to set
 	 */
 	public void setCurrent_position(int current_position) {
 		this.current_position = current_position;
@@ -133,7 +139,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param genre the genre to set
+	 * @param genre
+	 *            the genre to set
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
@@ -147,7 +154,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param birthdate the birthdate to set
+	 * @param birthdate
+	 *            the birthdate to set
 	 */
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
@@ -161,7 +169,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -175,7 +184,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param mobilphone the mobilphone to set
+	 * @param mobilphone
+	 *            the mobilphone to set
 	 */
 	public void setMobilphone(String mobilphone) {
 		this.mobilphone = mobilphone;
@@ -189,7 +199,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param note the note to set
+	 * @param note
+	 *            the note to set
 	 */
 	public void setNote(int note) {
 		this.note = note;
@@ -203,7 +214,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param registrationdate the registrationdate to set
+	 * @param registrationdate
+	 *            the registrationdate to set
 	 */
 	public void setRegistrationdate(String registrationdate) {
 		this.registrationdate = registrationdate;
@@ -217,19 +229,19 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param lastlogindate the lastlogindate to set
+	 * @param lastlogindate
+	 *            the lastlogindate to set
 	 */
 	public void setLastlogindate(String lastlogindate) {
 		this.lastlogindate = lastlogindate;
 	}
 
-	
 	public BeansUser() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BeansUser(String email, String password, String firstName,
-			String lastName, String genre) {
+	public BeansUser(String email, String password, String firstname,
+			String lastname, String genre) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -237,12 +249,14 @@ public class BeansUser {
 		this.lastname = lastname;
 		this.genre = genre;
 	}
-	
+
 	// afficher dans notre page web lorsqu'il y a un erreur
 	String messageErr;
+
 	public String getMessageErr() {
 		return messageErr;
 	}
+
 	public void setMessageErreur(String messageErreur) {
 		this.messageErr = messageErreur;
 	}
@@ -250,97 +264,84 @@ public class BeansUser {
 	public void setMessageErr(String messageErr) {
 		this.messageErr = messageErr;
 	}
-	
-	
-	public String toLogin()
-	{
+
+	public String toLogin() {
 		messageErr = "";
 		return "login";
 	}
-	
-	public String toCreatAccount()
-	{
+
+	public String toCreatAccount() {
 		messageErr = "";
 		return "creat_account";
 	}
-	
-	
 
 	/**
 	 * 
 	 */
-	public String creatUser()
-	{
-		
-		if(!ValidatorOfData.validateEMail(email)){
+	public String creatUser() {
+		User userCreated;
+		if (!ValidatorOfData.validateEMail(email)) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
 			return "actuel";
 		}
-		
-		///// TODO
-		if(!ValidatorOfData.validateData(firstname)){
+
+		// /// TODO
+		if (!ValidatorOfData.validateData(firstname)) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
 			return "actuel";
 		}
-		/////
-		
-		
-		if(email.equals("") || firstname.equals("") || lastname.equals("") || genre.equals("") ){
+		// ///
+
+		if (email.equals("") || firstname.equals("") || lastname.equals("")
+				|| genre.equals("")) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
-			
-		}else if(!password.equals(confirmPassword) || password.equals("") || confirmPassword.equals("") || email.equals("") ){
+
+		} else if (!password.equals(confirmPassword) || password.equals("")
+				|| confirmPassword.equals("") || email.equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
 			return "actuel";
 		}
-		
-		String lien = "";
-		
+
+		String lien = "ok";
+
 		User utilisateur = null;
 		
 		try {
-			utilisateur = TraitementSQL.creatUser(email, password);
+
+			userCreated = TraitementSQL.createUser(email, password);
+
+			// TODO sauvegarder en session
+
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
-		}		
-		
-		if(utilisateur == null)  return "actuel";		
-		
+
+			lien = "actuel";
+		}
+
 		return "ok";
 	}
-	
-	
-	
+
 	/**
 	 * 
 	 */
-	public String authentication(){		
-					
+	public String authentication() {
+
 		messageErr = "";
-			
-		BeansUser utilisateur = null ;
+
+		User userLogged = null;
 		try {
-			utilisateur = TraitementSQL.authentification(email, password);
+			userLogged = TraitementSQL.authentification(email, password);
+			return "ok";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
-		}	
-		
-	
-			if(utilisateur != null && utilisateur.getFirstname() != null){			
-				email = utilisateur.getEmail();
-				firstname = utilisateur.getFirstname();
-				lastname = utilisateur.getLastname();
-				genre = utilisateur.getGenre();				
-				messageErr = "";
-				return "ok";
-			}
-		
+		}
+
 		messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
-		
+
 		return "actuel";
 	}
-	
-	
 }
