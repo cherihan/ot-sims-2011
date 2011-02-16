@@ -12,44 +12,53 @@ public class BeansUser {
 	
 	
 	protected User user = new User();
+	protected String messageErr;
+	protected String confirmPassword;
 	
+	
+
+	/**
+	 * @return the user
+	 */
 	public User getUser() {
 		return user;
 	}
-	
+
+	/**
+	 * @param user the user to set
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	public BeansUser() {
-		// TODO Auto-generated constructor stub
-	}
 
-
-	public BeansUser(String email, String password, String firstname,
-			String lastname, String genre) {		
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setFirstname(firstname);
-		user.setLastname(lastname);
-		user.setGenre(genre);
-	}
-
-	// afficher dans notre page web lorsqu'il y a un erreur
-	String messageErr;
-
+	/**
+	 * @return the messageErr
+	 */
 	public String getMessageErr() {
 		return messageErr;
 	}
 
-	public void setMessageErreur(String messageErreur) {
-		this.messageErr = messageErreur;
-	}
-
+	/**
+	 * @param messageErr the messageErr to set
+	 */
 	public void setMessageErr(String messageErr) {
 		this.messageErr = messageErr;
 	}
+
+	/**
+	 * @return the confirmPassword
+	 */
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	/**
+	 * @param confirmPassword the confirmPassword to set
+	 */
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
 
 	public String toLogin() {
 		messageErr = "";
@@ -58,14 +67,14 @@ public class BeansUser {
 
 	public String toCreatAccount() {
 		messageErr = "";
-		return "creat_account";
+		return "create_account";
 	}
 
 	/**
 	 * 
 	 */
 	public String creatUser() {
-		User userCreated;
+		User userCreated = null;
 		if (!ValidatorOfData.validateEMail(user.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
 			return "actuel";
@@ -82,21 +91,19 @@ public class BeansUser {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 
-		} else if (!user.getPassword().equals(user.getConfirmPassword()) || user.getPassword().equals("")
-				|| user.getConfirmPassword().equals("") || user.getEmail().equals("")) {
+		} else if (!user.getPassword().equals(this.getConfirmPassword()) || user.getPassword().equals("")
+				|| this.getConfirmPassword().equals("") || user.getEmail().equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
 			return "actuel";
 		}
 
 		String lien = "ok";
 
-		User utilisateur = null;
 		
 		try {
 
 			userCreated = TraitementSQL.createUser(user.getEmail(), user.getPassword());
 			
-			this.user=userCreated;
 			//HttpSession session = Request.getSession(true);
 			
 			// TODO sauvegarder en session
@@ -108,6 +115,10 @@ public class BeansUser {
 
 			lien = "actuel";
 		}
+		
+		System.out.println("sdfsdf: " + userCreated);
+		
+		this.user=userCreated;
 
 		return "ok";
 	}
@@ -130,7 +141,7 @@ public class BeansUser {
 			messageErr = e.getMessage();
 		}
 
-		messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
+		if(messageErr.equals("")) messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
 
 		return "actuel";
 	}
