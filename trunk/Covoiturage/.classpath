@@ -20,8 +20,5 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-adapters-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
