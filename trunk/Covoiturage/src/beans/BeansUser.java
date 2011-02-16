@@ -1,9 +1,9 @@
 package beans;
 
-
 import java.util.Date;
 
 import utilities.Constantes;
+import utilities.ValidatorOfData;
 
 import dao.TraitementSQL;
 
@@ -17,7 +17,7 @@ public class BeansUser {
 	protected String confirmPassword;
 	protected int current_position;
 	protected String genre;
-	protected String birthdate;
+	protected Date birthdate;
 	protected String description;
 	protected String mobilphone;
 	protected int note;
@@ -140,14 +140,14 @@ public class BeansUser {
 	/**
 	 * @return the birthdate
 	 */
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
 	/**
 	 * @param birthdate the birthdate to set
 	 */
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -236,7 +236,7 @@ public class BeansUser {
 		this.genre = genre;
 	}
 	
-	//� afficher dans notre page web lors d'un erreur
+	// afficher dans notre page web lorsqu'il y a un erreur
 	String messageErr;
 	public String getMessageErr() {
 		return messageErr;
@@ -269,7 +269,20 @@ public class BeansUser {
 	 */
 	public String creatUser()
 	{
-				
+		
+		if(!ValidatorOfData.validateEMail(email)){
+			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
+			return "actuel";
+		}
+		
+		///// TODO
+		if(!ValidatorOfData.validateData(firstname)){
+			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
+			return "actuel";
+		}
+		/////
+		
+		
 		if(email.equals("") || firstname.equals("") || lastname.equals("") || genre.equals("") ){
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
@@ -282,7 +295,7 @@ public class BeansUser {
 		String lien = "";
 		
 		try {
-			lien = TraitementSQL.creatUser(email, password, firstname, lastname, genre);
+			lien = TraitementSQL.creatUser(email, password);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
@@ -301,20 +314,14 @@ public class BeansUser {
 					
 		messageErr = "";
 			
-		if(!password.equals(confirmPassword) || password.equals("") || confirmPassword.equals("") || email.equals("") ){
-			
-			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
-			
-			return "actuel";
-		}		
-		
 		BeansUser utilisateur = null ;
 		try {
 			utilisateur = TraitementSQL.authentification(email, password);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
-		}			
+		}	
+		
 	
 			if(utilisateur != null && utilisateur.getFirstname() != null){			
 				email = utilisateur.getEmail();
