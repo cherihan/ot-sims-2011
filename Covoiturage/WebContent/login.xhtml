@@ -7,30 +7,24 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="title">Identification</ui:define>
-
-	<ui:define name="header">
-		<h:form>
-			<h:panelGroup>
-				<h:outputText value="Authentification"/>
-				(<h:commandLink action="#{user.toCreatAccount}" value="create new account" />)
-			</h:panelGroup>
-		</h:form>
-	</ui:define>
 	
 	<ui:define name="body">
 		<h:form>
 			<div class="msg">
 				<h:outputText value="#{user.messageErr}" />
 			</div>
-			<label for="usr_email">E-mail :</label>
-			<h:inputText value="#{user.email}"/>				
-			
-			<label for="usr_email">Password :</label>
-			<h:inputSecret value="#{user.passWord}" />	
-						
-			
-			<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
-			
+			<div>
+				<label for="usr_email">E-mail :</label>	
+				<input id="usr_email" type="email" placeholder="moi@mail.com" value="#{user.email}" />
+				<h:inputText value="#{user.email}"/>
+			</div>
+			<div>
+				<label for="usr_email">Password :</label>
+				<h:inputSecret value="#{user.passWord}" />
+			</div>
+			<div>
+				<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
+			</div>
 			</h:form>	
 		</ui:define>
 </ui:composition>
