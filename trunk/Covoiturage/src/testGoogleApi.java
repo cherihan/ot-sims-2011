@@ -8,7 +8,7 @@ public class testGoogleApi {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main22(String[] args) {
 		// TODO Auto-generated method stub
 		
 		String addressQuery = "Ocean atlantique";

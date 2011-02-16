@@ -10,7 +10,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import utilities.Constantes;
 import beans.Annonce;
-import beans.User;
+import beans.BeansUser;
 
 public class TraitementSQL {
 	
@@ -160,7 +160,7 @@ try{
  * @return
  * @throws Exception 
  */
-public static User authentification(String email, String passWord) throws Exception
+public static BeansUser authentification(String email, String passWord) throws Exception
 {
 	con = null;	
 	
@@ -169,7 +169,7 @@ public static User authentification(String email, String passWord) throws Except
 	String lastName = null;
 	String genre = null;
 	
-	User utilisateur = null;
+	BeansUser utilisateur = null;
 	
 	
 	try{
@@ -205,7 +205,7 @@ public static User authentification(String email, String passWord) throws Except
 	
        
 	if(con != null){		
-		utilisateur = new User(email, passWord, firstName, lastName, genre);		
+		utilisateur = new BeansUser(email, passWord, firstName, lastName, genre);		
 		con.close();		
 	}
 	
