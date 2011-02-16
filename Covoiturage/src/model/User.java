@@ -65,6 +65,13 @@ public class User {
 		super();
 		this.id = id;
 	}
+	
+	/**
+	 * @param id
+	 */
+	public User() {
+		super();
+	}
 
 	/**
 	 * @param Hashtable
