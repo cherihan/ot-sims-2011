@@ -89,11 +89,8 @@ public class DaoUser {
 					+ passWord + "')";
 			ResultSet curseur = con.execute(query);
 
-			if(curseur.first()) {
+			if(curseur.next()) {
 				userLogged = new User(curseur);
-			}else{
-				messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
-				throw new Exception(messageErr);
 			}
 
 		} catch (ClassNotFoundException ex) {
@@ -105,7 +102,7 @@ public class DaoUser {
 			System.err.println(messageErr + " : " + ex);
 			throw new Exception(messageErr);
 		} catch (Exception e) {
-			messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;
+			messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
 			System.err.println(messageErr + " : " + e);
 			throw new Exception(messageErr);
 
