@@ -6,6 +6,7 @@ import model.User;
 import utilities.Constantes;
 import utilities.ValidatorOfData;
 
+import dao.DaoUser;
 import dao.TraitementSQL;
 
 public class BeansUser {
@@ -97,26 +98,14 @@ public class BeansUser {
 			return "actuel";
 		}
 
-		String lien = "ok";
-
-		
 		try {
-
-			userCreated = TraitementSQL.createUser(user.getEmail(), user.getPassword());
-			
-			//HttpSession session = Request.getSession(true);
-			
-			// TODO sauvegarder en session
-
-
+			userCreated = DaoUser.createUser(user.getEmail(), user.getPassword());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
 
-			lien = "actuel";
+			return "actuel";
 		}
-		
-		System.out.println("sdfsdf: " + userCreated);
 		
 		this.user=userCreated;
 
@@ -132,7 +121,7 @@ public class BeansUser {
 
 		User userLogged = null;
 		try {
-			userLogged = TraitementSQL.authentification(user.getEmail(), user.getPassword());
+			userLogged = DaoUser.authentification(user.getEmail(), user.getPassword());
 			this.user=userLogged;
 			
 			return "ok";

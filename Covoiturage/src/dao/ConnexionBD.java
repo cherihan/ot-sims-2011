@@ -8,6 +8,8 @@ public class ConnexionBD {
     public Statement           sta=null;
     public ResultSet           re=null;
     public ResultSetMetaData   metaBase;
+    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod="; // @jve:decl-index=0:
+	public static String nomDriver = "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
     
     public ConnexionBD(String url, String nomDriver) throws SQLException, ClassNotFoundException {
             Class.forName(nomDriver);
@@ -60,8 +62,8 @@ public class ConnexionBD {
     	try {
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Problème de fermeture de la Base de données");
+			System.out.println("Problï¿½me de fermeture de la Base de donnï¿½es");
 		}
-        System.out.println("Base de données Férmer");
+        System.out.println("Base de donnï¿½es Fï¿½rmer");
     }
 }
