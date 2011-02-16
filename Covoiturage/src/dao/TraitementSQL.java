@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.User;
+
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
@@ -15,7 +17,7 @@ import beans.BeansUser;
 public class TraitementSQL {
 	
 	public static ConnexionBD con;	
-	public static String url="jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod=";  //  @jve:decl-index=0:
+	public static String url="jdbc:mysql://127.0.0.1:3306/sims?user=root&password=";  //  @jve:decl-index=0:
 	public static String nomDriver="com.mysql.jdbc.Driver";  //  @jve:decl-index=0:
 
 	
@@ -212,6 +214,45 @@ public static BeansUser authentification(String email, String passWord) throws E
 	return utilisateur;
 	
 }
+
+public static User getUserById(int userid) throws Exception
+{
+	con = null;	
+	User user = null;
+	String messageErr;
+	
+	try{
+						
+		con = new ConnexionBD(url, nomDriver );
+		
+		String query = "SELECT * FROM user_usr WHERE usr_id="+userid+"";
+		ResultSet curseur = con.search(query);
+		
+		while(curseur.next())
+		{
+			user=new User(curseur);
+		}
+		
+	}catch (ClassNotFoundException ex) {        
+        messageErr = Constantes.CLASS_DB_NOT_FOUND;
+        System.err.println(messageErr + " : " + ex );        
+        throw new Exception(messageErr);
+    }
+    catch (SQLException ex) {
+    	messageErr = Constantes.PROBLEME_CONNECTION_DB;    	        
+        System.err.println(messageErr + " : " + ex );        
+        throw new Exception(messageErr);
+    }catch(Exception e){		
+		messageErr = Constantes.OTHER_PROBLEME_IN_CONNECTION_DB;		
+		System.err.println(messageErr + " : " + e );		
+		throw new Exception(messageErr);
+		
+	}
+		
+	return user;
+	
+}
+
 
 
 public static void main(String[] args) {
