@@ -6,37 +6,31 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/template/template.xhtml">
 
-<ui:define name="title">Identification</ui:define>
+	<ui:define name="title">Identification</ui:define>
 
-<ui:define name="header">
-	<h:form>
-		<h:panelGroup>
-			<h:outputText value="Authentification"/>
-			(<h:commandLink action="#{user.toCreatAccount}" value="creat new account" />)
-		</h:panelGroup>
-	</h:form>
-</ui:define>
-
-<ui:define name="body">
-
-	<h:form>		
-				
-		<h:outputText value="Email" />
-		<h:inputText value="#{user.email}"/>				
-				
-		<h:outputText value="Password" />			
-		<h:inputSecret value="#{user.passWord}" />	
-					
-		
-		<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
-		
-		
-		<br/>		
-		<h:outputText value="#{user.messageErr}" />
-		
-		</h:form>	
-		
-	</ui:define>	
+	<ui:define name="header">
+		<h:form>
+			<h:panelGroup>
+				<h:outputText value="Authentification"/>
+				(<h:commandLink action="#{user.toCreatAccount}" value="create new account" />)
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
 	
-	
+	<ui:define name="body">
+		<h:form>
+			<div class="msg">
+				<h:outputText value="#{user.messageErr}" />
+			</div>
+			<label for="usr_email">E-mail :</label>
+			<h:inputText value="#{user.email}"/>				
+			
+			<label for="usr_email">Password :</label>
+			<h:inputSecret value="#{user.passWord}" />	
+						
+			
+			<h:commandButton action="#{user.authentication}" value="se connecter" id="action"/>
+			
+			</h:form>	
+		</ui:define>
 </ui:composition>
