@@ -4,23 +4,29 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<ui:composition>
-
-<h:panelGrid columns="2">
-	<h:outputText value="email: " />
-	<h:outputText value="#{user.email}" />
-	
-	<h:outputText value="password: " />
-	<h:outputText value="#{user.passWord}" />
-	
-	<h:outputText value="first name: " />
-	<h:outputText value="#{user.firstName}" />
-	
-	<h:outputText value="Last name: " />
-	<h:outputText value="#{user.lastName}" />
-	
-	<h:outputText value="sexe: " />
-	<h:outputText value="#{user.sexe}" />
-</h:panelGrid>	
+	<ui:composition template="/template/template.xhtml">	
+		
+		<ui:define name="title">Accueil</ui:define>
+		<ui:define name="header">Accueil</ui:define>
+		
+		<ui:define name="body">
+			<h:outputText value="email: " />
+			<h:outputText value="#{beansUser.user.email}" />
+			<br/>
+			<h:outputText value="password: " />
+			<h:outputText value="#{beansUser.user.password}" />
+			<br/>	
+			<h:outputText value="first name: " />
+			<h:outputText value="#{beansUser.user.firstname}" />
+			<br/>	
+			<h:outputText value="Last name: " />
+			<h:outputText value="#{beansUser.user.lastname}" />
+			<br/>	
+			<h:outputText value="sexe: " />
+			<h:outputText value="#{beansUser.user.genre}" />		
+		</ui:define>
+		
 	</ui:composition>
+
+	
 </html>
