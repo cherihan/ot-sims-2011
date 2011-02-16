@@ -26,6 +26,13 @@ public class ConnexionBD {
     	return re;
     	}
     
+    public ResultSet execute(String query) throws SQLException{
+    	re=sta.executeQuery(query);
+    	System.out.println("Element trouvee ");
+    		
+    	return re;
+    	}
+    
     public void insert(String query) throws SQLException{
     	sta.executeUpdate(query);
     	System.out.println("Element ajouter a la base");
