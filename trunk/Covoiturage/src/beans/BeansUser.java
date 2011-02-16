@@ -2,6 +2,8 @@ package beans;
 
 import java.util.Date;
 
+import model.User;
+
 import utilities.Constantes;
 import utilities.ValidatorOfData;
 
@@ -294,15 +296,18 @@ public class BeansUser {
 		
 		String lien = "";
 		
+		User utilisateur = null;
+		
 		try {
-			lien = TraitementSQL.creatUser(email, password);
+			utilisateur = TraitementSQL.creatUser(email, password);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
 		}		
 		
+		if(utilisateur == null)  return "actuel";		
 		
-		return lien;
+		return "ok";
 	}
 	
 	
