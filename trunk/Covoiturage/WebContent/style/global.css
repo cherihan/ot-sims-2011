@@ -57,10 +57,8 @@ label {
 	margin-bottom: 4px;
 }
 
-input,
-select,
-textarea,
-button {
+
+.large {
 	display: block;
 	width: 100%;
 	font-size: 1em;
