@@ -16,14 +16,14 @@
 		</div>
 		<div>
 			<label for="create_account_form:usr_email">E-mail :</label>	
-			<h:inputText id="usr_email" value="#{beansUser.user.email}" type="email" />
+			<h:inputText id="usr_email" value="#{beansUser.user.email}" styleClass="large"  />
 			<label for="create_account_form:usr_password">Mot de passe :</label>
-			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" />
+			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
 			<label for="create_account_form:usr_confirm_password">Confirmation :</label>
-			<h:inputSecret id="usr_confirm_password" value="#{beansUser.confirmPassword}" />
+			<h:inputSecret id="usr_confirm_password" value="#{beansUser.confirmPassword}" styleClass="large" />
 		</div>				
 		<div>
-			<h:commandButton action="#{beansUser.creatUser}" value="Créer le compte" />
+			<h:commandButton action="#{beansUser.creatUser}" value="Créer le compte" styleClass="large" />
 		</div>
 		</h:form>
 	</ui:define>
