@@ -16,14 +16,14 @@
 			</div>
 			<div>
 				<label for="login_form:usr_email">E-mail :</label>
-				<h:inputText id="usr_email" value="#{beansUser.user.email}" type="email" />
+				<h:inputText id="usr_email" value="#{beansUser.user.email}" styleClass="large" />
 			</div>
 			<div>
 				<label for="login_form:usr_password">Password :</label>
-				<h:inputSecret id="usr_password" value="#{beansUser.user.password}" />
+				<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
 			</div>
 			<div>
-				<h:commandButton action="#{beansUser.authentication}" value="Se connecter" id="action"/>
+				<h:commandButton action="#{beansUser.authentication}" value="Se connecter" styleClass="large"/>
 			</div>
 			</h:form>	
 		</ui:define>
