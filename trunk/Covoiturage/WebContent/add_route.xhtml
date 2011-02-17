@@ -13,17 +13,30 @@
 		<ui:define name="body">	
 			<h:form>
 				<h:outputLabel value="Départ" />
-				<h:selectOneMenu value="">
+				<h:selectOneMenu value="" styleClass="large">
 					<f:selectItem itemLabel="ici" itemValue="here"/>
 					<f:selectItem itemLabel="autre..." itemValue="other"/>
 				</h:selectOneMenu>
 				<h:outputLabel value="Arrivée" />
-				<h:selectOneMenu value="">
+				<h:selectOneMenu value="" styleClass="large">
 					<f:selectItem itemLabel="Maison" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="Boulot" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="autre..." itemValue="other"/>
 				</h:selectOneMenu>
-				<h:outputLabel value="Date" />
+				
+		<h:panelGrid columns="3">
+		
+			<h:outputText value="Date" /> 	
+			<h:outputText value="Heure" />
+			<h:outputText value="Minute" />
+	
+			<rich:inputNumberSpinner minValue="0" maxValue="23" />
+			<rich:calendar value=""/>
+			<rich:inputNumberSpinner minValue="0" maxValue="59" />
+	 	
+		</h:panelGrid>
+				
+				<!-- h:outputLabel value="Date" />
 					<div class="timestamp">
 						<div class="timestamp">
 							<h:outputLabel value="Jour" />
@@ -127,8 +140,8 @@
 								<f:selectItem itemLabel="50" itemValue="50"/>
 							</h:selectOneMenu>
 						</div>
-					</div>
-				<h:commandButton action="#{annonce.insert}" value="Ajouter" />
+					</div-->
+				<h:commandButton action="#{annonce.insert}" value="Ajouter" styleClass="large" />
 			</h:form>
 		</ui:define>
 		
