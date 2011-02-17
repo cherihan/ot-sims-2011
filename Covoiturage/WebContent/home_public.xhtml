@@ -13,12 +13,13 @@
 <ui:define name="body">
 	<h:form>
 		<div>
-			<h:commandButton action="list_route" value="Chercher un trajet" />
+			<h:commandButton action="list_route" value="Chercher un trajet" styleClass="large" />
 		</div>
 		<hr/>
 		<div>
-			<h:commandButton action="#{beansUser.toLogin}" value="S'identifier" />
-			<h:commandButton action="#{beansUser.toCreatAccount}" value="Creer compte" />			
+			<h:commandButton action="#{beansUser.toLogin}" value="S'identifier" styleClass="large" />
+			<h:commandButton action="#{beansUser.toCreatAccount}" value="Creer compte" styleClass="large"/>
+					
 		</div>
 	</h:form>
 </ui:define>
