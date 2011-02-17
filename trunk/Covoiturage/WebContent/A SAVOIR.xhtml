@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<ui:composition>
+	
+	<h:panelGrid columns="3">
+		
+	<h:outputText value="Date" /> 	
+	<h:outputText value="Heure" />
+	<h:outputText value="Minute" />
+	
+	<rich:inputNumberSpinner minValue="0" maxValue="23" />
+	<rich:calendar value=""/>
+	<rich:inputNumberSpinner minValue="0" maxValue="59" />
+	 	
+	</h:panelGrid>
+	
+	<br/>
+	
+	<!-- On peut utiliser cette comboBox pour l'ajout d'un chemin (on peut chosir un chemin déja saisi (Favoris) ou un nouveau chemin -->
+	<!-- Je ne sais pas comment faire la largeur à 100% -->
+	
+			<rich:comboBox defaultLabel="Enter votre adresse de depart" width="500px">
+				<f:selectItem  itemValue="AAAA"/>
+				<f:selectItem  itemValue="AAAACCC"/>
+				<f:selectItem  itemValue="AAADDD"/>
+				<f:selectItem  itemValue="BBB"/>
+				<f:selectItem  itemValue="BBBDD"/>
+				<f:selectItem  itemValue="BBDDD"/>
+				<f:selectItem  itemValue="CCC"/>
+				<f:selectItem  itemValue="CCCD"/>
+				<f:selectItem  itemValue="CCDD"/>
+			</rich:comboBox>
+	
+	</ui:composition>
+</html>
