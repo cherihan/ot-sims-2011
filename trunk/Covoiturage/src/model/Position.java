@@ -1,5 +1,8 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Position {
 
 
@@ -16,6 +19,18 @@ public class Position {
 		this.address = address;
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+	
+	public Position(ResultSet sqlrow) {
+		super();
+		try{
+			this.id = sqlrow.getInt("pos_id");
+			this.address = sqlrow.getString("pos_address");
+			this.latitude = sqlrow.getDouble("pos_latitude");
+			this.longitude = sqlrow.getDouble("pos_longitude");
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * @return the id
