@@ -3,7 +3,7 @@
 
 2. Désarchiver Eclipse-jee-helios-win32.zip
 
-3. Désarchiver apache-tomcat-6.0.32-windows-x86.zip
+3. Désarchiver apache-tomcat-6.0.32-windows-x86.zip (http://tomcat.apache.org/download-60.cgi)
 
 4. Télécharger les jars pour JSF1.2:
 	jsf-api/jsf-impl/jstl-api-1.2/jstl-api-1.2/jstl-impl-1.2
