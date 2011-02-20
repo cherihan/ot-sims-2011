@@ -11,4 +11,5 @@ public class Constantes {
 	 public static String EMAIL_FORM_NOT_CORRECT = "la forme de l'adresse email que vous avez saisi n'est pas correcte";
 	 public static String DATA_FORM_NOT_CORRECT = "la forme de l'email que vous avez saisi n'est pas bonne";
 	 public static String PASSWORD_OR_USER_NOT_CORRECT = "Mot de passe ou Email n'est pas correcte";
+	 public static String UNEXPECTED_ERROR = "Une erreur inattendue est survenue ...";
 }
