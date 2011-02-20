@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/template/template.xhtml">
 
-	<ui:composition template="/template/template.xhtml">	
+<ui:define name="title">Édition de mon profil</ui:define>
 
-		<ui:define name="title">Édition du profil</ui:define>
-				
-		<ui:define name="body">
-		</ui:define>
+<ui:define name="body">
+		<div>
+			<h:outputLabel value="E-mail : " />
+			<h:inputText id="usr_email" value="#{beansUser.user.email}" styleClass="large"  />
+			<h:outputLabel value="Mot de passe : " />
+			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
+		</div>		
+			<hr/>		
 		
-	</ui:composition>
-
+		<div>
+			<h:outputLabel value="Prénom : " />
+			<h:inputText id="usr_firstname" value="#{beansUser.user.getFirstname}" styleClass="large"  />
+			<h:outputLabel value="Nom : " />
+			<h:inputText id="usr_lastname" value="#{beansUser.user.getLastname}" styleClass="large"  />
+			<h:outputLabel value="Genre : " />
+			<h:inputText id="usr_genre" value="#{beansUser.user.getGenre}" styleClass="large"  />
+			<h:outputLabel value="Anniversaire: : " />
+			<h:inputText id="usr_birthdate" value="#{beansUser.user.getBirthdate}" styleClass="large"  />
+		</div>
+		
+		<div>
+			<h:commandButton action="#{beansUser.}" value="Valider les modifications" styleClass="large" />
+		</div>
+		
+		<div>
+			<h:commandButton action="#{beansUser.}" value="Annuler les modifications" styleClass="large" />
+		</div>
+		
+		</h:form>
+	</ui:define>
 	
-</html>
+</ui:composition>
