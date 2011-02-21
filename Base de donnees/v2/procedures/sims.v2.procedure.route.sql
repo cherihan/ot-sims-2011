@@ -151,7 +151,8 @@ CREATE PROCEDURE route_search_with_date_and_delta (
 	IN _position_end_id INT(11),
 	IN _begin_date_departure BIGINT(11),
 	IN _end_date_departure BIGINT(11),
-	IN _location_approximate_nb_meters INT(11)
+	IN _location_approximate_nb_meters INT(11),
+	IN _rtp_id INT(11)
 )
 BEGIN
 	
@@ -175,10 +176,35 @@ BEGIN
 			AND	posend.pos_longitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
 			
 			AND	rte_deletedate IS NULL
-			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure;
+			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
+			AND (rte_type = _rtp_id OR _rtp_id = 0);
 		
 
 END //
+
+
+DROP PROCEDURE IF EXISTS route_search_of_owner //
+CREATE PROCEDURE route_search_of_owner (
+	IN _owner_id INT(11),
+	IN _begin_date_departure BIGINT(11),
+	IN _end_date_departure BIGINT(11),
+	IN _location_approximate_nb_meters INT(11),
+	IN _rtp_id INT(11)
+)
+BEGIN
+	
+	SELECT rte.* 
+		FROM route_rte rte
+		WHERE 
+				rte_owner = _owner_id
+			AND	rte_deletedate IS NULL
+			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
+			AND (rte_type = _rtp_id OR _rtp_id = 0);
+		
+
+END //
+
+
 
 
 
