@@ -77,23 +77,27 @@ public class BeansUser {
 		User userCreated = null;
 		if (!ValidatorOfData.validateEMail(user.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
+			user.setEmail(null);
 			return "actuel";
 		}
 
 		// /// TODO
 		if (!ValidatorOfData.validateData(user.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
+			user.setEmail(null);
 			return "actuel";
 		}
 		// ///
 
 		if (user.getEmail().equals("")) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
+			user.setEmail(null);
 			return "actuel";
 
 		} else if (!user.getPassword().equals(this.getConfirmPassword()) || user.getPassword().equals("")
 				|| this.getConfirmPassword().equals("") || user.getEmail().equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
+			user.setEmail(null);
 			return "actuel";
 		}
 
@@ -102,7 +106,7 @@ public class BeansUser {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
-
+			user.setEmail(null);
 			return "actuel";
 		}
 		
@@ -129,7 +133,7 @@ public class BeansUser {
 		}
 
 		if(messageErr.equals("")) messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
-
+		user.setEmail(null);
 		return "actuel";
 	}
 	
