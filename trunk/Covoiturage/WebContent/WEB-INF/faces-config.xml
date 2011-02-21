@@ -23,7 +23,7 @@
    <to-view-id>/user/login.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>show</from-outcome>
+   <from-outcome>showProfile</from-outcome>
    <to-view-id>/user/show.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
@@ -37,12 +37,19 @@
   <navigation-case>
    <from-outcome>index</from-outcome>
    <to-view-id>/route/index.xhtml</to-view-id>
-  </navigation-case>  
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <navigation-case>
    <from-outcome>home</from-outcome>
    <to-view-id>/home.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/user/show.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>edit</from-outcome>
+   <to-view-id>/user/edit.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <application>
