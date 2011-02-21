@@ -111,6 +111,9 @@ END //
 
 
 DROP PROCEDURE IF EXISTS user_update //
+
+
+
 CREATE PROCEDURE user_update (
 	IN _usr_id INT(11),
 	IN _usr_email VARCHAR(100),
@@ -125,7 +128,7 @@ CREATE PROCEDURE user_update (
 BEGIN
 
 	UPDATE user_usr SET
-		usr_email=_usr_email,
+		usr_email= _usr_email,
 		usr_firstname = _usr_firstname,
 		usr_lastname = _usr_lastname,
 		usr_genre = _usr_genre,

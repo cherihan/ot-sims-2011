@@ -193,5 +193,25 @@ BEGIN
 
 END //
 
+
+
+DROP PROCEDURE IF EXISTS route_get_passagers //
+CREATE PROCEDURE route_get_passagers (
+	IN _rte_id INT(11)
+)
+BEGIN
+
+	SELECT usr.* 
+		FROM  passager_psg as psg
+			INNER JOIN user_usr ON psg.psg_user = usr.usr_id		
+		WHERE 
+				psg_route = _rte_id;
+		
+
+END //
+
+
 DELIMITER ;
+
+
 
