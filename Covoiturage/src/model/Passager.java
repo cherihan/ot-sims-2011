@@ -92,6 +92,14 @@ public class Passager {
 		return this.routeObj;	
 	}
 	
+	public void setRouteObj(Route rte) {
+		this.routeObj = rte;	
+	}
+	
+	public void setUserObj(User usr) {
+		this.userObj = usr;	
+	}
+	
 	
 	/**
 	 * @param route the route to set

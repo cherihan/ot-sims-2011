@@ -201,7 +201,7 @@ CREATE PROCEDURE route_get_passagers (
 )
 BEGIN
 
-	SELECT usr.* 
+	SELECT usr.*, psg.*
 		FROM  passager_psg as psg
 			INNER JOIN user_usr ON psg.psg_user = usr.usr_id		
 		WHERE 

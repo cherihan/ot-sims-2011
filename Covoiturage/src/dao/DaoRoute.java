@@ -8,8 +8,10 @@ import java.util.Hashtable;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
+import model.Passager;
 import model.Position;
 import model.Route;
+import model.User;
 import google_api.GoogleGeoApiCached;
 
 public class DaoRoute {
@@ -188,6 +190,28 @@ public class DaoRoute {
 
 	public static Route getRoute(Route rte) {
 		return DaoRoute.getRoute(rte.getId());
+	}
+
+	public static Hashtable<Integer, Passager> getPassagers(int rte_id) {
+		Hashtable<Integer, Passager> list = new Hashtable<Integer, Passager>();
+		Passager psg = null;
+		User usr = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call route_get_passagers("+rte_id+")";
+			ResultSet curseur = con.execute(query);
+			
+			while(curseur.next()) {
+				psg = new Passager(curseur);
+				usr = new User(curseur);
+				psg.setUserObj(usr);
+				list.put(psg.getId(), psg);
+			}
+		} catch (Exception e) {
+			return list;
+		}
+		return list;
 	}
 	
 }

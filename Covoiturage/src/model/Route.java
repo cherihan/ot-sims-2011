@@ -9,6 +9,7 @@ import java.util.Hashtable;
 
 import dao.DaoCar;
 import dao.DaoPosition;
+import dao.DaoRoute;
 import dao.DaoUser;
 
 
@@ -29,6 +30,8 @@ public class Route {
 	protected Position position_endObj;
 	protected User ownerObj;
 	protected Car carObj;
+	
+	protected Hashtable<Integer, Passager> passagers=null;
 	
 	/**
 	 * @param id
@@ -273,6 +276,13 @@ public class Route {
 	public Integer getDate_endAsInteger() {
 		return Integer.valueOf(String.valueOf(this.getDate_end().getTime()/1000));
 	}
+	
+	public Hashtable<Integer, Passager> getPassagers() {
+		if(this.passagers == null) {
+			this.passagers = DaoRoute.getPassagers(this.getId());
+		}
+		return this.passagers;		
+	} 
 	
 
 }
