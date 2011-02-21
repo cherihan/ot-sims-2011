@@ -169,10 +169,10 @@ BEGIN
 			INNER JOIN position_pos AS posendask ON posendask = _position_end_id
 		WHERE 
 				posbeg.pos_latitude BETWEEN (posbegask.pos_latitude -  __delta_deg_x) AND (posbegask.pos_latitude +  __delta_deg_x)
-			AND	posbeg.pos_latitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
+			AND	posbeg.pos_longitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
 			
 			AND	posend.pos_latitude BETWEEN (posendask.pos_latitude -  __delta_deg_x) AND (posendask.pos_latitude +  __delta_deg_x)
-			AND	posend.pos_latitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
+			AND	posend.pos_longitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
 			
 			AND	rte_deletedate IS NULL
 			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure;
