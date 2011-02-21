@@ -10,6 +10,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import utilities.Constantes;
 import model.Position;
 import model.Route;
+import model.User;
 import google_api.GoogleGeoApiCached;
 
 public class DaoRoute {
@@ -163,4 +164,31 @@ public class DaoRoute {
 			con.close();
 		return route;
 	}
+	
+	
+
+	public static Route getRoute(int rte_id) {
+		Route rte = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "SELECT * FROM route_rte WHERE rte_id= " + rte_id
+					+ "";
+
+			ResultSet curseur = con.execute(query);
+			if (curseur.first()) {
+				rte = new Route(curseur);
+				return rte;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static Route getRoute(Route rte) {
+		return DaoRoute.getRoute(rte.getId());
+	}
+	
 }
