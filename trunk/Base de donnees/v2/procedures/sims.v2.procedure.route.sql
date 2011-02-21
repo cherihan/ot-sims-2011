@@ -24,15 +24,15 @@ CREATE PROCEDURE route_create (
 BEGIN
 	DECLARE __rte_id INT(11);
 	
-	call _route_create(rte_type,
-						rte_pos_begin,
-						rte_pos_end,
-						rte_date_begin,
-						rte_date_end,
-						rte_comment,
-						rte_owner,
-						rte_seat,
-						rte_car,
+	call _route_create(_rte_type,
+						_rte_pos_begin,
+						_rte_pos_end,
+						_rte_date_begin,
+						_rte_date_end,
+						_rte_comment,
+						_rte_owner,
+						_rte_seat,
+						_rte_car,
 						__rte_id
 					);
 					
