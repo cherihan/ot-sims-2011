@@ -18,9 +18,7 @@ public class BeansRoute {
 
 	protected String pos_depart = null;
 	protected String pos_arrive = null;
-	protected Date date_depart = null;
-	protected Integer hour_depart = null;
-	protected Integer minute_depart = null;
+	protected Integer minutes_to_depart = null;
 
 	protected String messageErr;
 
@@ -40,28 +38,12 @@ public class BeansRoute {
 		this.pos_arrive = pos_arrive;
 	}
 
-	public Date getDate_depart() {
-		return date_depart;
+	public Integer getMinutes_to_depart() {
+		return minutes_to_depart;
 	}
 
-	public void setDate_depart(Date date_depart) {
-		this.date_depart = date_depart;
-	}
-
-	public Integer getHour_depart() {
-		return hour_depart;
-	}
-
-	public void setHour_depart(Integer hour_depart) {
-		this.hour_depart = hour_depart;
-	}
-
-	public Integer getMinute_depart() {
-		return minute_depart;
-	}
-
-	public void setMinute_depart(Integer minute_depart) {
-		this.minute_depart = minute_depart;
+	public void setMinutes_to_depart(Integer minutes_to_depart) {
+		this.minutes_to_depart = minutes_to_depart;
 	}
 
 	/**
@@ -97,21 +79,19 @@ public class BeansRoute {
 	 */
 	public String createRoute() {
 		Route createdRoute = null;
-		if (date_depart == null || minute_depart == null || hour_depart == null
-				|| pos_depart == null || pos_arrive == null) {
+		if (minutes_to_depart == null || pos_depart == null
+				|| pos_arrive == null) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 		}
 
 		Calendar c = Calendar.getInstance();
-		c.setTime(date_depart);
-		c.set(Calendar.HOUR_OF_DAY, hour_depart);
-		c.set(Calendar.MINUTE, minute_depart);
+		c.setTimeInMillis((c.getTimeInMillis()/1000 + minutes_to_depart*60)*1000);
 		Date full_date_depart = c.getTime();
 
 		try {
 			// Code Test
-			route = DaoRoute.createRoute(0, pos_depart, pos_arrive,
+			route = DaoRoute.createRoute(1, pos_depart, pos_arrive,
 					full_date_depart, null, null, 1, 3, 0);
 		} catch (Exception e) {
 			e.printStackTrace();
