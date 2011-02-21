@@ -81,7 +81,6 @@ public class DaoPosition {
 	 */
 	public static Position getPositionByAddress(String address)
 			throws Exception {
-		// TODO: Errors in SQL procedure sims.v2.procedure.position
 		con = null;
 		String messageErr = null;
 		ResultSet res;
