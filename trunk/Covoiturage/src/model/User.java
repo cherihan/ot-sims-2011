@@ -335,4 +335,8 @@ public class User {
 		return DaoCriterion.getCriterionsOfUserOfType(this.getId(), ctt_id);
 	}
 
+	public Integer getBirthdateAsInteger() {
+		return Integer.valueOf(String.valueOf(this.getBirthdate().getTime()/1000));
+	}
+	
 }
