@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Hashtable;
+
 
 
 public class Criterion {
@@ -11,6 +15,56 @@ public class Criterion {
 	protected int root_criterion;
 	protected int order;
 	protected String label;
+	
+	
+	/**
+	 * @param id
+	 * @param type
+	 * @param root_criterion
+	 * @param order
+	 * @param label
+	 */
+	public Criterion(int id, int type, int root_criterion, int order,
+			String label) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.root_criterion = root_criterion;
+		this.order = order;
+		this.label = label;
+	}
+	
+	/**
+	 * @param id
+	 */
+	public Criterion(int id) {
+		super();
+		this.id = id;
+	}
+	
+	public Criterion(Hashtable<String, String> sqlrow) {
+		super();
+		this.id = Integer.valueOf(sqlrow.get("crt_id"));
+		this.type = Integer.valueOf(sqlrow.get("crt_type"));
+		this.root_criterion = Integer.valueOf(sqlrow.get("crt_root_criterion"));
+		this.order = Integer.valueOf(sqlrow.get("crt_order"));
+		this.label = sqlrow.get("crt_label");
+	}
+	
+	public Criterion(ResultSet sqlrow) {
+		super();
+		try {
+			this.id = sqlrow.getInt("crt_id");
+			this.type = sqlrow.getInt("crt_type");
+			this.root_criterion = sqlrow.getInt("crt_root_criterion");
+			this.order = sqlrow.getInt("crt_order");
+			this.label = sqlrow.getString("crt_label");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * @return the id
 	 */
@@ -71,22 +125,8 @@ public class Criterion {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	/**
-	 * @param id
-	 * @param type
-	 * @param root_criterion
-	 * @param order
-	 * @param label
-	 */
-	public Criterion(int id, int type, int root_criterion, int order,
-			String label) {
-		super();
-		this.id = id;
-		this.type = type;
-		this.root_criterion = root_criterion;
-		this.order = order;
-		this.label = label;
-	}
+	
+	
 
 	
 	

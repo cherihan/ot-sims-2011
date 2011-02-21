@@ -10,20 +10,17 @@ import java.util.Hashtable;
 
 public class Route {
 
-
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+	protected int id;
+	protected int type;
+	protected int position_begin;
+	protected int position_end;
+	protected Date date_begin;
+	protected Date date_end;
+	protected String comment;
+	protected int route_owner;
+	protected int seat;
+	protected int car;
+	
 	/**
 	 * @param id
 	 * @param type
@@ -89,6 +86,19 @@ public class Route {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	/**
@@ -199,15 +209,6 @@ public class Route {
 	public void setCar(int car) {
 		this.car = car;
 	}
-	protected int id;
-	protected int type;
-	protected int position_begin;
-	protected int position_end;
-	protected Date date_begin;
-	protected Date date_end;
-	protected String comment;
-	protected int route_owner;
-	protected int seat;
-	protected int car;
+	
 
 }

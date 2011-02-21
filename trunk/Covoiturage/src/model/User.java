@@ -1,5 +1,6 @@
 package model;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,6 +9,22 @@ import java.util.Hashtable;
 
 public class User {
 
+	protected int id;
+	protected String firstname;
+	protected String lastname;
+	protected String email;
+	protected String password;
+	protected int current_position;
+	protected String genre;
+	protected Date birthdate;
+	protected String description;
+	protected String mobilphone;
+	protected int note;
+	protected Date registrationdate;
+	protected Date lastlogindate;
+	
+	protected Hashtable<Integer, Criterion> criterions;
+	
 	/**
 	 * @return the id
 	 */
@@ -293,18 +310,4 @@ public class User {
 	public void setLastlogindate(Date lastlogindate) {
 		this.lastlogindate = lastlogindate;
 	}
-
-	protected int id;
-	protected String firstname;
-	protected String lastname;
-	protected String email;
-	protected String password;
-	protected int current_position;
-	protected String genre;
-	protected Date birthdate;
-	protected String description;
-	protected String mobilphone;
-	protected int note;
-	protected Date registrationdate;
-	protected Date lastlogindate;
 }
