@@ -6,7 +6,10 @@ import java.util.Hashtable;
 
 public class Position {
 
-
+	protected int id;
+	protected String address;
+	protected double latitude;
+	protected double longitude;
 
 	/**
 	 * @param id
@@ -90,10 +93,7 @@ public class Position {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	protected int id;
-	protected String address;
-	protected double latitude;
-	protected double longitude;
+	
 
 
 }

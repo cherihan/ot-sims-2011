@@ -4,17 +4,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import dao.DaoCriterion;
+
 
 
 public class Criterion {
 
 
 
-	protected int id;
-	protected int type;
-	protected int root_criterion;
-	protected int order;
-	protected String label;
+	protected int id=0;
+	protected int type=0;
+	protected int root_criterion = 0;
+	protected int order = 0;
+	protected String label = "";
+	
+	protected Criterion_type typeObj=null;
+	protected Criterion root_criterionObj=null;
 	
 	
 	/**
@@ -83,6 +88,18 @@ public class Criterion {
 	public int getType() {
 		return type;
 	}
+	
+	public Criterion_type getTypeObj() {
+		if(this.typeObj == null) {
+			if(this.getType() > 0) {
+				this.typeObj = DaoCriterion.getCriterion_type(this.getType());
+			}else{
+				this.typeObj = null;
+			}
+		}
+		return this.typeObj;	
+	}
+	
 	/**
 	 * @param type the type to set
 	 */
@@ -95,6 +112,18 @@ public class Criterion {
 	public int getRoot_criterion() {
 		return root_criterion;
 	}
+	
+	public Criterion getRoot_criterionObj() {
+		if(this.root_criterionObj == null) {
+			if(this.getRoot_criterion() > 0) {
+				this.root_criterionObj = DaoCriterion.getCriterion(this.getRoot_criterion());
+			}else{
+				this.root_criterionObj = null;
+			}
+		}
+		return this.root_criterionObj;	
+	}
+	
 	/**
 	 * @param root_criterion the root_criterion to set
 	 */

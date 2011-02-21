@@ -4,15 +4,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import dao.DaoUser;
+
 
 public class Comment {
 
 
-	protected int id;
-	protected int user_from;
-	protected int user_to;
-	protected String text;
-	protected int note;
+	protected int id=0;
+	protected int user_from=0;
+	protected int user_to=0;
+	protected String text="";
+	protected int note=0;
+	
+	protected User user_fromObj=null;
+	protected User user_toObj=null;
+	
 	/**
 	 * @return the id
 	 */
@@ -31,6 +37,18 @@ public class Comment {
 	public int getUser_from() {
 		return user_from;
 	}
+	
+	public User getUser_fromObj() {
+		if(this.user_fromObj == null) {
+			if(this.getUser_from() > 0) {
+				this.user_fromObj = DaoUser.getUser(this.getUser_from());
+			}else{
+				this.user_fromObj = null;
+			}
+		}
+		return this.user_fromObj;	
+	}
+	
 	/**
 	 * @param user_from the user_from to set
 	 */
@@ -43,6 +61,19 @@ public class Comment {
 	public int getUser_to() {
 		return user_to;
 	}
+	
+	public User getUser_toObj() {
+		if(this.user_toObj == null) {
+			if(this.getUser_to() > 0) {
+				this.user_toObj = DaoUser.getUser(this.getUser_to());
+			}else{
+				this.user_toObj = null;
+			}
+		}
+		return this.user_toObj;	
+	}
+	
+	
 	/**
 	 * @param user_to the user_to to set
 	 */
