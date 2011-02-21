@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import dao.DaoPosition;
+import dao.DaoUser;
+
 public class User_fav_position {
 
 	protected int id;
@@ -12,6 +15,7 @@ public class User_fav_position {
 	protected String label;
 	
 	protected User userObj;
+	protected Position positionObj;
 	
 	/**
 	 * @param id
@@ -112,6 +116,33 @@ public class User_fav_position {
 	public void setLabel(String label) {
 		this.label = label;
 	}
+
+	public void setPositionObj(Position pos) {
+		this.positionObj = pos;		
+	}
+
+	public User getUserObj() {
+		if(this.userObj == null) {
+			if(this.getUser() > 0) {
+				this.userObj = DaoUser.getUser(this.getUser());
+			}else{
+				this.userObj = null;
+			}
+		}
+		return this.userObj;		
+	} 
+	
+
+	public Position getPositionObj() {
+		if(this.positionObj == null) {
+			if(this.getPosition() > 0) {
+				this.positionObj = DaoPosition.getPosition(this.getPosition());
+			}else{
+				this.positionObj = null;
+			}
+		}
+		return this.positionObj;		
+	} 
 
 	
 
