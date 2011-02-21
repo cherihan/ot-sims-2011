@@ -71,9 +71,22 @@ CREATE PROCEDURE googlecache_get_by_address (
 	IN _address VARCHAR(255)
 )
 BEGIN
-	DECLARE __gch_id INT(11);
-	
+
 	SELECT * FROM googlecache_gch WHERE gch_address = _address;
+	
+end //
+
+
+
+-- Return position of an address or nothing if it's not found
+DROP PROCEDURE IF EXISTS googlecache_get_by_coords //
+CREATE PROCEDURE googlecache_get_by_coords (
+	IN _longitude FLOAT(10,6),
+	IN _latitude FLOAT(10,6)
+)
+BEGIN
+
+	SELECT * FROM googlecache_gch WHERE gch_longitude = _longitude AND gch_latitude = _latitude;
 	
 end //
 
