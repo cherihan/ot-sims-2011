@@ -22,125 +22,17 @@
 					<f:selectItem itemLabel="Maison" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="Boulot" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="autre..." itemValue="other"/>
+				</h:selectOneMenu>				
+				<h:outputLabel value="Dans" />
+				<h:selectOneMenu value="minutes" class="large">
+					<f:selectItem itemLabel="5mn" itemValue="5"/>
+					<f:selectItem itemLabel="10mn" itemValue="10"/>
+					<f:selectItem itemLabel="20mn" itemValue="20"/>
+					<f:selectItem itemLabel="30mn" itemValue="30"/>
+					<f:selectItem itemLabel="40mn" itemValue="40"/>
+					<f:selectItem itemLabel="50mn" itemValue="50"/>
+					<f:selectItem itemLabel="1h" itemValue="50"/>
 				</h:selectOneMenu>
-				
-		<h:panelGrid columns="3">
-		
-			<h:outputText value="Date" /> 	
-			<h:outputText value="Heure" />
-			<h:outputText value="Minute" />
-	
-			<rich:inputNumberSpinner minValue="0" maxValue="23" />
-			<rich:calendar value=""/>
-			<rich:inputNumberSpinner minValue="0" maxValue="59" />
-	 	
-		</h:panelGrid>
-				
-				<!-- h:outputLabel value="Date" />
-					<div class="timestamp">
-						<div class="timestamp">
-							<h:outputLabel value="Jour" />
-							<h:selectOneMenu value="day">
-								<f:selectItem itemLabel="1" itemValue="1"/>
-								<f:selectItem itemLabel="2" itemValue="2"/>
-								<f:selectItem itemLabel="3" itemValue="3"/>
-								<f:selectItem itemLabel="4" itemValue="4"/>
-								<f:selectItem itemLabel="5" itemValue="5"/>
-								<f:selectItem itemLabel="6" itemValue="6"/>
-								<f:selectItem itemLabel="7" itemValue="7"/>
-								<f:selectItem itemLabel="8" itemValue="8"/>
-								<f:selectItem itemLabel="9" itemValue="9"/>
-								<f:selectItem itemLabel="10" itemValue="10"/>
-								<f:selectItem itemLabel="11" itemValue="11"/>
-								<f:selectItem itemLabel="12" itemValue="12"/>
-								<f:selectItem itemLabel="13" itemValue="13"/>
-								<f:selectItem itemLabel="14" itemValue="14"/>
-								<f:selectItem itemLabel="15" itemValue="15"/>
-								<f:selectItem itemLabel="16" itemValue="16"/>
-								<f:selectItem itemLabel="17" itemValue="17"/>
-								<f:selectItem itemLabel="18" itemValue="18"/>
-								<f:selectItem itemLabel="19" itemValue="19"/>
-								<f:selectItem itemLabel="20" itemValue="20"/>
-								<f:selectItem itemLabel="21" itemValue="21"/>
-								<f:selectItem itemLabel="22" itemValue="22"/>
-								<f:selectItem itemLabel="23" itemValue="23"/>
-								<f:selectItem itemLabel="24" itemValue="24"/>
-								<f:selectItem itemLabel="25" itemValue="25"/>
-								<f:selectItem itemLabel="26" itemValue="26"/>
-								<f:selectItem itemLabel="27" itemValue="27"/>
-								<f:selectItem itemLabel="28" itemValue="28"/>
-								<f:selectItem itemLabel="29" itemValue="29"/>
-								<f:selectItem itemLabel="30" itemValue="30"/>
-								<f:selectItem itemLabel="31" itemValue="31"/>
-							</h:selectOneMenu>
-						</div>
-						<div class="timestamp">
-							<h:outputLabel value="Mois" />
-							<h:selectOneMenu value="month">
-								<f:selectItem itemLabel="1" itemValue="1"/>
-								<f:selectItem itemLabel="2" itemValue="2"/>
-								<f:selectItem itemLabel="3" itemValue="3"/>
-								<f:selectItem itemLabel="4" itemValue="4"/>
-								<f:selectItem itemLabel="5" itemValue="5"/>
-								<f:selectItem itemLabel="6" itemValue="6"/>
-								<f:selectItem itemLabel="7" itemValue="7"/>
-								<f:selectItem itemLabel="8" itemValue="8"/>
-								<f:selectItem itemLabel="9" itemValue="9"/>
-								<f:selectItem itemLabel="10" itemValue="10"/>
-								<f:selectItem itemLabel="11" itemValue="11"/>
-								<f:selectItem itemLabel="12" itemValue="12"/>
-							</h:selectOneMenu>
-						</div>
-						<div class="timestamp">
-							<h:outputLabel value="Année" />
-							<h:selectOneMenu value="year">
-								<f:selectItem itemLabel="2011" itemValue="2011"/>
-								<f:selectItem itemLabel="2012" itemValue="2012"/>
-							</h:selectOneMenu>
-						</div>
-					</div>
-					<div class="timestamp">
-						<div class="timestamp">
-							<h:outputLabel value="Heure" />
-							<h:selectOneMenu value="hour">
-								<f:selectItem itemLabel="0" itemValue="0"/>
-								<f:selectItem itemLabel="1" itemValue="1"/>
-								<f:selectItem itemLabel="2" itemValue="2"/>
-								<f:selectItem itemLabel="3" itemValue="3"/>
-								<f:selectItem itemLabel="4" itemValue="4"/>
-								<f:selectItem itemLabel="5" itemValue="5"/>
-								<f:selectItem itemLabel="6" itemValue="6"/>
-								<f:selectItem itemLabel="7" itemValue="7"/>
-								<f:selectItem itemLabel="8" itemValue="8"/>
-								<f:selectItem itemLabel="9" itemValue="9"/>
-								<f:selectItem itemLabel="10" itemValue="10"/>
-								<f:selectItem itemLabel="11" itemValue="11"/>
-								<f:selectItem itemLabel="12" itemValue="12"/>
-								<f:selectItem itemLabel="13" itemValue="13"/>
-								<f:selectItem itemLabel="14" itemValue="14"/>
-								<f:selectItem itemLabel="15" itemValue="15"/>
-								<f:selectItem itemLabel="16" itemValue="16"/>
-								<f:selectItem itemLabel="17" itemValue="17"/>
-								<f:selectItem itemLabel="18" itemValue="18"/>
-								<f:selectItem itemLabel="19" itemValue="19"/>
-								<f:selectItem itemLabel="20" itemValue="20"/>
-								<f:selectItem itemLabel="21" itemValue="21"/>
-								<f:selectItem itemLabel="22" itemValue="22"/>
-								<f:selectItem itemLabel="23" itemValue="23"/>
-							</h:selectOneMenu>
-						</div>
-						<div class="timestamp">
-							<h:outputLabel value="Minutes" />
-							<h:selectOneMenu value="minutes">
-								<f:selectItem itemLabel="00" itemValue="0"/>
-								<f:selectItem itemLabel="10" itemValue="10"/>
-								<f:selectItem itemLabel="20" itemValue="20"/>
-								<f:selectItem itemLabel="30" itemValue="30"/>
-								<f:selectItem itemLabel="40" itemValue="40"/>
-								<f:selectItem itemLabel="50" itemValue="50"/>
-							</h:selectOneMenu>
-						</div>
-					</div-->
 				<h:commandButton action="#{annonce.insert}" value="Ajouter" styleClass="large" />
 			</h:form>
 		</ui:define>
