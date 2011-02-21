@@ -7,7 +7,7 @@
 
 INSERT IGNORE INTO _route_type_rtp (rtp_id, rtp_label) VALUES 
 (1, 'WantCar'),
-(2,'NeedCar');
+(2,'ProvideCar');
 
 
 INSERT IGNORE INTO  _criterion_type_ctt (ctt_id, ctt_label) VALUES

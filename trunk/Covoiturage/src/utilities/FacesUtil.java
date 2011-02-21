@@ -17,6 +17,7 @@ public class FacesUtil {
      * User utilisateur = (User) FacesUtil.getParameter("#{beansUser.user}");
      * 
      */
+	@SuppressWarnings("deprecation")
 	public static Object getParameter(String name) {
     	FacesContext fc = FacesContext.getCurrentInstance();   	
     	   	
@@ -24,12 +25,14 @@ public class FacesUtil {
     }
 	
 	
+	@SuppressWarnings("deprecation")
 	public static User getUser() {
     	FacesContext fc = FacesContext.getCurrentInstance();   	
     	   	
     	return (User) fc.getApplication().createValueBinding("#{beansUser.user}").getValue(fc);
     }
 	
+	@SuppressWarnings("deprecation")
 	public static void setUser(User usr) {
     	FacesContext fc = FacesContext.getCurrentInstance();   	
     	   	

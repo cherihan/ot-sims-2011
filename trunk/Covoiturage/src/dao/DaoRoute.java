@@ -13,8 +13,8 @@ import utilities.DateUtils;
 import model.Passager;
 import model.Position;
 import model.Route;
+import model.Route_type;
 import model.User;
-import model.User_fav_position;
 import google_api.GoogleGeoApiCached;
 
 public class DaoRoute {
@@ -244,9 +244,14 @@ public class DaoRoute {
 
 	public static Hashtable<Integer, Route> route_search(Position pos_begin,
 			Position pos_end, Date date_departure_begin,
-			Date date_departure_end, Integer location_appro) {
+			Date date_departure_end, Integer location_appro, int rtp_id) {
 		Hashtable<Integer, Route> list = new Hashtable<Integer, Route>();
-		Route rte=null;
+		Route rte = null;
+
+		if (rtp_id == 0) {
+			rtp_id = Route_type.WANT_CAR; // want Car
+		}
+
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
@@ -254,7 +259,7 @@ public class DaoRoute {
 					+ pos_begin.getId() + ", " + pos_end.getId() + ", "
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
 					+ DateUtils.getDateAsInteger(date_departure_end)
-					+ location_appro + ")";
+					+ location_appro + ", " + rtp_id + ")";
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
 				rte = new Route(curseur);
