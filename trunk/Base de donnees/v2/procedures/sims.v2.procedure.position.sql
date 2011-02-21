@@ -14,7 +14,7 @@ CREATE PROCEDURE position_get_by_address (
 BEGIN
 	DECLARE __pos_id INT(11);
 	
-	call _position_get_by_address(_address);
+	call _position_get_by_address(_address,__pos_id);
 	
 	SELECT * FROM position_pos WHERE pos_id=__pos_id;
 end //
