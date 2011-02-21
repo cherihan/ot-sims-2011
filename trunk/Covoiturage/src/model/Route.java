@@ -89,8 +89,8 @@ public class Route {
 		try {
 			this.id = sqlrow.getInt("rte_id");
 			this.type = sqlrow.getInt("rte_type");
-			this.position_begin = sqlrow.getInt("rte_position_begin");
-			this.position_end = sqlrow.getInt("rte_position_end");
+			this.position_begin = sqlrow.getInt("rte_pos_begin");
+			this.position_end = sqlrow.getInt("rte_pos_end");
 			this.date_begin = sqlrow.getDate("rte_date_begin");
 			this.date_end = sqlrow.getDate("rte_date_end");
 			this.comment = sqlrow.getString("rte_comment");
