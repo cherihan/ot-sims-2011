@@ -277,7 +277,7 @@ ALTER TABLE usr_crt
 
 INSERT IGNORE INTO _route_type_rtp (rtp_id, rtp_label) VALUES 
 (1, 'WantCar'),
-(2,'NeedCar');
+(2,'ProvideCar');
 
 
 INSERT IGNORE INTO  _criterion_type_ctt (ctt_id, ctt_label) VALUES
@@ -319,6 +319,71 @@ INSERT IGNORE INTO _criterion_crt (crt_id, crt_type, crt_label, crt_root_criteri
 (9, 5, 'Preference_talking_discret', NULL, 1) ,
 (10, 5, 'Preference_talking_normal', NULL, 1),
 (11, 5, 'Preference_talking_passionate', NULL, 1);-- sims SQL V2, Sprint 2
+
+-- Procedures stokes, route
+
+-- From Simon Minotto
+
+
+DELIMITER //
+
+
+-- Return user_id of associated user or null if not
+DROP PROCEDURE IF EXISTS comment_create_or_update //
+CREATE PROCEDURE comment_create_or_update (
+	IN _cmn_user_from INT(11),
+	IN _cmn_user_to INT(11),
+	IN _cmn_text TEXT,
+	IN _cmn_note
+)
+BEGIN
+	DECLARE __cmn_id INT(11);
+	
+	INSERT INTO comment_cmn(
+		cmn_id,
+		cmn_user_from,
+		cmn_user_to,
+		cmn_text,
+		cmn_note
+	) VALUES (
+		NULL,
+		_cmn_user_from,
+		_cmn_user_to,
+		_cmn_text,
+		_cmn_note
+	) ON DUPLICATE KEY UPDATE cmn_text = _cmn_text, cmn_note = _cmn_note;
+	
+	SELECT cmn_id INTO __cmn_id FROM comment_cmn WHERE cmn_user_from = _cmn_user_from AND cmn_user_to = _cmn_user_to;
+	
+	
+	call _comment_update_note_of_user(_cmn_user_to);
+	
+	SELECT * FROM comment_cmn WHERE cmn_id=__cmn_id;
+	
+END //
+
+
+DROP PROCEDURE IF EXISTS _comment_update_note_of_user //
+CREATE PROCEDURE _comment_update_note_of_user (
+	IN _usr_id INT(11)
+)
+BEGIN
+	DECLARE __avg_float DOUBLE;
+	
+	SELECT AVG(cmn_note) INTO __avg_float
+	FROM comment_cmn 
+	WHERE cmn_user_to = _usr_id 
+		AND cmn_note IS NOT NULL 
+		AND cmn_note <> 0;
+		
+		
+	UPDATE user_usr SET usr_note = ROUND(__avg) WHERE usr_id = _usr_id;
+
+DELIMITER ;
+
+
+
+-- sims SQL V2, Sprint 2
 
 -- Procedures stokes
 
@@ -368,6 +433,39 @@ BEGIN
     
 end //
 
+
+DROP PROCEDURE IF EXISTS get_criterions_of_user //
+CREATE PROCEDURE get_criterions_of_user (
+	IN _usr_id INT(11)
+)
+BEGIN
+
+	SELECT crt.*
+	FROM usr_crt uc
+		INNER JOIN _criterion_crt crt ON uc.crt_id = crt.crt_id
+	WHERE uc.usr_id = _usr_id
+	ORDER BY crt_order;
+
+END //
+
+
+
+
+DROP PROCEDURE IF EXISTS get_criterions_of_user_of_type //
+CREATE PROCEDURE get_criterions_of_user_of_type (
+	IN _usr_id INT(11),
+	IN _ctt_id INT(11)
+)
+BEGIN
+	SELECT crt.*
+	FROM usr_crt uc
+		INNER JOIN _criterion_crt crt ON uc.crt_id = crt.crt_id
+	WHERE uc.usr_id = _usr_id
+	AND crt.crt_type = _ctt_id
+	ORDER BY crt_order;
+
+END //
+
 DELIMITER ;
 
 -- sims SQL V2, Sprint 2
@@ -386,7 +484,7 @@ CREATE PROCEDURE position_get_by_address (
 BEGIN
 	DECLARE __pos_id INT(11);
 	
-	call _position_get_by_address(_address);
+	call _position_get_by_address(_address,__pos_id);
 	
 	SELECT * FROM position_pos WHERE pos_id=__pos_id;
 end //
@@ -443,9 +541,22 @@ CREATE PROCEDURE googlecache_get_by_address (
 	IN _address VARCHAR(255)
 )
 BEGIN
-	DECLARE __gch_id INT(11);
-	
+
 	SELECT * FROM googlecache_gch WHERE gch_address = _address;
+	
+end //
+
+
+
+-- Return position of an address or nothing if it's not found
+DROP PROCEDURE IF EXISTS googlecache_get_by_coords //
+CREATE PROCEDURE googlecache_get_by_coords (
+	IN _longitude FLOAT(10,6),
+	IN _latitude FLOAT(10,6)
+)
+BEGIN
+
+	SELECT * FROM googlecache_gch WHERE gch_longitude = _longitude AND gch_latitude = _latitude;
 	
 end //
 
@@ -604,15 +715,16 @@ CREATE PROCEDURE route_search_with_date_and_delta (
 	IN _position_end_id INT(11),
 	IN _begin_date_departure BIGINT(11),
 	IN _end_date_departure BIGINT(11),
-	IN _location_approximate_nb_meters INT(11)
+	IN _location_approximate_nb_meters INT(11),
+	IN _rtp_id INT(11)
 )
 BEGIN
 	
 	DECLARE __delta_deg_x FLOAT(10,6);
 	DECLARE __delta_deg_y FLOAT(10,6);
 	
-	SELECT (_location_approximate_nb_meters * 0.0009) INTO __delta_deg_x;
-	SELECT (_location_approximate_nb_meters * 0,0014) INTO __delta_deg_y;
+	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0.0009) INTO __delta_deg_x;
+	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0,0014) INTO __delta_deg_y;
 	
 	SELECT * 
 		FROM route_rte 
@@ -622,16 +734,41 @@ BEGIN
 			INNER JOIN position_pos AS posendask ON posendask = _position_end_id
 		WHERE 
 				posbeg.pos_latitude BETWEEN (posbegask.pos_latitude -  __delta_deg_x) AND (posbegask.pos_latitude +  __delta_deg_x)
-			AND	posbeg.pos_latitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
+			AND	posbeg.pos_longitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
 			
 			AND	posend.pos_latitude BETWEEN (posendask.pos_latitude -  __delta_deg_x) AND (posendask.pos_latitude +  __delta_deg_x)
-			AND	posend.pos_latitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
+			AND	posend.pos_longitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
 			
 			AND	rte_deletedate IS NULL
-			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure;
+			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
+			AND (rte_type = _rtp_id OR _rtp_id = 0);
 		
 
 END //
+
+
+DROP PROCEDURE IF EXISTS route_search_of_owner //
+CREATE PROCEDURE route_search_of_owner (
+	IN _owner_id INT(11),
+	IN _begin_date_departure BIGINT(11),
+	IN _end_date_departure BIGINT(11),
+	IN _location_approximate_nb_meters INT(11),
+	IN _rtp_id INT(11)
+)
+BEGIN
+	
+	SELECT rte.* 
+		FROM route_rte rte
+		WHERE 
+				rte_owner = _owner_id
+			AND	rte_deletedate IS NULL
+			AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
+			AND (rte_type = _rtp_id OR _rtp_id = 0);
+		
+
+END //
+
+
 
 
 
@@ -646,7 +783,27 @@ BEGIN
 
 END //
 
+
+
+DROP PROCEDURE IF EXISTS route_get_passagers //
+CREATE PROCEDURE route_get_passagers (
+	IN _rte_id INT(11)
+)
+BEGIN
+
+	SELECT usr.*, psg.*
+		FROM  passager_psg as psg
+			INNER JOIN user_usr ON psg.psg_user = usr.usr_id		
+		WHERE 
+				psg_route = _rte_id;
+		
+
+END //
+
+
 DELIMITER ;
+
+
 
 -- sims SQL V2, Sprint 2
 
@@ -706,18 +863,23 @@ END //
 DROP PROCEDURE IF EXISTS user_create_short //
 CREATE PROCEDURE user_create_short (
 	IN _usr_email VARCHAR(100),
-	IN _usr_password_not_encrypted VARCHAR(100)
+	IN _usr_password_not_encrypted VARCHAR(100),
+	IN _usr_firstname VARCHAR(100),
+	IN _usr_lastname VARCHAR(100),
+	IN _usr_mobilphone VARCHAR(100)
 )
 BEGIN
 	DECLARE __usr_id INT(11);
 	
 	call _user_create(	_usr_email, 
 						_usr_password_not_encrypted, 
-						'', -- _usr_firstname, 
-						'', -- _usr_lastname, 
+						_usr_firstname, -- _usr_firstname, 
+						_usr_lastname, -- _usr_lastname, 
 						'male', -- _usr_genre, 
 						__usr_id
 					);
+	
+	UPDATE user_usr SET usr_mobilphone = _usr_mobilphone WHERE usr_id = __usr_id;
 	
 	SELECT * FROM user_usr WHERE usr_id=__usr_id;
 	
@@ -761,6 +923,9 @@ END //
 
 
 DROP PROCEDURE IF EXISTS user_update //
+
+
+
 CREATE PROCEDURE user_update (
 	IN _usr_id INT(11),
 	IN _usr_email VARCHAR(100),
@@ -775,7 +940,7 @@ CREATE PROCEDURE user_update (
 BEGIN
 
 	UPDATE user_usr SET
-		usr_email=_usr_email,
+		usr_email= _usr_email,
 		usr_firstname = _usr_firstname,
 		usr_lastname = _usr_lastname,
 		usr_genre = _usr_genre,
@@ -836,6 +1001,21 @@ BEGIN
 	
 END //
 
+
+
+-- Insert or update name of a user favorite place
+DROP PROCEDURE IF EXISTS user_get_pos_fav //
+CREATE PROCEDURE user_get_pos_fav (
+	IN _usr_id INT(11)
+)
+BEGIN
+
+	SELECT * 
+		FROM user_fav_pos_ufp ufp
+			INNER JOIN position_pos pos ON pos.pos_id = ufp.ufp_position
+		WHERE ufp_user = _usr_id;
+	
+END //
 
 
 
