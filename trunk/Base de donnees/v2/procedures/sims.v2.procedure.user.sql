@@ -56,18 +56,23 @@ END //
 DROP PROCEDURE IF EXISTS user_create_short //
 CREATE PROCEDURE user_create_short (
 	IN _usr_email VARCHAR(100),
-	IN _usr_password_not_encrypted VARCHAR(100)
+	IN _usr_password_not_encrypted VARCHAR(100),
+	IN _usr_firstname VARCHAR(100),
+	IN _usr_lastname VARCHAR(100),
+	IN _usr_mobilphone VARCHAR(100)
 )
 BEGIN
 	DECLARE __usr_id INT(11);
 	
 	call _user_create(	_usr_email, 
 						_usr_password_not_encrypted, 
-						'', -- _usr_firstname, 
-						'', -- _usr_lastname, 
+						_usr_firstname, -- _usr_firstname, 
+						_usr_lastname, -- _usr_lastname, 
 						'male', -- _usr_genre, 
 						__usr_id
 					);
+	
+	UPDATE user_usr SET usr_mobilphone = _usr_mobilphone WHERE usr_id = __usr_id;
 	
 	SELECT * FROM user_usr WHERE usr_id=__usr_id;
 	
