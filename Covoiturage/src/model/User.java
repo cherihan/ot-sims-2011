@@ -25,6 +25,8 @@ public class User {
 	protected Date registrationdate;
 	protected Date lastlogindate;
 	
+	Position current_positionObj;
+	
 	protected Hashtable<Integer, Criterion> criterions;
 	
 	/**
