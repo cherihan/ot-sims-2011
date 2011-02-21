@@ -7,94 +7,42 @@
   <managed-bean-class>beans.BeansUser</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>homeCtrl</managed-bean-name>
+  <managed-bean-class>beans.HomeCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
-  <display-name>home_public.xhtml</display-name>
-  <from-view-id>/home_public.xhtml</from-view-id>
+  <from-view-id>/home.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>create</from-outcome>
+   <to-view-id>/user/create.xhtml</to-view-id>
+  </navigation-case>
   <navigation-case>
    <from-outcome>login</from-outcome>
    <to-view-id>/user/login.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>create_account</from-outcome>
-   <to-view-id>/user/create.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>list_route</from-outcome>
-   <to-view-id>/route/index.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <display-name>create_account.xhtml</display-name>
-  <from-view-id>/user/create.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>home</from-outcome>
-   <to-view-id>/home.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <display-name>list_route.xhtml</display-name>
-  <from-view-id>/route/index.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>info_route</from-outcome>
-   <to-view-id>/route/show.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/user/login.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>home</from-outcome>
-   <to-view-id>/home.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/home.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>profile</from-outcome>
+   <from-outcome>show</from-outcome>
    <to-view-id>/user/show.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>add_route</from-outcome>
+   <from-outcome>create</from-outcome>
    <to-view-id>/route/create.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>list_route</from-outcome>
+   <from-outcome>show</from-outcome>
+   <to-view-id>/route/show.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>index</from-outcome>
    <to-view-id>/route/index.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>disconnect</from-outcome>
-   <to-view-id>/home_public.xhtml</to-view-id>
-  </navigation-case>
+  </navigation-case>  
  </navigation-rule>
  <navigation-rule>
-  <from-view-id>/user/show.xhtml</from-view-id>
   <navigation-case>
-   <from-outcome>edit_profile</from-outcome>
-   <to-view-id>/user/edit.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/user/edit.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>profile</from-outcome>
-   <to-view-id>/user/show.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>list_route</from-outcome>
-   <to-view-id>/route/index.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/route/show.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>edit_profile</from-outcome>
-   <to-view-id>/user/edit.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/route/create.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>list_route</from-outcome>
-   <to-view-id>/route/index.xhtml</to-view-id>
+   <from-outcome>home</from-outcome>
+   <to-view-id>/home.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <application>
