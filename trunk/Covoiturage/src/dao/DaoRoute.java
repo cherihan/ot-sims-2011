@@ -13,7 +13,6 @@ import utilities.DateUtils;
 import model.Passager;
 import model.Position;
 import model.Route;
-import model.Route_type;
 import model.User;
 import google_api.GoogleGeoApiCached;
 
