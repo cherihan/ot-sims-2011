@@ -15,8 +15,7 @@ public class DaoCriterion {
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "SELECT * FROM _criterion_crt WHERE crt_id= " + crt_id
-					+ "";
+			String query = "SELECT * FROM _criterion_crt WHERE crt_id= " + crt_id + "";
 
 			ResultSet curseur = con.execute(query);
 			if (curseur.first()) {
