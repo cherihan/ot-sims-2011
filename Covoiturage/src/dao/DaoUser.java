@@ -8,13 +8,13 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import utilities.Constantes;
 import model.Criterion;
+import model.Position;
 import model.User;
+import model.User_fav_position;
 
 public class DaoUser {
 
 	public static ConnexionBD con;
-
-	
 
 	/**
 	 * 
@@ -35,13 +35,13 @@ public class DaoUser {
 
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query ;
+			String query;
 
 			try {
 				query = "call user_get_user_by_email('" + email + "')";
 
 				res = con.execute(query);
-				if (res.first())//There is result -> email is already used
+				if (res.first())// There is result -> email is already used
 					throw new Exception(Constantes.USER_ALREADY_SAVED);
 
 				query = "call user_create_short('" + email + "', '" + password
@@ -123,7 +123,7 @@ public class DaoUser {
 		return userLogged;
 
 	}
-	
+
 	public static User getUser(int usr_id) {
 		User usr = null;
 		try {
@@ -150,5 +150,33 @@ public class DaoUser {
 
 	public static Hashtable<Integer, Criterion> getCriterionsOfUser(int usr_id) {
 		return DaoCriterion.getCriterionsOfUser(usr_id);
+	}
+
+	public static Hashtable<Integer, User_fav_position> getFavoritePositionsOfUser(
+			User usr) {
+		return DaoUser.getFavoritePositionsOfUser(usr.getId());
+	}
+
+	public static Hashtable<Integer, User_fav_position> getFavoritePositionsOfUser(
+			int usr_id) {
+		Hashtable<Integer, User_fav_position> list = new Hashtable<Integer, User_fav_position>();
+		User_fav_position ufp = null;
+		Position pos = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call user_get_pos_fav(" + usr_id + ")";
+
+			ResultSet curseur = con.execute(query);
+			while (curseur.next()) {
+				ufp = new User_fav_position(curseur);
+				pos = new Position(curseur);
+				ufp.setPositionObj(pos);
+				list.put(ufp.getId(), ufp);
+			}
+		} catch (Exception e) {
+			return list;
+		}
+		return list;
 	}
 }

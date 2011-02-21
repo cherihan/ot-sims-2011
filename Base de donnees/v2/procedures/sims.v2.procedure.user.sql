@@ -191,6 +191,21 @@ END //
 
 
 
+-- Insert or update name of a user favorite place
+DROP PROCEDURE IF EXISTS user_get_pos_fav //
+CREATE PROCEDURE user_get_pos_fav (
+	IN _usr_id INT(11)
+)
+BEGIN
+
+	SELECT * 
+		FROM user_fav_pos_ufp ufp
+			INNER JOIN position_pos pos ON pos.pos_id = ufp.ufp_position
+		WHERE ufp_user = _usr_id;
+	
+END //
+
+
 
 
 DELIMITER ;

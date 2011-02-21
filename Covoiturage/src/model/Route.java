@@ -265,7 +265,14 @@ public class Route {
 		}
 		return this.carObj;		
 	} 
-	
+
+	public Integer getDate_beginAsInteger() {
+		return Integer.valueOf(String.valueOf(this.getDate_begin().getTime()/1000));
+	}
+
+	public Integer getDate_endAsInteger() {
+		return Integer.valueOf(String.valueOf(this.getDate_end().getTime()/1000));
+	}
 	
 
 }
