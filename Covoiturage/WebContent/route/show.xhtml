@@ -28,7 +28,7 @@
 				<h:outputLabel value="Passager :" />
 				<ui:repeat value="#{route.getAllpassager}" var="passager">
                 	<li> 
-                     	 <h:commandButton action="#{}" value="" styleClass="large" />
+                     	 <h:commandButton action="#{}" value="#{passager.}" styleClass="large" />
                 	</li> 
          		 </ui:repeat>
 				<h:commandButton action="#{}" value="Se joindre au trajet" styleClass="large" />
