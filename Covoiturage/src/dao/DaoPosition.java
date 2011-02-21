@@ -9,6 +9,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import utilities.Constantes;
 
 import model.Position;
+import model.Route;
 
 public class DaoPosition {
 
@@ -117,5 +118,31 @@ public class DaoPosition {
 		return pos;
 
 	}
+	
 
+
+	public static Position getPosition(int pos_id) {
+		Position pos = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "SELECT * FROM position_pos WHERE pos_id= " + pos_id
+					+ "";
+
+			ResultSet curseur = con.execute(query);
+			if (curseur.first()) {
+				pos = new Position(curseur);
+				return pos;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static Position getPosition(Position pos) {
+		return DaoPosition.getPosition(pos.getId());
+	}
+	
 }
