@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12977807619120" configfile="/Covoiturage/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="792" y="72" id="pf12978472536882" referenceLink="//@navigationRule.3/@navigationCase.2/@toViewId|" outlinks="pf12978472536884 pf129784796214815" inlinks="pf12978472536887" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="373" y="180" id="pf129784725368912" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf129784796214816 pf129784796214817 pf129784796214818" inlinks="pf12978472536884 pf129784796214819" path="/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="home_public.xhtml" x="348" y="72" id="pf129784725368914" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf12978472536887 pf129784796214920 pf129784796214921" inlinks="pf129784796214815 pf129784796214922 pf129784796214817 pf129784796214923" path="/home_public.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="create_account.xhtml" x="754" y="180" id="pf129784796214924" outlinks="pf129784796214922 pf129784796214819" inlinks="pf129784796214921" path="/create_account.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="edit_profile.xhtml" x="769" y="300" id="pf129784796214925" outlinks="pf129784796214926" inlinks="pf129784796214927" path="/edit_profile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="profile.xhtml" x="786" y="396" id="pf129784796214928" outlinks="pf129784796214927 pf129784796214929 pf129784796214923" inlinks="pf129784796214926 pf129784821703237" path="/profile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="add_route.xhtml" x="96" y="396" id="pf129784796214930" outlinks="pf129784796214931" inlinks="pf129784796214818 pf129784796214932" path="/add_route.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="list_route.xhtml" x="240" y="396" id="pf129784796214933" outlinks="pf129784796214934 pf129784796214932" inlinks="pf129784796214920 pf129784796214816 pf129784796214935 pf129784796214931 pf129784796214929" path="/list_route.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="info_route.xhtml" x="236" y="492" id="pf129784796215036" outlinks="pf129784796214935 pf129784821703237" inlinks="pf129784796214934" path="/info_route.xhtml"/>
+  <links id="pf12978472536884" target="pf129784725368912" source="pf12978472536882" outcome="ok"/>
+  <links id="pf12978472536887" target="pf12978472536882" source="pf129784725368914" outcome="login"/>
+  <links id="pf129784796214920" target="pf129784796214933" source="pf129784725368914">
+    <bendPoints d1Width="-120" d2Width="-1" d2Height="-324"/>
+  </links>
+  <links id="pf129784796214926" target="pf129784796214928" source="pf129784796214925"/>
+  <links id="pf129784796214927" target="pf129784796214925" source="pf129784796214928"/>
+  <links id="pf129784796214921" target="pf129784796214924" source="pf129784725368914"/>
+  <links id="pf129784796214929" target="pf129784796214933" source="pf129784796214928"/>
+  <links id="pf129784796214815" target="pf129784725368914" source="pf12978472536882"/>
+  <links id="pf129784796214922" target="pf129784725368914" source="pf129784796214924"/>
+  <links id="pf129784796214819" target="pf129784725368912" source="pf129784796214924"/>
+  <links id="pf129784796214816" target="pf129784796214933" source="pf129784725368912"/>
+  <links id="pf129784796214817" target="pf129784725368914" source="pf129784725368912"/>
+  <links id="pf129784796214923" target="pf129784725368914" source="pf129784796214928"/>
+  <links id="pf129784796214934" target="pf129784796215036" source="pf129784796214933"/>
+  <links id="pf129784796214935" target="pf129784796214933" source="pf129784796215036"/>
+  <links id="pf129784796214818" target="pf129784796214930" source="pf129784725368912"/>
+  <links id="pf129784796214931" target="pf129784796214933" source="pf129784796214930"/>
+  <links id="pf129784796214932" target="pf129784796214930" source="pf129784796214933"/>
+  <links id="pf129784821703237" target="pf129784796214928" source="pf129784796215036"/>
+</pageflow:Pageflow>
