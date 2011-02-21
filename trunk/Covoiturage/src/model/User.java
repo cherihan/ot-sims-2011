@@ -12,23 +12,21 @@ import dao.DaoPosition;
 public class User {
 
 	protected int id;
-	protected String firstname = "";
-	protected String lastname = "";
-	protected String email = "";
-	protected String password = "";
-	protected int current_position = 0;
-	protected String genre = "";
-	protected Date birthdate = null;
-	protected String description = "";
-	protected String mobilphone = "";
-	protected int note = 0;
-	protected Date registrationdate = null;
-	protected Date lastlogindate = null;
-
-	protected Position current_positionObj = null;
-
+	protected String firstname;
+	protected String lastname;
+	protected String email;
+	protected String password;
+	protected int current_position;
+	protected String genre;
+	protected Date birthdate;
+	protected String description;
+	protected String mobilphone;
+	protected int note;
+	protected Date registrationdate;
+	protected Date lastlogindate;
+	
 	protected Hashtable<Integer, Criterion> criterions;
-
+	
 	/**
 	 * @return the id
 	 */
@@ -86,7 +84,7 @@ public class User {
 		super();
 		this.id = id;
 	}
-
+	
 	/**
 	 * @param id
 	 */
