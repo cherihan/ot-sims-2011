@@ -1,28 +1,48 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
 
-	<ui:composition template="/template/template.xhtml">	
-		
+	<ui:composition template="/template/template.xhtml">
+	
 		<ui:define name="title">Accueil</ui:define>
+
+<ui:define name="body">
+	<h:form>		
 		
-		<ui:define name="body">
-			<h:form>
-				<div>				
-					<h:commandButton action="add_route" value="Ajouter un trajet" styleClass="large" />
-					<h:commandButton action="list_route" value="Chercher un trajet" styleClass="large" />
-				</div>
-				<hr />
-				<div>
-					<h:commandButton action="profile" value="Mon profil" styleClass="large" />
-					<h:commandButton action="disconnect" value="Déconnexion" styleClass="large" />
-				</div>
-			</h:form>
-		</ui:define>
+		<h:panelGroup rendered="#{homeCtrl.userNotConnected}">
+			<div>
+				<h:commandButton action="list_route" value="Chercher un trajet" styleClass="large" />
+			</div>
+			<hr/>
+			<div>
+				<h:commandButton action="#{beansUser.toLogin}" value="S'identifier" styleClass="large" />
+				<h:commandButton action="#{beansUser.toCreatAccount}" value="Creer compte" styleClass="large"/>					
+			</div>
+		</h:panelGroup>
 		
+		<h:panelGroup rendered="#{homeCtrl.userConnected}">
+			
+			<h:outputText value="#{beansUser.user.email}" />
+			
+			<div>				
+				<h:commandButton action="add_route" value="Ajouter un trajet" styleClass="large" />
+				<h:commandButton action="list_route" value="Chercher un trajet" styleClass="large" />
+			</div>
+			<hr />
+			<div>
+				<h:commandButton action="profile" value="Mon profil" styleClass="large" />
+				<h:commandButton action="#{beansUser.disconnect}" value="Déconnexion" styleClass="large" />
+			</div>
+	</h:panelGroup>
+		
+		
+		
+	</h:form>
+</ui:define>
 	</ui:composition>
 
-	
 </html>
