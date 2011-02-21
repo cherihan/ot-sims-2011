@@ -7,7 +7,7 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/template/template.xhtml">
 
-<ui:define name="title">Édition de mon profil</ui:define>
+<ui:define name="title">édition de mon profil</ui:define>
 
 <ui:define name="body">
 		<div>
@@ -16,26 +16,35 @@
 			<h:outputLabel value="Mot de passe : " />
 			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
 		</div>		
+			
 			<hr/>		
 		
 		<div>
-			<h:outputLabel value="Prénom : " />
-			<h:inputText id="usr_firstname" value="#{beansUser.user.getFirstname}" styleClass="large"  />
-			<h:outputLabel value="Nom : " />
-			<h:inputText id="usr_lastname" value="#{beansUser.user.getLastname}" styleClass="large"  />
-			<h:outputLabel value="Genre : " />
-			<h:inputText id="usr_genre" value="#{beansUser.user.getGenre}" styleClass="large"  />
-			<h:outputLabel value="Anniversaire: : " />
-			<h:inputText id="usr_birthdate" value="#{beansUser.user.getBirthdate}" styleClass="large"  />
+		<h:form>
+				<h:outputLabel value="Prénom : " />
+				<h:inputText id="usr_firstname" value="#{beansUser.user.firstname}" styleClass="large" />
+				<h:outputLabel value="Nom : " />
+				<h:inputText id="usr_lastname" value="#{beansUser.user.lastname}" styleClass="large" />
+				<h:outputLabel value="Genre : " />
+				<h:selectOneMenu id="usr_genre" value="#{beansUser.user.genre}" styleClass="large">
+						<f:selectItem itemLabel="Homme" itemValue="Homme"/>
+						<f:selectItem itemLabel="Femme" itemValue="Femme"/>
+				</h:selectOneMenu>
+				<h:outputLabel value="Anniversaire : " />
+				<rich:calendar value=""/><br><br>
+				<h:outputLabel value="Numéro de portable : " />
+				<h:inputText id="usr_mobilphone" value="#{beansUser.user.mobilphone}" styleClass="large" />
+				<h:outputLabel value="Description : " />
+				<h:inputText id="usr_description" value="#{beansUser.user.description}" styleClass="large" />
 		</div>
 		
 		<div>
-			<h:commandButton action="#{beansUser.}" value="Valider les modifications" styleClass="large" />
+			<h:commandButton action="#{beansUser.creatUser()}" value="Valider les modifications" styleClass="large" />
+			<h:commandButton action="#{beansUser.creatUser()}" value="Annuler les modifications" styleClass="large" />
 		</div>
 		
-		<div>
-			<h:commandButton action="#{beansUser.}" value="Annuler les modifications" styleClass="large" />
-		</div>
+		</h:form>
+		
 		
 		</h:form>
 	</ui:define>
