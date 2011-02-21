@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Hashtable;
 
+import dao.DaoCar;
+import dao.DaoPosition;
+import dao.DaoUser;
+
 
 public class Route {
 
@@ -17,9 +21,14 @@ public class Route {
 	protected Date date_begin;
 	protected Date date_end;
 	protected String comment;
-	protected int route_owner;
+	protected int owner;
 	protected int seat;
 	protected int car;
+	
+	protected Position position_beginObj;
+	protected Position position_endObj;
+	protected User ownerObj;
+	protected Car carObj;
 	
 	/**
 	 * @param id
@@ -29,12 +38,12 @@ public class Route {
 	 * @param date_begin
 	 * @param date_end
 	 * @param comment
-	 * @param route_owner
+	 * @param owner
 	 * @param seat
 	 * @param car
 	 */
 	public Route(int id, int type, int position_begin, int position_end,
-			Date date_begin, Date date_end, String comment, int route_owner,
+			Date date_begin, Date date_end, String comment, int owner,
 			int seat, int car) {
 		super();
 		this.id = id;
@@ -44,7 +53,7 @@ public class Route {
 		this.date_begin = date_begin;
 		this.date_end = date_end;
 		this.comment = comment;
-		this.route_owner = route_owner;
+		this.owner = owner;
 		this.seat = seat;
 		this.car = car;
 	}
@@ -63,7 +72,7 @@ public class Route {
 		//this.date_begin = sqlrow.get("rte_date_begin");
 		//this.date_end = sqlrow.get("rte_date_end");
 		this.comment = sqlrow.get("rte_comment");
-		this.route_owner = Integer.parseInt(sqlrow.get("rte_route_owner"));
+		this.owner = Integer.parseInt(sqlrow.get("rte_owner"));
 		this.seat = Integer.parseInt(sqlrow.get("rte_seat"));
 		this.car = Integer.parseInt(sqlrow.get("rte_car"));
 	}
@@ -78,7 +87,7 @@ public class Route {
 			this.date_begin = sqlrow.getDate("rte_date_begin");
 			this.date_end = sqlrow.getDate("rte_date_end");
 			this.comment = sqlrow.getString("rte_comment");
-			this.route_owner = sqlrow.getInt("rte_route_owner");
+			this.owner = sqlrow.getInt("rte_owner");
 			this.seat = sqlrow.getInt("rte_seat");
 			this.car = sqlrow.getInt("rte_car");
 			
@@ -131,6 +140,41 @@ public class Route {
 	public int getPosition_end() {
 		return position_end;
 	}
+	
+	
+	public Position getPosition_beginObj() {
+		if(this.position_beginObj == null) {
+			if(this.getPosition_begin() > 0) {
+				this.position_beginObj = DaoPosition.getPosition(this.getPosition_begin());
+			}else{
+				this.position_beginObj = null;
+			}
+		}
+		return this.position_beginObj;		
+	}
+	
+	public Position getPosition_endObj() {
+		if(this.position_endObj == null) {
+			if(this.getPosition_end() > 0) {
+				this.position_endObj = DaoPosition.getPosition(this.getPosition_end());
+			}else{
+				this.position_endObj = null;
+			}
+		}
+		return this.position_endObj;		
+	}
+	
+	public User getOwnerObj() {
+		if(this.ownerObj == null) {
+			if(this.getOwner() > 0) {
+				this.ownerObj = DaoUser.getUser(this.getOwner());
+			}else{
+				this.ownerObj = null;
+			}
+		}
+		return this.ownerObj;		
+	}
+	
 	/**
 	 * @param position_end the position_end to set
 	 */
@@ -176,14 +220,14 @@ public class Route {
 	/**
 	 * @return the route_owner
 	 */
-	public int getRoute_owner() {
-		return route_owner;
+	public int getOwner() {
+		return owner;
 	}
 	/**
 	 * @param route_owner the route_owner to set
 	 */
-	public void setRoute_owner(int route_owner) {
-		this.route_owner = route_owner;
+	public void setOwner(int route_owner) {
+		this.owner = route_owner;
 	}
 	/**
 	 * @return the seat
@@ -209,6 +253,19 @@ public class Route {
 	public void setCar(int car) {
 		this.car = car;
 	}
+	
+
+	public Car getCarObj() {
+		if(this.carObj == null) {
+			if(this.getCar() > 0) {
+				this.carObj = DaoCar.getCar(this.getCar());
+			}else{
+				this.carObj = null;
+			}
+		}
+		return this.carObj;		
+	}
+	
 	
 
 }

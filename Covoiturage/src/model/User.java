@@ -7,21 +7,24 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Hashtable;
 
+import dao.DaoPosition;
+
 public class User {
 
 	protected int id;
-	protected String firstname;
-	protected String lastname;
-	protected String email;
-	protected String password;
-	protected int current_position;
-	protected String genre;
-	protected Date birthdate;
-	protected String description;
-	protected String mobilphone;
-	protected int note;
-	protected Date registrationdate;
-	protected Date lastlogindate;
+	protected String firstname = "";
+	protected String lastname = "";
+	protected String email = "";
+	protected String password = "";
+	protected int current_position = 0;
+	protected Position current_positionObj = null;
+	protected String genre = "";
+	protected Date birthdate = null;
+	protected String description = "";
+	protected String mobilphone = "";
+	protected int note = 0;
+	protected Date registrationdate = null;
+	protected Date lastlogindate = null;
 	
 	protected Hashtable<Integer, Criterion> criterions;
 	
@@ -196,6 +199,17 @@ public class User {
 	 */
 	public int getCurrent_position() {
 		return current_position;
+	}
+	
+	public Position getCurrent_positionObj() {
+		if(this.current_positionObj == null) {
+			if(this.getCurrent_position() > 0) {
+				this.current_positionObj = DaoPosition.getPosition(this.getCurrent_position());
+			}else{
+				this.current_positionObj = null;
+			}
+		}
+		return this.current_positionObj;		
 	}
 
 	/**
