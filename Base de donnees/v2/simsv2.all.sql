@@ -328,13 +328,12 @@ INSERT IGNORE INTO _criterion_crt (crt_id, crt_type, crt_label, crt_root_criteri
 DELIMITER //
 
 
--- Return user_id of associated user or null if not
 DROP PROCEDURE IF EXISTS comment_create_or_update //
 CREATE PROCEDURE comment_create_or_update (
 	IN _cmn_user_from INT(11),
 	IN _cmn_user_to INT(11),
 	IN _cmn_text TEXT,
-	IN _cmn_note
+	IN _cmn_note INT(11)
 )
 BEGIN
 	DECLARE __cmn_id INT(11);
@@ -378,6 +377,31 @@ BEGIN
 		
 		
 	UPDATE user_usr SET usr_note = ROUND(__avg) WHERE usr_id = _usr_id;
+	
+END //
+
+
+DROP PROCEDURE IF EXISTS comment_get_posted_by //
+CREATE PROCEDURE comment_get_posted_by (
+	IN _usr_id INT(11)
+)
+BEGIN
+
+	SELECT * FROM comment_cmn WHERE cmn_user_from = _usr_id;
+	
+END //
+
+
+DROP PROCEDURE IF EXISTS comment_get_posted_about //
+CREATE PROCEDURE comment_get_posted_about (
+	IN _usr_id INT(11)
+)
+BEGIN
+
+	SELECT * FROM comment_cmn WHERE cmn_user_to = _usr_id;
+	
+END //
+
 
 DELIMITER ;
 
