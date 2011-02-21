@@ -7,34 +7,49 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/template/template.xhtml">
 
-<ui:define name="title">Profil utilisateur</ui:define>
+	<ui:define name="title">Profil utilisateur</ui:define>
 
-<ui:define name="body">
-		<div>
-			<h:outputText value="#{beansUser.user.firstname} #{beansUser.user.lastname}" /><br>
-			<h:outputText value="#{beansUser.user.email}" /><br>
-			<h:outputText value="Réputation : #{beansUser.user.note}" /><br>
-		</div>			
+	<ui:define name="body">
+
+		<h:panelGrid columns="2">
 		
-		<div>
-			<h:outputText value="Genre : #{beansUser.user.genre}" /><br>
-			<h:outputText value="Anniversaire : #{beansUser.user.birthdate}" /><br>
-			<h:outputText value="Numéro de portable : #{beansUser.user.mobilphone}" /><br>
-			<h:outputText value="Description : #{beansUser.user.description}" /><br>		
-		</div>
+			<h:outputLabel value="First Name: " />
+			<h:outputText value="#{beansUser.user.firstname}" />
+			
+			<h:outputLabel value="Last Name: " />
+			<h:outputText value="#{beansUser.user.lastname}" />
+			
+			<h:outputLabel value="Email: " />
+			<h:outputText value="#{beansUser.user.email}" />
+			
+			<h:outputLabel value="Note: " />
+			<h:outputText value="#{beansUser.user.note}" />
+			
+			<h:outputLabel value="Genre: " />
+			<h:outputText value="#{beansUser.user.genre}" />
+			
+			<h:outputLabel value="Anniversaire: " />
+			<h:outputText value="#{beansUser.user.birthdate}" />
+			
+			<h:outputLabel value="Numéro de portable: " />
+			<h:outputText value="#{beansUser.user.mobilphone}" />
+			
+			<h:outputLabel value="Description: " />
+			<h:outputText value="#{beansUser.user.description}" />			
+			
+		</h:panelGrid>
 		
-		<div>
-			<h:commandButton action="" value="Modifier mon profil" styleClass="large" /><br>
-			<h:commandButton action="" value="Consulter mes trajets" styleClass="large" />
-		</div>
+		<hr/>
 		
-		<div>
-			<h:commandButton action="" value="Contacter #{beansUser.user.getFirstname} #{beansUser.user.getLastname}" styleClass="large" /><br>
-			<h:commandButton action="" value="Consulter ses trajets" styleClass="large" />
-		</div>
-		
-		
+		<h:form>	
+			<div>
+				<h:commandButton action="edit" value="Modifier mon profil" styleClass="large" />
+				<h:commandButton value="Consulter mes trajets" styleClass="large" />
+			</div>
 		</h:form>
+			
+		
+	
 	</ui:define>
 	
 </ui:composition>

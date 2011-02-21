@@ -10,43 +10,45 @@
 <ui:define name="title">Edition de mon profil</ui:define>
 
 <ui:define name="body">
-		<div>
-			<h:outputLabel value="E-mail : " />
-			<h:inputText id="usr_email" value="#{beansUser.user.email}" styleClass="large"  /><br>
-			<h:outputLabel value="Mot de passe : " />
-			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
-		</div>		
+		
+			<div>
+			<h:outputLabel value="E-mail: " />
+			<h:inputText value="#{beansUser.user.email}" styleClass="large"  />
+						
+			<h:outputLabel value="Mot de passe: " />
+			<h:inputSecret value="#{beansUser.user.password}" styleClass="large" />
+						
+			<h:outputLabel value="Confirmation: " />
+			<h:inputSecret  value="#{beansUser.confirmPassword}" styleClass="large" />
+			
+			<h:outputLabel value="First Name: " />
+			<h:inputText value="#{beansUser.user.firstname}" styleClass="large" />
+			
+			<h:outputLabel value="Last Name: " />
+			<h:inputText value="#{beansUser.user.lastname}" styleClass="large" />
+			
+			<h:outputLabel value="Genre: " />
+			<h:inputText value="#{beansUser.user.genre}" styleClass="large" />
+			
+			<h:outputLabel value="Anniversaire: " />
+			<rich:calendar value="#{beansUser.user.birthdate}" />
+			
+			<h:outputLabel value="Numéro de portable: " />
+			<h:inputText value="#{beansUser.user.mobilphone}" styleClass="large"/>
+			
+			<h:outputLabel value="Description: " />
+			<h:inputTextarea value="#{beansUser.user.description}" styleClass="large" />	
+			
+		</div>	
 			
 			<hr/>		
 		
-		<div>
-		<h:form>
-				<h:outputLabel value="Prénom : " />
-				<h:inputText id="usr_firstname" value="#{beansUser.user.firstname}" styleClass="large" /><br>
-				<h:outputLabel value="Nom : " />
-				<h:inputText id="usr_lastname" value="#{beansUser.user.lastname}" styleClass="large" /><br>
-				<h:outputLabel value="Genre : " />
-				<h:selectOneMenu id="usr_genre" value="#{beansUser.user.genre}" styleClass="large">
-						<f:selectItem itemLabel="Homme" itemValue="Homme"/>
-						<f:selectItem itemLabel="Femme" itemValue="Femme"/>
-				</h:selectOneMenu><br>
-				<h:outputLabel value="Anniversaire : " />
-				<rich:calendar value=""/><br>
-				<h:outputLabel value="Numéro de portable : " />
-				<h:inputText id="usr_mobilphone" value="#{beansUser.user.mobilphone}" styleClass="large" /><br>
-				<h:outputLabel value="Description : " />
-				<h:inputText id="usr_description" value="#{beansUser.user.description}" styleClass="large" />
-		</div>
 		
-		<div>
-			<h:commandButton action="#{beansUser.creatUser()}" value="Valider les modifications" styleClass="large" /><br>
-			<h:commandButton action="#{beansUser.creatUser()}" value="Annuler les modifications" styleClass="large" />
-		</div>
-		
+		<h:form>		
+			<h:commandButton action="#{beansUser.creatUser}" value="Valider les modifications" styleClass="large" />
+			<h:commandButton value="Annuler les modifications" styleClass="large" />		
 		</h:form>
 		
-		
-		</h:form>
 	</ui:define>
 	
 </ui:composition>
