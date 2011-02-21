@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -212,6 +213,31 @@ public class DaoRoute {
 			return list;
 		}
 		return list;
+	}
+	
+	public static void route_add_passager(int rte_id, int passager_user_id) throws Exception {
+		Hashtable<Integer, Passager> current_list = new Hashtable<Integer, Passager>();
+		Passager psg = null;
+		
+		current_list = DaoRoute.getPassagers(rte_id);
+		Enumeration<Passager> en = current_list.elements();
+		while ( en.hasMoreElements()) {
+			psg = (Passager)en.nextElement();
+			if(psg.getUser() == passager_user_id) {
+				//is already a passager of this route
+				throw new Exception(Constantes.ROUTE_ALREADY_PASSSAGER);
+			}
+		}
+		
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call route_join("+rte_id+", "+passager_user_id+")";
+			@SuppressWarnings("unused")
+			ResultSet curseur = con.execute(query);
+			
+		} catch (Exception e) {
+		}
 	}
 	
 }
