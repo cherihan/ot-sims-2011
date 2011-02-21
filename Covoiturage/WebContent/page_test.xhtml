@@ -7,7 +7,7 @@
       xmlns:a4j="http://richfaces.org/a4j">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<title><ui:insert name="title">Title</ui:insert></title>
+		<title>Title</title>
 		<link rel="stylesheet" type="text/css" href="static/style/global.css"/>
 		<meta name="viewport" content="width=device-width" />
 	</head>
@@ -23,17 +23,48 @@
 			</div>
 		</div>
 		<div id="body">
+			<button class="large">Nouvelle recherche</button>
 			<div class="msg">
 				Résultats de la recherche :
 			</div>
 			<ul id="rides">
 				<li class="ride">
-					<a href="{{ url_for('show_ride', ride_id=ride.id) }}">
-						<div class="from">De : Lyon, Part-Dieu</div>
-						<div class="to">À : Paris, Gare de Lyon</div>
+					<a href="">
+						<div class="from"><span>De :</span>Lyon, Part-Dieu</div>
+						<div class="to"><span>À  :</span>Paris, Gare de Lyon</div>
+						<div class="countdown">10mn</div>
+						<div class="matching">
+							◉◉
+						</div>
+					</a>
+					</li>
+				<li class="ride">
+					<a href="">
+						<div class="from"><span>De :</span>Lyon, Part-Dieu</div>
+						<div class="to"><span>À  :</span>Paris, Gare de Lyon</div>
 						<div class="countdown">20mn</div>
 						<div class="matching">
 							◎◉◉◉
+						</div>
+					</a>
+					</li>
+				<li class="ride">
+					<a href="">
+						<div class="from"><span>De :</span>Lyon, Part-Dieu</div>
+						<div class="to"><span>À  :</span>Paris, Gare de Lyon</div>
+						<div class="countdown">20mn</div>
+						<div class="matching">
+							◎◉
+						</div>
+					</a>
+					</li>
+				<li class="ride">
+					<a href="">
+						<div class="from"><span>De :</span>Lyon, Part-Dieu</div>
+						<div class="to"><span>À  :</span>Paris, Gare de Lyon</div>
+						<div class="countdown">40mn</div>
+						<div class="matching">
+							◎◎◎
 						</div>
 					</a>
 					</li>
