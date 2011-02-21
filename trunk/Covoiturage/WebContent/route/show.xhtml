@@ -23,12 +23,14 @@
 			<hr/>
 			
 			<div>
-				<h:outputLabel value="Conducteur : " />
-				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br>
+				<h:outputLabel value="Conducteur : " /><br>
+				<h:commandButton action="" value="#{route.Route_owner}" styleClass="large" /><br>
 				<h:outputLabel value="Passager :" />
-				<rich:dataTable value="#{}" var="" style="width:100%">
-						<h:commandButton action="#{}" value="#{}" styleClass="large" />	
-				</rich:dataTable>
+				<ui:repeat value="#{route.getAllpassager}" var="passager">
+                	<li> 
+                     	 <h:commandButton action="#{}" value="" styleClass="large" />
+                	</li> 
+         		 </ui:repeat>
 				<h:commandButton action="#{}" value="Se joindre au trajet" styleClass="large" />
 			</div>
 			
