@@ -240,4 +240,9 @@ public class DaoRoute {
 		}
 	}
 	
+	public static Hashtable<Integer, Route> route_search(Position pos_begin, Position pos_end, Date date_departure_begin, Date date_departure_end, Integer location_appro) {
+		Hashtable<Integer, Route> list = new Hashtable<Integer, Route>();
+		return list;
+	}
+	
 }
