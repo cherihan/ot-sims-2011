@@ -2,6 +2,7 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Hashtable;
 
 public class Position {
 
@@ -32,6 +33,15 @@ public class Position {
 			e.printStackTrace();
 		}
 	}
+	
+	public Position(Hashtable<String, String> sqlrow) {
+		super();
+		this.id = Integer.valueOf(sqlrow.get("pos_id"));
+		this.address = sqlrow.get("pos_address");
+		this.latitude = Double.valueOf(sqlrow.get("pos_latitude"));
+		this.longitude = Double.valueOf(sqlrow.get("pos_longitude"));
+	}
+	
 	/**
 	 * @return the id
 	 */

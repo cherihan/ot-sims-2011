@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Hashtable;
+
 
 public class Comment {
 
@@ -83,6 +87,38 @@ public class Comment {
 		this.user_to = user_to;
 		this.text = text;
 		this.note = note;
+	}
+	
+	/**
+	 * @param id
+	 */
+	public Comment(int id) {
+		super();
+		this.id = id;
+	}
+	
+	public Comment(Hashtable<String, String> sqlrow) {
+		super();
+		this.id = Integer.valueOf(sqlrow.get("cmn_id"));
+		this.user_from = Integer.valueOf(sqlrow.get("cmn_user_from"));
+		this.user_to = Integer.valueOf(sqlrow.get("cmn_user_to"));
+		this.text = sqlrow.get("cmn_text");
+		this.note = Integer.valueOf(sqlrow.get("cmn_note"));
+	}
+	
+	public Comment(ResultSet sqlrow) {
+		super();
+		
+		try {
+			this.id = sqlrow.getInt("cmn_id");
+			this.user_from = sqlrow.getInt("cmn_user_from");
+			this.user_to = sqlrow.getInt("cmn_user_to");
+			this.text = sqlrow.getString("cmn_text");
+			this.note = sqlrow.getInt("cmn_note");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 

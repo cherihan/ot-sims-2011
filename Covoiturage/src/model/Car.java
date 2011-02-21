@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Hashtable;
+
 
 
 public class Car {
@@ -8,7 +12,7 @@ public class Car {
 
 	protected int id;
 	protected String name;
-	protected int car_owner;
+	protected int owner;
 	protected int seat;
 	/**
 	 * @return the id
@@ -37,14 +41,14 @@ public class Car {
 	/**
 	 * @return the car_owner
 	 */
-	public int getCar_owner() {
-		return car_owner;
+	public int getOwner() {
+		return owner;
 	}
 	/**
 	 * @param car_owner the car_owner to set
 	 */
-	public void setCar_owner(int car_owner) {
-		this.car_owner = car_owner;
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 	/**
 	 * @return the seat
@@ -64,12 +68,41 @@ public class Car {
 	 * @param car_owner
 	 * @param seat
 	 */
-	public Car(int id, String name, int car_owner, int seat) {
+	public Car(int id, String name, int owner, int seat) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.car_owner = car_owner;
+		this.owner = owner;
 		this.seat = seat;
+	}
+	
+	/**
+	 * @param id
+	 */
+	public Car(int id) {
+		super();
+		this.id = id;
+	}
+	
+	public Car(Hashtable<String, String> sqlrow) {
+		super();
+		this.id = Integer.valueOf(sqlrow.get("car_id"));
+		this.name = sqlrow.get("car_name");
+		this.owner = Integer.valueOf(sqlrow.get("car_owner"));
+		this.seat = Integer.valueOf(sqlrow.get("car_seat"));
+	}
+	
+	public Car(ResultSet sqlrow) {
+		super();
+		try {
+			this.id = sqlrow.getInt("car_id");
+			this.name = sqlrow.getString("car_name");
+			this.owner = sqlrow.getInt("car_owner");
+			this.seat = sqlrow.getInt("car_seat");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 
