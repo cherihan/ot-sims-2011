@@ -45,7 +45,7 @@ public class DaoRoute {
 	 *         related to the specified address (depart or arrive)
 	 * @throws Exception
 	 */
-	public static Route createRoute(short type, String address_depart,
+	public static Route createRoute(int type, String address_depart,
 			String address_arrive, Date date_depart, Date date_arrive,
 			String comt, int user_ID, int seat, int car_ID) throws Exception {
 		Position pos_depart = null;
@@ -106,7 +106,7 @@ public class DaoRoute {
 	 *         no result
 	 * @throws Exception
 	 */
-	public static Route createRoute(short type, int pos_depart_ID,
+	public static Route createRoute(int type, int pos_depart_ID,
 			int pos_arrive_ID, Date date_depart, Date date_arrive, String comt,
 			int user_ID, int seat, int car_ID) throws Exception {
 

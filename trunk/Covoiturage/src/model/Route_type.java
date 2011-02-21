@@ -6,23 +6,6 @@ import java.util.Hashtable;
 
 public class Route_type {
 
-
-
-	protected int id;
-	protected String label;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
 	public Route_type(int id, String label) {
 		super();
 		this.id = id;
@@ -50,7 +33,22 @@ public class Route_type {
 			e.printStackTrace();
 		}		
 	}
+
+	protected int id;
+	protected String label;
 	
-
-
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	
 }

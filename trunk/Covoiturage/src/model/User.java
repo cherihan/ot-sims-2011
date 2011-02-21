@@ -1,12 +1,12 @@
 package model;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.Date;
 import java.util.Hashtable;
 
+import dao.DaoCriterion;
 import dao.DaoPosition;
 
 public class User {
@@ -17,7 +17,6 @@ public class User {
 	protected String email = "";
 	protected String password = "";
 	protected int current_position = 0;
-	protected Position current_positionObj = null;
 	protected String genre = "";
 	protected Date birthdate = null;
 	protected String description = "";
@@ -25,9 +24,11 @@ public class User {
 	protected int note = 0;
 	protected Date registrationdate = null;
 	protected Date lastlogindate = null;
-	
+
+	protected Position current_positionObj = null;
+
 	protected Hashtable<Integer, Criterion> criterions;
-	
+
 	/**
 	 * @return the id
 	 */
@@ -85,7 +86,7 @@ public class User {
 		super();
 		this.id = id;
 	}
-	
+
 	/**
 	 * @param id
 	 */
@@ -200,16 +201,17 @@ public class User {
 	public int getCurrent_position() {
 		return current_position;
 	}
-	
+
 	public Position getCurrent_positionObj() {
-		if(this.current_positionObj == null) {
-			if(this.getCurrent_position() > 0) {
-				this.current_positionObj = DaoPosition.getPosition(this.getCurrent_position());
-			}else{
+		if (this.current_positionObj == null) {
+			if (this.getCurrent_position() > 0) {
+				this.current_positionObj = DaoPosition.getPosition(this
+						.getCurrent_position());
+			} else {
 				this.current_positionObj = null;
 			}
 		}
-		return this.current_positionObj;		
+		return this.current_positionObj;
 	}
 
 	/**
@@ -324,4 +326,13 @@ public class User {
 	public void setLastlogindate(Date lastlogindate) {
 		this.lastlogindate = lastlogindate;
 	}
+	
+	public Hashtable<Integer, Criterion> getCriterionsOfUser() {
+		return DaoCriterion.getCriterionsOfUser(this.getId());
+	}
+	
+	public Hashtable<Integer, Criterion> getCriterionsOfUser(int ctt_id) {
+		return DaoCriterion.getCriterionsOfUserOfType(this.getId(), ctt_id);
+	}
+
 }
