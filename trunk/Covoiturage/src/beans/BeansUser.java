@@ -98,7 +98,7 @@ public class BeansUser {
 		}
 
 		try {
-			userCreated = DaoUser.createUser(user.getEmail(), user.getPassword().replaceAll("'", "''"));
+			userCreated = DaoUser.createUser(user.getEmail(), user.getPassword().replaceAll("'", "''"), user.getFirstname(), user.getLastname(), user.getMobilphone());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
