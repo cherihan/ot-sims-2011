@@ -15,7 +15,7 @@
 		
 		<h:panelGroup rendered="#{homeCtrl.userNotConnected}">
 			<div>
-				<h:commandButton action="list_route" value="Chercher un trajet" styleClass="large" />
+				<h:commandButton action="index" value="Chercher un trajet" styleClass="large" />
 			</div>
 			<hr/>
 			<div>
@@ -29,12 +29,12 @@
 			<h:outputText value="#{beansUser.user.email}" />
 			
 			<div>				
-				<h:commandButton action="add_route" value="Ajouter un trajet" styleClass="large" />
-				<h:commandButton action="list_route" value="Chercher un trajet" styleClass="large" />
+				<h:commandButton action="create" value="Ajouter un trajet" styleClass="large" />
+				<h:commandButton action="index" value="Chercher un trajet" styleClass="large" />
 			</div>
 			<hr />
 			<div>
-				<h:commandButton action="profile" value="Mon profil" styleClass="large" />
+				<h:commandButton action="show" value="Mon profil" styleClass="large" />
 				<h:commandButton action="#{beansUser.disconnect}" value="Déconnexion" styleClass="large" />
 			</div>
 	</h:panelGroup>
