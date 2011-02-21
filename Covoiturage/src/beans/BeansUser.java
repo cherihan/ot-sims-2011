@@ -108,7 +108,7 @@ public class BeansUser {
 		
 		this.user=userCreated;
 
-		return "ok";
+		return "home";
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class BeansUser {
 		try {
 			userLogged = DaoUser.authentification(user.getEmail(), user.getPassword().replaceAll("'", "''"));
 			this.user=userLogged;			
-			return "ok";
+			return "home";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
@@ -135,5 +135,12 @@ public class BeansUser {
 	
 	public User getLoggedUser() {
 		return this.user;		
+	}
+	
+	public String disconnect()
+	{
+		user = new User();
+		
+		return "disconnect";
 	}
 }
