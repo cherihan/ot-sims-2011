@@ -10,6 +10,48 @@ public class User_fav_position {
 	protected int user;
 	protected int position;
 	protected String label;
+	
+	protected User userObj;
+	
+	/**
+	 * @param id
+	 * @param user
+	 * @param position
+	 * @param label
+	 */
+	public User_fav_position(int id, int user, int position, String label) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.position = position;
+		this.label = label;
+	}
+
+	public User_fav_position(int id) {
+		super();
+		this.id = id;
+	}
+
+	public User_fav_position(Hashtable<String, String> sqlrow) {
+		super();
+		this.id = Integer.valueOf(sqlrow.get("ufp_id"));
+		this.user = Integer.valueOf(sqlrow.get("ufp_user"));
+		this.position = Integer.valueOf(sqlrow.get("ufp_position"));
+		this.label = sqlrow.get("ufp_label");
+	}
+
+	public User_fav_position(ResultSet sqlrow) {
+		super();
+		try {
+			this.id = sqlrow.getInt("ufp_id");
+			this.user = sqlrow.getInt("ufp_user");
+			this.position = sqlrow.getInt("ufp_position");
+			this.label = sqlrow.getString("ufp_label");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * @return the id
@@ -71,45 +113,6 @@ public class User_fav_position {
 		this.label = label;
 	}
 
-	/**
-	 * @param id
-	 * @param user
-	 * @param position
-	 * @param label
-	 */
-	public User_fav_position(int id, int user, int position, String label) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.position = position;
-		this.label = label;
-	}
-
-	public User_fav_position(int id) {
-		super();
-		this.id = id;
-	}
-
-	public User_fav_position(Hashtable<String, String> sqlrow) {
-		super();
-		this.id = Integer.valueOf(sqlrow.get("ufp_id"));
-		this.user = Integer.valueOf(sqlrow.get("ufp_user"));
-		this.position = Integer.valueOf(sqlrow.get("ufp_position"));
-		this.label = sqlrow.get("ufp_label");
-	}
-
-	public User_fav_position(ResultSet sqlrow) {
-		super();
-		try {
-			this.id = sqlrow.getInt("ufp_id");
-			this.user = sqlrow.getInt("ufp_user");
-			this.position = sqlrow.getInt("ufp_position");
-			this.label = sqlrow.getString("ufp_label");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+	
 
 }

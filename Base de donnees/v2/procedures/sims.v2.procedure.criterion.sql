@@ -48,5 +48,38 @@ BEGIN
     
 end //
 
+
+DROP PROCEDURE IF EXISTS get_criterions_of_user //
+CREATE PROCEDURE get_criterions_of_user (
+	IN _usr_id INT(11)
+)
+BEGIN
+
+	SELECT crt.*
+	FROM usr_crt uc
+		INNER JOIN _criterion_crt crt ON uc.crt_id = crt.crt_id
+	WHERE uc.usr_id = _usr_id
+	ORDER BY crt_order;
+
+END //
+
+
+
+
+DROP PROCEDURE IF EXISTS get_criterions_of_user_of_type //
+CREATE PROCEDURE get_criterions_of_user_of_type (
+	IN _usr_id INT(11),
+	IN _ctt_id INT(11)
+)
+BEGIN
+	SELECT crt.*
+	FROM usr_crt uc
+		INNER JOIN _criterion_crt crt ON uc.crt_id = crt.crt_id
+	WHERE uc.usr_id = _usr_id
+	AND crt.crt_type = _ctt_id
+	ORDER BY crt_order;
+
+END //
+
 DELIMITER ;
 
