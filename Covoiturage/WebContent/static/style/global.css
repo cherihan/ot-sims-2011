@@ -94,7 +94,8 @@ form .timestamp {
 	margin: 0;
 }
 
-.ride {
+.ride,
+.ride_details {
 	display: block;
 	width: 100%;
 	border: 1px solid grey;
@@ -104,21 +105,30 @@ form .timestamp {
 	background: -moz-linear-gradient(top,  #dfd,  #bfb);
 	padding: 5px 0px 5px 0px;
 }
+.ride_details {
+	padding: 10px 0px 10px 0px;
+}
+.ride_details div {
+	margin: 0px 10px 0px 10px;
+}
 
-.ride:first-child {
+.ride:first-child,
+.ride_details {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-topright: 10px;
 }
-.ride:last-child {
+.ride:last-child,
+.ride_details {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	-moz-border-radius-bottomleft: 10px;
 	-moz-border-radius-bottomright: 10px;
 }
 
-.ride:hover {
+.ride:hover,
+.ride_details:hover {
 	background-color: #efe;
 	background: -webkit-gradient(linear, left top, left bottom, from(#efe), to(#cfc));
 	background: -moz-linear-gradient(top,  #efe,  #bfb);
@@ -154,7 +164,8 @@ form .timestamp {
 	background-color: #ccc;
 }
 
-.ride div {
+.ride div,
+.ride_details div {
 	height: 25px;
 }
 
@@ -162,8 +173,19 @@ form .timestamp {
 	margin-top: -50px;
 	font-weight: bold;
 }
+.ride_details .to {
+	margin-bottom: 20px;
+}
+.ride_details .countdown span {
+	font-weight: bold;
+}
 .ride .matching {
 	margin-top: -25px;
+}
+.ride_details .countdown,
+.ride_details .matching {
+	font-size: 0.9em;
+	margin-top: -4px;
 }
 .ride .countdown,
 .ride .matching {
@@ -174,7 +196,7 @@ form .timestamp {
 	display: block;
 	color: black;
 	text-decoration: none;
-	margin: 5px;
+	margin: 5px 10px 5px 10px;
 }
 
 .ride a:visited {
@@ -182,7 +204,9 @@ form .timestamp {
 }
 
 .ride .to span,
-.ride .from span {
+.ride .from span,
+.ride_details .to span,
+.ride_details .from span {
 	display: inline-block;
 	min-width: 35px;
 	font-size: 0.75em;
