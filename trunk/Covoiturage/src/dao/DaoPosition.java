@@ -44,9 +44,8 @@ public class DaoPosition {
 			String query = "call position_create_or_update('" + address + "', "
 					+ latitude + ", " + longitude + ")";
 			try {
-				res = con.execute(query);
-				if (res.first())
-					pos = new Position(res);
+				con.execute(query);
+				pos = getPositionByAddress(address);
 			} catch (MySQLIntegrityConstraintViolationException ex) {
 				// ? Errors ?
 				messageErr = Constantes.UNEXPECTED_ERROR;
