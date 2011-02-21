@@ -8,14 +8,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 		<title><ui:insert name="title">Title</ui:insert></title>
-		<link rel="stylesheet" type="text/css" href="style/global.css"/>
+		<link rel="stylesheet" type="text/css" href="static/style/global.css"/>
 		<meta name="viewport" content="width=device-width" />
 	</head>
 	<body>
 		<div id="header">
 			<div id="home_logo">
 				<a href="./">
-					<img src="img/car_50px.png" alt="logo"/>
+					<img src="static/img/car_50px.png" alt="logo"/>
 				</a>
 			</div>
 			<div id="page_title">
@@ -24,21 +24,35 @@
 		</div>
 		<div id="body">
 			<div class="msg">
-				Ceci est un message.
+				Résultats de la recherche :
 			</div>
+			<ul id="rides">
+				<li class="ride">
+					<a href="{{ url_for('show_ride', ride_id=ride.id) }}">
+						<div class="from">De : Lyon, Part-Dieu</div>
+						<div class="to">À : Paris, Gare de Lyon</div>
+						<div class="countdown">20mn</div>
+						<div class="matching">
+							◎◉◉◉
+						</div>
+					</a>
+					</li>
+				</ul>
+			<div class="msg">Vous n’avez pas de trajet.</div>
+			<hr/>
 			<form>
 				<div>
 					<label for="usr_email">E-mail :</label>
-					<input id="usr_email" type="email" placeholder="moi@mail.com" />
+					<input id="usr_email" type="email" placeholder="moi@mail.com" class="large" />
 				</div>
 				<div>
 					<label for="usr_password">Mot de passe :</label>
-					<input id="usr_password" type="password" placeholder="password" />
+					<input id="usr_password" type="password" placeholder="password" class="large" />
 				</div>
 				<hr/>
 				<div>
 					<label for="usr_pos">Départ :</label>
-					<select id="usr_pos">
+					<select id="usr_pos" class="large">
 						<option value="">Ici (Lyon)</option>
 						<option value="">Lieu de travail</option>
 						<option value="">Maison</option>
@@ -46,10 +60,10 @@
 					</select>
 				</div>
 				<div>
-					<button>Test</button>
+					<button class="large">Test</button>
 				</div>
 				<div>
-					<input type="submit" value="Connexion" />
+					<input type="submit" value="Connexion" class="large" />
 				</div>
 			</form>
 		</div>
