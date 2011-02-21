@@ -13,18 +13,18 @@
 		<ui:define name="body">	
 			<h:form>
 				<h:outputLabel value="Départ" />
-				<h:selectOneMenu value="" styleClass="large">
+				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large">
 					<f:selectItem itemLabel="ici" itemValue="here"/>
 					<f:selectItem itemLabel="autre..." itemValue="other"/>
 				</h:selectOneMenu>
 				<h:outputLabel value="Arrivée" />
-				<h:selectOneMenu value="" styleClass="large">
+				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large">
 					<f:selectItem itemLabel="Maison" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="Boulot" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="autre..." itemValue="other"/>
 				</h:selectOneMenu>				
 				<h:outputLabel value="Dans" />
-				<h:selectOneMenu value="minutes" class="large">
+				<h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large">
 					<f:selectItem itemLabel="5mn" itemValue="5"/>
 					<f:selectItem itemLabel="10mn" itemValue="10"/>
 					<f:selectItem itemLabel="20mn" itemValue="20"/>
@@ -33,7 +33,7 @@
 					<f:selectItem itemLabel="50mn" itemValue="50"/>
 					<f:selectItem itemLabel="1h" itemValue="50"/>
 				</h:selectOneMenu>
-				<h:commandButton action="#{annonce.insert}" value="Ajouter" styleClass="large" />
+				<h:commandButton action="#{beansRoute.createRoute}" value="Ajouter" styleClass="large" />
 			</h:form>
 		</ui:define>
 		
