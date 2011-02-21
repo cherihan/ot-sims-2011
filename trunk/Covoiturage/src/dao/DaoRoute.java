@@ -119,12 +119,13 @@ public class DaoRoute {
 		ResultSet res;
 		Route route = null;
 
-		long date_depart_INT = 0;
-		long date_arrive_INT = 0;
+		Long date_depart_INT = null;
+		Long date_arrive_INT = null;
 
 		// Converting date
-		date_arrive_INT = date_arrive.getTime() / 1000;
 		date_depart_INT = date_depart.getTime() / 1000;
+		if (date_arrive != null)
+			date_arrive_INT = date_arrive.getTime() / 1000;
 
 		// Inserting
 		try {
@@ -132,7 +133,8 @@ public class DaoRoute {
 
 			String query = "call route_create(" + type + ", " + pos_depart_ID
 					+ ", " + pos_arrive_ID + ", " + date_depart_INT + ", "
-					+ date_arrive_INT + ", '" + comt + "', " + user_ID + ", "
+					+ (date_arrive_INT == null ? "NULL" : date_arrive_INT)
+					+ ", '" + (comt == null ? "" : comt) + "', " + user_ID + ", "
 					+ seat + ", ";
 
 			// Car id patch
@@ -246,7 +248,7 @@ public class DaoRoute {
 			Date date_departure_end, Integer location_appro, int rtp_id) {
 		Hashtable<Integer, Route> list = new Hashtable<Integer, Route>();
 		Route rte = null;
-		
+
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
