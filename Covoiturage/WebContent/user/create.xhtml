@@ -10,17 +10,29 @@
 <ui:define name="title">Nouveau compte</ui:define>
 
 <ui:define name="body">
-	<h:form id="create_account_form">
+	<h:form>
 		<div class="msg">
 			<h:outputText value="#{beansUser.messageErr}" />
 		</div>
 		<div>
-			<label for="create_account_form:usr_email">E-mail :</label>	
-			<h:inputText id="usr_email" value="#{beansUser.user.email}" styleClass="large"  />
-			<label for="create_account_form:usr_password">Mot de passe :</label>
-			<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
-			<label for="create_account_form:usr_confirm_password">Confirmation :</label>
-			<h:inputSecret id="usr_confirm_password" value="#{beansUser.confirmPassword}" styleClass="large" />
+			<h:outputLabel value="E-mail: " />
+			<h:inputText value="#{beansUser.user.email}" styleClass="large"  />
+			
+			<h:outputLabel value="Nom: " />
+			<h:inputText value="#{beansUser.user.firstname}" styleClass="large"  />
+			
+			<h:outputLabel value="Prénom: " />
+			<h:inputText value="#{beansUser.user.lastname}" styleClass="large"  />
+			
+			<h:outputLabel value="Numero de mobile: " />
+			<h:inputText value="#{beansUser.user.mobilphone}" styleClass="large"  />
+			
+			<h:outputLabel value="Mot de passe: " />
+			<h:inputSecret value="#{beansUser.user.password}" styleClass="large" />
+			
+			<h:outputLabel value="Confirmation : " />
+			<h:inputSecret value="#{beansUser.confirmPassword}" styleClass="large" />
+						
 		</div>				
 		<div>
 			<h:commandButton action="#{beansUser.creatUser}" value="Créer le compte" styleClass="large" />
