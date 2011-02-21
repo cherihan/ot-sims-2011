@@ -65,6 +65,10 @@ public class Route {
 		super();
 		this.id = id;
 	}
+	
+	public Route(){
+		super();
+	}
 
 	public Route(Hashtable<String, String> sqlrow) {
 		super();
