@@ -79,6 +79,81 @@ form .timestamp {
 	width: auto;
 }
 
+/* Ride lists */
+
+#rides {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ride {
+	display: block;
+	width: 100%;
+	border: 1px solid grey;
+	margin-bottom: 5px;
+	background: #dfd;
+	padding: 0;
+}
+
+.ride:hover {
+	background-color: #efe;
+}
+
+.ride:active {
+	background-color: #cfc;
+}
+
+.ride.car {
+	background: url('/static/img/car_50px.png') 50% 50% #ddf no-repeat;
+}
+
+.ride.car:hover {
+	background-color: #eef;
+}
+
+.ride.car:active {
+	background-color: #ccf;
+}
+
+.ride.expired {
+	background-color: #ddd;
+}
+
+.ride.expired:hover {
+	background-color: #eee;
+}
+
+.ride.expired:active {
+	background-color: #ccc;
+}
+
+.ride div {
+	height: 25px;
+}
+
+.ride .countdown {
+	margin-top: -50px;
+}
+.ride .matching {
+	margin-top: -25px;
+}
+.ride .countdown,
+.ride .matching {
+	float: right;
+}
+
+.ride a {
+	display: block;
+	color: black;
+	text-decoration: none;
+	margin: 5px;
+}
+
+.ride a:visited {
+	color: black;
+}
+
 /* Footer */
 
 #footer {
