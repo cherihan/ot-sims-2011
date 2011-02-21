@@ -10,7 +10,7 @@ import dao.DaoUser;
 
 
 public class Passager {
-
+""
 	protected int id=0;
 	protected int route=0;
 	protected int user=0;

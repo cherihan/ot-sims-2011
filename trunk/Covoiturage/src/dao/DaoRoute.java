@@ -9,10 +9,12 @@ import java.util.Hashtable;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
+import utilities.DateUtils;
 import model.Passager;
 import model.Position;
 import model.Route;
 import model.User;
+import model.User_fav_position;
 import google_api.GoogleGeoApiCached;
 
 public class DaoRoute {
@@ -166,8 +168,6 @@ public class DaoRoute {
 			con.close();
 		return route;
 	}
-	
-	
 
 	public static Route getRoute(int rte_id) {
 		Route rte = null;
@@ -200,10 +200,10 @@ public class DaoRoute {
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call route_get_passagers("+rte_id+")";
+			String query = "call route_get_passagers(" + rte_id + ")";
 			ResultSet curseur = con.execute(query);
-			
-			while(curseur.next()) {
+
+			while (curseur.next()) {
 				psg = new Passager(curseur);
 				usr = new User(curseur);
 				psg.setUserObj(usr);
@@ -214,35 +214,55 @@ public class DaoRoute {
 		}
 		return list;
 	}
-	
-	public static void route_add_passager(int rte_id, int passager_user_id) throws Exception {
+
+	public static void route_add_passager(int rte_id, int passager_user_id)
+			throws Exception {
 		Hashtable<Integer, Passager> current_list = new Hashtable<Integer, Passager>();
 		Passager psg = null;
-		
+
 		current_list = DaoRoute.getPassagers(rte_id);
 		Enumeration<Passager> en = current_list.elements();
-		while ( en.hasMoreElements()) {
-			psg = (Passager)en.nextElement();
-			if(psg.getUser() == passager_user_id) {
-				//is already a passager of this route
+		while (en.hasMoreElements()) {
+			psg = (Passager) en.nextElement();
+			if (psg.getUser() == passager_user_id) {
+				// is already a passager of this route
 				throw new Exception(Constantes.ROUTE_ALREADY_PASSSAGER);
 			}
 		}
-		
+
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
-			String query = "call route_join("+rte_id+", "+passager_user_id+")";
+			String query = "call route_join(" + rte_id + ", "
+					+ passager_user_id + ")";
 			@SuppressWarnings("unused")
 			ResultSet curseur = con.execute(query);
-			
+
 		} catch (Exception e) {
 		}
 	}
-	
-	public static Hashtable<Integer, Route> route_search(Position pos_begin, Position pos_end, Date date_departure_begin, Date date_departure_end, Integer location_appro) {
+
+	public static Hashtable<Integer, Route> route_search(Position pos_begin,
+			Position pos_end, Date date_departure_begin,
+			Date date_departure_end, Integer location_appro) {
 		Hashtable<Integer, Route> list = new Hashtable<Integer, Route>();
+		Route rte=null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call route_search_with_date_and_delta("
+					+ pos_begin.getId() + ", " + pos_end.getId() + ", "
+					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
+					+ DateUtils.getDateAsInteger(date_departure_end)
+					+ location_appro + ")";
+			ResultSet curseur = con.execute(query);
+			while (curseur.next()) {
+				rte = new Route(curseur);
+				list.put(rte.getId(), rte);
+			}
+		} catch (Exception e) {
+		}
 		return list;
 	}
-	
+
 }

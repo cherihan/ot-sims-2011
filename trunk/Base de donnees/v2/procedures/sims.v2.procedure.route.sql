@@ -158,8 +158,8 @@ BEGIN
 	DECLARE __delta_deg_x FLOAT(10,6);
 	DECLARE __delta_deg_y FLOAT(10,6);
 	
-	SELECT (_location_approximate_nb_meters * 0.0009) INTO __delta_deg_x;
-	SELECT (_location_approximate_nb_meters * 0,0014) INTO __delta_deg_y;
+	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0.0009) INTO __delta_deg_x;
+	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0,0014) INTO __delta_deg_y;
 	
 	SELECT * 
 		FROM route_rte 
