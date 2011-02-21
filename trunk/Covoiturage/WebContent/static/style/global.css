@@ -4,6 +4,10 @@
 body {
 	font-size: 1.2em;
 	font-family: Verdana, sans-serif;
+	
+	background-color: white;
+	background: -webkit-gradient(linear, left top, left bottom, from(white), to(#d6d6d6));
+	background: -moz-linear-gradient(top,  white,  #d6d6d6);
 }
 
 #body {
@@ -17,12 +21,15 @@ body {
 /* Header */
 
 #header {
-	background-color: #e2ebfe;
 	margin-bottom: 20px;
 	padding: 10px;
 	border: 1px solid gray;
 	-moz-border-radius		: 10px;
 	-webkit-border-radius	: 10px;
+	
+	background-color: #e2ebfe;
+	background: -webkit-gradient(linear, left top, left bottom, from(#e2ebfe), to(#c1d4fd));
+	background: -moz-linear-gradient(top,  #e2ebfe,  #c1d4fd);
 }
 
 #header > div {
@@ -91,17 +98,36 @@ form .timestamp {
 	display: block;
 	width: 100%;
 	border: 1px solid grey;
-	margin-bottom: 5px;
+	margin: 0px 0px -1px 0px;
 	background: #dfd;
-	padding: 0;
+	background: -webkit-gradient(linear, left top, left bottom, from(#dfd), to(#bfb));
+	background: -moz-linear-gradient(top,  #dfd,  #bfb);
+	padding: 5px 0px 5px 0px;
+}
+
+.ride:first-child {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+}
+.ride:last-child {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
 }
 
 .ride:hover {
 	background-color: #efe;
+	background: -webkit-gradient(linear, left top, left bottom, from(#efe), to(#cfc));
+	background: -moz-linear-gradient(top,  #efe,  #bfb);
 }
 
 .ride:active {
 	background-color: #cfc;
+	background: -webkit-gradient(linear, left top, left bottom, from(#cfc), to(#afa));
+	background: -moz-linear-gradient(top,  #cfc,  #bfb);
 }
 
 .ride.car {
@@ -134,6 +160,7 @@ form .timestamp {
 
 .ride .countdown {
 	margin-top: -50px;
+	font-weight: bold;
 }
 .ride .matching {
 	margin-top: -25px;
@@ -152,6 +179,13 @@ form .timestamp {
 
 .ride a:visited {
 	color: black;
+}
+
+.ride .to span,
+.ride .from span {
+	display: inline-block;
+	min-width: 35px;
+	font-size: 0.75em;
 }
 
 /* Footer */
