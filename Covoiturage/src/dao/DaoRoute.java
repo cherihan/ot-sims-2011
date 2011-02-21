@@ -10,7 +10,6 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import utilities.Constantes;
 import model.Position;
 import model.Route;
-import model.User;
 import google_api.GoogleGeoApiCached;
 
 public class DaoRoute {
