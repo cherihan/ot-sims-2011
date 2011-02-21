@@ -23,7 +23,7 @@ public class DaoUser {
 	 * @return User
 	 * @throws Exception
 	 */
-	public static User createUser(String email, String password)
+	public static User createUser(String email, String password, String firstName, String lastName, String mobilePhone)
 			throws Exception {
 
 		con = null;
@@ -41,11 +41,11 @@ public class DaoUser {
 				query = "call user_get_user_by_email('" + email + "')";
 
 				res = con.execute(query);
-				if (res.first())// There is result -> email is already used
+				if (res.first())//There is result -> email is already used
 					throw new Exception(Constantes.USER_ALREADY_SAVED);
 
-				query = "call user_create_short('" + email + "', '" + password
-						+ "')";
+				query = "call user_create_short('" + email + "', '" + password	+ "', '" + firstName +
+				"', '" + lastName + "', '" + mobilePhone + "')";
 
 				res = con.execute(query);
 				if (res.first())
@@ -71,7 +71,7 @@ public class DaoUser {
 		return user;
 
 	}
-
+	
 	/**
 	 * 
 	 * @param email
