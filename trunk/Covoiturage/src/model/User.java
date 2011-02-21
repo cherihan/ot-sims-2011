@@ -8,6 +8,7 @@ import java.util.Hashtable;
 
 import dao.DaoCriterion;
 import dao.DaoPosition;
+import dao.DaoRoute;
 
 public class User {
 
@@ -331,12 +332,17 @@ public class User {
 		return DaoCriterion.getCriterionsOfUser(this.getId());
 	}
 	
-	public Hashtable<Integer, Criterion> getCriterionsOfUser(int ctt_id) {
+	public Hashtable<Integer, Criterion> getCriterionsOfUserOfType(int ctt_id) {
 		return DaoCriterion.getCriterionsOfUserOfType(this.getId(), ctt_id);
 	}
 
 	public Integer getBirthdateAsInteger() {
 		return Integer.valueOf(String.valueOf(this.getBirthdate().getTime()/1000));
+	}
+	
+	public Hashtable<Integer, Route> getRouteOfUser(Date date_departure_begin,
+			Date date_departure_end, int rtp_id) {
+		return DaoRoute.route_search_of_owner(this.getId(), date_departure_begin, date_departure_end, rtp_id);
 	}
 	
 }

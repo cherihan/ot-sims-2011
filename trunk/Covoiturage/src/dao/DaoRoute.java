@@ -247,11 +247,7 @@ public class DaoRoute {
 			Date date_departure_end, Integer location_appro, int rtp_id) {
 		Hashtable<Integer, Route> list = new Hashtable<Integer, Route>();
 		Route rte = null;
-
-		if (rtp_id == 0) {
-			rtp_id = Route_type.WANT_CAR; // want Car
-		}
-
+		
 		try {
 			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
 
@@ -260,6 +256,29 @@ public class DaoRoute {
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
 					+ DateUtils.getDateAsInteger(date_departure_end)
 					+ location_appro + ", " + rtp_id + ")";
+			ResultSet curseur = con.execute(query);
+			while (curseur.next()) {
+				rte = new Route(curseur);
+				list.put(rte.getId(), rte);
+			}
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	public static Hashtable<Integer, Route> route_search_of_owner(int usr_id,
+			Date date_departure_begin, Date date_departure_end, int rtp_id) {
+		Hashtable<Integer, Route> list = new Hashtable<Integer, Route>();
+		Route rte = null;
+
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call route_search_of_owner("
+				+ usr_id + ", "
+				+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
+					+ DateUtils.getDateAsInteger(date_departure_end)
+					+ rtp_id + ")";
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
 				rte = new Route(curseur);
