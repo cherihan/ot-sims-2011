@@ -821,16 +821,19 @@ BEGIN
 	
 	DECLARE __delta_deg_x FLOAT(10,6);
 	DECLARE __delta_deg_y FLOAT(10,6);
-	
-	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0.0009) INTO __delta_deg_x;
-	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0,0014) INTO __delta_deg_y;
+	/*
+	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0.0009) As tmp  INTO __delta_deg_x;
+	SELECT ( ( _location_approximate_nb_meters / 100 ) * 0,0014) As tmp INTO __delta_deg_y;
+	*/
+	SELECT  _location_approximate_nb_meters / 100 * 0.0019  INTO __delta_deg_x;
+	SELECT  _location_approximate_nb_meters / 100 * 0.0014 INTO __delta_deg_y;
 	
 	SELECT * 
 		FROM route_rte 
 			INNER JOIN position_pos AS posbeg ON posbeg.pos_id = rte_pos_begin
 			INNER JOIN position_pos AS posend ON posend.pos_id = rte_pos_end
-			INNER JOIN position_pos AS posbegask ON posbegask = _position_begin_id
-			INNER JOIN position_pos AS posendask ON posendask = _position_end_id
+			INNER JOIN position_pos AS posbegask ON posbegask.pos_id = _position_begin_id
+			INNER JOIN position_pos AS posendask ON posendask.pos_id = _position_end_id
 		WHERE 
 				posbeg.pos_latitude BETWEEN (posbegask.pos_latitude -  __delta_deg_x) AND (posbegask.pos_latitude +  __delta_deg_x)
 			AND	posbeg.pos_longitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)

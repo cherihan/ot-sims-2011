@@ -8,7 +8,7 @@ public class ConnexionBD {
     public Statement           sta=null;
     public ResultSet           re=null;
     public ResultSetMetaData   metaBase;
-    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root&password="; // @jve:decl-index=0:
+    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root"; // @jve:decl-index=0:
 	public static String nomDriver = "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
 	
 	private static ConnexionBD conPersistante=null;
@@ -25,21 +25,21 @@ public class ConnexionBD {
     
     public ResultSet search(String query) throws SQLException{
     	re=sta.executeQuery(query);
-    	System.out.println("Element trouvé");
+    	//System.out.println("Element trouvé");
     		
     	return re;
     	}
     
     public ResultSet execute(String query) throws SQLException{
     	re=sta.executeQuery(query);
-    	System.out.println("Element trouvé");
+    	//System.out.println("Element trouvé");
     		
     	return re;
     	}
     
     public void insert(String query) throws SQLException{
     	sta.executeUpdate(query);
-    	System.out.println("Element ajouté à la base");
+    	//System.out.println("Element ajouté à la base");
     	    
     }  
     
