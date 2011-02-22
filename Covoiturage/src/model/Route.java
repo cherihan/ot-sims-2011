@@ -25,7 +25,7 @@ public class Route {
 	protected Date date_end;
 	protected String comment;
 	protected int owner;
-	protected int seat;
+	protected int seat;  
 	protected int car;
 	protected double price;
 	
@@ -329,5 +329,9 @@ public class Route {
 		return this.passagers;		
 	} 
 	
-
+	public Integer getSeatEmpty(){
+		//TODO Simon  
+    	return 1;
+	}
+	
 }
