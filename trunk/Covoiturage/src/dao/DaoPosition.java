@@ -3,7 +3,6 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
@@ -29,7 +28,6 @@ public class DaoPosition {
 
 		con = null;
 		String messageErr = null;
-		ResultSet res;
 		Position pos = null;
 
 		try {
@@ -43,15 +41,8 @@ public class DaoPosition {
 			}
 			String query = "call position_create_or_update('" + address + "', "
 					+ latitude + ", " + longitude + ")";
-			try {
-				con.execute(query);
-				pos = getPositionByAddress(address);
-			} catch (MySQLIntegrityConstraintViolationException ex) {
-				// ? Errors ?
-				messageErr = Constantes.UNEXPECTED_ERROR;
-				System.err.println(messageErr + " : " + ex);
-				throw new Exception(messageErr);
-			}
+			con.execute(query);
+			pos = getPositionByAddress(address);
 
 		} catch (ClassNotFoundException ex) {
 			messageErr = Constantes.CLASS_DB_NOT_FOUND;
@@ -115,8 +106,6 @@ public class DaoPosition {
 		return pos;
 
 	}
-	
-
 
 	public static Position getPosition(int pos_id) {
 		Position pos = null;
@@ -141,5 +130,5 @@ public class DaoPosition {
 	public static Position getPosition(Position pos) {
 		return DaoPosition.getPosition(pos.getId());
 	}
-	
+
 }

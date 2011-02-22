@@ -13,12 +13,16 @@ public class ValidatorOfData {
 		return true;
 	}
 	
+	
+	
+	
+	
 	public static Boolean validateEMail(String email){
 						
 		// Input the string for validation
 		// String email = "xyz@.com";
 		// Set the email pattern string
-		Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+		Pattern p = Pattern.compile("[a-zA-Z0-9\\-_+.]+@[a-zA-Z0-9\\-_+.]+\\.[a-zA-Z]{2,3}");
 
 		// Match the given string with the pattern
 		Matcher m = p.matcher(email);
@@ -40,6 +44,18 @@ public class ValidatorOfData {
 		} else
 			return false;
 	}
+	public static Boolean validatePhone(String phone){
+		Pattern pattern = Pattern.compile("(0|(00\\d{2})|(\\+\\d{2}))\\d{9}");
+	    Matcher matcher = pattern.matcher(phone);
+	
+	    if (matcher.matches()) {
+	  	  return true;
+	    }
+	    else{
+	    	return false;
+	    }
+	}
+
 }
 	
 	

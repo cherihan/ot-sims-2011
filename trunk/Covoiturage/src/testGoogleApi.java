@@ -1,5 +1,7 @@
 import java.util.Hashtable;
 
+import utilities.ValidatorOfData;
+
 import google_api.GoogleGeoApi;
 
 
@@ -10,6 +12,11 @@ public class testGoogleApi {
 	 */
 	public static void main22(String[] args) {
 		// TODO Auto-generated method stub
+		String phone = "0630874476";
+		System.out.println("Validate phone "+phone+""+ValidatorOfData.validatePhone(phone));
+		
+		String mail = "pkh-sdf_sdf+LKJo@pJGH.sdf_dso.fr";
+		System.out.println("Validate mail "+mail+""+ValidatorOfData.validateEMail(mail));
 		
 		String addressQuery = "Ocean atlantique";
 		

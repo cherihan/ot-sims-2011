@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Hashtable;
 
+import utilities.DateUtils;
+
 import dao.DaoCar;
 import dao.DaoPosition;
 import dao.DaoRoute;
@@ -274,11 +276,11 @@ public class Route {
 	} 
 
 	public Integer getDate_beginAsInteger() {
-		return Integer.valueOf(String.valueOf(this.getDate_begin().getTime()/1000));
+		return DateUtils.getDateAsInteger(this.getDate_begin());
 	}
 
 	public Integer getDate_endAsInteger() {
-		return Integer.valueOf(String.valueOf(this.getDate_end().getTime()/1000));
+		return DateUtils.getDateAsInteger(this.getDate_end());
 	}
 	
 	public Hashtable<Integer, Passager> getPassagers() {

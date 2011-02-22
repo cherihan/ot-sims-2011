@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import dao.DaoComment;
 import dao.DaoUser;
 
 
@@ -152,5 +153,12 @@ public class Comment {
 		}		
 	}
 
+	static Comment getCommentFromAbout(int user_from_id, int user_to_id) {
+		Comment cmn=null;
+		
+		cmn = DaoComment.getCommentFromAbout(user_from_id, user_to_id);
+		
+		return cmn;
+	}
 
 }
