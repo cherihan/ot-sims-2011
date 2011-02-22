@@ -750,6 +750,24 @@ END //
 
 
 
+DROP PROCEDURE IF EXISTS route_passager_edit_type //
+CREATE PROCEDURE route_passager_edit_type (
+	IN _rte_id INT(11),
+	IN _usr_id INT(11),
+	in _pgt_id INT(11)
+)
+BEGIN
+
+	UPDATE passager_psg SET psg_type = _pgt_id WHERE psg_user = _usr_id AND psg_route = _rte_id;
+									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
+									-- 3 waiting
+
+
+END //
+
+
+
+
 DROP PROCEDURE IF EXISTS route_search //
 CREATE PROCEDURE route_search (
 	IN _position_begin_id INT(11),
@@ -978,8 +996,8 @@ CREATE PROCEDURE _user_create (
 	OUT _usr_id INT(11)
 )
 BEGIN
-	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate) VALUES
-							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() );
+	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate, usr_description) VALUES
+							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() , '');
 	SELECT LAST_INSERT_ID() INTO _usr_id;
 	
 	call user_update_password(_usr_id, _usr_password_not_encrypted);
