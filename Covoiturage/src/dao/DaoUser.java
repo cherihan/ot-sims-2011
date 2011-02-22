@@ -123,6 +123,41 @@ public class DaoUser {
 		return userLogged;
 
 	}
+	
+	
+	public static User changeProfile(User userTemp) throws Exception {
+		con = null;
+		String messageErr = null;
+		User userLogged = null;
+
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			String query = "call user_update(" + userTemp.getId() + ", '"
+					+ ConnexionBD.escape(userTemp.getEmail()) + "', '"
+					+ ConnexionBD.escape(userTemp.getPassword()) + "', '"
+					+ ConnexionBD.escape(userTemp.getFirstname()) + "', '"
+					+ ConnexionBD.escape(userTemp.getLastname()) + "',"
+					+ "'male'," + userTemp.getBirthdateAsInteger() + ", '"
+					+ ConnexionBD.escape(userTemp.getDescription()) + "', '"
+					+ ConnexionBD.escape(userTemp.getMobilphone()) + "')";
+			con.execute(query);
+
+		} catch (ClassNotFoundException ex) {
+			messageErr = Constantes.CLASS_DB_NOT_FOUND;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		} catch (SQLException ex) {
+			messageErr = Constantes.PROBLEME_CONNECTION_DB;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		} catch (Exception e) {
+			messageErr = Constantes.UNEXPECTED_ERROR;
+			System.err.println(messageErr + " : " + e);
+			throw new Exception(messageErr);
+		}
+		return userLogged;
+	}
+	
 
 	public static User getUser(int usr_id) {
 		User usr = null;
@@ -179,4 +214,28 @@ public class DaoUser {
 		}
 		return list;
 	}
+	
+	
+	
+//	public static void main(String[] args) {
+//		
+//		User utilisateur  = new User(2, "test", "kk", "kk@gmail.com", "kk", 5, "male", new Date(), "", "", 1, new Date(), new Date());
+//		
+//		
+//		try {
+//			DaoUser.changeProfile(utilisateur);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		try {
+//			DaoUser.authentification("kk@gmail.com", "kk");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
 }
