@@ -165,6 +165,58 @@ public class BeansUser {
 		return "actuel";
 	}
 	
+	
+	public String toEdit() {
+		userTemp = new User(this.user);
+		confirmPassword = new String();
+		messageErr = "";
+		System.out.println(userTemp.getPassword());
+		System.out.println(this.getConfirmPassword());
+		return "edit";
+	}
+
+
+public String changeProfile() {
+		messageErr = "";
+		if (!ValidatorOfData.validateEMail(userTemp.getEmail())) {
+			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
+			userTemp.setEmail(null);
+			return "actuel";
+		}
+		// /// TODO
+		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
+			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
+			userTemp.setEmail(null);
+			return "actuel";
+		}
+		// ///
+		if (userTemp.getEmail().equals("")) {
+			messageErr = Constantes.DATAS_NOT_FILL_IN;
+			userTemp.setEmail(null);
+			return "actuel";
+		}
+//		 else if (!userTemp.getPassword().equals(this.getConfirmPassword())
+//				|| userTemp.getPassword().equals("")
+//				|| this.getConfirmPassword().equals("")) {
+//			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
+//			return "actuel";
+//		}
+		System.out.println("edit connexion");
+		try {
+			DaoUser.changeProfile(userTemp);
+			System.out.println("userTemp password : " + userTemp.getPassword());
+			System.out.println("confirmpassword : " + this.getConfirmPassword());
+			this.user = new User(userTemp);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			messageErr = e.getMessage();
+		}
+		System.out.println("avant return");
+		return "profile";
+	}
+
+	
+	
 	public User getLoggedUser() {
 		return this.user;		
 	}
