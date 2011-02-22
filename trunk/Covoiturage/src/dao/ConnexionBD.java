@@ -23,21 +23,21 @@ public class ConnexionBD {
     
     public ResultSet search(String query) throws SQLException{
     	re=sta.executeQuery(query);
-    	System.out.println("Element trouvee ");
+    	System.out.println("Element trouvé");
     		
     	return re;
     	}
     
     public ResultSet execute(String query) throws SQLException{
     	re=sta.executeQuery(query);
-    	System.out.println("Element trouvee ");
+    	System.out.println("Element trouvé");
     		
     	return re;
     	}
     
     public void insert(String query) throws SQLException{
     	sta.executeUpdate(query);
-    	System.out.println("Element ajouter a la base");
+    	System.out.println("Element ajouté à la base");
     	    
     }  
     
@@ -45,7 +45,7 @@ public class ConnexionBD {
     public void update(String query) throws SQLException{
     	
     	sta.executeUpdate(query);
-    	System.out.println("Element Modifier");
+    	System.out.println("Element modifié");
     	
     } 
     
@@ -53,7 +53,7 @@ public class ConnexionBD {
     public void delete(String query) throws SQLException{
     	 
     	sta.executeUpdate(query);
-    	System.out.println("Element suprimer");    	
+    	System.out.println("Element supprimé");    	
     	 	
     }
     
@@ -62,9 +62,9 @@ public class ConnexionBD {
     	try {
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Probl�me de fermeture de la Base de donn�es");
+			System.out.println("Problème de fermeture de la base de données");
 		}
-        System.out.println("Base de donn�es F�rmer");
+        System.out.println("Base de données fermée");
     }
     
     public static String escape(String input) {
