@@ -100,7 +100,8 @@ form .timestamp {
 }
 
 .ride,
-.ride_details {
+.ride_details,
+#body > div.ride_details {
 	display: block;
 	width: 100%;
 	border: 1px solid grey;
