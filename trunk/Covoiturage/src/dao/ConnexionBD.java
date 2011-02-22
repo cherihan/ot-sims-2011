@@ -8,7 +8,7 @@ public class ConnexionBD {
     public Statement           sta=null;
     public ResultSet           re=null;
     public ResultSetMetaData   metaBase;
-    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root_local"; // @jve:decl-index=0:
+    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root&password="; // @jve:decl-index=0:
 	public static String nomDriver = "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
 	
 	private static ConnexionBD conPersistante=null;
