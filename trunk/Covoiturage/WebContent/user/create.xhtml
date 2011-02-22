@@ -11,26 +11,26 @@
 
 <ui:define name="body">
 	<h:form>
-		<div class="msg">
+		<div class="msg error">
 			<h:outputText value="#{beansUser.messageErr}" />
 		</div>
 		<div>
-			<h:outputLabel value="E-mail: " />
+			<h:outputLabel value="E-mail :" />
 			<h:inputText value="#{beansUser.userTemp.email}" styleClass="large"  />
 			
-			<h:outputLabel value="Nom: " />
+			<h:outputLabel value="Prénom :" />
 			<h:inputText value="#{beansUser.userTemp.firstname}" styleClass="large"  />
 			
-			<h:outputLabel value="Prénom: " />
+			<h:outputLabel value="Nom :" />
 			<h:inputText value="#{beansUser.userTemp.lastname}" styleClass="large"  />
 			
-			<h:outputLabel value="Numero de mobile: " />
+			<h:outputLabel value="Numéro de portable :" />
 			<h:inputText value="#{beansUser.userTemp.mobilphone}" styleClass="large"  />
 			
-			<h:outputLabel value="Mot de passe: " />
+			<h:outputLabel value="Mot de passe :" />
 			<h:inputSecret value="#{beansUser.userTemp.password}" styleClass="large" />
 			
-			<h:outputLabel value="Confirmation : " />
+			<h:outputLabel value="Confirmation :" />
 			<h:inputSecret value="#{beansUser.confirmPassword}" styleClass="large" />
 						
 		</div>				

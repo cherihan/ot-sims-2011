@@ -7,45 +7,45 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/template/template.xhtml">
 
-<ui:define name="title">Edition de mon profil</ui:define>
+	<ui:define name="title">Édition de mon profil</ui:define>
 
-<ui:define name="body">
+	<ui:define name="body">
 		<h:form>
+			<div class="msg error">
+				<h:outputText value="#{beansUser.messageErr}" />
+			</div>
 			<div>
-			<h:outputText value="#{beansUser.messageErr}" />
-			<h:outputLabel value="E-mail: " />
-			<h:inputText value="#{beansUser.userTemp.email}" styleClass="large"  />
-						
-			<h:outputLabel value="Mot de passe: " />
-			<h:inputSecret value="#{beansUser.userTemp.password}" styleClass="large" />
-						
-			<h:outputLabel value="Confirmation: " />
-			<h:inputSecret  value="#{beansUser.confirmPassword}" styleClass="large" />
-			
-			<h:outputLabel value="First Name: " />
-			<h:inputText value="#{beansUser.userTemp.firstname}" styleClass="large" />
-			
-			<h:outputLabel value="Last Name: " />
-			<h:inputText value="#{beansUser.userTemp.lastname}" styleClass="large" />
-			
-			<h:outputLabel value="Genre: " />
-			<h:inputText value="#{beansUser.userTemp.genre}" styleClass="large" />
-			
-			<h:outputLabel value="Anniversaire: " />
-			<rich:calendar value="#{beansUser.userTemp.birthdate}" />
-			
-			<h:outputLabel value="Numéro de portable: " />
-			<h:inputText value="#{beansUser.userTemp.mobilphone}" styleClass="large"/>
-			
-			<h:outputLabel value="Description: " />
-			<h:inputTextarea value="#{beansUser.userTemp.description}" styleClass="large" />	
-			
-		</div>	
+				<h:outputLabel value="E-mail :" />
+				<h:inputText value="#{beansUser.userTemp.email}" styleClass="large"  />
+							
+				<h:outputLabel value="Mot de passe :" />
+				<h:inputSecret value="#{beansUser.userTemp.password}" styleClass="large" />
+							
+				<h:outputLabel value="Confirmation :" />
+				<h:inputSecret  value="#{beansUser.confirmPassword}" styleClass="large" />
+				
+				<h:outputLabel value="Prénom :" />
+				<h:inputText value="#{beansUser.userTemp.firstname}" styleClass="large" />
+				
+				<h:outputLabel value="Nom :" />
+				<h:inputText value="#{beansUser.userTemp.lastname}" styleClass="large" />
+				
+				<h:outputLabel value="Genre :" />
+				<h:inputText value="#{beansUser.userTemp.genre}" styleClass="large" />
+				
+				<h:outputLabel value="Anniversaire :" />
+				<rich:calendar value="#{beansUser.userTemp.birthdate}" />
+				
+				<h:outputLabel value="Numéro de portable :" />
+				<h:inputText value="#{beansUser.userTemp.mobilphone}" styleClass="large"/>
+				
+				<h:outputLabel value="Description :" />
+				<h:inputTextarea value="#{beansUser.userTemp.description}" styleClass="large" />	
+				
+			</div>	
 			
 			<hr/>		
-		
-		
-				
+
 			<h:commandButton action="#{beansUser.changeProfile}" value="Valider les modifications" styleClass="large" />
 			<h:commandButton value="Annuler les modifications" styleClass="large" />		
 		</h:form>
