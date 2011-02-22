@@ -51,7 +51,7 @@
 			<div>
 				<h:outputLabel value="Conducteur : " /><br/>
 				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br/>
-				<h:outputLabel value="Passager :" />
+				<h:outputLabel value="Passager : (#{route.seat} places, #{route.seat} - #{route.getPassagers.size}dispo.)" />
 				<ui:repeat value="#{route.getPassagers.elements}" var="passager">
                 	<li> 
                      	 <h:commandButton action="#{}" value="#{passager.getUserObj.Firstname} #{passager.getUserObj.Lastname}" styleClass="large" />
