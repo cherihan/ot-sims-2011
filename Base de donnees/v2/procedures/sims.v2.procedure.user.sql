@@ -109,6 +109,8 @@ BEGIN
 	
 	UPDATE user_usr SET usr_password = MD5(CONCAT(_usr_id,_usr_password_not_encrypted)) WHERE usr_id = _usr_id;
 	
+	SELECT * FROM user_usr WHERE usr_id=_usr_id;
+	
 END //
 
 
@@ -141,6 +143,8 @@ BEGIN
 		usr_description = _usr_description,
 		usr_mobilphone = _usr_mobilphone
 	WHERE usr_id = _usr_id;
+	
+	SELECT * FROM user_usr WHERE usr_id=_usr_id;
 	
 END //
 
