@@ -23,7 +23,8 @@ public class DaoUser {
 	 * @return User
 	 * @throws Exception
 	 */
-	public static User createUser(String email, String password, String firstName, String lastName, String mobilePhone)
+	public static User createUser(String email, String password,
+			String firstName, String lastName, String mobilePhone)
 			throws Exception {
 
 		con = null;
@@ -41,11 +42,12 @@ public class DaoUser {
 				query = "call user_get_user_by_email('" + email + "')";
 
 				res = con.execute(query);
-				if (res.first())//There is result -> email is already used
+				if (res.first())// There is result -> email is already used
 					throw new Exception(Constantes.USER_ALREADY_SAVED);
 
-				query = "call user_create_short('" + email + "', '" + password	+ "', '" + firstName +
-				"', '" + lastName + "', '" + mobilePhone + "')";
+				query = "call user_create_short('" + email + "', '" + password
+						+ "', '" + firstName + "', '" + lastName + "', '"
+						+ mobilePhone + "')";
 
 				res = con.execute(query);
 				if (res.first())
@@ -68,7 +70,7 @@ public class DaoUser {
 		return user;
 
 	}
-	
+
 	/**
 	 * 
 	 * @param email
@@ -112,12 +114,11 @@ public class DaoUser {
 			throw new Exception(messageErr);
 
 		}
-
+		
 		return userLogged;
 
 	}
-	
-	
+
 	public static User changeProfile(User userTemp) throws Exception {
 		con = null;
 		String messageErr = null;
@@ -129,12 +130,34 @@ public class DaoUser {
 					+ ConnexionBD.escape(userTemp.getEmail()) + "', '"
 					+ ConnexionBD.escape(userTemp.getPassword()) + "', '"
 					+ ConnexionBD.escape(userTemp.getFirstname()) + "', '"
-					+ ConnexionBD.escape(userTemp.getLastname()) + "',"
-					+ "'male'," + userTemp.getBirthdateAsInteger() + ", '"
+					+ ConnexionBD.escape(userTemp.getLastname()) + "'," + "'"
+					+ userTemp.getGenre() + "',"
+					+ userTemp.getBirthdateAsInteger() + ", '"
 					+ ConnexionBD.escape(userTemp.getDescription()) + "', '"
 					+ ConnexionBD.escape(userTemp.getMobilphone()) + "')";
-			con.execute(query);
+			
+			 String queryChangePassWord = "call user_update_password('"
+			 + userTemp.getId() + "', '" + userTemp.getPassword()
+			 + "');";
+						
+			ResultSet curseur = null;
+				
+			if(userTemp.getPassword().length() ==0)
+			{
+				curseur = con.execute(query);
+			}
+			else{
+				
+				con.execute(query);
+				curseur = con.execute(queryChangePassWord);
+			}
+				
+			
+			if (curseur.first()) {
+				userLogged = new User(curseur);
+			}
 
+		
 		} catch (ClassNotFoundException ex) {
 			messageErr = Constantes.CLASS_DB_NOT_FOUND;
 			System.err.println(messageErr + " : " + ex);
@@ -148,10 +171,15 @@ public class DaoUser {
 			System.err.println(messageErr + " : " + e);
 			throw new Exception(messageErr);
 		}
+
 		return userLogged;
 	}
-	
 
+	/**
+	 * 
+	 * @param usr_id
+	 * @return
+	 */
 	public static User getUser(int usr_id) {
 		User usr = null;
 		try {
@@ -207,28 +235,5 @@ public class DaoUser {
 		}
 		return list;
 	}
-	
-	
-	
-//	public static void main(String[] args) {
-//		
-//		User utilisateur  = new User(2, "test", "kk", "kk@gmail.com", "kk", 5, "male", new Date(), "", "", 1, new Date(), new Date());
-//		
-//		
-//		try {
-//			DaoUser.changeProfile(utilisateur);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		try {
-//			DaoUser.authentification("kk@gmail.com", "kk");
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-	
-	
+
 }
