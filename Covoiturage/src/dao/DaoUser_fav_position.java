@@ -31,7 +31,7 @@ public class DaoUser_fav_position {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query;
 
@@ -50,9 +50,6 @@ public class DaoUser_fav_position {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
-
 		return ufp;
 
 	}
@@ -60,7 +57,7 @@ public class DaoUser_fav_position {
 	public static User_fav_position getUser_fav_position(int ufp_id) {
 		User_fav_position ufp = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM user_fav_pos_ufp WHERE ufp_id= " + ufp_id;
 
@@ -91,7 +88,7 @@ public class DaoUser_fav_position {
 		User_fav_position ufp = null;
 		Position pos = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call user_get_pos_fav(" + usr_id + ")";
 

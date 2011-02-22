@@ -6,6 +6,7 @@
 
 set foreign_key_checks = 0;
 
+DROP TABLE IF EXISTS _passager_type_pgt;
 DROP TABLE IF EXISTS comment_cmn;
 DROP TABLE IF EXISTS googlecache_gch;
 DROP TABLE IF EXISTS passager_psg;
@@ -339,7 +340,7 @@ INSERT IGNORE INTO _criterion_crt (crt_id, crt_type, crt_label, crt_root_criteri
 (10, 5, 'Preference_talking_normal', NULL, 1),
 (11, 5, 'Preference_talking_passionate', NULL, 1);
 
-INSERT INTO _passager_type_pgt (pgt_id, pgt_label) VALUES 
+INSERT IGNORE INTO _passager_type_pgt (pgt_id, pgt_label) VALUES 
 (1, 'Accepted'),
 (2, 'Rejected'),
 (3, 'Pending');-- sims SQL V2, Sprint 2

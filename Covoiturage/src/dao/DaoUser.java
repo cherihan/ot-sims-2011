@@ -33,7 +33,7 @@ public class DaoUser {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query;
 
@@ -65,9 +65,6 @@ public class DaoUser {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
-
 		return user;
 
 	}
@@ -88,7 +85,7 @@ public class DaoUser {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call user_check_authentification('" + email
 					+ "', '" + passWord + "')";
@@ -116,10 +113,6 @@ public class DaoUser {
 
 		}
 
-		if (con != null) {
-			con.close();
-		}
-
 		return userLogged;
 
 	}
@@ -131,7 +124,7 @@ public class DaoUser {
 		User userLogged = null;
 
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 			String query = "call user_update(" + userTemp.getId() + ", '"
 					+ ConnexionBD.escape(userTemp.getEmail()) + "', '"
 					+ ConnexionBD.escape(userTemp.getPassword()) + "', '"
@@ -162,7 +155,7 @@ public class DaoUser {
 	public static User getUser(int usr_id) {
 		User usr = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM user_usr WHERE usr_id= " + usr_id
 					+ "";
@@ -198,7 +191,7 @@ public class DaoUser {
 		User_fav_position ufp = null;
 		Position pos = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call user_get_pos_fav(" + usr_id + ")";
 

@@ -29,7 +29,7 @@ public class DaoComment {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query;
 
@@ -48,9 +48,6 @@ public class DaoComment {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
-
 		return cmn;
 
 	}
@@ -59,7 +56,7 @@ public class DaoComment {
 	public static Comment getComment(int cmn_id) {
 		Comment cmn = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM comment_cmn WHERE cmn_id= " + cmn_id
 					+ "";
@@ -72,6 +69,7 @@ public class DaoComment {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -84,7 +82,7 @@ public class DaoComment {
 		Hashtable<Integer, Comment> list = new Hashtable<Integer, Comment>();
 		Comment cmn = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call comment_get_posted_by("+usr_id+")";
 
@@ -94,6 +92,7 @@ public class DaoComment {
 				list.put(cmn.getId(), cmn);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return list;
 		}
 		return list;
@@ -103,7 +102,7 @@ public class DaoComment {
 		Hashtable<Integer, Comment> list = new Hashtable<Integer, Comment>();
 		Comment cmn = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call comment_get_posted_about("+usr_id+")";
 
@@ -113,6 +112,7 @@ public class DaoComment {
 				list.put(cmn.getId(), cmn);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return list;
 		}
 		return list;
@@ -120,7 +120,7 @@ public class DaoComment {
 	
 	public static void deleteComment(int cmn_id) {
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call comment_delete("+cmn_id+")";
 
@@ -128,6 +128,7 @@ public class DaoComment {
 			ResultSet curseur = con.execute(query);
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -135,7 +136,7 @@ public class DaoComment {
 	public static Comment getCommentFromAbout(int user_from_id, int user_to_id) {
 		Comment cmn = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call comment_get_from_and_about("+user_from_id+", "+user_to_id+")";
 
@@ -145,6 +146,7 @@ public class DaoComment {
 				return cmn;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		return null;

@@ -31,7 +31,7 @@ public class DaoPosition {
 		Position pos = null;
 
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 			if ((latitude > 180 || latitude < -180)
 					|| (longitude > 90 || longitude < -90)) {
 				messageErr = Constantes.DATA_FORM_NOT_CORRECT;
@@ -54,9 +54,6 @@ public class DaoPosition {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
-
 		return pos;
 
 	}
@@ -77,7 +74,7 @@ public class DaoPosition {
 		Position pos = null;
 
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 			String query = "call position_get_by_address('" + address + "')";
 			try {
 				res = con.execute(query);
@@ -100,9 +97,6 @@ public class DaoPosition {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
-
 		return pos;
 
 	}
@@ -110,7 +104,8 @@ public class DaoPosition {
 	public static Position getPosition(int pos_id) {
 		Position pos = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM position_pos WHERE pos_id= " + pos_id
 					+ "";
@@ -123,6 +118,7 @@ public class DaoPosition {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -6,6 +6,7 @@
 
 set foreign_key_checks = 0;
 
+DROP TABLE IF EXISTS _passager_type_pgt;
 DROP TABLE IF EXISTS comment_cmn;
 DROP TABLE IF EXISTS googlecache_gch;
 DROP TABLE IF EXISTS passager_psg;

@@ -1,30 +1,62 @@
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
+
+import dao.DaoPosition;
+import dao.DaoRoute;
+
+import model.Position;
+import model.Route;
+import model.Route_type;
 
 import utilities.ValidatorOfData;
 
 import google_api.GoogleGeoApi;
+import google_api.GoogleGeoApiCached;
 
 
 public class testGoogleApi {
 
 	/**
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main22(String[] args) {
+	public static void main22(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		String phone = "0630874476";
-		System.out.println("Validate phone "+phone+""+ValidatorOfData.validatePhone(phone));
+		Route r1;
+		String adr1;
+		String adr2;
+		Position pos1;
+		Position pos2;
 		
-		String mail = "pkh-sdf_sdf+LKJo@pJGH.sdf_dso.fr";
-		System.out.println("Validate mail "+mail+""+ValidatorOfData.validateEMail(mail));
+		adr1 = "Lyon";
+		adr2 = "Paris";
+		Hashtable<String, Double> gresult;
 		
-		String addressQuery = "Ocean atlantique";
+		gresult = GoogleGeoApiCached.getCoordOfAddress(adr1);
+		pos1 = DaoPosition.createPosition(adr1, gresult.get("latitude"), gresult.get("longitude"));
+		
+		gresult = GoogleGeoApiCached.getCoordOfAddress(adr2);
+		pos2 = DaoPosition.createPosition(adr2, gresult.get("latitude"), gresult.get("longitude"));
+		
+		r1 = DaoRoute.createRoute(Route_type.PROVIDE_CAR, adr1,
+				adr2, new Date(), null, "comment",
+				1, 3, (Integer) 0);
+		System.out.println(r1);
+		
+		Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(0), new Date(), 1000, 0);
+		
+		testGoogleApi.displayHash(result);
+		
+		System.out.println("fin");
+		if(true) {
+			return ;
+		}
+		
 		
 		Hashtable<String, Double> resultCoord;
+		String addressQuery = "Lyon";
 		String resultAddress;
-		
-		System.out.println("Recherche de l'addresse ".concat(addressQuery));
-		
 		resultCoord = GoogleGeoApi.getCoordOfAddress(addressQuery);
 		if(resultCoord == null) {
 			System.out.println("Pas de coordonnées");
@@ -39,6 +71,18 @@ public class testGoogleApi {
 			}
 		}
 		
+	}
+	
+	public static void displayHash(Hashtable<Integer, Route> hash) {
+		System.out.println("Affichage des resultats");
+		Enumeration<Route> en = hash.elements();
+		while(en.hasMoreElements()) {
+			Route rte = en.nextElement();
+			System.out.println("Route : ");
+			System.out.println("	Owner : "+rte.getOwner());
+			System.out.println("	Depart : "+rte.getPosition_beginObj().getAddress());
+			System.out.println("	Arrive : "+rte.getPosition_endObj().getAddress());
+		}
 	}
 
 }

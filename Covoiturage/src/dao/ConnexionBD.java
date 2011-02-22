@@ -8,8 +8,10 @@ public class ConnexionBD {
     public Statement           sta=null;
     public ResultSet           re=null;
     public ResultSetMetaData   metaBase;
-    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root&passwod="; // @jve:decl-index=0:
+    public static String url = "jdbc:mysql://127.0.0.1:3306/sims?user=root_local"; // @jve:decl-index=0:
 	public static String nomDriver = "com.mysql.jdbc.Driver"; // @jve:decl-index=0:
+	
+	private static ConnexionBD conPersistante=null;
     
     public ConnexionBD(String url, String nomDriver) throws SQLException, ClassNotFoundException {
             Class.forName(nomDriver);
@@ -70,4 +72,13 @@ public class ConnexionBD {
     public static String escape(String input) {
     	return input.replaceAll("'", "''");
     }
+
+
+	public static ConnexionBD getConnexion() throws SQLException, ClassNotFoundException {
+		
+		if(ConnexionBD.conPersistante == null) {
+			ConnexionBD.conPersistante = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+		}
+		return ConnexionBD.conPersistante;
+	}
 }
