@@ -21,25 +21,17 @@
    <PROCESS-ITEM-OUTPUT ID="index::#route#index.xhtml" NAME="output4"
     PATH="/route/index.xhtml" TARGET="rules:#route#index.xhtml"
     TITLE="index" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="search::#route#search.xhtml" NAME="output6"
+    PATH="/route/search.xhtml" TARGET="rules:#route#search.xhtml"
+    TITLE="search" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#user#create.xhtml" PATH="/user/create.xhtml"
-  SHAPE="272,88,50,25" model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#user#login.xhtml" PATH="/user/login.xhtml"
-  SHAPE="264,144,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:" SHAPE="24,376,53,42" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
     PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#route#create.xhtml"
-  PATH="/route/create.xhtml" SHAPE="264,264,50,25"
-  model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#route#show.xhtml" PATH="/route/show.xhtml"
-  SHAPE="264,320,50,25" model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#route#index.xhtml" PATH="/route/index.xhtml"
-  SHAPE="264,368,50,25" model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#user#show.xhtml" PATH="/user/show.xhtml"
   SHAPE="264,192,50,25" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#user#show.xhtml:0" NAME="item"
@@ -48,6 +40,20 @@
     PATH="/user/edit.xhtml" TARGET="rules:#user#edit.xhtml" TITLE="edit" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#route#index.xhtml" PATH="/route/index.xhtml"
+  SHAPE="264,368,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#user#create.xhtml" PATH="/user/create.xhtml"
+  SHAPE="272,88,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#user#login.xhtml" PATH="/user/login.xhtml"
+  SHAPE="264,144,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#user#edit.xhtml" PATH="/user/edit.xhtml"
   SHAPE="472,216,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#route#show.xhtml" PATH="/route/show.xhtml"
+  SHAPE="264,320,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#route#create.xhtml"
+  PATH="/route/create.xhtml" SHAPE="264,264,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#route#search.xhtml"
+  PATH="/route/search.xhtml" SHAPE="272,424,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
