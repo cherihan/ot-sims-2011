@@ -106,6 +106,24 @@ END //
 
 
 
+DROP PROCEDURE IF EXISTS route_passager_edit_type //
+CREATE PROCEDURE route_passager_edit_type (
+	IN _rte_id INT(11),
+	IN _usr_id INT(11),
+	in _pgt_id INT(11)
+)
+BEGIN
+
+	UPDATE passager_psg SET psg_type = _pgt_id WHERE psg_user = _usr_id AND psg_route = _rte_id;
+									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
+									-- 3 waiting
+
+
+END //
+
+
+
+
 DROP PROCEDURE IF EXISTS route_search //
 CREATE PROCEDURE route_search (
 	IN _position_begin_id INT(11),
