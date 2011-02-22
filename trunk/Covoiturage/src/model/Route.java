@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Hashtable;
-
 import utilities.DateUtils;
-
 import dao.DaoCar;
 import dao.DaoPosition;
 import dao.DaoRoute;
@@ -330,8 +328,7 @@ public class Route {
 	} 
 	
 	public Integer getSeatEmpty(){
-		//TODO Simon  
-    	return 1;
+    	return Math.max(0, this.getSeat() - this.getPassagersOfType(Passager.PASSAGER_TYPE_ACCEPTED).size());
 	}
 	
 }
