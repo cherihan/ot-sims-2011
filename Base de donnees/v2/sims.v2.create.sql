@@ -142,13 +142,25 @@ CREATE TABLE IF NOT EXISTS user_fav_pos_ufp (
 	
 ) ENGINE = InnoDb;
 
+
+CREATE TABLE IF NOT EXISTS _passager_type_pgt (
+	pgt_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+	pgt_label VARCHAR(100) NOT NULL
+
+) ENGINE = InnoDb;
+
+
 CREATE TABLE IF NOT EXISTS passager_psg (
 	psg_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	psg_route INT(11) NOT NULL,
 	psg_user INT(11) NOT NULL,
+	psg_type INT(11) NOT NULL,
+	psg_askdate BIGINT(20) NOT NULL COMMENT 'Date de la demande',
 						   
 	INDEX(psg_route),
-	INDEX(psg_user)
+	INDEX(psg_user),
+	INDEX(psg_type),
+	INDEX(psg_askdate)
 
 ) ENGINE = InnoDb;
 
@@ -245,5 +257,11 @@ ALTER TABLE usr_crt
 
 ALTER TABLE usr_crt
 	ADD CONSTRAINT usr_crt_criterion_constraint FOREIGN KEY (crt_id) REFERENCES _criterion_crt (crt_id);
+	
+	
+ALTER TABLE passager_psg
+	ADD CONSTRAINT passager_type_constraint FOREIGN KEY (psg_type) REFERENCES _passager_type_pgt (pgt_id);
+	
+	
 	
 	

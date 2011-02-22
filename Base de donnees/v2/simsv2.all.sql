@@ -164,13 +164,25 @@ CREATE TABLE IF NOT EXISTS user_fav_pos_ufp (
 	
 ) ENGINE = InnoDb;
 
+
+CREATE TABLE IF NOT EXISTS _passager_type_pgt (
+	pgt_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+	pgt_label VARCHAR(100) NOT NULL
+
+) ENGINE = InnoDb;
+
+
 CREATE TABLE IF NOT EXISTS passager_psg (
 	psg_id INT(11) PRIMARY KEY AUTO_INCREMENT,
 	psg_route INT(11) NOT NULL,
 	psg_user INT(11) NOT NULL,
+	psg_type INT(11) NOT NULL,
+	psg_askdate BIGINT(20) NOT NULL COMMENT 'Date de la demande',
 						   
 	INDEX(psg_route),
-	INDEX(psg_user)
+	INDEX(psg_user),
+	INDEX(psg_type),
+	INDEX(psg_askdate)
 
 ) ENGINE = InnoDb;
 
@@ -268,6 +280,12 @@ ALTER TABLE usr_crt
 ALTER TABLE usr_crt
 	ADD CONSTRAINT usr_crt_criterion_constraint FOREIGN KEY (crt_id) REFERENCES _criterion_crt (crt_id);
 	
+	
+ALTER TABLE passager_psg
+	ADD CONSTRAINT passager_type_constraint FOREIGN KEY (psg_type) REFERENCES _passager_type_pgt (pgt_id);
+	
+	
+	
 	-- sims SQL V2, Sprint 2
 
 -- MINIMAL INSERT
@@ -318,7 +336,12 @@ INSERT IGNORE INTO  _criterion_type_ctt (ctt_id, ctt_label) VALUES
 INSERT IGNORE INTO _criterion_crt (crt_id, crt_type, crt_label, crt_root_criterion, crt_order) VALUES 
 (9, 5, 'Preference_talking_discret', NULL, 1) ,
 (10, 5, 'Preference_talking_normal', NULL, 1),
-(11, 5, 'Preference_talking_passionate', NULL, 1);-- sims SQL V2, Sprint 2
+(11, 5, 'Preference_talking_passionate', NULL, 1);
+
+INSERT INTO _passager_type_pgt (pgt_id, pgt_label) VALUES 
+(1, 'Accepted'),
+(2, 'Rejected'),
+(3, 'Pending');-- sims SQL V2, Sprint 2
 
 -- Procedures stokes, route
 
@@ -401,6 +424,38 @@ BEGIN
 	SELECT * FROM comment_cmn WHERE cmn_user_to = _usr_id;
 	
 END //
+
+DROP PROCEDURE IF EXISTS comment_get_from_and_about //
+CREATE PROCEDURE comment_get_from_and_about (
+	IN _user_from_id INT(11),
+	IN _user_to_id INT(11)
+)
+BEGIN
+
+	SELECT * FROM comment_cmn WHERE cmn_user_from = _user_from_id AND cmn_user_to = _user_to_id;
+	
+END //
+
+
+
+
+DROP PROCEDURE IF EXISTS comment_delete //
+CREATE PROCEDURE comment_delete (
+	IN _cmn_id INT(11)
+)
+BEGIN
+	
+	DECLARE __cmn_user_to INT(11);
+	
+	SELECT cmn_user_to INTO __cmn_user_to FROM comment_cmn WHERE cmn_id = _cmn_id;
+	
+	DELETE FROM comment_cmn WHERE cmn_id = _cmn_id;
+	
+	call _comment_update_note_of_user(__cmn_user_to);
+	
+END //
+
+
 
 
 DELIMITER ;
