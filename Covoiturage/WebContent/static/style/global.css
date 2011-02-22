@@ -78,9 +78,11 @@ label {
 	padding: 3px 0px 3px 0px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+button {
 	-webkit-appearance: button;
 	margin-top: 20px;
+	height: 40px;
 	padding: 6px 0px 6px 0px;
 }
 
@@ -89,6 +91,24 @@ form .timestamp {
 	margin: 0 10px 0 0;
 	display: inline;
 	width: auto;
+}
+
+.people_link {
+	position: relative;
+	width: 100%;
+}
+.people_link > * {
+	display: inline-block;
+	height: 40px;
+}
+.people_link *:first-child {
+	width: 82%;
+}
+.people_link *:last-child {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 15%;
 }
 
 /* Ride lists */
