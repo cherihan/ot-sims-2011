@@ -90,8 +90,8 @@ CREATE PROCEDURE _user_create (
 	OUT _usr_id INT(11)
 )
 BEGIN
-	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate, usr_description) VALUES
-							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() , '');
+	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate	, usr_description	, usr_mobilphone) VALUES
+							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() 				, ''				, '');
 	SELECT LAST_INSERT_ID() INTO _usr_id;
 	
 	call user_update_password(_usr_id, _usr_password_not_encrypted);

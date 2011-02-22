@@ -68,19 +68,19 @@ CREATE TABLE IF NOT EXISTS crt_crt (
 
 CREATE TABLE IF NOT EXISTS user_usr (
 	usr_id INT(11) PRIMARY KEY AUTO_INCREMENT,
-	usr_firstname VARCHAR(100) NOT NULL,
-	usr_lastname VARCHAR(100) NOT NULL,
+	usr_firstname VARCHAR(100) NOT NULL DEFAULT '',
+	usr_lastname VARCHAR(100) NOT NULL DEFAULT '',
 	usr_email VARCHAR(100) NOT NULL COMMENT 'email is login',
 	usr_password VARCHAR(100) NOT NULL COMMENT 'password is md5(concat(usr_id,password_clear))',
 	usr_current_position INT(11) NULL DEFAULT NULL,
 	usr_genre ENUM('male','female') NOT NULL,
 	usr_birthdate BIGINT(20) NULL DEFAULT NULL,
 	usr_description TEXT NOT NULL,
-	usr_mobilphone VARCHAR(100) NOT NULL,
+	usr_mobilphone VARCHAR(100) NOT NULL DEFAULT '',
 --	usr_reputation INT(11) NOT NULL,
 	usr_note INT(2) NULL DEFAULT NULL COMMENT 'Member review average of this member, null for none', 
-	usr_registrationdate BIGINT(20) NOT NULL,
-	usr_lastlogindate BIGINT(20) NOT NULL,
+	usr_registrationdate BIGINT(20) NOT NULL DEFAULT 0,
+	usr_lastlogindate BIGINT(20) NOT NULL DEFAULT 0,
 					   
 					   
 	UNIQUE(usr_email),
@@ -996,8 +996,8 @@ CREATE PROCEDURE _user_create (
 	OUT _usr_id INT(11)
 )
 BEGIN
-	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate, usr_description) VALUES
-							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() , '');
+	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate	, usr_description	, usr_mobilphone) VALUES
+							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() 				, ''				, '');
 	SELECT LAST_INSERT_ID() INTO _usr_id;
 	
 	call user_update_password(_usr_id, _usr_password_not_encrypted);
