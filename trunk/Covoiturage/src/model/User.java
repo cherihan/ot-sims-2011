@@ -2,7 +2,6 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -25,11 +24,11 @@ public class User {
 	protected int note;
 	protected Date registrationdate;
 	protected Date lastlogindate;
-	
+
 	Position current_positionObj;
-	
+
 	protected Hashtable<Integer, Criterion> criterions;
-	
+
 	/**
 	 * @return the id
 	 */
@@ -87,7 +86,26 @@ public class User {
 		super();
 		this.id = id;
 	}
-	
+
+	public User(User user) {
+		super();
+
+		this.id = user.id;
+		this.firstname = user.firstname;
+		this.lastname = user.lastname;
+		this.email = user.email;
+		this.password = user.password;
+		this.current_position = user.current_position;
+		this.genre = user.genre;
+		this.birthdate = user.birthdate;
+		this.description = user.description;
+		this.mobilphone = user.mobilphone;
+		this.note = user.note;
+		this.registrationdate = user.registrationdate;
+		this.lastlogindate = user.lastlogindate;
+
+	}
+
 	/**
 	 * @param id
 	 */
@@ -128,7 +146,10 @@ public class User {
 		this.password = sqlrow.getString("usr_password");
 		this.current_position = (sqlrow.getInt("usr_current_position"));
 		this.genre = sqlrow.getString("usr_genre");
-		// this.birthdate = DateFormat.parse(sqlrow.get("usr_birthdate"));
+
+		long timestamp = (long) sqlrow.getInt("usr_birthdate") * 1000;
+		this.birthdate = new Date(timestamp);
+
 		this.description = sqlrow.getString("usr_description");
 		this.mobilphone = sqlrow.getString("usr_mobilphone");
 		this.note = (sqlrow.getInt("usr_note"));
@@ -327,22 +348,25 @@ public class User {
 	public void setLastlogindate(Date lastlogindate) {
 		this.lastlogindate = lastlogindate;
 	}
-	
+
 	public Hashtable<Integer, Criterion> getCriterionsOfUser() {
 		return DaoCriterion.getCriterionsOfUser(this.getId());
 	}
-	
+
 	public Hashtable<Integer, Criterion> getCriterionsOfUserOfType(int ctt_id) {
 		return DaoCriterion.getCriterionsOfUserOfType(this.getId(), ctt_id);
 	}
 
 	public Integer getBirthdateAsInteger() {
-		return Integer.valueOf(String.valueOf(this.getBirthdate().getTime()/1000));
+		return Integer.valueOf(String
+				.valueOf(this.getBirthdate().getTime() / 1000));
 	}
-	
+
 	public Hashtable<Integer, Route> getRouteOfUser(Date date_departure_begin,
 			Date date_departure_end, int rtp_id) {
-		return DaoRoute.route_search_of_owner(this.getId(), date_departure_begin, date_departure_end, rtp_id);
+		return DaoRoute.route_search_of_owner(this.getId(),
+				date_departure_begin, date_departure_end, rtp_id);
 	}
-	
+
+
 }
