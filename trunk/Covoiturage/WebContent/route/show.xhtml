@@ -18,17 +18,43 @@
 				<h:outputText value="De : #{route.Position_begin}" /><br>
 				<h:outputText value="A : #{route.Position_end}" /><br>
 				<h:outputText value="Départ dans"/>
+				<script> 
+					var now = new Date();
+					var df = (now.gettime()-route.date_begin.gettime())/60000;
+
+					if (df/(60*24) >= 2){
+						document.write(df/(60*24) + " jours");
+					}else if (df/(60*24) >= 1)
+						document.write("1 jour");
+					}
+
+					df = df%(60*24);
+					
+					if (df/60 >= 2){
+						document.write(df/60 + " heures");
+					}else if (df/60 >= 1){
+						document.write("1 heure");
+					}
+
+					df = df%60;
+					
+					if (df >= 2){
+						document.write(df + " minutes");
+					}else if (df >= 1){
+						document.write("1 minute");
+					}
+				</script><br>
 			</div>
 			
 			<hr/>
 			
 			<div>
 				<h:outputLabel value="Conducteur : " /><br>
-				<h:commandButton action="" value="#{route.Route_owner}" styleClass="large" /><br>
+				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br>
 				<h:outputLabel value="Passager :" />
-				<ui:repeat value="#{route.getAllpassager}" var="passager">
+				<ui:repeat value="#{route.getPassagers.elements}" var="passager">
                 	<li> 
-                     	 <h:commandButton action="#{}" value="#{passager.}" styleClass="large" />
+                     	 <h:commandButton action="#{}" value="#{passager.getUserObj.Firstname} #{passager.getUserObj.Lastname}" styleClass="large" />
                 	</li> 
          		 </ui:repeat>
 				<h:commandButton action="#{}" value="Se joindre au trajet" styleClass="large" />
