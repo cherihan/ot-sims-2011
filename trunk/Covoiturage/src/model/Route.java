@@ -27,6 +27,7 @@ public class Route {
 	protected int owner;
 	protected int seat;
 	protected int car;
+	protected double price;
 	
 	protected Position position_beginObj;
 	protected Position position_endObj;
@@ -49,7 +50,7 @@ public class Route {
 	 */
 	public Route(int id, int type, int position_begin, int position_end,
 			Date date_begin, Date date_end, String comment, int owner,
-			int seat, int car) {
+			int seat, int car, double price) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -61,6 +62,7 @@ public class Route {
 		this.owner = owner;
 		this.seat = seat;
 		this.car = car;
+		this.price = price;
 	}
 	
 	public Route(int id) {
@@ -84,6 +86,7 @@ public class Route {
 		this.owner = Integer.parseInt(sqlrow.get("rte_owner"));
 		this.seat = Integer.parseInt(sqlrow.get("rte_seat"));
 		this.car = Integer.parseInt(sqlrow.get("rte_car"));
+		this.price = Double.parseDouble(sqlrow.get("rte_price"));
 	}
 
 	public Route(ResultSet sqlrow) {
@@ -99,6 +102,7 @@ public class Route {
 			this.owner = sqlrow.getInt("rte_owner");
 			this.seat = sqlrow.getInt("rte_seat");
 			this.car = sqlrow.getInt("rte_car");
+			this.price = sqlrow.getDouble("rte_price");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -263,6 +267,34 @@ public class Route {
 		this.car = car;
 	}
 	
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public void setPosition_beginObj(Position position_beginObj) {
+		this.position_beginObj = position_beginObj;
+	}
+
+	public void setPosition_endObj(Position position_endObj) {
+		this.position_endObj = position_endObj;
+	}
+
+	public void setOwnerObj(User ownerObj) {
+		this.ownerObj = ownerObj;
+	}
+
+	public void setCarObj(Car carObj) {
+		this.carObj = carObj;
+	}
+
+	public void setPassagers(Hashtable<Integer, Passager> passagers) {
+		this.passagers = passagers;
+	}
 
 	public Car getCarObj() {
 		if(this.carObj == null) {

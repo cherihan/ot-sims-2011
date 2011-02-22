@@ -7,7 +7,7 @@ import java.util.Hashtable;
 public class Route_type {
 	
 	public static Integer WANT_CAR = 1;
-	public static Integer PROVIDE_CAR = 1;
+	public static Integer PROVIDE_CAR = 2;
 
 	public Route_type(int id, String label) {
 		super();
