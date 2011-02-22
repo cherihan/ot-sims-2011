@@ -315,6 +315,13 @@ public class Route {
 		return DateUtils.getDateAsInteger(this.getDate_end());
 	}
 	
+	public Hashtable<Integer, Passager> getPassagersOfType(int pgt_id) {
+		if(this.passagers == null) {
+			this.passagers = DaoRoute.getPassagersOfType(this.getId(), pgt_id);
+		}
+		return this.passagers;		
+	} 
+	
 	public Hashtable<Integer, Passager> getPassagers() {
 		if(this.passagers == null) {
 			this.passagers = DaoRoute.getPassagers(this.getId());
