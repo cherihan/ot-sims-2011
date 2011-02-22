@@ -117,4 +117,37 @@ public class DaoComment {
 		}
 		return list;
 	}
+	
+	public static void deleteComment(int cmn_id) {
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call comment_delete("+cmn_id+")";
+
+			@SuppressWarnings("unused")
+			ResultSet curseur = con.execute(query);
+			
+		} catch (Exception e) {
+		}
+	}
+
+
+	public static Comment getCommentFromAbout(int user_from_id, int user_to_id) {
+		Comment cmn = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call comment_get_from_and_about("+user_from_id+", "+user_to_id+")";
+
+			ResultSet curseur = con.execute(query);
+			if(curseur.first()) {
+				cmn = new Comment(curseur);
+				return cmn;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		return null;
+	}
+	
 }

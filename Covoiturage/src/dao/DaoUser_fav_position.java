@@ -6,7 +6,6 @@ import java.util.Hashtable;
 
 
 import utilities.Constantes;
-import model.Criterion;
 import model.Position;
 import model.User;
 import model.User_fav_position;
@@ -79,10 +78,6 @@ public class DaoUser_fav_position {
 
 	public static User_fav_position getUser_fav_position(User_fav_position ufp) {
 		return DaoUser_fav_position.getUser_fav_position(ufp.getId());
-	}
-
-	public static Hashtable<Integer, Criterion> getCriterionsOfUser(int usr_id) {
-		return DaoCriterion.getCriterionsOfUser(usr_id);
 	}
 
 	public static Hashtable<Integer, User_fav_position> getFavoritePositionsOfUser(

@@ -2,7 +2,10 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Hashtable;
+
+import utilities.DateUtils;
 
 import dao.DaoRoute;
 import dao.DaoUser;
@@ -14,9 +17,15 @@ public class Passager {
 	protected int id=0;
 	protected int route=0;
 	protected int user=0;
+	protected int type=0;
+	protected Date askdate=null;
 	
 	protected Route routeObj=null;
 	protected User userObj=null;
+	
+	public static int PASSAGER_TYPE_ACCEPTED = 1;
+	public static int PASSAGER_TYPE_REJECTED = 2;
+	public static int PASSAGER_TYPE_PENDING = 3;
 	
 	/**
 	 * @param id
@@ -130,5 +139,26 @@ public class Passager {
 		this.user = user;
 	}
 	
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public Date getAskdate() {
+		return askdate;
+	}
+	
+	public Integer getAskdateAsInteger() {
+		return DateUtils.getDateAsInteger(this.getAskdate());
+	}
+
+	public void setAskdate(Date askdate) {
+		this.askdate = askdate;
+	}
+
 
 }
