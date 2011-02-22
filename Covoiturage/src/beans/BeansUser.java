@@ -1,5 +1,7 @@
 package beans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import model.User;
 
@@ -9,14 +11,18 @@ import utilities.ValidatorOfData;
 import dao.DaoUser;
 
 public class BeansUser {
-	
-	
-	protected User user = new User();
-	protected User userTemp = new User();
+
+	protected User user;
+	protected User userTemp;
 	protected String messageErr;
 	protected String confirmPassword;
-	
-	
+	protected String birthdateString;
+
+	public BeansUser() {
+		user = new User();
+		userTemp = new User(user);
+		birthdateString = "";
+	}
 
 	/**
 	 * @return the user
@@ -26,13 +32,12 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-		
 
 	/**
 	 * @return the userTemp
@@ -42,7 +47,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param userTemp the userTemp to set
+	 * @param userTemp
+	 *            the userTemp to set
 	 */
 	public void setUserTemp(User userTemp) {
 		this.userTemp = userTemp;
@@ -56,7 +62,8 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param messageErr the messageErr to set
+	 * @param messageErr
+	 *            the messageErr to set
 	 */
 	public void setMessageErr(String messageErr) {
 		this.messageErr = messageErr;
@@ -70,12 +77,27 @@ public class BeansUser {
 	}
 
 	/**
-	 * @param confirmPassword the confirmPassword to set
+	 * @param confirmPassword
+	 *            the confirmPassword to set
 	 */
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
+
+	/**
+	 * @return the birthdateString
+	 */
+	public String getBirthdateString() {
+		return birthdateString;
+	}
+
+	/**
+	 * @param birthdateString
+	 *            the birthdateString to set
+	 */
+	public void setBirthdateString(String birthdateString) {
+		this.birthdateString = birthdateString;
+	}
 
 	public String toLogin() {
 		messageErr = "";
@@ -87,11 +109,18 @@ public class BeansUser {
 		return "create_account";
 	}
 
+	public String toEdit() {
+		userTemp = new User(user);
+		confirmPassword = new String();
+		messageErr = "";
+		return "edit";
+	}
+
 	/**
 	 * 
 	 */
 	public String creatUser() {
-		
+
 		User userCreated = null;
 		if (!ValidatorOfData.validateEMail(userTemp.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
@@ -104,15 +133,15 @@ public class BeansUser {
 			userTemp.setMobilphone("");
 			return "actuel";
 		}
-		
+
 		if (!ValidatorOfData.validatePassWord(userTemp.getPassword())) {
 			messageErr = Constantes.PASSWORD_FORM_NOT_CORRECT;
 			userTemp.setPassword("");
 			return "actuel";
 		}
-		
+
 		// /// TODO
-		
+
 		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
 			userTemp.setFirstname("");
@@ -122,24 +151,32 @@ public class BeansUser {
 		// ///
 
 		if (userTemp.getEmail().equals("")) {
-			messageErr = Constantes.DATAS_NOT_FILL_IN;			
+			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 
-		} else if (!userTemp.getPassword().equals(this.getConfirmPassword()) || userTemp.getPassword().equals("")
-				|| this.getConfirmPassword().equals("") || userTemp.getEmail().equals("")) {
+		} else if (!userTemp.getPassword().equals(this.getConfirmPassword())
+				|| userTemp.getPassword().equals("")
+				|| this.getConfirmPassword().equals("")
+				|| userTemp.getEmail().equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
 			return "actuel";
 		}
 
 		try {
-			userCreated = DaoUser.createUser(userTemp.getEmail(), userTemp.getPassword().replaceAll("'", "''"), userTemp.getFirstname(), userTemp.getLastname(), userTemp.getMobilphone());
+			userCreated = DaoUser.createUser(userTemp.getEmail(), userTemp
+					.getPassword().replaceAll("'", "''"), userTemp
+					.getFirstname(), userTemp.getLastname(), userTemp
+					.getMobilphone());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
 			return "actuel";
 		}
-		
-		this.user=userCreated;
+
+		this.user = userCreated;
+
+		DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+		birthdateString = dateFormat.format(user.getBirthdate());
 
 		return "home";
 	}
@@ -153,31 +190,35 @@ public class BeansUser {
 
 		User userLogged = null;
 		try {
-			userLogged = DaoUser.authentification(userTemp.getEmail(), userTemp.getPassword().replaceAll("'", "''"));
-			this.user=userLogged;			
+			userLogged = DaoUser.authentification(userTemp.getEmail(), userTemp
+					.getPassword().replaceAll("'", "''"));
+			this.user = userLogged;
+
+			DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+			birthdateString = dateFormat.format(user.getBirthdate());
+
 			return "home";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
 		}
 
-		if(messageErr.equals("")) messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
+		if (messageErr.equals(""))
+			messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
 		return "actuel";
 	}
-	
-	
-	public String toEdit() {
-		userTemp.setId(user.getId());
-		confirmPassword = new String();
-		messageErr = "";
-		System.out.println(userTemp.getPassword());
-		System.out.println(this.getConfirmPassword());
-		return "edit";
-	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public String changeProfile() {
 
-public String changeProfile() {
 		messageErr = "";
+		User userUpdate = null;
+
+		System.out.println("sd: " + userTemp.getPassword().length());
+
 		if (!ValidatorOfData.validateEMail(userTemp.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
 			userTemp.setEmail(null);
@@ -194,38 +235,48 @@ public String changeProfile() {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			userTemp.setEmail(null);
 			return "actuel";
+		} else if (userTemp.getPassword().length() != 0
+				&& !userTemp.getPassword().equals(this.getConfirmPassword())) {
+			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
+			return "actuel";
 		}
-//		 else if (!userTemp.getPassword().equals(this.getConfirmPassword())
-//				|| userTemp.getPassword().equals("")
-//				|| this.getConfirmPassword().equals("")) {
-//			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
-//			return "actuel";
-//		}
-		System.out.println("edit connexion");
 		try {
-			userTemp.setId(user.getId());
-			DaoUser.changeProfile(userTemp);
-			System.out.println("userTemp password : " + userTemp.getPassword());
-			System.out.println("confirmpassword : " + this.getConfirmPassword());			
+
+			userUpdate = DaoUser.changeProfile(userTemp);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
 		}
-		System.out.println("avant return Id : " + userTemp.getId());
-		user = userTemp;
+		user = userUpdate;
+
+		DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+		birthdateString = dateFormat.format(user.getBirthdate());
+
 		return "profile";
 	}
 
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public User getLoggedUser() {
-		return this.user;		
+		return this.user;
 	}
-	
-	public String disconnect()
-	{
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String disconnect() {
 		user = new User();
-		
+
 		return "disconnect";
 	}
+
+	// public static void main(String[] args) {
+	//
+	// Date date = new Timestamp(1999999999);
+	// System.out.println(date.toString());
+	// }
 }
