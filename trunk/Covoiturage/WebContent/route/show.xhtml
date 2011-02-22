@@ -5,10 +5,8 @@
       xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets">
       
-
 	<ui:composition template="/template/template.xhtml">
-	
-	
+
 		<ui:define name="title">
 			<h:outputText value="Trajet #{route.Position_begin} > #{route.Position_end}" /> 
 		</ui:define>
@@ -53,9 +51,9 @@
 				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br/>
 				<h:outputLabel value="Passager : (#{route.seat} places, #{route.getSeatEmpty} dispo.)" />
 				<ui:repeat value="#{route.getPassagers.elements}" var="passager">
-                	<li> 
+                	<li>
                      	 <h:commandButton action="#{}" value="#{passager.getUserObj.Firstname} #{passager.getUserObj.Lastname}" styleClass="large" />
-                	</li> 
+                	</li>
          		 </ui:repeat>
 				<h:commandButton action="#{}" value="Se joindre au trajet" styleClass="large" />
 			</div>
@@ -72,8 +70,5 @@
 			</div>
 			
 		</ui:define>
-		
 	</ui:composition>
-
-	
 </html>

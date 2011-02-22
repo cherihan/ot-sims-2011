@@ -11,7 +11,7 @@
 		<ui:define name="title">Trajets</ui:define>
 
 		<ui:define name="body">
-				<rich:dataTable value="#{listofAnnonces.annonces}" var="item" style="width:100%">
+				<rich:dataTable value="#{beanRoute.list_route}" var="item" style="width:100%">
 					<h:column>
 						<f:facet name="header">depart</f:facet>
 							#{item.depart}
