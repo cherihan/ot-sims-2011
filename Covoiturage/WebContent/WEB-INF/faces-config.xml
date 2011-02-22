@@ -43,6 +43,10 @@
    <from-outcome>index</from-outcome>
    <to-view-id>/route/index.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>search</from-outcome>
+   <to-view-id>/route/search.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <navigation-case>
