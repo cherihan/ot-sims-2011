@@ -94,6 +94,13 @@ public class Position {
 		this.longitude = longitude;
 	}
 	
+	public Hashtable<String, Double> getCoords() {
+		Hashtable<String, Double> hs = new Hashtable<String, Double>();
+		hs.put("latitude", this.getLatitude());
+		hs.put("longitude", this.getLongitude());
+		return hs;
+	}
+	
 
 
 }

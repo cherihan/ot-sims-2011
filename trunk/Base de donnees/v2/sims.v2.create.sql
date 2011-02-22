@@ -200,7 +200,22 @@ CREATE TABLE IF NOT EXISTS comment_cmn (
 
 
 
+CREATE VIEW _view_user_usr AS (SELECT usr_id,usr_firstname, usr_lastname,usr_email,usr_password,	usr_current_position ,usr_genre, FROM_UNIXTIME(usr_birthdate) AS usr_birthdate,usr_description,usr_mobilphone,usr_note,	FROM_UNIXTIME(usr_registrationdate) AS usr_registrationdate,FROM_UNIXTIME(usr_lastlogindate) AS usr_lastlogindate FROM user_usr);
+CREATE VIEW _view_passager_psg AS (SELECT psg_id, psg_route, psg_user, psg_type, FROM_UNIXTIME(psg_askdate) AS psg_askdate FROM passager_psg);
 
+CREATE VIEW _view_route_rte AS ( SELECT
+	rte_id,
+	rte_type,
+	rte_pos_begin,
+	rte_pos_end,
+	FROM_UNIXTIME(rte_date_begin) AS rte_date_begin,
+	FROM_UNIXTIME(rte_date_end) AS rte_date_end,
+	rte_comment,
+	rte_owner,
+	rte_seat,
+	rte_car,
+	FROM_UNIXTIME(rte_deletedate) AS rte_deletedate,
+	rte_price FROM route_rte);
 
 ALTER TABLE user_usr
 	ADD CONSTRAINT usr_ufp_constraint FOREIGN KEY (usr_current_position) REFERENCES user_fav_pos_ufp (ufp_id);
