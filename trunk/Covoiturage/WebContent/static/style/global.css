@@ -72,6 +72,9 @@ ul.msg {
 	-moz-border-radius		: 10px;
 	-webkit-border-radius	: 10px;
 }
+.error:empty {
+	display: none;
+}
 
 /* Form */
 
