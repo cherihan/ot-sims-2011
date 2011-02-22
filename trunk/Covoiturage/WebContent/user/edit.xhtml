@@ -28,11 +28,14 @@
 				<h:outputLabel value="Nom :" />
 				<h:inputText value="#{beansUser.userTemp.lastname}" styleClass="large" />
 				
-				<h:outputLabel value="Genre :" />
-				<h:inputText value="#{beansUser.userTemp.genre}" styleClass="large" />
+				<h:outputLabel value="Genre :" />				
+				<h:selectOneListbox value="#{beansUser.userTemp.genre}"  styleClass="large">
+					<f:selectItem itemValue="male"/>
+					<f:selectItem itemValue="female"/>
+				</h:selectOneListbox>
 				
 				<h:outputLabel value="Anniversaire :" />
-				<rich:calendar value="#{beansUser.userTemp.birthdate}" />
+				<rich:calendar value="#{beansUser.birthdateString}" />
 				
 				<h:outputLabel value="Numéro de portable :" />
 				<h:inputText value="#{beansUser.userTemp.mobilphone}" styleClass="large"/>
