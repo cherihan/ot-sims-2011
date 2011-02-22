@@ -759,7 +759,6 @@ CREATE PROCEDURE route_passager_edit_type (
 BEGIN
 
 	UPDATE passager_psg SET psg_type = _pgt_id WHERE psg_user = _usr_id AND psg_route = _rte_id;
-									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
 									-- 3 waiting
 
 
