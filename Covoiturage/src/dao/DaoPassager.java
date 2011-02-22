@@ -6,12 +6,37 @@ import java.util.Hashtable;
 
 
 import utilities.Constantes;
+import model.Car;
 import model.Passager;
 import model.User;
 
 public class DaoPassager {
 
 	public static ConnexionBD con;
+	
+	public static Passager getPassager(int psg_id) {
+		Passager psg = null;
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "SELECT * FROM passager_psg WHERE psg_id= " + psg_id
+					+ "";
+
+			ResultSet curseur = con.execute(query);
+			if (curseur.first()) {
+				psg = new Passager(curseur);
+				return psg;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static Passager getPassager(Passager psg) {
+		return DaoPassager.getPassager(psg.getId());
+	}
 	
 	/*
 	 * Effectue une demande d'invitation de la part du passager pour le trajet
@@ -67,6 +92,44 @@ public class DaoPassager {
 			return list;
 		}
 		return list;
+	}
+
+	public static void updatePassagerType(int rte_id, int usr_id, int pgt_id) {
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call route_passager_edit_type(" + rte_id + ", " + usr_id + ", "+pgt_id+")";
+			@SuppressWarnings("unused")
+			ResultSet curseur = con.execute(query);
+
+		} catch (Exception e) {
+		}
+	}
+	
+
+	public static void updatePassagerType(int psg_id, int pgt_id) {
+		Passager psg = DaoPassager.getPassager(psg_id);
+		int rte_id=psg.getRoute();
+		int usr_id=psg.getUser();
+		try {
+			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+
+			String query = "call route_passager_edit_type(" + rte_id + ", " + usr_id + ", "+pgt_id+")";
+			@SuppressWarnings("unused")
+			ResultSet curseur = con.execute(query);
+
+		} catch (Exception e) {
+		}
+	}
+	
+	public static void updatePassagerTypeAccept(int rte_id, int usr_id) {
+		int pgt_id = Passager.PASSAGER_TYPE_ACCEPTED;
+		DaoPassager.updatePassagerType(rte_id, usr_id, pgt_id);
+	}
+	
+	public static void updatePassagerTypeReject(int rte_id, int usr_id) {
+		int pgt_id = Passager.PASSAGER_TYPE_REJECTED;
+		DaoPassager.updatePassagerType(rte_id, usr_id, pgt_id);
 	}
 
 }
