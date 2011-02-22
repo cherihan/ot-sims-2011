@@ -16,11 +16,11 @@
 			</div>
 			<div>
 				<label for="login_form:usr_email">E-mail :</label>
-				<h:inputText id="usr_email" value="#{beansUser.user.email}" styleClass="large" />
+				<h:inputText id="usr_email" value="#{beansUser.userTemp.email}" styleClass="large" />
 			</div>
 			<div>
 				<label for="login_form:usr_password">Password :</label>
-				<h:inputSecret id="usr_password" value="#{beansUser.user.password}" styleClass="large" />
+				<h:inputSecret id="usr_password" value="#{beansUser.userTemp.password}" styleClass="large" />
 			</div>
 			<div>
 				<h:commandButton action="#{beansUser.authentication}" value="Se connecter" styleClass="large"/>
