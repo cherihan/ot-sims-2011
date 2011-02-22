@@ -12,6 +12,7 @@ public class BeansUser {
 	
 	
 	protected User user = new User();
+	protected User userTemp = new User();
 	protected String messageErr;
 	protected String confirmPassword;
 	
@@ -29,6 +30,22 @@ public class BeansUser {
 	 */
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+		
+
+	/**
+	 * @return the userTemp
+	 */
+	public User getUserTemp() {
+		return userTemp;
+	}
+
+	/**
+	 * @param userTemp the userTemp to set
+	 */
+	public void setUserTemp(User userTemp) {
+		this.userTemp = userTemp;
 	}
 
 	/**
@@ -75,38 +92,33 @@ public class BeansUser {
 	 */
 	public String creatUser() {
 		User userCreated = null;
-		if (!ValidatorOfData.validateEMail(user.getEmail())) {
+		if (!ValidatorOfData.validateEMail(userTemp.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
-			user.setEmail(null);
 			return "actuel";
 		}
 
 		// /// TODO
-		if (!ValidatorOfData.validateData(user.getFirstname())) {
-			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
-			user.setEmail(null);
+		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
+			messageErr = Constantes.DATA_FORM_NOT_CORRECT;			
 			return "actuel";
 		}
 		// ///
 
-		if (user.getEmail().equals("")) {
-			messageErr = Constantes.DATAS_NOT_FILL_IN;
-			user.setEmail(null);
+		if (userTemp.getEmail().equals("")) {
+			messageErr = Constantes.DATAS_NOT_FILL_IN;			
 			return "actuel";
 
-		} else if (!user.getPassword().equals(this.getConfirmPassword()) || user.getPassword().equals("")
-				|| this.getConfirmPassword().equals("") || user.getEmail().equals("")) {
+		} else if (!userTemp.getPassword().equals(this.getConfirmPassword()) || userTemp.getPassword().equals("")
+				|| this.getConfirmPassword().equals("") || userTemp.getEmail().equals("")) {
 			messageErr = Constantes.PASSWORD_NOT_IDENTIQUE_OR_NULL;
-			user.setEmail(null);
 			return "actuel";
 		}
 
 		try {
-			userCreated = DaoUser.createUser(user.getEmail(), user.getPassword().replaceAll("'", "''"), user.getFirstname(), user.getLastname(), user.getMobilphone());
+			userCreated = DaoUser.createUser(userTemp.getEmail(), userTemp.getPassword().replaceAll("'", "''"), userTemp.getFirstname(), userTemp.getLastname(), userTemp.getMobilphone());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
-			user.setEmail(null);
 			return "actuel";
 		}
 		
@@ -124,7 +136,7 @@ public class BeansUser {
 
 		User userLogged = null;
 		try {
-			userLogged = DaoUser.authentification(user.getEmail(), user.getPassword().replaceAll("'", "''"));
+			userLogged = DaoUser.authentification(userTemp.getEmail(), userTemp.getPassword().replaceAll("'", "''"));
 			this.user=userLogged;			
 			return "home";
 		} catch (Exception e) {
@@ -133,7 +145,6 @@ public class BeansUser {
 		}
 
 		if(messageErr.equals("")) messageErr = Constantes.PASSWORD_OR_USER_NOT_CORRECT;
-		user.setEmail(null);
 		return "actuel";
 	}
 	
