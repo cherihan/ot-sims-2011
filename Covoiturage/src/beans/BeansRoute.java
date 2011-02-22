@@ -3,14 +3,18 @@ package beans;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
+import dao.DaoPosition;
 import dao.DaoRoute;
 
 import utilities.Constantes;
 
 import model.Passager;
+import model.Position;
 import model.Route;
+import model.Route_type;
 
 public class BeansRoute {
 
@@ -19,7 +23,11 @@ public class BeansRoute {
 	protected String pos_depart = null;
 	protected String pos_arrive = null;
 	protected Integer minutes_to_depart = null;
-
+	protected Integer time_delta = null;
+	protected Integer distance_radius = null;
+	
+	protected Hashtable<Integer, Route> route_list = null;
+	
 	protected String messageErr;
 
 	public String getPos_depart() {
@@ -105,5 +113,28 @@ public class BeansRoute {
 	public List<Passager> getAllPassagers() {
 		return null;
 
+	}
+	
+	public String search() throws Exception {
+		Position from = null;
+		Position to = null;
+		if (minutes_to_depart == null || pos_depart == null
+				|| pos_arrive == null) {
+			messageErr = Constantes.DATAS_NOT_FILL_IN;
+			return "actuel";
+		}
+		
+		from = DaoPosition.createPosition(pos_depart, 45.0, 45.0); // FIXME : latitude and longitude
+		to = DaoPosition.createPosition(pos_arrive, 45.0, 45.0); // FIXME : latitude and longitude
+		
+		Calendar c = Calendar.getInstance();
+		c.setTimeInMillis((c.getTimeInMillis()/1000 + (minutes_to_depart + time_delta)*60)*1000);
+		Date date_departure_begin = c.getTime();
+		c.setTimeInMillis((c.getTimeInMillis()/1000 + (minutes_to_depart - time_delta)*60)*1000);
+		Date date_departure_end = c.getTime();
+		
+		route_list = DaoRoute.route_search(from, to, date_departure_begin, date_departure_end,
+									 distance_radius, Route_type.PROVIDE_CAR);
+		return "index";
 	}
 }
