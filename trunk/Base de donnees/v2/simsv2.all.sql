@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS user_usr (
 	usr_password VARCHAR(100) NOT NULL COMMENT 'password is md5(concat(usr_id,password_clear))',
 	usr_current_position INT(11) NULL DEFAULT NULL,
 	usr_genre ENUM('male','female') NOT NULL,
-	usr_birthdate BIGINT(20) NOT NULL,
+	usr_birthdate BIGINT(20) NULL DEFAULT NULL,
 	usr_description TEXT NOT NULL,
 	usr_mobilphone VARCHAR(100) NOT NULL,
 --	usr_reputation INT(11) NOT NULL,
@@ -740,8 +740,9 @@ CREATE PROCEDURE route_join (
 )
 BEGIN
 
-	INSERT IGNORE INTO passager_psg (psg_id,psg_route,psg_user) VALUES
-									(NULL, _rte_id, _usr_id);
+	INSERT IGNORE INTO passager_psg (psg_id	,psg_route	,psg_user, psg_type	, psg_askdate		) VALUES
+									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
+									-- 3 waiting
 
 
 END //
