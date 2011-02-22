@@ -229,7 +229,6 @@ public class DaoRoute {
 					+ location_appro + ", " + rtp_id + ")";
 			System.out.println(query);
 			ResultSet curseur = con.execute(query);
-			System.out.println(curseur.getFetchSize());
 			while (curseur.next()) {
 				rte = new Route(curseur);
 				list.put(rte.getId(), rte);

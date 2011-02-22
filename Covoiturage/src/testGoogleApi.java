@@ -26,11 +26,14 @@ public class testGoogleApi {
 		Route r1;
 		String adr1;
 		String adr2;
+		String adr3;
 		Position pos1;
 		Position pos2;
+		Position pos3;
 		
 		adr1 = "Lyon";
 		adr2 = "Paris";
+		adr3 = "Bron";
 		Hashtable<String, Double> gresult;
 		
 		gresult = GoogleGeoApiCached.getCoordOfAddress(adr1);
@@ -39,13 +42,18 @@ public class testGoogleApi {
 		gresult = GoogleGeoApiCached.getCoordOfAddress(adr2);
 		pos2 = DaoPosition.createPosition(adr2, gresult.get("latitude"), gresult.get("longitude"));
 		
+		gresult = GoogleGeoApiCached.getCoordOfAddress(adr3);
+		pos3 = DaoPosition.createPosition(adr3, gresult.get("latitude"), gresult.get("longitude"));
+		
 		r1 = DaoRoute.createRoute(Route_type.PROVIDE_CAR, adr1,
 				adr2, new Date(), null, "comment",
 				1, 3, (Integer) 0);
 		System.out.println(r1);
 		
-		Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(0), new Date(), 1000, 0);
+		Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(0), new Date(), 0, 0);
+		testGoogleApi.displayHash(result);
 		
+		result = DaoRoute.route_search(pos3, pos2, new Date(0), new Date(), 10000, 0);
 		testGoogleApi.displayHash(result);
 		
 		System.out.println("fin");
