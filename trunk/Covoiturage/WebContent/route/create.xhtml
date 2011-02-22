@@ -22,7 +22,8 @@
 					<f:selectItem itemLabel="Maison" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="Boulot" itemValue="une ID de lieux enregistré"/>
 					<f:selectItem itemLabel="autre..." itemValue="other"/>
-				</h:selectOneMenu>				
+				</h:selectOneMenu>
+				<ui:insert name="route_create_after_end" />	<!-- used in search -->
 				<h:outputLabel value="Dans" />
 				<h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large">
 					<f:selectItem itemLabel="5mn" itemValue="5"/>
@@ -33,6 +34,7 @@
 					<f:selectItem itemLabel="50mn" itemValue="50"/>
 					<f:selectItem itemLabel="1h" itemValue="50"/>
 				</h:selectOneMenu>
+				<ui:insert name="route_create_after_minutes" />	<!-- used in search -->
 				<h:commandButton action="#{beansRoute.createRoute}" value="Ajouter" styleClass="large" />
 			</h:form>
 		</ui:define>
