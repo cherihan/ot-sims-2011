@@ -12,58 +12,47 @@
 		</ui:define>
 		
 		<ui:define name="body">
-			<div>
-				<h:outputText value="De : #{route.Position_begin}" /><br/>
-				<h:outputText value="A : #{route.Position_end}" /><br/>
-				<h:outputText value="Départ dans"/>
-				<script> 
-					var now = new Date();
-					var df = (now.gettime()-route.date_begin.gettime())/60000;
-
-					if (df/(60*24) >= 2){
-						document.write(df/(60*24) + " jours");
-					}else if (df/(60*24) >= 1)
-						document.write("1 jour");
-					}
-
-					df = df%(60*24);
-					
-					if (df/60 >= 2){
-						document.write(df/60 + " heures");
-					}else if (df/60 >= 1){
-						document.write("1 heure");
-					}
-
-					df = df%60;
-					
-					if (df >= 2){
-						document.write(df + " minutes");
-					}else if (df >= 1){
-						document.write("1 minute");
-					}
-				</script>
+			<div class="ride_details">
+				<div class="from"><span>De :</span><h:outputText value="#{route.Position_begin}" /></div>
+				<div class="to"><span>À  :</span><h:outputText value="#{route.Position_end}" /></div>
+				<div class="countdown">Départ dans <span><h:outputText value="#{route.getMinuteCountdown()}" />mn</span></div>
+				<div class="matching"><h:outputText value="#{route.getSeatEmpty()}" /> places libres ◎◉</div>
 			</div>
-			
 			<hr/>
-			
 			<div>
-				<h:outputLabel value="Conducteur : " /><br/>
-				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br/>
-				<h:outputLabel value="Passager : (#{route.seat} places, #{route.getSeatEmpty} dispo.)" />
+				Conducteur :
+			</div>
+			<div>
+				<div class="people_link">
+					<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" />
+					<button class="large">☎</button>
+				</div>
+			</div>
+			<div>
+				Passagers :
+			</div>
+			<div>
 				<ui:repeat value="#{route.getPassagers.elements}" var="passager">
-                	<li>
-                     	 <h:commandButton action="#{}" value="#{passager.getUserObj.Firstname} #{passager.getUserObj.Lastname}" styleClass="large" />
-                	</li>
-         		 </ui:repeat>
+					<div class="people_link">
+						<h:commandButton action="#{}" value="#{passager.getUserObj.Firstname} #{passager.getUserObj.Lastname}" styleClass="large" />
+						<button class="large">☎</button>
+					</div>
+				</ui:repeat>
+			</div>
+			<div>
 				<h:commandButton action="#{}" value="Se joindre au trajet" styleClass="large" />
 			</div>
 			
-			<hr/>
+			<hr />
 			
 			<div>
-				<h:outputLabel value="Détails du trajet :" />
-				<h:outputText value="#{route.Comment}" /><br/>
+				Détails du trajets :
 			</div>
+			<div class="msg">
+				<h:outputText value="#{route.Comment}" />
+			</div>
+			
+			<hr />
 			
 			<div>
 				<h:commandButton action="#{}" value="Autres trajets" styleClass="large" />

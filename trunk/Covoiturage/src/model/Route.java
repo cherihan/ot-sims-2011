@@ -328,7 +328,15 @@ public class Route {
 	} 
 	
 	public Integer getSeatEmpty(){
-    	return Math.max(0, this.getSeat() - this.getPassagersOfType(Passager.PASSAGER_TYPE_ACCEPTED).size());
+		// Retourne le nombre de places disponibles restantes
+    return Math.max(0, this.getSeat() - this.getPassagersOfType(Passager.PASSAGER_TYPE_ACCEPTED).size());
 	}
+	
+	public Integer getMinuteCountdown() {
+		// Retourne le nombre de minutes restantes avant le départ
+		//TODO
+		return 20;
+	}
+	
 	
 }
