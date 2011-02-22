@@ -167,7 +167,7 @@ public class BeansUser {
 	
 	
 	public String toEdit() {
-		userTemp = DaoUser.getUser(this.user.getId());
+		userTemp.setId(user.getId());
 		confirmPassword = new String();
 		messageErr = "";
 		System.out.println(userTemp.getPassword());
@@ -203,15 +203,16 @@ public String changeProfile() {
 //		}
 		System.out.println("edit connexion");
 		try {
+			userTemp.setId(user.getId());
 			DaoUser.changeProfile(userTemp);
 			System.out.println("userTemp password : " + userTemp.getPassword());
-			System.out.println("confirmpassword : " + this.getConfirmPassword());
-			this.user = DaoUser.getUser(userTemp.getId());
+			System.out.println("confirmpassword : " + this.getConfirmPassword());			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
 		}
-		System.out.println("avant return");
+		System.out.println("avant return Id : " + userTemp.getId());
+		user = userTemp;
 		return "profile";
 	}
 
