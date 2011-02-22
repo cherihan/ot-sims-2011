@@ -13,7 +13,7 @@ public class DaoCriterion {
 	public static Criterion getCriterion(int crt_id) {
 		Criterion crt = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM _criterion_crt WHERE crt_id= " + crt_id + "";
 
@@ -25,6 +25,7 @@ public class DaoCriterion {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -37,7 +38,7 @@ public class DaoCriterion {
 	public static Criterion_type getCriterion_type(int ctt_id) {
 		Criterion_type ctt = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM _criterion_type_ctt WHERE ctt_id= " + ctt_id
 					+ "";
@@ -50,6 +51,7 @@ public class DaoCriterion {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -63,7 +65,7 @@ public class DaoCriterion {
 		Hashtable<Integer, Criterion> list = new Hashtable<Integer, Criterion>();
 		
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call get_criterions_of_user(" + usr_id + ")";
 
@@ -83,7 +85,7 @@ public class DaoCriterion {
 		Hashtable<Integer, Criterion> list = new Hashtable<Integer, Criterion>();
 		
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call get_criterions_of_user_of_type(" + usr_id + ", " + ctt_id + ")";
 

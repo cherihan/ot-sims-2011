@@ -6,7 +6,6 @@ import java.util.Hashtable;
 
 
 import utilities.Constantes;
-import model.Car;
 import model.Passager;
 import model.User;
 
@@ -17,7 +16,7 @@ public class DaoPassager {
 	public static Passager getPassager(int psg_id) {
 		Passager psg = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM passager_psg WHERE psg_id= " + psg_id
 					+ "";
@@ -30,6 +29,7 @@ public class DaoPassager {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -57,7 +57,7 @@ public class DaoPassager {
 		}
 
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_join(" + rte_id + ", "
 					+ passager_user_id + ")";
@@ -77,7 +77,7 @@ public class DaoPassager {
 		Passager psg = null;
 		User usr = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_get_passagers_of_type(" + rte_id + ", "+pgt_id+")";
 			ResultSet curseur = con.execute(query);
@@ -96,7 +96,7 @@ public class DaoPassager {
 
 	public static void updatePassagerType(int rte_id, int usr_id, int pgt_id) {
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_passager_edit_type(" + rte_id + ", " + usr_id + ", "+pgt_id+")";
 			@SuppressWarnings("unused")
@@ -112,7 +112,7 @@ public class DaoPassager {
 		int rte_id=psg.getRoute();
 		int usr_id=psg.getUser();
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_passager_edit_type(" + rte_id + ", " + usr_id + ", "+pgt_id+")";
 			@SuppressWarnings("unused")

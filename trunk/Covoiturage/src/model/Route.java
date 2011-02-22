@@ -154,9 +154,11 @@ public class Route {
 	
 	
 	public Position getPosition_beginObj() {
+		System.out.println("Position:"+this.getPosition_begin());
 		if(this.position_beginObj == null) {
 			if(this.getPosition_begin() > 0) {
 				this.position_beginObj = DaoPosition.getPosition(this.getPosition_begin());
+				System.out.println(this.position_beginObj);
 			}else{
 				this.position_beginObj = null;
 			}

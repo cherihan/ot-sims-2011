@@ -127,7 +127,7 @@ public class DaoRoute {
 
 		// Inserting
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_create(" + type + ", " + pos_depart_ID
 					+ ", " + pos_arrive_ID + ", " + date_depart_INT + ", "
@@ -163,15 +163,13 @@ public class DaoRoute {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
 		return route;
 	}
 
 	public static Route getRoute(int rte_id) {
 		Route rte = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM route_rte WHERE rte_id= " + rte_id
 					+ "";
@@ -222,19 +220,22 @@ public class DaoRoute {
 		Route rte = null;
 
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_search_with_date_and_delta("
 					+ pos_begin.getId() + ", " + pos_end.getId() + ", "
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
-					+ DateUtils.getDateAsInteger(date_departure_end)
+					+ DateUtils.getDateAsInteger(date_departure_end) + ", "
 					+ location_appro + ", " + rtp_id + ")";
+			System.out.println(query);
 			ResultSet curseur = con.execute(query);
+			System.out.println(curseur.getFetchSize());
 			while (curseur.next()) {
 				rte = new Route(curseur);
 				list.put(rte.getId(), rte);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return list;
 	}
@@ -253,7 +254,7 @@ public class DaoRoute {
 		Route rte = null;
 
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call route_search_of_owner("
 				+ usr_id + ", "

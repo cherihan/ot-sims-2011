@@ -28,7 +28,7 @@ public class DaoCar {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query;
 
@@ -48,9 +48,6 @@ public class DaoCar {
 			throw new Exception(messageErr);
 		}
 
-		if (con != null)
-			con.close();
-
 		return car;
 
 	}
@@ -59,7 +56,7 @@ public class DaoCar {
 	public static Car getCar(int car_id) {
 		Car car = null;
 		try {
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "SELECT * FROM car_car WHERE car_id= " + car_id
 					+ "";
@@ -72,6 +69,7 @@ public class DaoCar {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -17,11 +17,11 @@ public class DaoGoogleGeo {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query;
 
-				query = "googlecache_create_or_update('"
+				query = "call googlecache_create_or_update('"
 						+ ConnexionBD.escape(address) + "', "
 						+ coords.get("latitude") + ", "
 						+ coords.get("longitude") + ")";
@@ -30,10 +30,8 @@ public class DaoGoogleGeo {
 				
 
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		if (con != null)
-			con.close();
 
 	}
 
@@ -44,7 +42,7 @@ public class DaoGoogleGeo {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call googlecache_get_by_address('"
 					+ ConnexionBD.escape(address) + "')";
@@ -56,11 +54,8 @@ public class DaoGoogleGeo {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
-		}
-
-		if (con != null) {
-			con.close();
 		}
 
 		return gch;
@@ -73,7 +68,7 @@ public class DaoGoogleGeo {
 
 		try {
 
-			con = new ConnexionBD(ConnexionBD.url, ConnexionBD.nomDriver);
+			con = ConnexionBD.getConnexion();
 
 			String query = "call googlecache_get_by_coords(" + coords.get("latitude") + ", "
 			+ coords.get("longitude") + ")";
@@ -85,13 +80,10 @@ public class DaoGoogleGeo {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
-
-		if (con != null) {
-			con.close();
-		}
-
+		
 		return gch;
 	}
 }

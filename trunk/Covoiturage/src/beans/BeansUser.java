@@ -167,7 +167,7 @@ public class BeansUser {
 	
 	
 	public String toEdit() {
-		userTemp = new User(this.user);
+		userTemp = DaoUser.getUser(this.user.getId());
 		confirmPassword = new String();
 		messageErr = "";
 		System.out.println(userTemp.getPassword());
@@ -206,7 +206,7 @@ public String changeProfile() {
 			DaoUser.changeProfile(userTemp);
 			System.out.println("userTemp password : " + userTemp.getPassword());
 			System.out.println("confirmpassword : " + this.getConfirmPassword());
-			this.user = new User(userTemp);
+			this.user = DaoUser.getUser(userTemp.getId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
