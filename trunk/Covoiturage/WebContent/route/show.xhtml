@@ -15,8 +15,8 @@
 		
 		<ui:define name="body">
 			<div>
-				<h:outputText value="De : #{route.Position_begin}" /><br>
-				<h:outputText value="A : #{route.Position_end}" /><br>
+				<h:outputText value="De : #{route.Position_begin}" /><br/>
+				<h:outputText value="A : #{route.Position_end}" /><br/>
 				<h:outputText value="Départ dans"/>
 				<script> 
 					var now = new Date();
@@ -43,14 +43,14 @@
 					}else if (df >= 1){
 						document.write("1 minute");
 					}
-				</script><br>
+				</script>
 			</div>
 			
 			<hr/>
 			
 			<div>
-				<h:outputLabel value="Conducteur : " /><br>
-				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br>
+				<h:outputLabel value="Conducteur : " /><br/>
+				<h:commandButton action="#{}" value="#{route.Route_owner}" styleClass="large" /><br/>
 				<h:outputLabel value="Passager :" />
 				<ui:repeat value="#{route.getPassagers.elements}" var="passager">
                 	<li> 
@@ -64,7 +64,7 @@
 			
 			<div>
 				<h:outputLabel value="Détails du trajet :" />
-				<h:outputText value="#{route.Comment}" /><br>
+				<h:outputText value="#{route.Comment}" /><br/>
 			</div>
 			
 			<div>
