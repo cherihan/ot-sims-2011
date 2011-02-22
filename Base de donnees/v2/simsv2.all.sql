@@ -899,6 +899,25 @@ BEGIN
 END //
 
 
+
+DROP PROCEDURE IF EXISTS route_get_passagers_of_type //
+CREATE PROCEDURE route_get_passagers_of_type (
+	IN _rte_id INT(11),
+	IN _pgt_id INT(11)
+)
+BEGIN
+
+	SELECT usr.*, psg.*
+		FROM  passager_psg as psg
+			INNER JOIN user_usr ON psg.psg_user = usr.usr_id		
+		WHERE 
+				psg_route = _rte_id
+			AND (psg_type = _pgt_id OR _pgt_id = 0 );
+		
+
+END //
+
+
 DELIMITER ;
 
 

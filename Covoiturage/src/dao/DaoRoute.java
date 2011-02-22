@@ -196,9 +196,8 @@ public class DaoRoute {
 		return DaoPassager.getPassagers(rte_id);
 	}
 	
-	public static Hashtable<Integer, Passager> getPassagersOfType(int id,
-			int pgt_id) {
-		DaoPassager.getPassagersOfType(rte_id);
+	public static Hashtable<Integer, Passager> getPassagersOfType(int rte_id,int pgt_id) {
+		return DaoPassager.getPassagersOfType(rte_id, pgt_id);
 	}
 
 	public static void route_add_passager(int rte_id, int passager_user_id)
