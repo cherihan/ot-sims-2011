@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class ValidatorOfData {
 	
 	public static Boolean validateData(String data){
@@ -12,9 +13,6 @@ public class ValidatorOfData {
 		
 		return true;
 	}
-	
-	
-	
 	
 	
 	public static Boolean validateEMail(String email){
@@ -44,6 +42,8 @@ public class ValidatorOfData {
 		} else
 			return false;
 	}
+	
+	
 	public static Boolean validatePhone(String phone){
 		Pattern pattern = Pattern.compile("(0|(00\\d{2})|(\\+\\d{2}))\\d{9}");
 	    Matcher matcher = pattern.matcher(phone);
@@ -55,6 +55,16 @@ public class ValidatorOfData {
 	    	return false;
 	    }
 	}
+	
+	
+	public static Boolean validatePassWord(String password){
+		
+		//TODO
+		
+		return true;
+	}
+	
+	
 
 }
 	

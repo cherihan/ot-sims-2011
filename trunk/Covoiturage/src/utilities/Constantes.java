@@ -10,7 +10,9 @@ public class Constantes {
 	 public static String DATAS_NOT_FILL_IN = "Vous n'avez pas remplit tous les champs";
 	 public static String EMAIL_FORM_NOT_CORRECT = "la forme de l'adresse email que vous avez saisi n'est pas correcte";
 	 public static String DATA_FORM_NOT_CORRECT = "la forme de l'email que vous avez saisi n'est pas bonne";
+	 public static String MOBILE_NUMBER_FORM_NOT_CORRECT = "la forme de numero de telephone que vous avez saisi n'est pas bonne";
 	 public static String PASSWORD_OR_USER_NOT_CORRECT = "Mot de passe ou Email n'est pas correcte";
+	 public static String PASSWORD_FORM_NOT_CORRECT = "Mot de passe ne respecte pas la forme validée";
 	 public static String UNEXPECTED_ERROR = "Une erreur inattendue est survenue ...";
 	 public static String ROUTE_ALREADY_PASSSAGER = "Deja passager du trajet";
 }

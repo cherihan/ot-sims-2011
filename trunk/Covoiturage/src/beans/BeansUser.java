@@ -91,17 +91,30 @@ public class BeansUser {
 	 * 
 	 */
 	public String creatUser() {
+		
 		User userCreated = null;
 		if (!ValidatorOfData.validateEMail(userTemp.getEmail())) {
 			messageErr = Constantes.EMAIL_FORM_NOT_CORRECT;
 			return "actuel";
 		}
 
+		if (!ValidatorOfData.validatePhone(userTemp.getMobilphone())) {
+			messageErr = Constantes.MOBILE_NUMBER_FORM_NOT_CORRECT;			
+			return "actuel";
+		}
+		
+		if (!ValidatorOfData.validatePassWord(userTemp.getPassword())) {
+			messageErr = Constantes.PASSWORD_FORM_NOT_CORRECT;			
+			return "actuel";
+		}
+		
 		// /// TODO
+		
 		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;			
 			return "actuel";
 		}
+
 		// ///
 
 		if (userTemp.getEmail().equals("")) {
