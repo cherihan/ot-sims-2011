@@ -95,6 +95,9 @@ button {
 	margin-top: 20px;
 	height: 40px;
 	padding: 6px 0px 6px 0px;
+	background-color: white;
+	-moz-border-radius		: 10px;
+	-webkit-border-radius	: 10px;
 }
 
 form .timestamp {
