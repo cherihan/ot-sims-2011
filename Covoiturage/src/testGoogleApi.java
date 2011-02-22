@@ -21,7 +21,7 @@ public class testGoogleApi {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main22(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		Route r1;
 		String adr1;
