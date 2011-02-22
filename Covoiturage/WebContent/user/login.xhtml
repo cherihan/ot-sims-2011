@@ -11,7 +11,7 @@
 	
 	<ui:define name="body">
 		<h:form id="login_form">
-			<div class="msg">
+			<div class="msg error">
 				<h:outputText value="#{beansUser.messageErr}" />
 			</div>
 			<div>
@@ -19,7 +19,7 @@
 				<h:inputText id="usr_email" value="#{beansUser.userTemp.email}" styleClass="large" />
 			</div>
 			<div>
-				<label for="login_form:usr_password">Password :</label>
+				<label for="login_form:usr_password">Mot de passe :</label>
 				<h:inputSecret id="usr_password" value="#{beansUser.userTemp.password}" styleClass="large" />
 			</div>
 			<div>
