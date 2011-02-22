@@ -24,64 +24,18 @@
    <PROCESS-ITEM-OUTPUT ID="add_route::#route#create.xhtml"
     NAME="output1" PATH="/route/create.xhtml"
     TARGET="rules:#route#create.xhtml" TITLE="add_route" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="list_route::#route#index.xhtml"
-    NAME="output2" PATH="/route/index.xhtml"
-    TARGET="rules:#route#index.xhtml" TITLE="list_route" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="showProfile::#route#search.xhtml"
+    NAME="output2" PATH="/route/search.xhtml"
+    TARGET="rules:#route#search.xhtml" TITLE="showProfile" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="disconnect::#home_public.xhtml"
     NAME="output3" PATH="/home_public.xhtml"
     TARGET="rules:#home_public.xhtml" TITLE="disconnect" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#create_account.xhtml"
-  PATH="/create_account.xhtml" SHAPE="688,192,50,41"
-  model-entity="JSFProcessGroup" persistent="true">
-  <PROCESS-ITEM ID="rules:#create_account.xhtml:1" NAME="item"
-   PATH="/create_account.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
-    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#list_route.xhtml" PATH="/list_route.xhtml"
-  SHAPE="376,512,50,41" model-entity="JSFProcessGroup" persistent="true">
-  <PROCESS-ITEM ID="rules:#list_route.xhtml:1" NAME="item"
-   PATH="/list_route.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="info_route::#info_route.xhtml" NAME="output"
-    PATH="/info_route.xhtml" TARGET="rules:#info_route.xhtml"
-    TITLE="info_route" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#user#create.xhtml" PATH="/user/create.xhtml"
-  SHAPE="664,184,50,41" model-entity="JSFProcessGroup" persistent="true">
-  <PROCESS-ITEM ID="rules:#user#create.xhtml:0" NAME="item"
-   PATH="/user/create.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
-    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#route#index.xhtml" PATH="/route/index.xhtml"
-  SHAPE="400,488,50,41" model-entity="JSFProcessGroup" persistent="true">
-  <PROCESS-ITEM ID="rules:#route#index.xhtml:0" NAME="item"
-   PATH="/route/index.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="info_route::#route#show.xhtml" NAME="output"
+   <PROCESS-ITEM-OUTPUT ID="show::#route#show.xhtml" NAME="output4"
     PATH="/route/show.xhtml" TARGET="rules:#route#show.xhtml"
-    TITLE="info_route" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#user#login.xhtml" PATH="/user/login.xhtml"
-  SHAPE="544,56,50,41" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#user#login.xhtml:0" NAME="item"
-   PATH="/user/login.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
-    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#user#show.xhtml" PATH="/user/show.xhtml"
-  SHAPE="552,264,50,41" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#user#show.xhtml:0" NAME="item"
-   PATH="/user/show.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="edit_profile::#user#edit.xhtml"
-    NAME="output" PATH="/user/edit.xhtml"
-    TARGET="rules:#user#edit.xhtml" TITLE="edit_profile" model-entity="JSFProcessItemOutput"/>
+    TITLE="show" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="index::#route#index.xhtml" NAME="output5"
+    PATH="/route/index.xhtml" TARGET="rules:#route#index.xhtml"
+    TITLE="index" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#user#edit.xhtml" PATH="/user/edit.xhtml"
@@ -94,6 +48,33 @@
    <PROCESS-ITEM-OUTPUT ID="list_route::#route#index.xhtml"
     NAME="output1" PATH="/route/index.xhtml"
     TARGET="rules:#route#index.xhtml" TITLE="list_route" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#user#show.xhtml" PATH="/user/show.xhtml"
+  SHAPE="552,264,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#user#show.xhtml:0" NAME="item"
+   PATH="/user/show.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="edit_profile::#user#edit.xhtml"
+    NAME="output" PATH="/user/edit.xhtml"
+    TARGET="rules:#user#edit.xhtml" TITLE="edit_profile" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#user#create.xhtml" PATH="/user/create.xhtml"
+  SHAPE="664,184,50,41" model-entity="JSFProcessGroup" persistent="true">
+  <PROCESS-ITEM ID="rules:#user#create.xhtml:0" NAME="item"
+   PATH="/user/create.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#route#search.xhtml"
+  PATH="/route/search.xhtml" SHAPE="400,488,50,41"
+  model-entity="JSFProcessGroup" persistent="true">
+  <PROCESS-ITEM ID="rules:#route#index.xhtml:0" NAME="item"
+   PATH="/route/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="info_route::#route#show.xhtml" NAME="output"
+    PATH="/route/show.xhtml" TARGET="rules:#route#show.xhtml"
+    TITLE="info_route" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#route#show.xhtml" PATH="/route/show.xhtml"
@@ -114,10 +95,37 @@
     TARGET="rules:#route#index.xhtml" TITLE="list_route" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#user#login.xhtml" PATH="/user/login.xhtml"
+  SHAPE="544,56,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#user#login.xhtml:0" NAME="item"
+   PATH="/user/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:" SHAPE="48,513,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
     PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#create_account.xhtml"
+  PATH="/create_account.xhtml" SHAPE="688,192,50,41"
+  model-entity="JSFProcessGroup" persistent="true">
+  <PROCESS-ITEM ID="rules:#create_account.xhtml:1" NAME="item"
+   PATH="/create_account.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#home.xhtml" NAME="output"
+    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#list_route.xhtml" PATH="/list_route.xhtml"
+  SHAPE="376,512,50,41" model-entity="JSFProcessGroup" persistent="true">
+  <PROCESS-ITEM ID="rules:#list_route.xhtml:1" NAME="item"
+   PATH="/list_route.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="info_route::#info_route.xhtml" NAME="output"
+    PATH="/info_route.xhtml" TARGET="rules:#info_route.xhtml"
+    TITLE="info_route" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#route#index.xhtml" PATH="/route/index.xhtml" model-entity="JSFProcessGroup"/>
 </PROCESS>

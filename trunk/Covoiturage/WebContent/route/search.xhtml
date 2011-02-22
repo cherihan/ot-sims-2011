@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="/route/create.xhtml" >
+		
+		<ui:define name="title">Recherche</ui:define>
+		<ui:define name="route_create_after_end">
+			<h:outputLabel value="Dans un rayon de" />
+			<h:selectOneMenu value="#{beansRoute.distance_radius}" styleClass="large">
+				<f:selectItem itemLabel="1km" itemValue="1"/>
+				<f:selectItem itemLabel="2km" itemValue="2"/>
+				<f:selectItem itemLabel="3km" itemValue="3"/>
+				<f:selectItem itemLabel="4km" itemValue="4"/>
+			</h:selectOneMenu>
+		</ui:define>
+		<ui:define name="route_create_after_minutes">
+			<h:outputLabel value="plus ou moins" />
+			<h:selectOneMenu value="beansRoute.time_delta" styleClass="large">
+				<f:selectItem itemLabel="1mn" itemValue="1"/>
+				<f:selectItem itemLabel="2mn" itemValue="2"/>
+				<f:selectItem itemLabel="3mn" itemValue="3"/>
+				<f:selectItem itemLabel="4mn" itemValue="4"/>
+			</h:selectOneMenu>
+			<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />
+		</ui:define>
+	</ui:composition>
+</html>

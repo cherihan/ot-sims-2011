@@ -34,8 +34,9 @@
 					<f:selectItem itemLabel="50mn" itemValue="50"/>
 					<f:selectItem itemLabel="1h" itemValue="50"/>
 				</h:selectOneMenu>
-				<ui:insert name="route_create_after_minutes" />	<!-- used in search -->
-				<h:commandButton action="#{beansRoute.createRoute}" value="Ajouter" styleClass="large" />
+				<ui:insert name="route_create_after_minutes"><!-- used in search -->
+					<h:commandButton action="#{beansRoute.createRoute}" value="Ajouter" styleClass="large" />
+				</ui:insert>
 			</h:form>
 		</ui:define>
 		
