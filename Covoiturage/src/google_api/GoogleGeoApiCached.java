@@ -25,7 +25,7 @@ public class GoogleGeoApiCached {
 	}
 
 	public static String getNearAddressFromCoord(
-			Hashtable<String, Double> coords) {
+			Hashtable<String, Double> coords, String prefix) {
 
 		String result = null;
 
@@ -34,10 +34,15 @@ public class GoogleGeoApiCached {
 			return gch.getAddress();
 		}
 
-		result = GoogleGeoApi.getNearAddressFromCoord(coords);
+		result = GoogleGeoApi.getNearAddressFromCoord(coords, prefix);
 		if (result != null) {
 			DaoGoogleGeo.createOrUpdateGoogleGeo(result, coords);
 		}
 		return result;
+	}
+	
+	public static String getNearAddressFromCoord(
+			Hashtable<String, Double> coords) {
+		return GoogleGeoApiCached.getNearAddressFromCoord(coords, "");
 	}
 }

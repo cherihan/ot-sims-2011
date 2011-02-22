@@ -184,8 +184,8 @@ END //
 
 
 -- Delete a user favorite place
-DROP PROCEDURE IF EXISTS user_add_pos_fav //
-CREATE PROCEDURE user_add_pos_fav (
+DROP PROCEDURE IF EXISTS user_fav_pos_delete //
+CREATE PROCEDURE user_fav_pos_delete (
 	IN _ufp_id INT(11)
 )
 BEGIN
@@ -193,6 +193,8 @@ BEGIN
 	DELETE FROM user_fav_pos_ufp  WHERE ufp_id = _ufp_id;
 	
 END //
+
+
 
 
 

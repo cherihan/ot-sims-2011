@@ -1,6 +1,11 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import dao.DaoPosition;
 import dao.DaoRoute;
@@ -45,6 +50,38 @@ public class testGoogleApi {
 		gresult = GoogleGeoApiCached.getCoordOfAddress(adr3);
 		pos3 = DaoPosition.createPosition(adr3, gresult.get("latitude"), gresult.get("longitude"));
 		
+		System.out.println("Debut a "+pos1.getAddress());
+		ArrayList<Hashtable<String, Double>> result = GoogleGeoApi.getDirection(pos1.getCoords(), pos2.getCoords(), "", new Hashtable<Integer, Hashtable<Integer,Double>>());
+		
+/*
+	    Enumeration<Hashtable<String, Double>> en = result.elements();
+		while(en.hasMoreElements()) {
+			*/
+		//	while(itKey.hasNext()) {
+		for(int i=0;i < result.size();i++) {
+				//Character value = (Character)itValue.next();
+				Integer key = i;
+
+			Hashtable<String, Double> step = (Hashtable<String, Double>) result.get(i);
+			
+			String addressStart = GoogleGeoApiCached.getNearAddressFromCoord(step, "start_");
+			String addressEnd = GoogleGeoApiCached.getNearAddressFromCoord(step, "end_");
+			Double duration = step.get("duration");
+			
+			System.out.println("Step : ");
+			System.out.println("	start :  "+addressStart + step.get("start_latitude") + ","+step.get("start_longitude"));
+			System.out.println("	end :  "+addressEnd);
+			System.out.println("	duree :  "+duration);
+			System.out.println("	etape:  "+key);
+		}
+		
+		System.out.println("Fin");
+		
+		if(true) {
+			return;
+		}
+		
+		/*
 		r1 = DaoRoute.createRoute(Route_type.PROVIDE_CAR, adr1,
 				adr2, new Date(), null, "comment",
 				1, 3, (Integer) 0);
@@ -81,6 +118,7 @@ public class testGoogleApi {
 				System.out.println(new String("Address : ").concat(resultAddress));
 			}
 		}
+		*/
 		
 	}
 	

@@ -69,6 +69,7 @@ public class DaoUser_fav_position {
 				return null;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -100,8 +101,24 @@ public class DaoUser_fav_position {
 				list.put(ufp.getId(), ufp);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return list;
 		}
 		return list;
 	}
+	
+	public static void deleteUser_fav_position(int ufp_id) {
+		try {
+			con = ConnexionBD.getConnexion();
+
+			String query = "call user_fav_pos_delete(" + ufp_id + ")";
+
+			@SuppressWarnings("unused")
+			ResultSet curseur = con.execute(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
+

@@ -6,6 +6,11 @@
 
 set foreign_key_checks = 0;
 
+
+DROP VIEW IF EXISTS _view_user_usr;
+DROP VIEW IF EXISTS _view_passager_psg;
+DROP VIEW IF EXISTS _view_route_rte;
+
 DROP TABLE IF EXISTS _passager_type_pgt;
 DROP TABLE IF EXISTS comment_cmn;
 DROP TABLE IF EXISTS googlecache_gch;
