@@ -227,7 +227,6 @@ public class DaoRoute {
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
 					+ DateUtils.getDateAsInteger(date_departure_end) + ", "
 					+ location_appro + ", " + rtp_id + ")";
-			System.out.println(query);
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
 				rte = new Route(curseur);

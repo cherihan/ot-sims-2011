@@ -21,7 +21,7 @@ public class testGoogleApi {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main22(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		Route r1;
 		String adr1;
@@ -54,6 +54,9 @@ public class testGoogleApi {
 		testGoogleApi.displayHash(result);
 		
 		result = DaoRoute.route_search(pos3, pos2, new Date(0), new Date(), 10000, 0);
+		
+		result = DaoRoute.route_search_of_owner(1, new Date(), new Date(0), 0);
+		
 		testGoogleApi.displayHash(result);
 		
 		System.out.println("fin");
