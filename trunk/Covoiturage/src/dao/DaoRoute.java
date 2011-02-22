@@ -195,6 +195,11 @@ public class DaoRoute {
 	public static Hashtable<Integer, Passager> getPassagers(int rte_id) {
 		return DaoPassager.getPassagers(rte_id);
 	}
+	
+	public static Hashtable<Integer, Passager> getPassagersOfType(int id,
+			int pgt_id) {
+		DaoPassager.getPassagersOfType(rte_id);
+	}
 
 	public static void route_add_passager(int rte_id, int passager_user_id)
 			throws Exception {
@@ -265,5 +270,7 @@ public class DaoRoute {
 		}
 		return list;
 	}
+
+	
 
 }
