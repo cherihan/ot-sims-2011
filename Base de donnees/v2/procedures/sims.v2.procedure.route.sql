@@ -96,8 +96,9 @@ CREATE PROCEDURE route_join (
 )
 BEGIN
 
-	INSERT IGNORE INTO passager_psg (psg_id,psg_route,psg_user) VALUES
-									(NULL, _rte_id, _usr_id);
+	INSERT IGNORE INTO passager_psg (psg_id	,psg_route	,psg_user, psg_type	, psg_askdate		) VALUES
+									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
+									-- 3 waiting
 
 
 END //

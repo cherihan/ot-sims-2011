@@ -32,11 +32,13 @@ public class Passager {
 	 * @param route
 	 * @param user
 	 */
-	public Passager(int id, int route, int user) {
+	public Passager(int id, int route, int user, int type, Date askdate) {
 		super();
 		this.id = id;
 		this.route = route;
 		this.user = user;
+		this.type = type;
+		this.askdate = askdate;
 	}
 	
 	/**
@@ -54,6 +56,8 @@ public class Passager {
 		this.id = Integer.valueOf(sqlrow.get("psg_id"));
 		this.route = Integer.valueOf(sqlrow.get("psg_route"));
 		this.user = Integer.valueOf(sqlrow.get("psg_user"));
+		this.type = Integer.valueOf(sqlrow.get("psg_type"));
+		this.askdate = DateUtils.getTimestampAsDate(Integer.valueOf(sqlrow.get("psg_askdate")));
 	}
 	
 	public Passager(ResultSet sqlrow) {
@@ -62,6 +66,8 @@ public class Passager {
 			this.id = sqlrow.getInt("psg_id");
 			this.route = sqlrow.getInt("psg_route");
 			this.user = sqlrow.getInt("psg_user");
+			this.type = sqlrow.getInt("psg_type");
+			this.askdate = DateUtils.getTimestampAsDate(sqlrow.getInt("psg_askdate"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

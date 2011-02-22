@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS user_usr (
 	usr_password VARCHAR(100) NOT NULL COMMENT 'password is md5(concat(usr_id,password_clear))',
 	usr_current_position INT(11) NULL DEFAULT NULL,
 	usr_genre ENUM('male','female') NOT NULL,
-	usr_birthdate BIGINT(20) NOT NULL,
+	usr_birthdate BIGINT(20) NULL DEFAULT NULL,
 	usr_description TEXT NOT NULL,
 	usr_mobilphone VARCHAR(100) NOT NULL,
 --	usr_reputation INT(11) NOT NULL,
@@ -118,6 +118,7 @@ CREATE TABLE IF NOT EXISTS route_rte (
 	rte_seat INT(2) NULL DEFAULT NULL COMMENT 'Number of seat needed / proposed. NULL <=> not set',
 	rte_car INT(11) NULL DEFAULT NULL COMMENT 'Optional - Car used for this traject',
 	rte_deletedate BIGINT(20) NULL DEFAULT NULL COMMENT 'Delete date, null if this route is not deleted',
+	rte_price FLOAT(10,2) NULL DEFAULT NULL,
 	
 
 	INDEX(rte_type),
