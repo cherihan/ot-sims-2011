@@ -2,7 +2,9 @@ package beans;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -33,10 +35,9 @@ public class BeansRoute {
 	protected Integer minutes_to_depart = null;
 	protected Integer seat_number = null;
 	protected Integer time_delta = null;
-	protected Integer distance_radius = null;
-
-	protected Hashtable<Integer, Route> route_list = null;
-
+	private Integer distance_radius = null;
+	
+	private List<Route> route_list = null;
 	protected String messageErr;
 
 	public Integer getSeat_number() {
@@ -134,7 +135,6 @@ public class BeansRoute {
 		User currentUser = FacesUtil.getUser();
 
 		try {
-			
 			route = DaoRoute.createRoute(route_type, pos_depart, pos_arrive,
 					full_date_depart, null, null, currentUser.getId(), seat_number, null);
 		} catch (Exception e) {
@@ -155,28 +155,50 @@ public class BeansRoute {
 		Position from = null;
 		Position to = null;
 		if (minutes_to_depart == null || pos_depart == null
-				|| pos_arrive == null) {
+				|| pos_arrive == null || time_delta == null
+				|| distance_radius == null) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 		}
+		
+		from = DaoPosition.createPosition(pos_depart, 45.0, 45.0); // FIXME : latitude and longitude
+		to = DaoPosition.createPosition(pos_arrive, 45.0, 45.0); // FIXME : latitude and longitude
 
-		from = DaoPosition.createPosition(pos_depart, 45.0, 45.0); // FIXME :
-																	// latitude
-																	// and
-																	// longitude
-		to = DaoPosition.createPosition(pos_arrive, 45.0, 45.0); // FIXME :
-																	// latitude
-																	// and
-																	// longitude
+		Date date_departure_begin = new Date(0);
+		//date_departure_begin.setTime(date_departure_begin.getTime() - time_delta*60*1000);
+		
+		Date date_departure_end = new Date();
+		date_departure_end.setTime(date_departure_end.getTime() + time_delta*60*1000);
 
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis((c.getTimeInMillis() / 1000 + (minutes_to_depart + time_delta) * 60) * 1000);
-		Date date_departure_begin = c.getTime();
-		c.setTimeInMillis((c.getTimeInMillis() / 1000 + (minutes_to_depart - time_delta) * 60) * 1000);
-		Date date_departure_end = c.getTime();
-
-		route_list = DaoRoute.route_search(from, to, date_departure_begin,
-				date_departure_end, distance_radius, Route_type.PROVIDE_CAR);
+		Hashtable<Integer, Route> table = DaoRoute.route_search(from, to, date_departure_begin, date_departure_end,
+				distance_radius, Route_type.PROVIDE_CAR);
+		route_list = new ArrayList<Route>(table.values());
+		System.out.println(from);
+		System.out.println(to);
+		System.out.println(date_departure_begin);
+		System.out.println(date_departure_end);
+		System.out.println(distance_radius);
+		System.out.println(route_list.size());
 		return "index";
+	}
+
+	public void setDistance_radius(Integer distance_radius) {
+		this.distance_radius = distance_radius;
+	}
+
+	public Integer getDistance_radius() {
+		return distance_radius;
+	}
+
+	public void setTime_delta(Integer time_delta) {
+		this.time_delta = time_delta;
+	}
+
+	public Integer getTime_delta() {
+		return time_delta;
+	}
+
+	public Collection<Route> getRoute_list() {
+		return route_list;
 	}
 }

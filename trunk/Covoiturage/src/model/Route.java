@@ -31,7 +31,6 @@ public class Route {
 	protected Position position_endObj;
 	protected User ownerObj;
 	protected Car carObj;
-	
 	protected Hashtable<Integer, Passager> passagers=null;
 	
 	/**
@@ -327,9 +326,21 @@ public class Route {
 		return this.passagers;		
 	} 
 	
-	public Integer getSeatEmpty(){
+	public Integer getEmpty_seats(){
 		// Retourne le nombre de places disponibles restantes
-    return Math.max(0, this.getSeat() - this.getPassagersOfType(Passager.PASSAGER_TYPE_ACCEPTED).size());
+        return Math.max(0, this.getSeat() - this.getPassagersOfType(Passager.PASSAGER_TYPE_ACCEPTED).size());
+	}
+
+	public long getDelay_from_now() {
+		long begin = this.date_begin.getTime();
+		long now = new Date().getTime();
+		long delta =  begin - now;
+		long days = delta % (1000*60*60*24);
+		delta = delta - days % (1000*60*60*24);
+		long hours = delta % (1000*60*60);
+		delta = delta - hours % (1000*60*60);
+		long minutes = delta % (1000*60*60);
+		return minutes;
 	}
 	
 	public Integer getMinuteCountdown() {

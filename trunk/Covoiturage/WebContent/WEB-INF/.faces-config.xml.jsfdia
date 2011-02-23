@@ -54,6 +54,12 @@
   PATH="/route/create.xhtml" SHAPE="264,264,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#route#search.xhtml"
-  PATH="/route/search.xhtml" SHAPE="272,424,50,25"
-  model-entity="JSFProcessGroup" persistent="true"/>
+  PATH="/route/search.xhtml" SHAPE="272,424,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#route#search.xhtml:0" NAME="item"
+   PATH="/route/search.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="index::#route#index.xhtml" NAME="output"
+    PATH="/route/index.xhtml" TARGET="rules:#route#index.xhtml"
+    TITLE="index" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

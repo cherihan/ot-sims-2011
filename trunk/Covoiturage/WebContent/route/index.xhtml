@@ -10,21 +10,18 @@
 		<ui:define name="title">Trajets</ui:define>
 
 		<ui:define name="body">
-				<rich:dataTable value="#{beanRoute.list_route}" var="item" style="width:100%">
-					<h:column>
-						<f:facet name="header">Départ :</f:facet>
-							#{item.depart}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Arrivée :</f:facet>
-							#{item.arrive}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Quand ?</f:facet>
-						#{item.dateString}
-					</h:column>			
-							
-				</rich:dataTable>
-			</ui:define>
+			<ul id="rides">
+				<ui:repeat value="#{beansRoute.route_list}" var="route">
+				<li class="ride">
+					<a href="">
+						<div class="from"><span>De :</span>#{route.position_beginObj.address}</div>
+						<div class="to"><span>√Ä :</span>#{route.position_endObj.address}</div>
+						<div class="countdown">#{route.delay_from_now}mn</div>
+						<div class="matching"><span>Places: </span>#{route.empty_seats}/#{route.seat}</div>
+					</a>
+				</li>
+				</ui:repeat>
+			</ul>
+		</ui:define>
 	</ui:composition>
 </html>
