@@ -1,7 +1,10 @@
 package dao;
 
+import google_api.GoogleGeoApiCached;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Hashtable;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -39,10 +42,12 @@ public class DaoPosition {
 						+ ");Longitude(" + longitude + ")");
 				throw new Exception(messageErr);
 			}
-			String query = "call position_create_or_update('" + address + "', "
+			String query = "call position_create_or_update(" + (address == null || address.equals("") ? "NULL" : "'"+address+"'") + ", "
 					+ latitude + ", " + longitude + ")";
-			con.execute(query);
-			pos = getPositionByAddress(address);
+			ResultSet res = con.execute(query);
+			if (res.first())
+				pos = new Position(res);
+			//pos = getPositionByAddress(address);
 
 		} catch (ClassNotFoundException ex) {
 			messageErr = Constantes.CLASS_DB_NOT_FOUND;
@@ -75,7 +80,39 @@ public class DaoPosition {
 
 		try {
 			con = ConnexionBD.getConnexion();
-			String query = "call position_get_by_address('" + address + "')";
+			String query = "call position_get_by_address('" + (address == null || address.equals("") ? "NULL" : address) + "')";
+			res = con.execute(query);
+			if (res.first())
+				pos = new Position(res);
+
+		} catch (ClassNotFoundException ex) {
+			messageErr = Constantes.CLASS_DB_NOT_FOUND;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		} catch (SQLException ex) {
+			messageErr = Constantes.PROBLEME_CONNECTION_DB;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		}
+		if(pos == null) {
+			Hashtable<String, Double> gresult = GoogleGeoApiCached.getCoordOfAddress(address);
+			pos = DaoPosition.createPosition(address, gresult.get("latitude"), gresult.get("longitude"));
+		}
+
+		return pos;
+
+	}
+	/*
+	public static Position getPositionByCoords(Double latitude, Double longitude)
+			throws Exception {
+		con = null;
+		String messageErr = null;
+		ResultSet res;
+		Position pos = null;
+
+		try {
+			con = ConnexionBD.getConnexion();
+			String query = "call position_get_by_lat_lng(" + latitude + ", "+longitude+")";
 			try {
 				res = con.execute(query);
 				if (res.first())
@@ -100,6 +137,7 @@ public class DaoPosition {
 		return pos;
 
 	}
+	*/
 
 	public static Position getPosition(int pos_id) {
 		Position pos = null;

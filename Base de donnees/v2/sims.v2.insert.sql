@@ -54,3 +54,22 @@ INSERT IGNORE INTO _passager_type_pgt (pgt_id, pgt_label) VALUES
 (1, 'Accepted'),
 (2, 'Rejected'),
 (3, 'Pending');
+
+INSERT IGNORE INTO user_usr (
+`usr_id` ,
+`usr_firstname` ,
+`usr_lastname` ,
+`usr_email` ,
+`usr_password` ,
+`usr_current_position` ,
+`usr_genre` ,
+`usr_birthdate` ,
+`usr_description` ,
+`usr_mobilphone` ,
+`usr_note` ,
+`usr_registrationdate` ,
+`usr_lastlogindate`
+)
+VALUES (
+'1', '', '', 'admin@admin.com', 'lksdkfkljqsdhflqshfjsdqlkj', NULL , 'male', '1999', 'descr', '', NULL , '0', '0'
+);

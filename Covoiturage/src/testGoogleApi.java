@@ -14,6 +14,7 @@ import model.Position;
 import model.Route;
 import model.Route_type;
 
+import utilities.DateUtils;
 import utilities.ValidatorOfData;
 
 import google_api.GoogleGeoApi;
@@ -26,99 +27,137 @@ public class testGoogleApi {
 	 * @param args
 	 * @throws Exception 
 	 */
+	@SuppressWarnings("unchecked")
 	public static void main22(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		Route r1;
-		String adr1;
-		String adr2;
-		String adr3;
-		Position pos1;
-		Position pos2;
-		Position pos3;
+		String typeTest="";
 		
-		adr1 = "Lyon";
-		adr2 = "Paris";
-		adr3 = "Bron";
-		Hashtable<String, Double> gresult;
+		//typeTest="googleDirection";
+		typeTest="createRoute";
+		//typeTest="googleDirection";
 		
-		gresult = GoogleGeoApiCached.getCoordOfAddress(adr1);
-		pos1 = DaoPosition.createPosition(adr1, gresult.get("latitude"), gresult.get("longitude"));
-		
-		gresult = GoogleGeoApiCached.getCoordOfAddress(adr2);
-		pos2 = DaoPosition.createPosition(adr2, gresult.get("latitude"), gresult.get("longitude"));
-		
-		gresult = GoogleGeoApiCached.getCoordOfAddress(adr3);
-		pos3 = DaoPosition.createPosition(adr3, gresult.get("latitude"), gresult.get("longitude"));
-		
-		System.out.println("Debut a "+pos1.getAddress());
-		ArrayList<Hashtable<String, Double>> result = GoogleGeoApi.getDirection(pos1.getCoords(), pos2.getCoords(), "", new Hashtable<Integer, Hashtable<Integer,Double>>());
-		
-/*
-	    Enumeration<Hashtable<String, Double>> en = result.elements();
-		while(en.hasMoreElements()) {
-			*/
-		//	while(itKey.hasNext()) {
-		for(int i=0;i < result.size();i++) {
-				//Character value = (Character)itValue.next();
-				Integer key = i;
-
-			Hashtable<String, Double> step = (Hashtable<String, Double>) result.get(i);
+		if(typeTest.equals("googleDirection")) {
+			Route r1;
+			String adr1;
+			String adr2;
+			String adr3;
+			Position pos1;
+			Position pos2;
+			Position pos3;
 			
-			String addressStart = GoogleGeoApiCached.getNearAddressFromCoord(step, "start_");
-			String addressEnd = GoogleGeoApiCached.getNearAddressFromCoord(step, "end_");
-			Double duration = step.get("duration");
+			adr1 = "Lyon";
+			adr2 = "Paris";
+			adr3 = "Bron";
+			Hashtable<String, Double> gresult;
 			
-			System.out.println("Step : ");
-			System.out.println("	start :  "+addressStart + step.get("start_latitude") + ","+step.get("start_longitude"));
-			System.out.println("	end :  "+addressEnd);
-			System.out.println("	duree :  "+duration);
-			System.out.println("	etape:  "+key);
+			gresult = GoogleGeoApiCached.getCoordOfAddress(adr1);
+			pos1 = DaoPosition.createPosition(adr1, gresult.get("latitude"), gresult.get("longitude"));
+			
+			gresult = GoogleGeoApiCached.getCoordOfAddress(adr2);
+			pos2 = DaoPosition.createPosition(adr2, gresult.get("latitude"), gresult.get("longitude"));
+			
+			gresult = GoogleGeoApiCached.getCoordOfAddress(adr3);
+			pos3 = DaoPosition.createPosition(adr3, gresult.get("latitude"), gresult.get("longitude"));
+			
+			System.out.println("Debut a "+pos1.getAddress());
+			ArrayList<Hashtable<String, Object>> result = GoogleGeoApi.getDirection(pos1.getCoords(), pos2.getCoords(), "", new Hashtable<Integer, Hashtable<Integer,Double>>());
+			
+			/*
+		    Enumeration<Hashtable<String, Double>> en = result.elements();
+			while(en.hasMoreElements()) {
+				*/
+			//	while(itKey.hasNext()) {
+			for(int i=0;i < result.size();i++) {
+					//Character value = (Character)itValue.next();
+					Integer key = i;
+	
+				Hashtable<String, Object> step = (Hashtable<String, Object>) result.get(i);
+				
+				String addressStart = GoogleGeoApiCached.getNearAddressFromCoord((Hashtable<String, Double>) step.get("begin"));
+				String addressEnd = GoogleGeoApiCached.getNearAddressFromCoord((Hashtable<String, Double>) step.get("end"));
+				Double duration = (Double) step.get("duration");
+				
+				ArrayList<Hashtable<String, Object>> segments= (ArrayList<Hashtable<String, Object>>) step.get("segments");
+				
+				System.out.println("Step : ");
+				System.out.println("	start :  "+addressStart);
+				System.out.println("	end :  "+addressEnd);
+				System.out.println("	duree :  "+duration);
+				System.out.println("	etape:  "+key);
+				System.out.println("	SUB Step : "+segments.size());
+				for(int i2=0;i2 < segments.size();i2++) {
+					String subaddressStart = GoogleGeoApiCached.getNearAddressFromCoord((Hashtable<String, Double>) segments.get(i2).get("begin"));
+					String subaddressEnd = GoogleGeoApiCached.getNearAddressFromCoord((Hashtable<String, Double>) segments.get(i2).get("end"));
+					Double subduration = (Double) segments.get(i2).get("duration");
+					System.out.println("	SUB Step : ");
+					System.out.println("		start :  "+subaddressStart+" - "+((Hashtable<String, Double>) segments.get(i2).get("begin")).get("latitude")+" , "+((Hashtable<String, Double>) segments.get(i2).get("begin")).get("longitude"));
+					System.out.println("		end :  "+subaddressEnd);
+					System.out.println("		duree :  "+subduration);
+				}
+				
+			}
+			
+			System.out.println("Fin");
 		}
 		
-		System.out.println("Fin");
-		
-		if(true) {
-			return;
-		}
-		
-		/*
-		r1 = DaoRoute.createRoute(Route_type.PROVIDE_CAR, adr1,
-				adr2, new Date(), null, "comment",
-				1, 3, (Integer) 0);
-		System.out.println(r1);
-		
-		Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(0), new Date(), 0, 0);
-		testGoogleApi.displayHash(result);
-		
-		result = DaoRoute.route_search(pos3, pos2, new Date(0), new Date(), 10000, 0);
-		
-		result = DaoRoute.route_search_of_owner(1, new Date(), new Date(0), 0);
-		
-		testGoogleApi.displayHash(result);
-		
-		System.out.println("fin");
-		if(true) {
-			return ;
-		}
-		
-		
-		Hashtable<String, Double> resultCoord;
-		String addressQuery = "Lyon";
-		String resultAddress;
-		resultCoord = GoogleGeoApi.getCoordOfAddress(addressQuery);
-		if(resultCoord == null) {
-			System.out.println("Pas de coordonnées");
-		}else{
-			System.out.println(new String("Coords : ").concat(resultCoord.toString()));
+		if(typeTest.equals("createRoute")) {
+			String adr1;
+			String adr2;
+			String adr3;
+			Route r1;
 			
-			resultAddress = GoogleGeoApi.getNearAddressFromCoord(resultCoord);
-			if(resultAddress == null) {
-				System.out.println("Pas d'addresse correspondante");
-			}else{			
-				System.out.println(new String("Address : ").concat(resultAddress));
+			Position pos1;
+			Position pos2;
+			Position pos3;
+			
+			adr1="Lyon";
+			adr2="Paris";
+			adr3="Bron";
+			
+			pos1 = DaoPosition.getPositionByAddress(adr1);
+			pos2 = DaoPosition.getPositionByAddress(adr2);
+			pos3 = DaoPosition.getPositionByAddress(adr3);
+			
+			System.out.println(DateUtils.getDateAsInteger(new Date(199999)));
+			System.out.println(DateUtils.getDateAsInteger(new Date()));
+			
+			r1 = DaoRoute.createRoute(Route_type.PROVIDE_CAR, adr1,
+					adr2, new Date(), null, "comment",
+					1, 3, (Integer) 0);
+			System.out.println(r1);
+			
+			Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(199999), new Date(), 0, 0);
+			testGoogleApi.displayHash(result);
+			
+			result = DaoRoute.route_search(pos3, pos2, new Date(0), new Date(), 10000, 0);
+			
+			result = DaoRoute.route_search_of_owner(1, new Date(), new Date(0), 0);
+			
+			testGoogleApi.displayHash(result);
+			
+			System.out.println("fin");
+			if(true) {
+				return ;
+			}
+			
+			
+			Hashtable<String, Double> resultCoord;
+			String addressQuery = "Lyon";
+			String resultAddress;
+			resultCoord = GoogleGeoApi.getCoordOfAddress(addressQuery);
+			if(resultCoord == null) {
+				System.out.println("Pas de coordonnées");
+			}else{
+				System.out.println(new String("Coords : ").concat(resultCoord.toString()));
+				
+				resultAddress = GoogleGeoApi.getNearAddressFromCoord(resultCoord);
+				if(resultAddress == null) {
+					System.out.println("Pas d'addresse correspondante");
+				}else{			
+					System.out.println(new String("Address : ").concat(resultAddress));
+				}
 			}
 		}
-		*/
 		
 	}
 	

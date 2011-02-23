@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -12,6 +13,7 @@ import utilities.DateUtils;
 import model.Passager;
 import model.Position;
 import model.Route;
+import google_api.GoogleGeoApi;
 import google_api.GoogleGeoApiCached;
 
 public class DaoRoute {
@@ -109,6 +111,7 @@ public class DaoRoute {
 	 *         no result
 	 * @throws Exception
 	 */
+
 	public static Route createRoute(Integer type, Integer pos_depart_ID,
 			Integer pos_arrive_ID, Date date_depart, Date date_arrive,
 			String comt, Integer user_ID, Integer seat, Integer car_ID)
@@ -127,6 +130,12 @@ public class DaoRoute {
 		if (date_arrive != null)
 			date_arrive_INT = date_arrive.getTime() / 1000;
 
+		Position pos_begin = DaoPosition.getPosition(pos_depart_ID);
+		Position pos_end = DaoPosition.getPosition(pos_arrive_ID);
+		
+		Hashtable<Integer, Hashtable<Integer, Double>> waypoints = new Hashtable<Integer, Hashtable<Integer, Double>>();
+		
+		
 		// Inserting
 		try {
 			con = ConnexionBD.getConnexion();
@@ -136,12 +145,61 @@ public class DaoRoute {
 					+ (date_arrive_INT == null ? "NULL" : date_arrive_INT)
 					+ ", '" + (comt == null ? "" : comt) + "', " + user_ID
 					+ ", " + (seat == null ? "NULL" : seat) + ", "
-					+ (car_ID == null ? "NULL" : car_ID) + ")";
+					+ (car_ID == null || car_ID == 0 ? "NULL" : car_ID) + ")";
 
 			try {
 				res = con.execute(query);
 				if (res.first())
 					route = new Route(res);
+				
+				Boolean insertSegments = true;
+				if(insertSegments) {
+					
+					System.out.println("Recuperation des segments");
+					ArrayList<Hashtable<String, Object>> directionResult = GoogleGeoApi
+							.getDirection(pos_begin.getCoords(), pos_end.getCoords(),
+									"driving", waypoints);
+					System.out.println("Fin Recuperation des segments");
+					
+					// translate(Ajout des segments composants le trajet)
+					int directionResultSize = directionResult.size();
+					int directionResultI;
+					int segmentCounter=0;
+					int global_duration_increment=0;
+					System.out.println("Debut ajout des segments");
+					for (directionResultI = 0; directionResultI < directionResultSize; directionResultI++) {
+						// Character value = (Character)itValue.next();
+	
+						Hashtable<String, Object> step = (Hashtable<String, Object>) directionResult
+								.get(directionResultI);
+						
+						ArrayList<Hashtable<String, Object>> segments = (ArrayList<Hashtable<String, Object>>) step
+								.get("segments");
+						
+						
+						int subdurationIncrement=0;
+						for (int i2 = 0; i2 < segments.size(); i2++) {
+							Hashtable<String, Double> sub_pos_begin = (Hashtable<String, Double>) segments.get(i2).get("begin");
+							Hashtable<String, Double> sub_pos_end = (Hashtable<String, Double>) segments.get(i2).get("end");
+							Integer subduration = (int) Math.round(((Double) segments.get(i2).get("duration")));
+							
+							Position sub_ppos_begin = DaoPosition.createPosition(null, sub_pos_begin.get("latitude"), sub_pos_begin.get("longitude"));
+							Position sub_ppos_end = DaoPosition.createPosition(null, sub_pos_end.get("latitude"), sub_pos_end.get("longitude"));
+							
+							
+							Date sub_date_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(route.getDate_begin()) + subduration + global_duration_increment + subdurationIncrement);
+							
+							DaoSegment.createSegment(route, sub_ppos_begin, sub_ppos_end, subduration, sub_date_begin, segmentCounter);
+							
+							subdurationIncrement+=subduration;
+							segmentCounter++;
+						}
+						global_duration_increment+=(Double)step.get("duration");
+	
+					}
+					System.out.println("Fin ajout de  "+segmentCounter+" segments");
+				}
+
 			} catch (MySQLIntegrityConstraintViolationException ex) {
 				// ? Errors ?
 				messageErr = Constantes.UNEXPECTED_ERROR;
@@ -219,7 +277,6 @@ public class DaoRoute {
 
 		try {
 			con = ConnexionBD.getConnexion();
-
 			String query = "call route_search_with_date_and_delta("
 					+ pos_begin.getId() + ", " + pos_end.getId() + ", "
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "

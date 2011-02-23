@@ -11,6 +11,7 @@ DROP VIEW IF EXISTS _view_user_usr;
 DROP VIEW IF EXISTS _view_passager_psg;
 DROP VIEW IF EXISTS _view_route_rte;
 
+DROP TABLE IF EXISTS segment_seg;
 DROP TABLE IF EXISTS _passager_type_pgt;
 DROP TABLE IF EXISTS comment_cmn;
 DROP TABLE IF EXISTS googlecache_gch;
@@ -107,13 +108,14 @@ CREATE TABLE IF NOT EXISTS usr_crt (
 
 CREATE TABLE IF NOT EXISTS position_pos (
 	pos_id INT(11) PRIMARY KEY AUTO_INCREMENT,
-	pos_address VARCHAR(255) NOT NULL,
+	pos_address VARCHAR(255) NULL DEFAULT NULL,
 	pos_latitude FLOAT(10,6) NOT NULL,
 	pos_longitude FLOAT(10,6) NOT NULL,
 	
 	INDEX(pos_latitude),
 	INDEX(pos_longitude),
-	UNIQUE(pos_address)
+	INDEX(pos_address)
+	
 ) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS car_car (
@@ -185,11 +187,15 @@ CREATE TABLE IF NOT EXISTS passager_psg (
 	psg_user INT(11) NOT NULL,
 	psg_type INT(11) NOT NULL,
 	psg_askdate BIGINT(20) NOT NULL COMMENT 'Date de la demande',
+	psg_pos_begin INT(11) NOT NULL,
+	psg_pos_end INT(11) NOT NULL,
 						   
 	INDEX(psg_route),
 	INDEX(psg_user),
 	INDEX(psg_type),
-	INDEX(psg_askdate)
+	INDEX(psg_askdate),
+	INDEX(psg_pos_begin),
+	INDEX(psg_pos_end)
 
 ) ENGINE = InnoDb;
 
@@ -198,13 +204,13 @@ CREATE TABLE IF NOT EXISTS passager_psg (
 
 CREATE TABLE IF NOT EXISTS googlecache_gch (
 	gch_id INT(11) PRIMARY KEY AUTO_INCREMENT,
-	gch_address VARCHAR(255) NOT NULL,
+	gch_address VARCHAR(255) NULL DEFAULT NULL,
 	gch_latitude FLOAT(10,6) NULL DEFAULT NULL,
 	gch_longitude FLOAT(10,6) NULL DEFAULT NULL,
 							  
-	UNIQUE(gch_address),
 	INDEX(gch_latitude),
-	INDEX(gch_longitude)
+	INDEX(gch_longitude),
+	INDEX(gch_address)
 
 
 ) ENGINE = InnoDb;
@@ -225,6 +231,22 @@ CREATE TABLE IF NOT EXISTS comment_cmn (
 						  
 ) ENGINE = InnoDb;
 
+
+CREATE TABLE segment_seg (
+	seg_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+	seg_route INT(11) NOT NULL,
+	seg_pos_begin INT(11) NOT NULL,
+	seg_pos_end INT(11) NOT NULL,
+	seg_duration INT(11) NOT NULL COMMENT 'duration of this portion in second',
+	seg_date_begin BIGINT(20) NOT NULL DEFAULT 0,
+	seg_order INT(11) NOT NULL DEFAULT 0,
+	
+	INDEX(seg_route),
+	INDEX(seg_pos_begin),
+	INDEX(seg_pos_end),
+	INDEX(seg_date_begin),
+	INDEX(seg_order)
+) ENGINE = InnoDb;
 
 
 
@@ -278,6 +300,13 @@ ALTER TABLE passager_psg
 ALTER TABLE passager_psg
 	ADD CONSTRAINT passager_user_constraint FOREIGN KEY (psg_user) REFERENCES user_usr (usr_id);
 	
+ALTER TABLE passager_psg
+	ADD CONSTRAINT passager_pos_begin_constraint FOREIGN KEY (psg_pos_begin) REFERENCES position_pos (pos_id);
+	
+ALTER TABLE passager_psg
+	ADD CONSTRAINT passager_pos_end_constraint FOREIGN KEY (psg_pos_end) REFERENCES position_pos (pos_id);
+	
+	
 ALTER TABLE comment_cmn
 	ADD CONSTRAINT comment_user_from_constraint FOREIGN KEY (cmn_user_from) REFERENCES user_usr (usr_id);
 	
@@ -305,6 +334,18 @@ ALTER TABLE usr_crt
 	
 ALTER TABLE passager_psg
 	ADD CONSTRAINT passager_type_constraint FOREIGN KEY (psg_type) REFERENCES _passager_type_pgt (pgt_id);
+	
+	
+ALTER TABLE segment_seg
+	ADD CONSTRAINT segment_pos_begin_constraint FOREIGN KEY (seg_pos_begin) REFERENCES position_pos (pos_id);
+	
+	
+ALTER TABLE segment_seg
+	ADD CONSTRAINT segment_pos_end_constraint FOREIGN KEY (seg_pos_end) REFERENCES position_pos (pos_id);
+
+	
+ALTER TABLE segment_seg
+	ADD CONSTRAINT segment_route_constraint FOREIGN KEY (seg_route) REFERENCES route_rte (rte_id);
 	
 	
 	
@@ -363,7 +404,27 @@ INSERT IGNORE INTO _criterion_crt (crt_id, crt_type, crt_label, crt_root_criteri
 INSERT IGNORE INTO _passager_type_pgt (pgt_id, pgt_label) VALUES 
 (1, 'Accepted'),
 (2, 'Rejected'),
-(3, 'Pending');-- sims SQL V2, Sprint 2
+(3, 'Pending');
+
+INSERT IGNORE INTO user_usr (
+`usr_id` ,
+`usr_firstname` ,
+`usr_lastname` ,
+`usr_email` ,
+`usr_password` ,
+`usr_current_position` ,
+`usr_genre` ,
+`usr_birthdate` ,
+`usr_description` ,
+`usr_mobilphone` ,
+`usr_note` ,
+`usr_registrationdate` ,
+`usr_lastlogindate`
+)
+VALUES (
+'1', '', '', 'admin@admin.com', 'lksdkfkljqsdhflqshfjsdqlkj', NULL , 'male', '1999', 'descr', '', NULL , '0', '0'
+);
+-- sims SQL V2, Sprint 2
 
 -- Procedures stokes, route
 
@@ -597,7 +658,7 @@ CREATE PROCEDURE _position_get_by_address (
 	OUT _pos_id INT(11)
 )
 BEGIN
-	SELECT pos_id INTO _pos_id FROM position_pos WHERE pos_address = _address;
+	SELECT pos_id INTO _pos_id FROM position_pos WHERE pos_address = _address LIMIT 1;
 end //
 
 
@@ -610,11 +671,25 @@ CREATE PROCEDURE position_create_or_update (
 	IN _longitude FLOAT(10,6)
 )
 BEGIN
-
-	INSERT INTO position_pos 	(pos_id, pos_address, pos_latitude, pos_longitude) VALUES 
-								(NULL, _address, _latitude, _longitude) 
-		ON DUPLICATE KEY 
-			UPDATE pos_latitude=_latitude, pos_longitude=_longitude;
+	
+	DECLARE __pos_id INT(11);
+	SELECT NULL INTO __pos_id;
+	
+	IF _address IS NOT NULL THEN
+		SELECT pos_id INTO __pos_id FROM position_pos WHERE pos_address= _address;
+	END IF;
+	
+	IF __pos_id IS NULL THEN
+		SELECT pos_id INTO __pos_id FROM position_pos WHERE pos_latitude= _latitude AND pos_longitude= _longitude;
+	END IF;
+	
+	IF __pos_id IS NULL THEN
+		INSERT INTO position_pos 	(pos_id, pos_address, pos_latitude, pos_longitude) VALUES 
+									(NULL, _address, _latitude, _longitude);
+		SELECT LAST_INSERT_ID() INTO __pos_id;
+	END IF;
+	
+	SELECT * FROM position_pos WHERE pos_id = __pos_id;
 	
 END //
 
@@ -751,6 +826,30 @@ BEGIN
 END //
 
 
+DROP PROCEDURE IF EXISTS route_add_segment //
+CREATE PROCEDURE route_add_segment (
+	IN _rte_id INT(11),
+	IN _pos_begin INT(11),
+	IN _pos_end INT(11),
+	IN _duration INT(11),
+	IN _date_begin INT(11),
+	IN _order INT(11)
+)
+BEGIN
+	
+	INSERT INTO segment_seg (seg_id	, seg_route	, seg_pos_begin	, seg_pos_end	, seg_duration	, seg_date_begin, seg_order) VALUES
+							(NULL	, _rte_id	, _pos_begin	, _pos_end	  	, _duration		, _date_begin	, _order);
+	
+END //
+
+
+DROP PROCEDURE IF EXISTS route_del_all_segment //
+CREATE PROCEDURE route_del_all_segment (
+	IN _rte_id INT(11)
+)
+BEGIN
+	DELETE FROM segment_seg WHERE seg_route = _rte_id;	
+END //
 
 
 
@@ -760,10 +859,16 @@ CREATE PROCEDURE route_join (
 	IN _usr_id INT(11)
 )
 BEGIN
-
-	INSERT IGNORE INTO passager_psg (psg_id	,psg_route	,psg_user, psg_type	, psg_askdate		) VALUES
-									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
+	
+	DECLARE __pos_begin INT(11);
+	DECLARE __pos_end INT(11);
+	
+	SELECT rte_pos_begin, rte_pos_end INTO __pos_begin, __pos_end FROM route_rte WHERE rte_id = _rte_id;
+	
+	INSERT IGNORE INTO passager_psg (psg_id	,psg_route	,psg_user, psg_type	, psg_askdate		, psg_pos_begin	, psg_pos_end 	) VALUES
+									(NULL	, _rte_id	, _usr_id, 1		, UNIX_TIMESTAMP()	, __pos_begin	, __pos_end		);
 									-- 3 waiting
+									-- 1 accepted
 
 
 END //

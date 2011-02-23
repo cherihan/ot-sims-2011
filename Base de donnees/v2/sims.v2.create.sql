@@ -79,13 +79,14 @@ CREATE TABLE IF NOT EXISTS usr_crt (
 
 CREATE TABLE IF NOT EXISTS position_pos (
 	pos_id INT(11) PRIMARY KEY AUTO_INCREMENT,
-	pos_address VARCHAR(255) NOT NULL,
+	pos_address VARCHAR(255) NULL DEFAULT NULL,
 	pos_latitude FLOAT(10,6) NOT NULL,
 	pos_longitude FLOAT(10,6) NOT NULL,
 	
 	INDEX(pos_latitude),
 	INDEX(pos_longitude),
-	UNIQUE(pos_address)
+	INDEX(pos_address)
+	
 ) ENGINE = InnoDb;
 
 CREATE TABLE IF NOT EXISTS car_car (
@@ -157,11 +158,15 @@ CREATE TABLE IF NOT EXISTS passager_psg (
 	psg_user INT(11) NOT NULL,
 	psg_type INT(11) NOT NULL,
 	psg_askdate BIGINT(20) NOT NULL COMMENT 'Date de la demande',
+	psg_pos_begin INT(11) NOT NULL,
+	psg_pos_end INT(11) NOT NULL,
 						   
 	INDEX(psg_route),
 	INDEX(psg_user),
 	INDEX(psg_type),
-	INDEX(psg_askdate)
+	INDEX(psg_askdate),
+	INDEX(psg_pos_begin),
+	INDEX(psg_pos_end)
 
 ) ENGINE = InnoDb;
 
@@ -170,13 +175,13 @@ CREATE TABLE IF NOT EXISTS passager_psg (
 
 CREATE TABLE IF NOT EXISTS googlecache_gch (
 	gch_id INT(11) PRIMARY KEY AUTO_INCREMENT,
-	gch_address VARCHAR(255) NOT NULL,
+	gch_address VARCHAR(255) NULL DEFAULT NULL,
 	gch_latitude FLOAT(10,6) NULL DEFAULT NULL,
 	gch_longitude FLOAT(10,6) NULL DEFAULT NULL,
 							  
-	UNIQUE(gch_address),
 	INDEX(gch_latitude),
-	INDEX(gch_longitude)
+	INDEX(gch_longitude),
+	INDEX(gch_address)
 
 
 ) ENGINE = InnoDb;
@@ -197,6 +202,22 @@ CREATE TABLE IF NOT EXISTS comment_cmn (
 						  
 ) ENGINE = InnoDb;
 
+
+CREATE TABLE segment_seg (
+	seg_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+	seg_route INT(11) NOT NULL,
+	seg_pos_begin INT(11) NOT NULL,
+	seg_pos_end INT(11) NOT NULL,
+	seg_duration INT(11) NOT NULL COMMENT 'duration of this portion in second',
+	seg_date_begin BIGINT(20) NOT NULL DEFAULT 0,
+	seg_order INT(11) NOT NULL DEFAULT 0,
+	
+	INDEX(seg_route),
+	INDEX(seg_pos_begin),
+	INDEX(seg_pos_end),
+	INDEX(seg_date_begin),
+	INDEX(seg_order)
+) ENGINE = InnoDb;
 
 
 
@@ -250,6 +271,13 @@ ALTER TABLE passager_psg
 ALTER TABLE passager_psg
 	ADD CONSTRAINT passager_user_constraint FOREIGN KEY (psg_user) REFERENCES user_usr (usr_id);
 	
+ALTER TABLE passager_psg
+	ADD CONSTRAINT passager_pos_begin_constraint FOREIGN KEY (psg_pos_begin) REFERENCES position_pos (pos_id);
+	
+ALTER TABLE passager_psg
+	ADD CONSTRAINT passager_pos_end_constraint FOREIGN KEY (psg_pos_end) REFERENCES position_pos (pos_id);
+	
+	
 ALTER TABLE comment_cmn
 	ADD CONSTRAINT comment_user_from_constraint FOREIGN KEY (cmn_user_from) REFERENCES user_usr (usr_id);
 	
@@ -277,6 +305,18 @@ ALTER TABLE usr_crt
 	
 ALTER TABLE passager_psg
 	ADD CONSTRAINT passager_type_constraint FOREIGN KEY (psg_type) REFERENCES _passager_type_pgt (pgt_id);
+	
+	
+ALTER TABLE segment_seg
+	ADD CONSTRAINT segment_pos_begin_constraint FOREIGN KEY (seg_pos_begin) REFERENCES position_pos (pos_id);
+	
+	
+ALTER TABLE segment_seg
+	ADD CONSTRAINT segment_pos_end_constraint FOREIGN KEY (seg_pos_end) REFERENCES position_pos (pos_id);
+
+	
+ALTER TABLE segment_seg
+	ADD CONSTRAINT segment_route_constraint FOREIGN KEY (seg_route) REFERENCES route_rte (rte_id);
 	
 	
 	

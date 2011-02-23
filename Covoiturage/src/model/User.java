@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Hashtable;
 
+import utilities.DateUtils;
+
 import dao.DaoCriterion;
 import dao.DaoPosition;
 import dao.DaoRoute;
@@ -128,12 +130,12 @@ public class User {
 		this.current_position = Integer.parseInt(sqlrow
 				.get("usr_current_position"));
 		this.genre = sqlrow.get("usr_genre");
-		// this.birthdate = DateFormat.parse(sqlrow.get("usr_birthdate"));
+		this.birthdate = DateUtils.getTimestampAsDate(Integer.valueOf(sqlrow.get("usr_birthdate")));
 		this.description = sqlrow.get("usr_description");
 		this.mobilphone = sqlrow.get("usr_mobilphone");
 		this.note = Integer.parseInt(sqlrow.get("usr_note"));
-		// this.registrationdate = sqlrow.get("usr_registrationdate");
-		// this.lastlogindate = sqlrow.get("usr_lastlogindate");
+		this.registrationdate = DateUtils.getTimestampAsDate(Integer.valueOf(sqlrow.get("usr_registrationdate")));
+		this.lastlogindate = DateUtils.getTimestampAsDate(Integer.valueOf(sqlrow.get("usr_lastlogindate")));
 	}
 
 	public User(ResultSet sqlrow) throws SQLException {
@@ -147,14 +149,13 @@ public class User {
 		this.current_position = (sqlrow.getInt("usr_current_position"));
 		this.genre = sqlrow.getString("usr_genre");
 
-		long timestamp = (long) sqlrow.getInt("usr_birthdate") * 1000;
-		this.birthdate = new Date(timestamp);
+		this.birthdate = DateUtils.getTimestampAsDate(sqlrow.getInt("usr_birthdate"));
 
 		this.description = sqlrow.getString("usr_description");
 		this.mobilphone = sqlrow.getString("usr_mobilphone");
 		this.note = (sqlrow.getInt("usr_note"));
-		// this.registrationdate = sqlrow.get("usr_registrationdate");
-		// this.lastlogindate = sqlrow.get("usr_lastlogindate");
+		this.registrationdate = DateUtils.getTimestampAsDate(sqlrow.getInt("usr_registrationdate"));
+		this.lastlogindate = DateUtils.getTimestampAsDate(sqlrow.getInt("usr_lastlogindate"));
 	}
 
 	/**
