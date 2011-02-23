@@ -113,6 +113,7 @@ public class BeansRoute {
 	 */
 	public String createRoute() {
 		Route createdRoute = null;
+		route_type = Route_type.PROVIDE_CAR;
 		if (minutes_to_depart == null || pos_depart == null
 				|| pos_arrive == null || route_type == null) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
