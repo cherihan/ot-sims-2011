@@ -10,23 +10,27 @@
 		
 		<ui:define name="title">Recherche</ui:define>
 		<ui:define name="route_create_after_end">
-			<h:outputLabel value="Dans un rayon de" />
-			<h:selectOneMenu value="#{beansRoute.distance_radius}" styleClass="large">
-				<f:selectItem itemLabel="1km" itemValue="1"/>
-				<f:selectItem itemLabel="2km" itemValue="2"/>
-				<f:selectItem itemLabel="3km" itemValue="3"/>
-				<f:selectItem itemLabel="4km" itemValue="4"/>
-			</h:selectOneMenu>
+			<div class="section">
+				<h:outputLabel value="Dans un rayon de" />
+				<h:selectOneMenu value="#{beansRoute.distance_radius}" styleClass="large">
+					<f:selectItem itemLabel="1km" itemValue="1"/>
+					<f:selectItem itemLabel="2km" itemValue="2"/>
+					<f:selectItem itemLabel="3km" itemValue="3"/>
+					<f:selectItem itemLabel="4km" itemValue="4"/>
+				</h:selectOneMenu>
+			</div>
 		</ui:define>
 		<ui:define name="route_create_after_minutes">
-			<h:outputLabel value="plus ou moins" />
-			<h:selectOneMenu value="beansRoute.time_delta" styleClass="large">
-				<f:selectItem itemLabel="1mn" itemValue="1"/>
-				<f:selectItem itemLabel="2mn" itemValue="2"/>
-				<f:selectItem itemLabel="3mn" itemValue="3"/>
-				<f:selectItem itemLabel="4mn" itemValue="4"/>
-			</h:selectOneMenu>
-			<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />
+			<div class="section">
+				<h:outputLabel value="plus ou moins" />
+				<h:selectOneMenu value="beansRoute.time_delta" styleClass="large">
+					<f:selectItem itemLabel="1mn" itemValue="1"/>
+					<f:selectItem itemLabel="2mn" itemValue="2"/>
+					<f:selectItem itemLabel="3mn" itemValue="3"/>
+					<f:selectItem itemLabel="4mn" itemValue="4"/>
+				</h:selectOneMenu>
+				<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />
+			</div>
 		</ui:define>
 	</ui:composition>
 </html>
