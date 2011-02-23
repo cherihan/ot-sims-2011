@@ -17,16 +17,16 @@
 		<h:form id="create-route-form">
 			<div class="section"><h:outputLabel value="Au dŽpart de" />
 				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
-					<f:selectItem itemLabel="ici" itemValue="here" />
-					<f:selectItem itemLabel="autre..." itemValue="other" />
+					<f:selectItem itemLabel="ici" itemValue="Lyon, France" />
+					<f:selectItem itemLabel="autre..." itemValue="Paris, France" />
 				</h:selectOneMenu>
 			</div>
 			<div class="section"><h:outputLabel value="Jusqu'ˆ" />
 				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
 					<f:selectItem itemLabel="Maison"
-						itemValue="une ID de lieux enregistre" />
+						itemValue="Le Puy-en-Velay, France" />
 					<f:selectItem itemLabel="Boulot"
-						itemValue="une ID de lieux enregistre" />
+						itemValue="Le Mans, France" />
 					<f:selectItem itemLabel="autre..." itemValue="other" />
 				</h:selectOneMenu>
 			</div>

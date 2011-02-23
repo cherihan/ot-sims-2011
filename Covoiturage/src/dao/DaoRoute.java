@@ -153,7 +153,7 @@ public class DaoRoute {
 				if (res.first())
 					route = new Route(res);
 				
-				Boolean insertSegments = true;
+				Boolean insertSegments = false;
 				if(insertSegments) {
 					
 					System.out.println("Recuperation des segments");
