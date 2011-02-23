@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/template/template.xhtml">
+
+	<ui:define name="title">Nouveau trajet</ui:define>
+
+	<ui:define name="body">
+		<div class="msg error"><h:outputText value="#{beansRoute.messageErr}" /></div>
+		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
+		<ui:insert name="begin-form" />
+		<h:form id="create-route-form">
+			<div class="section"><h:outputLabel value="De" />
+				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+					<f:selectItem itemLabel="ici" itemValue="here" />
+					<f:selectItem itemLabel="autre..." itemValue="other" />
+				</h:selectOneMenu>
+			</div>
+			<div class="section"><h:outputLabel value="A" />
+				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
+					<f:selectItem itemLabel="Maison"
+						itemValue="une ID de lieux enregistre" />
+					<f:selectItem itemLabel="Boulot"
+						itemValue="une ID de lieux enregistre" />
+					<f:selectItem itemLabel="autre..." itemValue="other" />
+				</h:selectOneMenu>
+			</div>
+			<div class="section">
+				<h:outputLabel value="Dans" />
+				<h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large" required="true">
+					<f:selectItem itemLabel="5mn" itemValue="5" />
+					<f:selectItem itemLabel="10mn" itemValue="10" />
+					<f:selectItem itemLabel="20mn" itemValue="20" />
+					<f:selectItem itemLabel="30mn" itemValue="30" />
+					<f:selectItem itemLabel="40mn" itemValue="40" />
+					<f:selectItem itemLabel="50mn" itemValue="50" />
+					<f:selectItem itemLabel="1h" itemValue="50" />
+				</h:selectOneMenu>
+			</div>
+			<ui:insert name="form-end" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
