@@ -112,6 +112,7 @@ public class DaoRoute {
 	 * @throws Exception
 	 */
 
+	@SuppressWarnings("unchecked")
 	public static Route createRoute(Integer type, Integer pos_depart_ID,
 			Integer pos_arrive_ID, Date date_depart, Date date_arrive,
 			String comt, Integer user_ID, Integer seat, Integer car_ID)
