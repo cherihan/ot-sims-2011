@@ -676,7 +676,7 @@ BEGIN
 	SELECT NULL INTO __pos_id;
 	
 	IF _address IS NOT NULL THEN
-		SELECT pos_id INTO __pos_id FROM position_pos WHERE pos_address= _address;
+		SELECT pos_id INTO __pos_id FROM position_pos WHERE pos_address IS NOT NULL AND pos_address= _address;
 	END IF;
 	
 	IF __pos_id IS NULL THEN
