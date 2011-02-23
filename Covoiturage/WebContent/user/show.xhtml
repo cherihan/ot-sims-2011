@@ -12,39 +12,55 @@
 	<ui:define name="body">
 		<div class="section">
 			<h:outputLabel value="Prénom :" />
-			<h:outputText value="#{beansUser.user.firstname}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.firstname}" />
+			</div>
 			<h:outputLabel value="Nom :" />
-			<h:outputText value="#{beansUser.user.lastname}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.lastname}" />
+			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="E-mail :" />
-			<h:outputText value="#{beansUser.user.email}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.email}" />
+			</div>
 		</div>	
 		
 		<div class="section">	
 			<h:outputLabel value="Note :" />
-			<h:outputText value="#{beansUser.user.note}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.note}" />
+			</div>
 		</div>	
 		
 		<div class="section">	
 			<h:outputLabel value="Genre :" />
-			<h:outputText value="#{beansUser.user.genre}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.genre}" />
+			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="Anniversaire :" />
-			<h:outputText value="#{beansUser.birthdateString}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.birthdateString}" />
+			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="Numéro de portable :" />
-			<h:outputText value="#{beansUser.user.mobilphone}" />
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.mobilphone}" />
+			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="Description :" />
-			<h:outputText value="#{beansUser.user.description}" />			
+			<div class="readonly">
+				<h:outputText value="#{beansUser.user.description}" />
+			</div>
 		</div>	
 		<hr/>
 		
