@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<title>Test</title>
+		<link rel="stylesheet" type="text/css" href="static/style/global.css"/>
+		<meta name="viewport" content="width=device-width" />
+	</head>
+	<body>
+		<div id="header">
+			<div id="home_logo">
+				<a href="/Covoiturage/home.jsf">
+					<img src="static/img/car_50px.png" alt="logo" />
+				</a>
+			</div>
+			<div id="page_title">
+				<h1>Profil utilisateur</h1>
+
+			</div>
+		</div>
+		<div id="body">
+		<div class="section">
+			<label>Prénom :</label>
+			<div class="readonly">
+				Vincent
+			</div>
+			<label>Nom :</label>
+			<div class="readonly">
+				Tou
+			</div>
+		</div>
+		<hr />
+<form id="j_id30" name="j_id30" method="post" action="/Covoiturage/user/show.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_id30" value="j_id30" />
+	
+			<div class="section"><input type="submit" name="j_id30:j_id32" value="Modifier mon profil" class="large" /><input type="submit" name="j_id30:j_id33" value="Consulter mes trajets" class="large" />
+			</div><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="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" autocomplete="off" />
+</form>
+
+		</div>
+		<div id="footer">INSA/IF - OT/SIMS - 2011
+		</div>
+	</body>
+</html>
