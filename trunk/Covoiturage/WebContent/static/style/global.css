@@ -54,10 +54,22 @@ hr {
 	margin: 17px 10px 25px 10px;
 }
 
+.readonly {
+	margin-bottom: 8px;
+	padding: 5px;
+	background-color: white;
+	
+	border: 1px solid black;
+	-moz-border-radius		: 10px;
+	-webkit-border-radius	: 10px;
+}
+
 /* Messages */
 
 .msg {
+	display:  block;
 	font-style: italic;
+	margin-bottom: 20px;
 }
 ul.msg {
 	margin-top: 0px;
