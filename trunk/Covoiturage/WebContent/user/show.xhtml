@@ -10,39 +10,46 @@
 	<ui:define name="title">Profil utilisateur</ui:define>
 
 	<ui:define name="body">
-
-		<h:panelGrid columns="2">
-		
+		<div class="section">
 			<h:outputLabel value="Prénom :" />
 			<h:outputText value="#{beansUser.user.firstname}" />
-			
 			<h:outputLabel value="Nom :" />
 			<h:outputText value="#{beansUser.user.lastname}" />
-			
+		</div>	
+		
+		<div class="section">
 			<h:outputLabel value="E-mail :" />
 			<h:outputText value="#{beansUser.user.email}" />
-			
+		</div>	
+		
+		<div class="section">	
 			<h:outputLabel value="Note :" />
 			<h:outputText value="#{beansUser.user.note}" />
-			
+		</div>	
+		
+		<div class="section">	
 			<h:outputLabel value="Genre :" />
 			<h:outputText value="#{beansUser.user.genre}" />
-			
+		</div>	
+		
+		<div class="section">
 			<h:outputLabel value="Anniversaire :" />
 			<h:outputText value="#{beansUser.birthdateString}" />
-			
+		</div>	
+		
+		<div class="section">
 			<h:outputLabel value="Numéro de portable :" />
 			<h:outputText value="#{beansUser.user.mobilphone}" />
-			
+		</div>	
+		
+		<div class="section">
 			<h:outputLabel value="Description :" />
 			<h:outputText value="#{beansUser.user.description}" />			
-			
-		</h:panelGrid>
-		
+		</div>	
 		<hr/>
 		
 		<h:form>	
-			<div>
+			<div class="section">
 				<h:commandButton action="#{beansUser.toEdit}" value="Modifier mon profil" styleClass="large" />
 				<h:commandButton value="Consulter mes trajets" styleClass="large" />
 			</div>
