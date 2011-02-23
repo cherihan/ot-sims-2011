@@ -9,7 +9,7 @@
 	<ui:composition template="/route/create.xhtml" >
 		
 		<ui:define name="title">Recherche</ui:define>
-		<ui:define name="route_create_after_end">
+		<ui:define name="form-end">
 			<div class="section">
 				<h:outputLabel value="Dans un rayon de" />
 				<h:selectOneMenu value="#{beansRoute.distance_radius}" styleClass="large">
@@ -19,8 +19,6 @@
 					<f:selectItem itemLabel="4km" itemValue="4"/>
 				</h:selectOneMenu>
 			</div>
-		</ui:define>
-		<ui:define name="route_create_after_minutes">
 			<div class="section">
 				<h:outputLabel value="plus ou moins" />
 				<h:selectOneMenu value="beansRoute.time_delta" styleClass="large">
@@ -29,8 +27,8 @@
 					<f:selectItem itemLabel="3mn" itemValue="3"/>
 					<f:selectItem itemLabel="4mn" itemValue="4"/>
 				</h:selectOneMenu>
-				<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />
 			</div>
+			<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />
 		</ui:define>
 	</ui:composition>
 </html>
