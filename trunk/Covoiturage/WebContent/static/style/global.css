@@ -66,8 +66,7 @@ hr {
 
 /* Messages */
 
-.msg {
-	display:  block;
+.msg {	
 	font-style: italic;
 	margin-bottom: 20px;
 }
