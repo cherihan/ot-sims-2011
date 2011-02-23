@@ -19,7 +19,7 @@
 			</div>
 			
 			<div class="section">
-				<p><font size="2"  color="gray">Si vous voulez garder votre mot de passe actuel, laissez ce champ vide.</font></p>
+				<p><font size="2"  color="gray">Si vous voulez garder votre mot de passe actuel, laissez le champ du mot de passe vide.</font></p>
 				<h:outputLabel value="Mot de passe :" />
 				<h:inputSecret value="#{beansUser.userTemp.password}" styleClass="large" />
 				<h:outputLabel value="Confirmation :" />
@@ -35,10 +35,10 @@
 			
 			<div class="section">
 				<h:outputLabel value="Genre :" />				
-				<h:selectOneListbox value="#{beansUser.userTemp.genre}"  styleClass="large">
-					<f:selectItem itemValue="male"/>
-					<f:selectItem itemValue="female"/>
-				</h:selectOneListbox>
+				<h:selectOneRadio value="#{beansUser.userTemp.genre}" styleClass="large">
+					<f:selectItem itemLabel="Homme" itemValue="male"/>
+					<f:selectItem itemLabel="Femme"  itemValue="female"/>
+				</h:selectOneRadio>
 			</div>
 			
 			<div class="section">
