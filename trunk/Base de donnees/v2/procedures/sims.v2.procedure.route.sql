@@ -86,6 +86,30 @@ BEGIN
 END //
 
 
+DROP PROCEDURE IF EXISTS route_add_segment //
+CREATE PROCEDURE route_add_segment (
+	IN _rte_id INT(11),
+	IN _pos_begin INT(11),
+	IN _pos_end INT(11),
+	IN _duration INT(11),
+	IN _date_begin INT(11),
+	IN _order INT(11)
+)
+BEGIN
+	
+	INSERT INTO segment_seg (seg_id	, seg_route	, seg_pos_begin	, seg_pos_end	, seg_duration	, seg_date_begin, seg_order) VALUES
+							(NULL	, _rte_id	, _pos_begin	, _pos_end	  	, _duration		, _date_begin	, _order);
+	
+END //
+
+
+DROP PROCEDURE IF EXISTS route_del_all_segment //
+CREATE PROCEDURE route_del_all_segment (
+	IN _rte_id INT(11)
+)
+BEGIN
+	DELETE FROM segment_seg WHERE seg_route = _rte_id;	
+END //
 
 
 
@@ -95,10 +119,16 @@ CREATE PROCEDURE route_join (
 	IN _usr_id INT(11)
 )
 BEGIN
-
-	INSERT IGNORE INTO passager_psg (psg_id	,psg_route	,psg_user, psg_type	, psg_askdate		) VALUES
-									(NULL	, _rte_id	, _usr_id, 3		, UNIX_TIMESTAMP()	);
+	
+	DECLARE __pos_begin INT(11);
+	DECLARE __pos_end INT(11);
+	
+	SELECT rte_pos_begin, rte_pos_end INTO __pos_begin, __pos_end FROM route_rte WHERE rte_id = _rte_id;
+	
+	INSERT IGNORE INTO passager_psg (psg_id	,psg_route	,psg_user, psg_type	, psg_askdate		, psg_pos_begin	, psg_pos_end 	) VALUES
+									(NULL	, _rte_id	, _usr_id, 1		, UNIX_TIMESTAMP()	, __pos_begin	, __pos_end		);
 									-- 3 waiting
+									-- 1 accepted
 
 
 END //

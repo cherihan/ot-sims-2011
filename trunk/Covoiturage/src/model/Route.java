@@ -77,8 +77,8 @@ public class Route {
 		this.type = Integer.parseInt(sqlrow.get("rte_type"));
 		this.position_begin = Integer.parseInt(sqlrow.get("rte_position_begin"));
 		this.position_end = Integer.parseInt(sqlrow.get("rte_position_end"));
-		//this.date_begin = sqlrow.get("rte_date_begin");
-		//this.date_end = sqlrow.get("rte_date_end");
+		this.date_begin = DateUtils.getTimestampAsDate(Integer.valueOf(sqlrow.get("rte_date_begin")));
+		this.date_end = DateUtils.getTimestampAsDate(Integer.valueOf(sqlrow.get("rte_date_end")));
 		this.comment = sqlrow.get("rte_comment");
 		this.owner = Integer.parseInt(sqlrow.get("rte_owner"));
 		this.seat = Integer.parseInt(sqlrow.get("rte_seat"));
@@ -93,8 +93,8 @@ public class Route {
 			this.type = sqlrow.getInt("rte_type");
 			this.position_begin = sqlrow.getInt("rte_pos_begin");
 			this.position_end = sqlrow.getInt("rte_pos_end");
-			this.date_begin = sqlrow.getDate("rte_date_begin");
-			this.date_end = sqlrow.getDate("rte_date_end");
+			this.date_begin = DateUtils.getTimestampAsDate(sqlrow.getInt("rte_date_begin"));
+			this.date_end = DateUtils.getTimestampAsDate(sqlrow.getInt("rte_date_end"));
 			this.comment = sqlrow.getString("rte_comment");
 			this.owner = sqlrow.getInt("rte_owner");
 			this.seat = sqlrow.getInt("rte_seat");
@@ -343,10 +343,16 @@ public class Route {
 		return minutes;
 	}
 	
+	public Integer getMinuteCountdown() {
+		// Retourne le nombre de minutes restantes avant le d�part
+		//TODO
+		return 20;
+	}
+	
 	public String getSeatDots() {
 		// Retourne une représentation sous forme de points blancs et noirs du nombre de places restantes
 		// Note : je sais, c'est mal. -Vincent.
-		int nRestant = this.getSeatEmpty().intValue();
+		int nRestant = this.getEmpty_seats().intValue();
 		int nTotal = this.getSeat();
 		int i = 0;
 		String outputStr = "";
