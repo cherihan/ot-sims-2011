@@ -21,11 +21,10 @@
 			</div>
 			<div class="section">
 				<h:outputLabel value="plus ou moins" />
-				<h:selectOneMenu value="beansRoute.time_delta" styleClass="large">
-					<f:selectItem itemLabel="1mn" itemValue="1"/>
-					<f:selectItem itemLabel="2mn" itemValue="2"/>
-					<f:selectItem itemLabel="3mn" itemValue="3"/>
-					<f:selectItem itemLabel="4mn" itemValue="4"/>
+				<h:selectOneMenu value="#{beansRoute.time_delta}" styleClass="large">
+					<f:selectItem itemLabel="5mn" itemValue="5"/>
+					<f:selectItem itemLabel="10mn" itemValue="10"/>
+					<f:selectItem itemLabel="30mn" itemValue="30"/>
 				</h:selectOneMenu>
 			</div>
 			<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />

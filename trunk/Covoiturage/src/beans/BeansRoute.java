@@ -153,20 +153,20 @@ public class BeansRoute {
 	}
 
 	public String search() throws Exception {
-		Position from = null;
-		Position to = null;
 		if (minutes_to_depart == null || pos_depart == null
 				|| pos_arrive == null || time_delta == null
 				|| distance_radius == null) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 		}
-		
-		from = DaoPosition.createPosition(pos_depart, 45.0, 45.0); // FIXME : latitude and longitude
-		to = DaoPosition.createPosition(pos_arrive, 45.0, 45.0); // FIXME : latitude and longitude
 
-		Date date_departure_begin = new Date(0);
-		//date_departure_begin.setTime(date_departure_begin.getTime() - time_delta*60*1000);
+		Position from = DaoPosition.getPositionByAddress(pos_depart);
+		Position to = DaoPosition.getPositionByAddress(pos_arrive);
+		//from = DaoPosition.createPosition(pos_depart, 45.0, 45.0); // FIXME : latitude and longitude
+		//to = DaoPosition.createPosition(pos_arrive, 45.0, 45.0); // FIXME : latitude and longitude
+
+		Date date_departure_begin = new Date();
+		date_departure_begin.setTime(date_departure_begin.getTime() - time_delta*60*1000);
 		
 		Date date_departure_end = new Date();
 		date_departure_end.setTime(date_departure_end.getTime() + time_delta*60*1000);
@@ -174,8 +174,8 @@ public class BeansRoute {
 		Hashtable<Integer, Route> table = DaoRoute.route_search(from, to, date_departure_begin, date_departure_end,
 				distance_radius, Route_type.PROVIDE_CAR);
 		route_list = new ArrayList<Route>(table.values());
-		System.out.println(from);
-		System.out.println(to);
+		System.out.println(from.getAddress());
+		System.out.println(to.getAddress());
 		System.out.println(date_departure_begin);
 		System.out.println(date_departure_end);
 		System.out.println(distance_radius);

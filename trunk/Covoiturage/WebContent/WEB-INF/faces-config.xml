@@ -40,10 +40,6 @@
    <to-view-id>/route/show.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>index</from-outcome>
-   <to-view-id>/route/index.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
    <from-outcome>search</from-outcome>
    <to-view-id>/route/search.xhtml</to-view-id>
   </navigation-case>
@@ -69,10 +65,10 @@
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
-  <from-view-id>/route/create.xhtml</from-view-id>
+  <from-view-id>/route/search.xhtml</from-view-id>
   <navigation-case>
-   <from-outcome>show</from-outcome>
-   <to-view-id>/route/show.xhtml</to-view-id>
+   <from-outcome>index</from-outcome>
+   <to-view-id>/route/index.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <application>
