@@ -343,12 +343,6 @@ public class Route {
 		return minutes;
 	}
 	
-	public Integer getMinuteCountdown() {
-		// Retourne le nombre de minutes restantes avant le départ
-		//TODO
-		return 20;
-	}
-	
 	public String getSeatDots() {
 		// Retourne une représentation sous forme de points blancs et noirs du nombre de places restantes
 		// Note : je sais, c'est mal. -Vincent.
