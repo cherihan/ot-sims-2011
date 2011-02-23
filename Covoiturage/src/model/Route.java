@@ -344,7 +344,7 @@ public class Route {
 	}
 	
 	public Integer getMinuteCountdown() {
-		// Retourne le nombre de minutes restantes avant le d�part
+		// Retourne le nombre de minutes restantes avant le départ
 		//TODO
 		return 20;
 	}
