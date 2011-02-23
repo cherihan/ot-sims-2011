@@ -14,9 +14,9 @@
 		<ui:define name="body">
 			<div class="ride_details">
 				<div class="from"><span>De :</span><h:outputText value="#{route.Position_begin}" /></div>
-				<div class="to"><span>À  :</span><h:outputText value="#{route.Position_end}" /></div>
-				<div class="countdown">Départ dans <span><h:outputText value="#{route.getMinuteCountdown()}" />mn</span></div>
-				<div class="matching"><h:outputText value="#{route.getSeatEmpty()}" /> places libres ◎◉</div>
+				<div class="to"><span>À :</span><h:outputText value="#{route.Position_end}" /></div>
+				<div class="countdown">Départ dans <span><h:outputText value="#{route.delay_from_now}" />mn</span></div>
+				<div class="matching"><h:outputText value="#{route.empty_seats}" /> places libres #{route.seatDots}</div>
 			</div>
 			<hr/>
 			<div>
