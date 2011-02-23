@@ -15,13 +15,13 @@
 		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
 		<ui:insert name="begin-form" />
 		<h:form id="create-route-form">
-			<div class="section"><h:outputLabel value="De" />
+			<div class="section"><h:outputLabel value="Au dŽpart de" />
 				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
 					<f:selectItem itemLabel="ici" itemValue="here" />
 					<f:selectItem itemLabel="autre..." itemValue="other" />
 				</h:selectOneMenu>
 			</div>
-			<div class="section"><h:outputLabel value="A" />
+			<div class="section"><h:outputLabel value="Jusqu'ˆ" />
 				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
 					<f:selectItem itemLabel="Maison"
 						itemValue="une ID de lieux enregistre" />
