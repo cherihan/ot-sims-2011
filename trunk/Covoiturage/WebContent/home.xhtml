@@ -26,7 +26,7 @@
 		
 		<h:panelGroup rendered="#{homeCtrl.userConnected}">
 			
-			<h:outputText value="#{beansUser.user.email}" />
+			<div class="readonly">Bienvenue <h:outputText value="#{beansUser.user.email}" /></div>
 			
 			<div>				
 				<h:commandButton action="create" value="Ajouter un trajet" styleClass="large" />
