@@ -54,6 +54,8 @@ hr {
 	margin: 17px 10px 25px 10px;
 }
 
+/* Messages */
+
 .msg {
 	font-style: italic;
 }
@@ -109,6 +111,15 @@ form .timestamp {
 	display: inline;
 	width: auto;
 }
+
+.section {
+	margin: 0px 0px 24px 0px;
+}
+.section .large {
+	margin: 0px 0px 8px 0px;
+}
+
+/* People */
 
 .people_link {
 	position: relative;
