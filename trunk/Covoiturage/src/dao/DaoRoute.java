@@ -28,17 +28,17 @@ public class DaoRoute {
 	 * January 1, 1970, 00:00:00 GMT before inserting into the data base
 	 * 
 	 * @param address_depart
-	 *            : name of the departure position
+	 *            : name of the departure position (not null)
 	 * @param address_arrive
-	 *            : name of the arrival position
+	 *            : name of the arrival position (not null)
 	 * @param date_depart
-	 *            : departure time
+	 *            : departure time (not null)
 	 * @param date_arrive
 	 *            : arrival time
 	 * @param comt
-	 *            : user comment
+	 *            : user comment (replaced by '' if null)
 	 * @param user_ID
-	 *            : user id
+	 *            : user id (not null)
 	 * @param seat
 	 *            : number of seat available
 	 * @param car_ID
@@ -47,9 +47,10 @@ public class DaoRoute {
 	 *         related to the specified address (depart or arrive)
 	 * @throws Exception
 	 */
-	public static Route createRoute(int type, String address_depart,
+	public static Route createRoute(Integer type, String address_depart,
 			String address_arrive, Date date_depart, Date date_arrive,
-			String comt, int user_ID, int seat, int car_ID) throws Exception {
+			String comt, Integer user_ID, Integer seat, Integer car_ID)
+			throws Exception {
 		Position pos_depart = null;
 		Position pos_arrive = null;
 
@@ -89,17 +90,17 @@ public class DaoRoute {
 	 * into the data base
 	 * 
 	 * @param pos_depart_ID
-	 *            : depart position id
+	 *            : depart position id (not null)
 	 * @param pos_arrive_ID
-	 *            : arrive position id
+	 *            : arrive position id (not null)
 	 * @param date_depart
-	 *            : departure time
+	 *            : departure time (not null)
 	 * @param date_arrive
 	 *            : arrival time
 	 * @param comt
-	 *            : user comment
+	 *            : user comment (replaced by '' if null)
 	 * @param user_ID
-	 *            : user id
+	 *            : user id (not null)
 	 * @param seat
 	 *            : number of seat available
 	 * @param car_ID
@@ -108,9 +109,10 @@ public class DaoRoute {
 	 *         no result
 	 * @throws Exception
 	 */
-	public static Route createRoute(int type, int pos_depart_ID,
-			int pos_arrive_ID, Date date_depart, Date date_arrive, String comt,
-			int user_ID, int seat, int car_ID) throws Exception {
+	public static Route createRoute(Integer type, Integer pos_depart_ID,
+			Integer pos_arrive_ID, Date date_depart, Date date_arrive,
+			String comt, Integer user_ID, Integer seat, Integer car_ID)
+			throws Exception {
 
 		con = null;
 		String messageErr = null;
@@ -132,15 +134,9 @@ public class DaoRoute {
 			String query = "call route_create(" + type + ", " + pos_depart_ID
 					+ ", " + pos_arrive_ID + ", " + date_depart_INT + ", "
 					+ (date_arrive_INT == null ? "NULL" : date_arrive_INT)
-					+ ", '" + (comt == null ? "" : comt) + "', " + user_ID + ", "
-					+ seat + ", ";
-
-			// Car id patch
-			if (car_ID == 0) {
-				query += "NULL)";
-			} else {
-				query += car_ID + ")";
-			}
+					+ ", '" + (comt == null ? "" : comt) + "', " + user_ID
+					+ ", " + (seat == null ? "NULL" : seat) + ", "
+					+ (car_ID == null ? "NULL" : car_ID) + ")";
 
 			try {
 				res = con.execute(query);
@@ -193,8 +189,9 @@ public class DaoRoute {
 	public static Hashtable<Integer, Passager> getPassagers(int rte_id) {
 		return DaoPassager.getPassagers(rte_id);
 	}
-	
-	public static Hashtable<Integer, Passager> getPassagersOfType(int rte_id,int pgt_id) {
+
+	public static Hashtable<Integer, Passager> getPassagersOfType(int rte_id,
+			int pgt_id) {
 		return DaoPassager.getPassagersOfType(rte_id, pgt_id);
 	}
 
@@ -202,7 +199,7 @@ public class DaoRoute {
 			throws Exception {
 		DaoPassager.route_add_passager(rte_id, passager_user_id);
 	}
-	
+
 	/**
 	 * 
 	 * @param pos_begin
@@ -210,7 +207,8 @@ public class DaoRoute {
 	 * @param date_departure_begin
 	 * @param date_departure_end
 	 * @param location_appro
-	 * @param rtp_id  appartient à (0,1,2), 0 <=> indifferent
+	 * @param rtp_id
+	 *            appartient à (0,1,2), 0 <=> indifferent
 	 * @return Les routes correspondantes aux criteres
 	 */
 	public static Hashtable<Integer, Route> route_search(Position pos_begin,
@@ -237,13 +235,14 @@ public class DaoRoute {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * 
 	 * @param usr_id
 	 * @param date_departure_begin
 	 * @param date_departure_end
-	 * @param rtp_id  appartient à (0,1,2), 0 <=> indifferent
+	 * @param rtp_id
+	 *            appartient à (0,1,2), 0 <=> indifferent
 	 * @return
 	 */
 	public static Hashtable<Integer, Route> route_search_of_owner(int usr_id,
@@ -254,11 +253,10 @@ public class DaoRoute {
 		try {
 			con = ConnexionBD.getConnexion();
 
-			String query = "call route_search_of_owner("
-				+ usr_id + ", "
-				+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
-					+ DateUtils.getDateAsInteger(date_departure_end)
-					+ rtp_id + ")";
+			String query = "call route_search_of_owner(" + usr_id + ", "
+					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
+					+ DateUtils.getDateAsInteger(date_departure_end) + rtp_id
+					+ ")";
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
 				rte = new Route(curseur);
@@ -268,7 +266,5 @@ public class DaoRoute {
 		}
 		return list;
 	}
-
-	
 
 }
