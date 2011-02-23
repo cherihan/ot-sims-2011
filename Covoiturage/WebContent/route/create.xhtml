@@ -22,45 +22,57 @@
 		}
 	}
 	</script>
-		<div class="msg error"><h:outputText
-			value="#{beansRoute.messageErr}" /></div>
-		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
+		<div class="msg error"><h:outputText value="#{beansRoute.messageErr}" /></div>
+		<div class="msg error"><h:messages styleClass="msg" errorClass="error" fatalClass="error"/></div>
+		
 		<h:form id="create-route-form">
-			<div class="section"><h:outputLabel value="J'aimerais" /> <h:selectOneMenu
-				value="#{beansRoute.route_type}" class="large"
-				onchange="showHideSeatNumber();" id="route-type">
+			<div class="section">
+			<h:outputLabel value="J'aimerais" />
+			<h:selectOneMenu value="#{beansRoute.route_type}" class="large" onchange="showHideSeatNumber();" id="route-type">
 				<f:selectItem itemLabel="proposer un trajet" itemValue="2" />
 				<f:selectItem itemLabel="demander un trajet" itemValue="1" />
-			</h:selectOneMenu></div>
-			<div class="section"><h:outputLabel value="De" /> <h:selectOneMenu
-				value="#{beansRoute.pos_depart}" styleClass="large" required="true">
-				<f:selectItem itemLabel="ici" itemValue="here" />
-				<f:selectItem itemLabel="autre..." itemValue="other" />
-			</h:selectOneMenu></div>
-			<div class="section"><h:outputLabel value="A" /> <h:selectOneMenu
-				value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
-				<f:selectItem itemLabel="Maison"
-					itemValue="une ID de lieux enregistré" />
-				<f:selectItem itemLabel="Boulot"
-					itemValue="une ID de lieux enregistré" />
-				<f:selectItem itemLabel="autre..." itemValue="other" />
-			</h:selectOneMenu></div>
-			<div class="section"><h:outputLabel value="Dans" /> <h:selectOneMenu
-				value="#{beansRoute.minutes_to_depart}" class="large"
-				required="true">
-				<f:selectItem itemLabel="5mn" itemValue="5" />
-				<f:selectItem itemLabel="10mn" itemValue="10" />
-				<f:selectItem itemLabel="20mn" itemValue="20" />
-				<f:selectItem itemLabel="30mn" itemValue="30" />
-				<f:selectItem itemLabel="40mn" itemValue="40" />
-				<f:selectItem itemLabel="50mn" itemValue="50" />
-				<f:selectItem itemLabel="1h" itemValue="50" />
-			</h:selectOneMenu></div>
-			<div class="section" id="seat-number-section"><h:outputText
-				value="Avec "/> <h:inputText value="#{beansRoute.seat_number}"
-				styleClass="large" id="seat-number" /> <h:outputText value=" place(s) disponible(s)" /></div>
-			<h:commandButton action="#{beansRoute.createRoute}" value="Ajouter"
-				styleClass="large" />
+			</h:selectOneMenu>
+			</div>
+			
+			<div class="section">
+				<h:outputLabel value="De" />
+				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+					<f:selectItem itemLabel="ici" itemValue="here" />
+					<f:selectItem itemLabel="autre..." itemValue="other" />
+				</h:selectOneMenu>
+			</div>
+			
+			<div class="section">
+				<h:outputLabel value="A" />
+				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
+					<f:selectItem itemLabel="Maison" itemValue="une ID de lieux enregistré" />
+					<f:selectItem itemLabel="Boulot" itemValue="une ID de lieux enregistré" />
+					<f:selectItem itemLabel="autre..." itemValue="other" />
+				</h:selectOneMenu>
+			</div>
+			
+			<div class="section">
+				<h:outputLabel value="Dans" />
+				<h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large" required="true">
+					<f:selectItem itemLabel="5mn" itemValue="5" />
+					<f:selectItem itemLabel="10mn" itemValue="10" />
+					<f:selectItem itemLabel="20mn" itemValue="20" />
+					<f:selectItem itemLabel="30mn" itemValue="30" />
+					<f:selectItem itemLabel="40mn" itemValue="40" />
+					<f:selectItem itemLabel="50mn" itemValue="50" />
+					<f:selectItem itemLabel="1h" itemValue="50" />
+				</h:selectOneMenu>
+			</div>
+			
+			<div class="section" id="seat-number-section">
+				<h:outputText value="Avec "/>
+				<h:inputText value="#{beansRoute.seat_number}" styleClass="large" id="seat-number" />
+				<h:outputText value=" place(s) disponible(s)" />
+			</div>
+			
+			<div class="section">
+				<h:commandButton action="#{beansRoute.createRoute}" value="Ajouter" styleClass="large" />
+			</div>
 		</h:form>
 		<script type="text/javascript">showHideSeatNumber();</script>
 	</ui:define>
