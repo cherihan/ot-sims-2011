@@ -3,8 +3,10 @@
 function positionSelectUpdateState(jSelect) {
 	var jDiv = jSelect.parents('.positionSelect');
 	var jOther = jDiv.find('input.other');
+	var jSelect = jDiv.find('select');
 	if(jSelect.attr('value') == 'other') {
 		jOther.show();
+		jSelect.hide();
 	}else{
 		jOther.hide();
 	}
@@ -21,7 +23,6 @@ function geolocalisation_success(position) {
 	
 	__geolocalisation_success_detected=true;
 	
-	alert('Position : '+position.coords.latitude+' - '+position.coords.longitude); 
 	//document.getElementById('localisation').value=+position.coords.latitude+';'+position.coords.longitude;
 	$('input.lat').each(function(i, elm) {
 		$(this).attr('value', position.coords.latitude);
@@ -68,7 +69,13 @@ $(function() {
 		
 	});
 	
+	var posDetected=false;
+	$('.detectPosition').each(function() {
+		if(posDetected == false) {
+			posDetected=true;
+			geolocalisation_detectPosition();
+		}
+	});
 	
-	geolocalisation_detectPosition();
 	
 });
