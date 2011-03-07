@@ -13,6 +13,7 @@ import utilities.DateUtils;
 import dao.DaoCriterion;
 import dao.DaoPosition;
 import dao.DaoRoute;
+import dao.DaoUser_fav_position;
 
 public class User {
 
@@ -408,14 +409,35 @@ public class User {
 	 */
 
 	public void setFavoritePosition(String posLabel, String position) {
-	//TODO ...
+		//TODO: tests
+		// - lorsqu'il n'y a pas d'adresse déjà remplie
+		//   -> nouvelle adresse
+		// - lorsqu'il y a déjà une adresse remplie
+		//   -> l'adresse est mise à jour
+		// - lorsque l'adresse est incorrecte
+		//   -> l'action est sans effet
+		try {
+			Position fav_position = DaoPosition.getPositionByAddress(position);
+			DaoUser_fav_position.createUser_fav_position(posLabel, this.getId(), fav_position.getId());
+		} catch (Exception e) {
+		
+		}
 	}
 	
 	public void setFavoritePositionHome(String position) {
 		this.setFavoritePosition("Domicile", position);
 	}
 	public void setFavoritePositionWork(String position) {
-		this.setFavoritePosition("Lieu de travail", position);
+		this.setFavoritePosition("Bureau", position);
+	}
+	
+	public String getFavoritePositionHome() {
+	//TODO: retourner l'adresse de la position pour le label "Domicile"
+		return "";
+	}
+	public String getFavoritePositionWork() {
+	//TODO: retourner l'adresse de la position pour le label "Bureau"
+		return "";
 	}
 
 }
