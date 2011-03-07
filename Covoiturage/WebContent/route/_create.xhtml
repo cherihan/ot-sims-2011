@@ -13,19 +13,21 @@
 		<ui:insert name="begin-form" />
 		<h:form id="create-route-form">
 			<div class="section"><h:outputLabel value="Au départ de" escape="false"/>
-				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+				<!--h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
 					<f:selectItem itemLabel="ici" itemValue="Lyon, France" />
 					<f:selectItem itemLabel="autre..." itemValue="Paris, France" />
-				</h:selectOneMenu>
+				</h:selectOneMenu-->
+				<h:inputText value="#{beansRoute.pos_depart}" styleClass="large" required="true" />
 			</div>
 			<div class="section"><h:outputLabel value="Jusqu'à" escape="false"/>
-				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
+				<!--h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
 					<f:selectItem itemLabel="Maison"
 						itemValue="Le Puy-en-Velay, France" />
 					<f:selectItem itemLabel="Boulot"
 						itemValue="Le Mans, France" />
 					<f:selectItem itemLabel="autre..." itemValue="other" />
-				</h:selectOneMenu>
+				</h:selectOneMenu-->
+				<h:inputText value="#{beansRoute.pos_arrive}" styleClass="large" required="true" />
 			</div>
 			<div class="section">
 				<h:outputLabel value="Dans" />
