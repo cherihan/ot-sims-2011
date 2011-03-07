@@ -1121,6 +1121,36 @@ BEGIN
 END //
 
 
+DROP PROCEDURE IF EXISTS route_get_segments //
+CREATE PROCEDURE route_get_segments (
+	IN _rte_id INT(11)
+)
+BEGIN
+
+	SELECT seg.*, 
+			pbeg.pos_id AS pbeg_pos_id,
+			pbeg.pos_address AS pbeg_pos_address,
+			pbeg.pos_latitude AS pbeg_pos_latitude,
+			pbeg.pos_longitude AS pbeg_pos_longitude,
+			
+			pend.pos_id AS pend_pos_id,
+			pend.pos_address AS pend_pos_address,
+			pend.pos_latitude AS pend_pos_latitude,
+			pend.pos_longitude AS pend_pos_longitude
+			
+			
+		FROM  segment_seg seg
+			INNER JOIN position_pos pbeg ON seg.seg_pos_begin = pbeg.pos_id
+			INNER JOIN position_pos pend ON seg.seg_pos_end = pend.pos_id
+		WHERE 
+				seg.seg_route = _rte_id;
+		
+
+END //
+
+
+
+
 DELIMITER ;
 
 
