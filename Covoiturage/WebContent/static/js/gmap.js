@@ -5,7 +5,7 @@ function gmapInitialize() {
 		return false;
 	}
 		
-	var myLatlng = new google.maps.LatLng(__gmap_polyline_points[0].lat, __gmap_polyline_points[0].lng);
+	var myLatlng = new google.maps.LatLng(__gmap_polyline_points[0].['lat'], __gmap_polyline_points[0].['lng']);
 	var myOptions = {
 		zoom : __gmap_zoom,
 		center : myLatlng,
@@ -15,8 +15,8 @@ function gmapInitialize() {
 	var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 
 	var flightPlanCoordinates = new Array();
-	for(i=0 ; i < __gmap_polyline_points; i++ ) {
-		flightPlanCoordinates.push(new google.maps.LatLng(__gmap_polyline_points[i].lat, __gmap_polyline_points[i].lng));
+	for(i=0 ; i < __gmap_polyline_points.length ; i++ ) {
+		flightPlanCoordinates.push(new google.maps.LatLng(__gmap_polyline_points[i].['lat'], __gmap_polyline_points[i].['lng']));
 	}
 	
 	var flightPath = new google.maps.Polyline({
