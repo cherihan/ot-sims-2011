@@ -16,13 +16,14 @@ function positionSelectUpdateState(jSelect) {
 var __geolocalisation_success_detected = false;
 
 function geolocalisation_success(position) {
+	alert(3);
 	if (__geolocalisation_success_detected) {
 		// not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back
 		return;
 	}
 	
 	__geolocalisation_success_detected=true;
-	
+
 	//document.getElementById('localisation').value=+position.coords.latitude+';'+position.coords.longitude;
 	$('input.lat').each(function(i, elm) {
 		$(this).attr('value', position.coords.latitude);
@@ -41,7 +42,7 @@ function geolocalisation_error(msg) {
 function geolocalisation_detectPosition() {
 	if (geolocalisation_isSupported()) {
 		//maximum age of 10 minutes = 600000 milliseconds
-		navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000});
+		navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000, timeout:2000});
 	} else {
 		error('geolocalisation not supported');
 	}
@@ -68,7 +69,6 @@ $(function() {
 		positionSelectUpdateState(jSelect);
 		
 	});
-	
 	var posDetected=false;
 	$('.detectPosition').each(function() {
 		if(posDetected == false) {
