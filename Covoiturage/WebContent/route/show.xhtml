@@ -62,7 +62,7 @@
     <script type="text/javascript">
       var polyline = new Array();
       <ui:repeat value="#{beansRoute.segments}" var="pos">
-          polyline.add({"latitude"=>#{pos.latitude}, "longitude"=>#{pos.pos_beginObj.longitude}});
+          polyline.add({"latitude":#{pos.latitude}, "longitude":#{pos.longitude}});
       </ui:repeat>
       initializeGoogleMap(polyline);
     </script>
