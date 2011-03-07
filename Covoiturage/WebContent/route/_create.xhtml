@@ -12,6 +12,7 @@
 		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
 		<ui:insert name="begin-form" />
 		<h:form id="create-route-form">
+      <div class="detectPosition"></div>
 			<div class="section positionSelect">
         <h:outputLabel value="Au départ de" escape="false"/>
 				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
@@ -24,15 +25,16 @@
         <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
         
 			</div>
-			<div class="section"><h:outputLabel value="Jusqu'à" escape="false"/>
-				<!--h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
-					<f:selectItem itemLabel="Maison"
-						itemValue="Le Puy-en-Velay, France" />
-					<f:selectItem itemLabel="Boulot"
-						itemValue="Le Mans, France" />
-					<f:selectItem itemLabel="autre..." itemValue="other" />
-				</h:selectOneMenu-->
-				<h:inputText value="#{beansRoute.pos_arrive}" styleClass="large" required="true" />
+			<div class="section positionSelect">
+        <h:outputLabel value="Jusqu'à" escape="false"/>
+				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
+          <f:selectItem itemLabel="Ici" itemValue="here" />
+          <f:selectItem itemLabel="Position fav 1" itemValue="ufp-1" />
+          <f:selectItem itemLabel="Autre..." itemValue="other" />
+        </h:selectOneMenu>
+        <h:inputText value="#{beansRoute.pos_arrive_other}" styleClass="large hidden other" required="false" />
+        <h:inputText value="#{beansRoute.pos_arrive_coords_lat}" styleClass="hidden lat" required="false" />
+        <h:inputText value="#{beansRoute.pos_arrive_coords_lng}" styleClass="hidden lng" required="false" />
 			</div>
 			<div class="section">
 				<h:outputLabel value="Dans" />

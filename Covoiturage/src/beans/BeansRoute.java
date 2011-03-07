@@ -287,6 +287,7 @@ public class BeansRoute {
 		return route_list;
 	}
 
+
 	public String getPos_depart_other() {
 		return pos_depart_other;
 	}
@@ -338,5 +339,5 @@ public class BeansRoute {
 	public void setRoute_list(List<Route> route_list) {
 		this.route_list = route_list;
 	}
-	
+
 }
