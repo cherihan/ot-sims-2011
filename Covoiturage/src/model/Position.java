@@ -45,6 +45,18 @@ public class Position {
 		this.longitude = Double.valueOf(sqlrow.get("pos_longitude"));
 	}
 	
+	public Position(ResultSet sqlrow, String prefix) {
+		super();
+		try{
+			this.id = sqlrow.getInt(prefix+"pos_id");
+			this.address = sqlrow.getString(prefix+"pos_address");
+			this.latitude = sqlrow.getDouble(prefix+"pos_latitude");
+			this.longitude = sqlrow.getDouble(prefix+"pos_longitude");
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * @return the id
 	 */

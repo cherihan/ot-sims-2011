@@ -57,7 +57,17 @@
 			value="#{beansRoute.route.comment}" /></div>
 
 		<hr />
-
+    
+    <div id="map_canvas" style="width:300px;height:300px;"></div>
+    <script type="text/javascript">
+      var polyline = new Array();
+      <ui:repeat value="#{beansRoute.segments}" var="seg">
+          polyline.add({"latitude"=>#{seg.pos_beginObj.latitude}, "longitude"=>#{seg.pos_beginObj.longitude}});
+      </ui:repeat>
+      initializeGoogleMap(polyline);
+    </script>
+     
+    <hr />
 		<div><h:commandButton value="Autres trajets" styleClass="large" />
 		</div>
 
