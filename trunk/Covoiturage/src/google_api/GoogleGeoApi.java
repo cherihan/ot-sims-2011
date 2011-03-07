@@ -14,11 +14,18 @@ import org.json.JSONObject;
 public class GoogleGeoApi {
 
 	/**
+	 * @param int Définit la distance minimale entre 2 points de la polyline
+	 *        décrivant le parcours. AInsi, si dans une curbe, les points sont trop rapprochés, ils seront supprimés pur qu'ils soient au plus prooche, distant de X metres
+	 */
+	private static final int POLYLINE_INTERVAL_SIZE_MIN = 6000;
+	
+	
+	/**
 	 * @param int Définit la distance maximale entre 2 points de la polyline
 	 *        décrivant le parcours
 	 */
-	private static final int POLYLINE_INTERVAL_SIZE_MAX = 5000;
-	private static final int POLYLINE_INTERVAL_SIZE_MIN = 3000;
+	private static final int POLYLINE_INTERVAL_SIZE_MAX = 8000;
+	
 
 	private static final double LATITUDE_CONVERS = 0.000009;
 	private static final double LONGITUDE_CONVERS = 0.000014;
