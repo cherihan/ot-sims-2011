@@ -285,4 +285,57 @@ public class BeansRoute {
 	public Collection<Route> getRoute_list() {
 		return route_list;
 	}
+
+	public String getPos_depart_other() {
+		return pos_depart_other;
+	}
+
+	public void setPos_depart_other(String pos_depart_other) {
+		this.pos_depart_other = pos_depart_other;
+	}
+
+	public String getPos_depart_coords_lat() {
+		return pos_depart_coords_lat;
+	}
+
+	public void setPos_depart_coords_lat(String pos_depart_coords_lat) {
+		this.pos_depart_coords_lat = pos_depart_coords_lat;
+	}
+
+	public String getPos_depart_coords_lng() {
+		return pos_depart_coords_lng;
+	}
+
+	public void setPos_depart_coords_lng(String pos_depart_coords_lng) {
+		this.pos_depart_coords_lng = pos_depart_coords_lng;
+	}
+
+	public String getPos_arrive_other() {
+		return pos_arrive_other;
+	}
+
+	public void setPos_arrive_other(String pos_arrive_other) {
+		this.pos_arrive_other = pos_arrive_other;
+	}
+
+	public String getPos_arrive_coords_lat() {
+		return pos_arrive_coords_lat;
+	}
+
+	public void setPos_arrive_coords_lat(String pos_arrive_coords_lat) {
+		this.pos_arrive_coords_lat = pos_arrive_coords_lat;
+	}
+
+	public String getPos_arrive_coords_lng() {
+		return pos_arrive_coords_lng;
+	}
+
+	public void setPos_arrive_coords_lng(String pos_arrive_coords_lng) {
+		this.pos_arrive_coords_lng = pos_arrive_coords_lng;
+	}
+
+	public void setRoute_list(List<Route> route_list) {
+		this.route_list = route_list;
+	}
+	
 }
