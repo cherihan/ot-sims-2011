@@ -164,6 +164,7 @@ public class BeansRoute {
 			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR, posBegin.getId(), posEnd.getId(),
 					full_date_depart, null, null, currentUser.getId(), seat_number, null);
 			if (route != null){
+				route.setPassagers(new Hashtable<Integer, Passager>());
 				System.out.println("new route created");
 				return "show";
 			}else{
