@@ -23,11 +23,11 @@ function geolocalisation_success(position) {
 	
 	alert('Position : '+position.coords.latitude+' - '+position.coords.longitude); 
 	//document.getElementById('localisation').value=+position.coords.latitude+';'+position.coords.longitude;
-	jDiv.find('input.lat').each(function(i, elm) {
-		$(elm).attr('value', position.coords.latitude);
+	$('input.lat').each(function(i, elm) {
+		$(this).attr('value', position.coords.latitude);
 	});
-	jDiv.find('input.lng').each(function(i, elm) {
-		$(elm).attr('value', position.coords.longitude);
+	$('input.lng').each(function(i, elm) {
+		$(this).attr('value', position.coords.longitude);
 	});
 	
 }
@@ -51,10 +51,9 @@ function geolocalisation_isSupported() {
 }
 
 
-(function() {
-
+$(function() {
 	$('.positionSelect').each(function (i, elm) {
-		var jDiv = $(elm);
+		var jDiv = $(this);
 		var jSelect = jDiv.find('select');
 
 		var jOther = jDiv.find('input.other');
@@ -72,4 +71,4 @@ function geolocalisation_isSupported() {
 	
 	geolocalisation_detectPosition();
 	
-})();
+});
