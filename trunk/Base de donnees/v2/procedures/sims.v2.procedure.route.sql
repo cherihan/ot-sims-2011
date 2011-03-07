@@ -384,7 +384,7 @@ BEGIN
 			pend.pos_longitude AS pend_pos_longitude
 			
 			
-		FROM  segment_seg
+		FROM  segment_seg seg
 			INNER JOIN position_pos pbeg ON seg.seg_pos_begin = pbeg.pos_id
 			INNER JOIN position_pos pend ON seg.seg_pos_end = pend.pos_id
 		WHERE 
