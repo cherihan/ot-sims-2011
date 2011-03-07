@@ -289,6 +289,18 @@ public class User {
 	}
 
 	/**
+	 * @param birthdate
+	 *            the year of the birthdate to set
+	 * 
+	 * exemple : user.setBirthdateByYear("1988");
+	 *
+	 */
+	public void setBirthdateByYear(String strYear) {
+		DateFormat dfm = new SimpleDateFormat("yyyy");
+		this.birthdate = dfm.parse(strYear);
+	}
+
+	/**
 	 * @return the description
 	 */
 	public String getDescription() {
