@@ -139,6 +139,7 @@ form .timestamp {
 	height: 40px;
 }
 .people_link *:first-child {
+	margin-top: 0px;
 	width: 82%;
 }
 .people_link *:last-child {
@@ -146,6 +147,7 @@ form .timestamp {
 	right: 0px;
 	top: 0px;
 	width: 15%;
+	margin-top: 0px;
 }
 
 /* Ride lists */
