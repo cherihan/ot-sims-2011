@@ -336,17 +336,16 @@ public class BeansRoute {
 		this.route_list = route_list;
 	}
 	
-	public ArrayList<Hashtable<String, Double>> getSegments() {
-		ArrayList<Hashtable<String, Double>> retour = new ArrayList<Hashtable<String, Double>>();
+	public ArrayList<Position> getSegments() {
+		ArrayList<Position> retour = new ArrayList<Position>();
 		ArrayList<Segment> input = DaoRoute.getSegments(this.route);
+		System.out.println("Numberelementssss : "+input.size());
 		int i=0;
 		int n=input.size();
 		while(i < n) {
 			Segment seg = input.get(i); 
-			Hashtable<String, Double> subres = new Hashtable<String, Double>();
-			subres.put("latitude", seg.getPos_beginObj().getLatitude());
-			subres.put("longitude", seg.getPos_beginObj().getLongitude());
-			retour.add(subres);
+			retour.add(seg.getPos_beginObj());
+			retour.add(seg.getPos_endObj());
 			i++;
 		}
 		return retour;
