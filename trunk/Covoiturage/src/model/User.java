@@ -2,6 +2,9 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -297,7 +300,12 @@ public class User {
 	 */
 	public void setBirthdateByYear(String strYear) {
 		DateFormat dfm = new SimpleDateFormat("yyyy");
-		this.birthdate = dfm.parse(strYear);
+		try {
+			this.birthdate = dfm.parse(strYear);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
