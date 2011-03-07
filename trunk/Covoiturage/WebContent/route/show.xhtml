@@ -35,8 +35,12 @@
 		</div>
 		<div>Passagers :</div>
 		<div>
-			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty}">
-				<div>Soyez le premier </div>
+			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty} and #{!beansRoute.is_my_route}">
+				<div><h:outputText escape="false" value="Soyez le premier passager à bord"/></div>
+				<div><h:outputText escape="false" value="En cliquant sur le bouton ci-dessous"/></div>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty} and #{beansRoute.is_my_route}">
+				<div><h:outputText escape="false" value="Pas de passager"/></div>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{!beansRoute.route.isPassegerListEmpty}">
 				<ui:repeat value="#{beansRoute.route.passagerslist}" var="passager">
@@ -47,9 +51,10 @@
 				</ui:repeat>
 			</h:panelGroup>
 		</div>
-		<div><h:commandButton value="Se joindre au trajet"
-			styleClass="large" /></div>
-
+		<h:panelGroup rendered="#{!beansRoute.is_my_route}">
+			<div><h:commandButton value="Se joindre au trajet"
+				styleClass="large" /></div>
+		</h:panelGroup>
 		<hr />
 
 		<div><h:outputText escape="false" value="Détails du trajets : "/></div>
@@ -57,8 +62,7 @@
 			value="#{beansRoute.route.comment}" /></div>
 
 		<hr />
-    
-    <div id="map_canvas" style="width:300px;height:300px;"></div>
+		    <div id="map_canvas" style="width:300px;height:300px;"></div>
     <script type="text/javascript">
       var polyline = new Array();
       <ui:repeat value="#{beansRoute.segments}" var="pos">
@@ -66,11 +70,14 @@
       </ui:repeat>
       initializeGoogleMap(polyline);
     </script>
-     
-    <hr />
-		<div><h:commandButton value="Autres trajets" styleClass="large" />
-		</div>
-
+		<h:panelGroup rendered="#{beansRoute.is_created_route}">
+			<div><h:commandButton value="Retour" styleClass="large" />
+			</div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{!beansRoute.is_created_route}">
+			<div><h:commandButton value="Autres trajets" styleClass="large" />
+			</div>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>
