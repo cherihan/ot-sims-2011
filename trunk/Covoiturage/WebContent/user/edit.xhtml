@@ -34,6 +34,25 @@
 			</div>
 			
 			<div class="section">
+				<h:outputLabel value="Numéro de portable :" />
+				<h:inputText value="#{beansUser.userTemp.mobilphone}" styleClass="large"/>
+			</div>
+			
+			<hr />
+			
+			<div class="section">
+				<h:outputLabel value="Domicile :" />
+				<h:inputText value="#{beansUser.userTemp.favoritePositionHome}" styleClass="large"/>
+			</div>
+			
+			<div class="section">
+				<h:outputLabel value="Lieu de travail :" />
+				<h:inputText value="#{beansUser.userTemp.favoritePositionWork}" styleClass="large"/>
+			</div>
+			
+			<hr />
+			
+			<div class="section">
 				<h:outputLabel value="Genre :" />				
 				<h:selectOneRadio value="#{beansUser.userTemp.genre}" styleClass="large">
 					<f:selectItem itemLabel="Homme" itemValue="male"/>
@@ -53,11 +72,6 @@
 					<f:selectItem itemLabel="Senior" itemValue="1940"/>
 					<f:selectItem itemLabel="Senior++" itemValue="1900"/>
 				</h:selectOneMenu>
-			</div>
-			
-			<div class="section">
-				<h:outputLabel value="Numéro de portable :" />
-				<h:inputText value="#{beansUser.userTemp.mobilphone}" styleClass="large"/>
 			</div>
 			
 			<div class="section">

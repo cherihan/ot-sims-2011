@@ -393,6 +393,21 @@ public class User {
 		return DaoRoute.route_search_of_owner(this.getId(),
 				date_departure_begin, date_departure_end, rtp_id);
 	}
+	
+	
+	/**
+	 * Accès/modification des lieux "favoris"
+	 */
 
+	public void setFavoritePosition(String posLabel, String position) {
+	//TODO ...
+	}
+	
+	public void setFavoritePositionHome(String position) {
+		this.setFavoritePosition("Domicile", position);
+	}
+	public void setFavoritePositionWork(String position) {
+		this.setFavoritePosition("Lieu de travail", position);
+	}
 
 }
