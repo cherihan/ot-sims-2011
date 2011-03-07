@@ -362,18 +362,8 @@ public class Route {
 		long begin = this.date_begin.getTime();
 		long now = new Date().getTime();
 		long delta =  begin - now;
-		long days = delta % (1000*60*60*24);
-		delta = delta - days % (1000*60*60*24);
-		long hours = delta % (1000*60*60);
-		delta = delta - hours % (1000*60*60);
-		long minutes = delta % (1000*60*60);
+		long minutes = delta / 1000 / 60;
 		return minutes;
-	}
-	
-	public Integer getMinuteCountdown() {
-		// Retourne le nombre de minutes restantes avant le départ
-		//TODO
-		return 20;
 	}
 	
 	public String getSeatDots() {
