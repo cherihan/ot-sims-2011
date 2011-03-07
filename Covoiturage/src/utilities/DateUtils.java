@@ -10,8 +10,8 @@ public class DateUtils {
 		return Integer.valueOf(String.valueOf(input.getTime()/1000));
 	}
 
-	public static Date getTimestampAsDate(Integer dateTimestamp) {
-		Date dt = new Date(Long.valueOf(1000 * dateTimestamp));
+	public static Date getTimestampAsDate(long dateTimestamp) {
+		Date dt = new Date(1000 * dateTimestamp);
 		return dt;
 	}
 
