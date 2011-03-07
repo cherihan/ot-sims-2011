@@ -991,8 +991,8 @@ END //
 
 
 
-DROP PROCEDURE IF EXISTS route_search_with_date_and_delta_and_subtraject //
-CREATE PROCEDURE route_search_with_date_and_delta_and_subtraject (
+DROP PROCEDURE IF EXISTS route_search_with_date_and_delta_using_subtraject //
+CREATE PROCEDURE route_search_with_date_and_delta_using_subtraject (
 	IN _position_begin_id INT(11),
 	IN _position_end_id INT(11),
 	IN _begin_date_departure BIGINT(11),
@@ -1011,42 +1011,37 @@ BEGIN
 	SELECT  _location_approximate_nb_meters / 100 * 0.0019  INTO __delta_deg_x;
 	SELECT  _location_approximate_nb_meters / 100 * 0.0014 INTO __delta_deg_y;
 	
--- 	(
--- 		SELECT * 
--- 			FROM route_rte 
--- 				INNER JOIN position_pos AS posbeg ON posbeg.pos_id = rte_pos_begin
--- 				INNER JOIN position_pos AS posend ON posend.pos_id = rte_pos_end
--- 				INNER JOIN position_pos AS posbegask ON posbegask.pos_id = _position_begin_id
--- 				INNER JOIN position_pos AS posendask ON posendask.pos_id = _position_end_id
--- 			WHERE 
--- 					posbeg.pos_latitude BETWEEN (posbegask.pos_latitude -  __delta_deg_x) AND (posbegask.pos_latitude +  __delta_deg_x)
--- 				AND	posbeg.pos_longitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
--- 				
--- 				AND	posend.pos_latitude BETWEEN (posendask.pos_latitude -  __delta_deg_x) AND (posendask.pos_latitude +  __delta_deg_x)
--- 				AND	posend.pos_longitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
--- 				
--- 				AND	rte_deletedate IS NULL
--- 				AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
--- 				AND (rte_type = _rtp_id OR _rtp_id = 0);
--- 	) UNION (
-		SELECT * 
-			FROM route_rte 
-				INNER JOIN position_pos AS posbeg ON posbeg.pos_id = rte_pos_begin
-				INNER JOIN position_pos AS posend ON posend.pos_id = rte_pos_end
+		SELECT DISTINCT rte.* 
+			FROM route_rte rte
+				
+				-- on jointe avec les positions de depart et d'arrive demandées
 				INNER JOIN position_pos AS posbegask ON posbegask.pos_id = _position_begin_id
 				INNER JOIN position_pos AS posendask ON posendask.pos_id = _position_end_id
+				
+				-- on jointe avec des segments
+				INNER JOIN segment_seg AS segbeg ON segbeg.seg_route = rte.rte_id
+				INNER JOIN position_pos AS posbeg ON posbeg.pos_id = segbeg.seg_pos_begin
+				
+				INNER JOIN segment_seg AS segend ON segend.seg_route = rte.rte_id
+				INNER JOIN position_pos AS posend ON posend.pos_id = segend.seg_pos_end
+				
+				
 			WHERE 
 					posbeg.pos_latitude BETWEEN (posbegask.pos_latitude -  __delta_deg_x) AND (posbegask.pos_latitude +  __delta_deg_x)
 				AND	posbeg.pos_longitude BETWEEN (posbegask.pos_longitude -  __delta_deg_y) AND (posbegask.pos_longitude +  __delta_deg_y)
 				
 				AND	posend.pos_latitude BETWEEN (posendask.pos_latitude -  __delta_deg_x) AND (posendask.pos_latitude +  __delta_deg_x)
 				AND	posend.pos_longitude BETWEEN (posendask.pos_longitude -  __delta_deg_y) AND (posendask.pos_longitude +  __delta_deg_y)	
-				
-				AND	rte_deletedate IS NULL
+				AND ( (
+				-- AND	
+				rte_deletedate IS NULL
 				AND rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
-				AND (rte_type = _rtp_id OR _rtp_id = 0);
+				AND (rte_type = _rtp_id OR _rtp_id = 0)
+				AND (segbeg.seg_order > segend.seg_order OR 1)
+				) OR 0)
+			
+				;
 	
--- 	)
 		
 
 END //

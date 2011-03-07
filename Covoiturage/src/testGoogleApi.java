@@ -104,19 +104,23 @@ public class testGoogleApi {
 			String adr1;
 			String adr2;
 			String adr3;
+			String adr4;
 			Route r1;
 			
 			Position pos1;
 			Position pos2;
 			Position pos3;
+			Position pos4;
 			
 			adr1="Lyon";
 			adr2="Paris";
 			adr3="Bron";
+			adr4="Dijon";
 			
 			pos1 = DaoPosition.getPositionByAddress(adr1);
 			pos2 = DaoPosition.getPositionByAddress(adr2);
 			pos3 = DaoPosition.getPositionByAddress(adr3);
+			pos4 = DaoPosition.getPositionByAddress(adr4);
 			
 			System.out.println(DateUtils.getDateAsInteger(new Date(199999)));
 			System.out.println(DateUtils.getDateAsInteger(new Date()));
@@ -126,12 +130,13 @@ public class testGoogleApi {
 					1, 3, (Integer) 0);
 			System.out.println(r1);
 			
-			Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(199999), new Date(), 0, 0);
+			Hashtable<Integer, Route> result = DaoRoute.route_search(pos1, pos2, new Date(0), new Date(), 100, 0);
 			testGoogleApi.displayHash(result);
 			
 			result = DaoRoute.route_search(pos3, pos2, new Date(0), new Date(), 10000, 0);
+			result = DaoRoute.route_search(pos4, pos2, new Date(0), new Date(), 20000, 0);
 			
-			result = DaoRoute.route_search_of_owner(1, new Date(), new Date(0), 0);
+			//result = DaoRoute.route_search_of_owner(1, new Date(), new Date(0), 0);
 			
 			testGoogleApi.displayHash(result);
 			
@@ -140,7 +145,7 @@ public class testGoogleApi {
 				return ;
 			}
 			
-			
+			/*
 			Hashtable<String, Double> resultCoord;
 			String addressQuery = "Lyon";
 			String resultAddress;
@@ -157,6 +162,7 @@ public class testGoogleApi {
 					System.out.println(new String("Address : ").concat(resultAddress));
 				}
 			}
+			*/
 		}
 		
 	}
