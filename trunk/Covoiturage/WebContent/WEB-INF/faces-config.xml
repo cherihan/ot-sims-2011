@@ -17,6 +17,16 @@
   <managed-bean-class>beans.BeansRoute</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>ParamsBean</managed-bean-name>
+  <managed-bean-class>beans.ParamsBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+  <managed-property>
+   <property-name>parameter</property-name>
+   <property-class>java.lang.String</property-class>
+   <value>#{param.parameter}</value>
+  </managed-property>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>/home.xhtml</from-view-id>
   <navigation-case>
