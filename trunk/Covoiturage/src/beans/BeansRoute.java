@@ -136,15 +136,20 @@ public class BeansRoute {
 		User currentUser = FacesUtil.getUser();
 
 		try {
-			route = DaoRoute.createRoute(route_type, pos_depart, pos_arrive,
+			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR, pos_depart, pos_arrive,
 					full_date_depart, null, null, currentUser.getId(), seat_number, null);
+			if (route != null){
+				System.out.println("new route created");
+				return "show";
+			}else{
+				this.messageErr = Constantes.UNEXPECTED_ERROR;
+				return "actuel";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.messageErr = e.getMessage();
 			return "actuel";
 		}
-
-		return null;
 	}
 
 	public List<Passager> getAllPassagers() {

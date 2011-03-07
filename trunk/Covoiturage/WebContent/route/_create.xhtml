@@ -7,21 +7,18 @@
 	xmlns:a4j="http://richfaces.org/a4j">
 
 <ui:composition template="/template/template.xhtml">
-
-	<ui:define name="title">Nouveau trajet</ui:define>
-
 	<ui:define name="body">
 		<div class="msg error"><h:outputText value="#{beansRoute.messageErr}" /></div>
 		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
 		<ui:insert name="begin-form" />
 		<h:form id="create-route-form">
-			<div class="section"><h:outputLabel value="Au dpart de" />
+			<div class="section"><h:outputLabel value="Au dÃ©part de" escape="false"/>
 				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
 					<f:selectItem itemLabel="ici" itemValue="Lyon, France" />
 					<f:selectItem itemLabel="autre..." itemValue="Paris, France" />
 				</h:selectOneMenu>
 			</div>
-			<div class="section"><h:outputLabel value="Jusqu'ˆ" />
+			<div class="section"><h:outputLabel value="Jusqu'Ã " escape="false"/>
 				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
 					<f:selectItem itemLabel="Maison"
 						itemValue="Le Puy-en-Velay, France" />
