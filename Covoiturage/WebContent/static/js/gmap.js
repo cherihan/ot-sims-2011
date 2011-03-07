@@ -23,7 +23,7 @@ function gmapInitialize() {
 		path : flightPlanCoordinates,
 		strokeColor : "#FF0000",
 		strokeOpacity : 1.0,
-		strokeWeight : 2
+		strokeWeight : 4
 	});
 
 	flightPath.setMap(map);
@@ -38,7 +38,7 @@ function gmapLoadScript() {
 }
 
 var __gmap_polyline_points = new Array();
-var __gmap_zoom = 3;
+var __gmap_zoom = 8;
 
 function initializeGoogleMap(arrayListOfPoints) {
 	__gmap_polyline_points = arrayListOfPoints;
