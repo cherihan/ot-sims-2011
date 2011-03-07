@@ -13,6 +13,7 @@ import utilities.DateUtils;
 import model.Passager;
 import model.Position;
 import model.Route;
+import model.Segment;
 import google_api.GoogleGeoApi;
 import google_api.GoogleGeoApiCached;
 
@@ -325,6 +326,26 @@ public class DaoRoute {
 		} catch (Exception e) {
 		}
 		return list;
+	}
+	
+	public static ArrayList<Segment> getSegments(Route rte) {
+		ArrayList<Segment> retour = new ArrayList<Segment>();
+		try {
+			con = ConnexionBD.getConnexion();
+
+			String query = "call route_get_segments(" + rte.getId() + ")";
+			ResultSet curseur = con.execute(query);
+			while (curseur.next()) {
+				Segment seg = new Segment(curseur);
+				Position posBegin = new Position(curseur, "pbeg_");
+				Position posEnd = new Position(curseur, "pend_");
+				seg.setPos_beginObj(posBegin);
+				seg.setPos_endObj(posEnd);
+				retour.add(seg);
+			}
+		} catch (Exception e) {
+		}
+		return retour;
 	}
 
 }

@@ -6,14 +6,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 
 import dao.DaoRoute;
 import dao.DaoPosition;
@@ -24,6 +19,7 @@ import utilities.FacesUtil;
 import model.Passager;
 import model.Position;
 import model.Route;
+import model.Segment;
 import model.User;
 import model.Route_type;
 
@@ -338,6 +334,22 @@ public class BeansRoute {
 
 	public void setRoute_list(List<Route> route_list) {
 		this.route_list = route_list;
+	}
+	
+	public ArrayList<Hashtable<String, Double>> getSegments() {
+		ArrayList<Hashtable<String, Double>> retour = new ArrayList<Hashtable<String, Double>>();
+		ArrayList<Segment> input = DaoRoute.getSegments(this.route);
+		int i=0;
+		int n=input.size();
+		while(i < n) {
+			Segment seg = input.get(i); 
+			Hashtable<String, Double> subres = new Hashtable<String, Double>();
+			subres.put("latitude", seg.getPos_beginObj().getLatitude());
+			subres.put("longitude", seg.getPos_beginObj().getLongitude());
+			retour.add(subres);
+			i++;
+		}
+		return retour;
 	}
 
 }
