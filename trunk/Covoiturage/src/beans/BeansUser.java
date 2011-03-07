@@ -115,6 +115,11 @@ public class BeansUser {
 		messageErr = "";
 		return "edit";
 	}
+	
+	public String toIndex() {
+		messageErr = "";
+		return "index";
+	}
 
 	/**
 	 * 
