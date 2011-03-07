@@ -28,7 +28,7 @@ public class testGoogleApi {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) throws Exception {
+	public static void main22(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		String typeTest="";
 		
