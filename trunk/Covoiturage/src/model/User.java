@@ -26,6 +26,7 @@ public class User {
 	protected int note;
 	protected Date registrationdate;
 	protected Date lastlogindate;
+	protected String fullname;
 
 	Position current_positionObj;
 
@@ -69,6 +70,7 @@ public class User {
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.fullname = firstname + " " + lastname;
 		this.email = email;
 		this.password = password;
 		this.current_position = current_position;
@@ -95,6 +97,7 @@ public class User {
 		this.id = user.id;
 		this.firstname = user.firstname;
 		this.lastname = user.lastname;
+		this.fullname = firstname + " " + lastname;
 		this.email = user.email;
 		this.password = user.password;
 		this.current_position = user.current_position;
@@ -125,6 +128,7 @@ public class User {
 		this.id = Integer.parseInt(sqlrow.get("usr_id"));
 		this.firstname = sqlrow.get("usr_firstname");
 		this.lastname = sqlrow.get("usr_lastname");
+		this.fullname = firstname + " " + lastname;
 		this.email = sqlrow.get("usr_email");
 		this.password = sqlrow.get("usr_password");
 		this.current_position = Integer.parseInt(sqlrow
@@ -144,6 +148,7 @@ public class User {
 		this.id = (sqlrow.getInt("usr_id"));
 		this.firstname = sqlrow.getString("usr_firstname");
 		this.lastname = sqlrow.getString("usr_lastname");
+		this.fullname = firstname + " " + lastname;
 		this.email = sqlrow.getString("usr_email");
 		this.password = sqlrow.getString("usr_password");
 		this.current_position = (sqlrow.getInt("usr_current_position"));
@@ -156,6 +161,14 @@ public class User {
 		this.note = (sqlrow.getInt("usr_note"));
 		this.registrationdate = DateUtils.getTimestampAsDate(sqlrow.getInt("usr_registrationdate"));
 		this.lastlogindate = DateUtils.getTimestampAsDate(sqlrow.getInt("usr_lastlogindate"));
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	/**

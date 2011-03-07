@@ -4,8 +4,12 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
+
 import utilities.DateUtils;
 import dao.DaoCar;
 import dao.DaoPosition;
@@ -32,6 +36,8 @@ public class Route {
 	protected User ownerObj;
 	protected Car carObj;
 	protected Hashtable<Integer, Passager> passagers=null;
+	protected Passager [] passagerslist = null;
+	protected Boolean isPassegerListEmpty = true;
 	
 	/**
 	 * @param id
@@ -291,6 +297,19 @@ public class Route {
 
 	public void setPassagers(Hashtable<Integer, Passager> passagers) {
 		this.passagers = passagers;
+		this.passagerslist = passagers.values().toArray(new Passager[0]);
+	}
+
+	public Passager [] getPassagerslist() {
+		if (passagerslist == null)
+			System.out.println("passager list null");
+		else if (passagerslist.length == 0)
+			System.out.println("passager list empty");
+		return passagerslist;
+	}
+
+	public void setPassagerslist(Passager [] passagerslist) {
+		this.passagerslist = passagerslist;
 	}
 
 	public Car getCarObj() {
@@ -326,6 +345,14 @@ public class Route {
 		return this.passagers;		
 	} 
 	
+	public Boolean getIsPassegerListEmpty() {
+		return passagerslist.length == 0;
+	}
+
+	public void setIsPassegerListEmpty(Boolean isPassegerListEmpty) {
+		this.isPassegerListEmpty = isPassegerListEmpty;
+	}
+
 	public Integer getEmpty_seats(){
 		// Retourne le nombre de places disponibles restantes
         return Math.max(0, this.getSeat() - this.getPassagersOfType(Passager.PASSAGER_TYPE_ACCEPTED).size());
