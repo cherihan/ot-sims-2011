@@ -278,11 +278,13 @@ public class DaoRoute {
 
 		try {
 			con = ConnexionBD.getConnexion();
-			String query = "call route_search_with_date_and_delta("
+			//String query = "call route_search_with_date_and_delta("
+			String query = "call route_search_with_date_and_delta_using_subtraject("
 					+ pos_begin.getId() + ", " + pos_end.getId() + ", "
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
 					+ DateUtils.getDateAsInteger(date_departure_end) + ", "
 					+ location_appro + ", " + rtp_id + ")";
+			System.out.println(query);
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
 				rte = new Route(curseur);
