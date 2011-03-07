@@ -12,12 +12,17 @@
 		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
 		<ui:insert name="begin-form" />
 		<h:form id="create-route-form">
-			<div class="section"><h:outputLabel value="Au départ de" escape="false"/>
-				<!--h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
-					<f:selectItem itemLabel="ici" itemValue="Lyon, France" />
-					<f:selectItem itemLabel="autre..." itemValue="Paris, France" />
-				</h:selectOneMenu-->
-				<h:inputText value="#{beansRoute.pos_depart}" styleClass="large" required="true" />
+			<div class="section positionSelect">
+        <h:outputLabel value="Au départ de" escape="false"/>
+				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+					<f:selectItem itemLabel="Ici" itemValue="here" />
+          <f:selectItem itemLabel="Position fav 1" itemValue="ufp-1" />
+					<f:selectItem itemLabel="Autre..." itemValue="other" />
+				</h:selectOneMenu>
+				<h:inputText value="#{beansRoute.pos_depart_other}" styleClass="large hidden other" required="false" />
+        <h:inputText value="#{beansRoute.pos_depart_coords_lat}" styleClass="hidden lat" required="false" />
+        <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
+        
 			</div>
 			<div class="section"><h:outputLabel value="Jusqu'à" escape="false"/>
 				<!--h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
