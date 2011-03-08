@@ -431,13 +431,17 @@ public class User {
 		this.setFavoritePosition("Bureau", position);
 	}
 	
-	public String getFavoritePositionHome() {
-	//TODO: retourner l'adresse de la position pour le label "Domicile"
+	public String getFavoritePosition(String label) {
+		User_fav_position pos = DaoUser_fav_position.getFavoritePositionsOfUserForLabel(this.getId(), label);
+		if(pos && pos.getPositionObj())
+			return pos.getPositionObj().getAddress();
 		return "";
 	}
+	public String getFavoritePositionHome() {
+		return this.getFavoritePosition("Domicile");
+	}
 	public String getFavoritePositionWork() {
-	//TODO: retourner l'adresse de la position pour le label "Bureau"
-		return "";
+		return this.getFavoritePosition("Bureau");
 	}
 
 }

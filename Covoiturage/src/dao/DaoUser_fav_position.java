@@ -107,6 +107,18 @@ public class DaoUser_fav_position {
 		return list;
 	}
 	
+	public static User_fav_position getFavoritePositionsOfUserForLabel(int usr_id, String label) {
+		Hashtable<Integer, User_fav_position> positions = DaoUser_fav_position.getFavoritePositionsOfUser(usr_id);
+		Collection<User_fav_position> inpc = positions.values();
+		Iterator<User_fav_position> it = inpc.iterator();
+		while(it.hasNext()) {
+			User_fav_position ufp = it.next();
+			if(ufp.getLabel().equals(label))
+				return ufp;
+		}
+		return null;
+	}
+	
 	public static void deleteUser_fav_position(int ufp_id) {
 		try {
 			con = ConnexionBD.getConnexion();
