@@ -52,8 +52,27 @@ public class BeansRoute {
 	protected Boolean is_created_route = false;
 	protected ArrayList<User_fav_position> user_fav_pos = null;
 	
-	protected List<Route> route_list = new ArrayList<Route>();
+	private List<Route> route_list = new ArrayList<Route>();
 	protected String messageErr;
+	
+	private Route roadById;
+		
+    private String parameter;	
+
+	/**
+	 * @return the parameter
+	 */
+	public String getParameter() {
+		return parameter;
+	}
+
+	/**
+	 * @param parameter the parameter to set
+	 */
+	public void setParameter(String parameter) {
+		this.parameter = parameter;
+	}
+	
 
 	public Integer getSeat_number() {
 		return seat_number;
@@ -390,6 +409,27 @@ public class BeansRoute {
 
 	public void setUser_fav_pos(ArrayList<User_fav_position> user_fav_pos) {
 		this.user_fav_pos = user_fav_pos;
+	}
+	
+	/**
+	 * @return the roadById
+	 */
+	public Route getRoadById() {
+		
+		System.out.println("parameter: ****** " + parameter + "******" );
+		
+		int rte_id = Integer.parseInt(parameter);		
+		
+		roadById = DaoRoute.getRoute(rte_id);
+		
+		return roadById;
+	}
+
+	/**
+	 * @param roadById the roadById to set
+	 */
+	public void setRoadById(Route roadById) {
+		this.roadById = roadById;
 	}
 	
 	
