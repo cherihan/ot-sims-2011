@@ -48,9 +48,9 @@ public class BeansRoute {
 	protected Integer time_delta = null;
 	private Integer distance_radius = null;
 	
+	protected Boolean is_my_route = false;
+	protected Boolean is_created_route = false;
 	protected ArrayList<User_fav_position> user_fav_pos = null;
-	
-	
 	
 	private List<Route> route_list = null;
 	protected String messageErr;
@@ -165,6 +165,7 @@ public class BeansRoute {
 			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR, posBegin.getId(), posEnd.getId(),
 					full_date_depart, null, null, currentUser.getId(), seat_number, null);
 			if (route != null){
+				is_created_route = true;
 				route.setPassagers(new Hashtable<Integer, Passager>());
 				System.out.println("new route created");
 				return "show";
@@ -356,6 +357,22 @@ public class BeansRoute {
 			i++;
 		}
 		return retour;
+	}
+
+	public Boolean getIs_my_route() {
+		return route.getOwner() == FacesUtil.getUser().getId();
+	}
+
+	public void setIs_my_route(Boolean isMyRoute) {
+		this.is_my_route = isMyRoute;
+	}
+
+	public Boolean getIs_created_route() {
+		return is_created_route;
+	}
+
+	public void setIs_created_route(Boolean is_created_route) {
+		this.is_created_route = is_created_route;
 	}
 
 	public ArrayList<User_fav_position> getUser_fav_pos() {
