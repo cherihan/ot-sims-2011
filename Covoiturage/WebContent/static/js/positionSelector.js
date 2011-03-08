@@ -44,6 +44,8 @@ function geolocalisation_success(position) {
 		var jObj = $(obj);
 		jObj.html("Ici");
 		jObj.attr("disabled", "");
+		jObj.removeAttr("disabled");
+
 	});
 	
 }

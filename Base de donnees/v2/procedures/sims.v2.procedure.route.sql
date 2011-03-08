@@ -281,7 +281,7 @@
 					-- AND	
 					rte.rte_deletedate IS NULL
 					-- AND rte.rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
-					AND rte.rte_date_begin BETWEEN _begin_date_departure AND _end_date_departure
+					AND segbeg.seg_date_begin BETWEEN _begin_date_departure AND _end_date_departure
 					AND (rte_type = _rtp_id OR _rtp_id = 0)
 					AND (segbeg.seg_order > segend.seg_order OR 1)
 					) OR 0)
