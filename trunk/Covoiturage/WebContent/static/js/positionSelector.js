@@ -95,19 +95,18 @@ $(function() {
 		positionSelectUpdateState(jSelect);
 		
 	});
-	var posDetected=false;
-	$('.detectPosition').each(function() {
-		if(posDetected == false) {
-			posDetected=true;
-			geolocalisation_detectPosition();
-		}
-	});
-	
 	
 	$('.positionSelect select option[value="here"]').each(function(index, obj) {
 		var jObj = $(obj);
 		jObj.attr("disabled", "disabled");
 	});
 	
+	var posDetected=false;
+	$('.detectPosition').each(function() {
+		if(posDetected == false) {
+			posDetected=true;
+			geolocalisation_detectPosition();
+		}
+	});	
 	
 });
