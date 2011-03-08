@@ -1,7 +1,10 @@
 package utilities;
 
+import java.util.List;
+
 import javax.faces.context.FacesContext;
 
+import model.Route;
 import model.User;
 
 public class FacesUtil {
@@ -45,6 +48,15 @@ public class FacesUtil {
 				.getExpressionFactory()
 				.createValueExpression(fc.getELContext(), "#{beansUser.user}",
 						User.class).setValue(fc.getELContext(), usr);
+	}
+	
+	public static void setRouteList(List<Route> routeList){
+		FacesContext fc = FacesContext.getCurrentInstance();
+
+		fc.getApplication()
+				.getExpressionFactory()
+				.createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
+						List.class).setValue(fc.getELContext(), routeList);
 	}
 
 }
