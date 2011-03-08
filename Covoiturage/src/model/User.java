@@ -2,11 +2,15 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.List;
 
 import utilities.DateUtils;
 
@@ -433,7 +437,7 @@ public class User {
 	
 	public String getFavoritePosition(String label) {
 		User_fav_position pos = DaoUser_fav_position.getFavoritePositionsOfUserForLabel(this.getId(), label);
-		if(pos && pos.getPositionObj())
+		if(pos!=null && pos.getPositionObj()!=null)
 			return pos.getPositionObj().getAddress();
 		return "";
 	}
@@ -443,5 +447,15 @@ public class User {
 	public String getFavoritePositionWork() {
 		return this.getFavoritePosition("Bureau");
 	}
-
+	
+	public List<Route> getAllRouteOfUser() {
+		Calendar c = Calendar.getInstance();
+		c.set(2000, 1, 1);
+		Date d1 = c.getTime();
+		c.set(2012, 1, 1);
+		Date d2 = c.getTime();
+		Hashtable<Integer, Route> routes = DaoRoute.route_search_of_owner(this.getId(), d1, d2, 0);
+		return Arrays.asList(routes.values().toArray(new Route[0]));
+	}
+	
 }
