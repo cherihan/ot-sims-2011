@@ -88,13 +88,6 @@
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
-  <from-view-id>/page_test list_route.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>ok</from-outcome>
-   <to-view-id>/default.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
   <from-view-id>/route/index.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>detail</from-outcome>
