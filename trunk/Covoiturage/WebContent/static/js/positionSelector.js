@@ -67,7 +67,7 @@ function geolocalisation_detectPosition() {
 		});
 		
 		//maximum age of 10 minutes = 600000 milliseconds
-		navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000, timeout:2000});
+		navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000, timeout:10000});
 	} else {
 		$('.positionSelect select option[value="here"]').each(function(index, obj) {
 			var jObj = $(obj);
