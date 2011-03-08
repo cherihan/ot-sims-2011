@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 public class ValidatorOfData {
 	
+	private static final int PASSWORD_MIN_LENGTH = 6;
+
+
 	public static Boolean validateData(String data){
 			
 		//TODO
@@ -59,7 +62,9 @@ public class ValidatorOfData {
 	
 	public static Boolean validatePassWord(String password){
 		
-		//TODO
+		if(password.length() < ValidatorOfData.PASSWORD_MIN_LENGTH) {
+			return false;
+		}
 		
 		return true;
 	}

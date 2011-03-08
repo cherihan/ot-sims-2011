@@ -41,7 +41,7 @@ public class DaoPosition {
 						+ ");Longitude(" + longitude + ")");
 				throw new Exception(messageErr);
 			}
-			String query = "call position_create_or_update(" + (address == null || address.equals("") ? "NULL" : "'"+address+"'") + ", "
+			String query = "call position_create_or_update(" + (address == null || address.equals("") ? "NULL" : "'"+ConnexionBD.escape(address)+"'") + ", "
 					+ latitude + ", " + longitude + ")";
 			ResultSet res = con.execute(query);
 			if (res.first())
@@ -79,7 +79,7 @@ public class DaoPosition {
 
 		try {
 			con = ConnexionBD.getConnexion();
-			String query = "call position_get_by_address('" + (address == null || address.equals("") ? "NULL" : address) + "')";
+			String query = "call position_get_by_address(" + (address == null || address.equals("") ? "NULL" : "'"+ConnexionBD.escape(address)+"'") + ")";
 			res = con.execute(query);
 			if (res.first())
 				pos = new Position(res);

@@ -39,15 +39,15 @@ public class DaoUser {
 			String query;
 
 			try {
-				query = "call user_get_user_by_email('" + email + "')";
+				query = "call user_get_user_by_email('" + ConnexionBD.escape(email) + "')";
 
 				res = con.execute(query);
 				if (res.first())// There is result -> email is already used
 					throw new Exception(Constantes.USER_ALREADY_SAVED);
 
-				query = "call user_create_short('" + email + "', '" + password
-						+ "', '" + firstName + "', '" + lastName + "', '"
-						+ mobilePhone + "')";
+				query = "call user_create_short('" + ConnexionBD.escape(email) + "', '" + ConnexionBD.escape(password)
+						+ "', '" + ConnexionBD.escape(firstName) + "', '" + ConnexionBD.escape(lastName) + "', '"
+						+ ConnexionBD.escape(mobilePhone) + "')";
 
 				res = con.execute(query);
 				if (res.first())
@@ -89,8 +89,8 @@ public class DaoUser {
 
 			con = ConnexionBD.getConnexion();
 
-			String query = "call user_check_authentification('" + email
-					+ "', '" + passWord + "')";
+			String query = "call user_check_authentification('" + ConnexionBD.escape(email)
+					+ "', '" + ConnexionBD.escape(passWord) + "')";
 			ResultSet curseur = con.execute(query);
 
 			if (curseur.first()) {

@@ -178,7 +178,7 @@ public class BeansUser {
 
 		try {
 			userCreated = DaoUser.createUser(userTemp.getEmail(), userTemp
-					.getPassword().replaceAll("'", "''"), userTemp
+					.getPassword(), userTemp
 					.getFirstname(), userTemp.getLastname(), userTemp
 					.getMobilphone());
 		} catch (Exception e) {
