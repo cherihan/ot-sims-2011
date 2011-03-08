@@ -52,7 +52,7 @@ public class BeansRoute {
 	protected Boolean is_created_route = false;
 	protected ArrayList<User_fav_position> user_fav_pos = null;
 	
-	private List<Route> route_list = null;
+	protected List<Route> route_list = new ArrayList<Route>();
 	protected String messageErr;
 
 	public Integer getSeat_number() {
@@ -267,7 +267,8 @@ public class BeansRoute {
 
 		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin, posEnd, date_departure_begin, date_departure_end,
 				distance_radius, Route_type.PROVIDE_CAR);
-		route_list = new ArrayList<Route>(table.values());
+		route_list.clear();
+		route_list.addAll(table.values());
 		return "index";
 	}
 
