@@ -16,7 +16,6 @@ function positionSelectUpdateState(jSelect) {
 var __geolocalisation_success_detected = false;
 
 function geolocalisation_success(position) {
-	alert(3);
 	if (__geolocalisation_success_detected) {
 		// not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back
 		return;
@@ -50,7 +49,6 @@ function geolocalisation_success(position) {
 }
 
 function geolocalisation_error(msg) {
-	alert('your position cannot be determined');
 	$('.positionSelect select option[value="here"]').each(function(index, obj) {
 		var jObj = $(obj);
 		jObj.html("Ici - Detection de la position echouee");
