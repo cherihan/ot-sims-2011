@@ -161,6 +161,7 @@ public class DaoPosition {
 	}
 
 	public static Position getPosition(Position pos) {
+		// Quelqu'un peut m'expliquer l'intérêt de cette fonction ? -V
 		return DaoPosition.getPosition(pos.getId());
 	}
 

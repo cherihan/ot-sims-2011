@@ -303,6 +303,11 @@ public class User {
 	 * exemple : user.setBirthdateByYear("1988");
 	 *
 	 */
+	public String getBirthdateByYear() {
+		DateFormat dfm = new SimpleDateFormat("yyyy");
+		return dfm.format(this.birthdate);
+	}
+	
 	public void setBirthdateByYear(String strYear) {
 		DateFormat dfm = new SimpleDateFormat("yyyy");
 		try {
@@ -431,6 +436,7 @@ public class User {
 	public void setFavoritePositionHome(String position) {
 		this.setFavoritePosition("Domicile", position);
 	}
+	
 	public void setFavoritePositionWork(String position) {
 		this.setFavoritePosition("Bureau", position);
 	}
@@ -441,9 +447,11 @@ public class User {
 			return pos.getPositionObj().getAddress();
 		return "";
 	}
+	
 	public String getFavoritePositionHome() {
 		return this.getFavoritePosition("Domicile");
 	}
+	
 	public String getFavoritePositionWork() {
 		return this.getFavoritePosition("Bureau");
 	}
