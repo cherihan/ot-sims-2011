@@ -2,7 +2,10 @@ package beans;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.Route;
 import model.User;
 
 import utilities.Constantes;
@@ -119,7 +122,11 @@ public class BeansUser {
 	
 	public String toIndex() {
 		messageErr = "";
-		FacesUtil.setRouteList(user.getAllRouteOfUser());
+		List<Route> list = FacesUtil.getRouteList();
+		System.out.println(user.getAllRouteOfUser().size());
+		list.clear();
+		list.addAll(user.getAllRouteOfUser());
+
 		return "index";
 	}
 
