@@ -395,6 +395,7 @@ public class GoogleGeoApi {
 				Double seg2Distance = Math.sqrt(Math.pow(seg2X, 2) + Math.pow(seg2Y, 2));
 
 				if ((seg1Distance+seg2Distance) < polylineIntervalSizeMin) {
+					retour.add(polyHash.get(polyHashI + 2));
 					polyHashI++;
 					updated=true;
 				}else{
