@@ -405,9 +405,16 @@ public class GoogleGeoApi {
 			} while (polyHashI < polyHashSize - 2);
 		}
 		if(polyHashSize >= 2) {
-			//on ajoute le premier point dans tous les cas
+			//on ajoute le dernier point dans tous les cas
 			retour.add(polyHash.get(polyHashSize-1));
 		}
+		
+		if(retour.size() != polyHashSize) {
+			updated=true;
+		}else{
+			updated=false;
+		}
+		
 		if(updated) {
 			return GoogleGeoApi.polylineDelSubpoints(retour, polylineIntervalSizeMin);
 		}else{
