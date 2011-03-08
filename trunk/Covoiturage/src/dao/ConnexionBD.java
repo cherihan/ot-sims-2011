@@ -14,12 +14,10 @@ public class ConnexionBD {
 	private static ConnexionBD conPersistante=null;
     
     public ConnexionBD(String url, String nomDriver) throws SQLException, ClassNotFoundException {
-            Class.forName(nomDriver);
-            con = DriverManager.getConnection(url);
-            System.out.println("Overture de la connection");
-            sta = con.createStatement();
-        
-        
+	    Class.forName(nomDriver);
+	    con = DriverManager.getConnection(url);
+	    System.out.println("Overture de la connection");
+        sta = con.createStatement();
      }
     
     
