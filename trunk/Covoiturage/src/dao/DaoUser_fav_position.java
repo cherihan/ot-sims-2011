@@ -37,7 +37,7 @@ public class DaoUser_fav_position {
 
 			String query;
 
-			query = "call user_add_pos_fav("+usr_id+", "+pos_id+", '" + label + "')";
+			query = "call user_add_pos_fav("+usr_id+", "+pos_id+", '" + ConnexionBD.escape(label) + "')";
 			res = con.execute(query);
 			if (res.first())
 				ufp = new User_fav_position(res);
