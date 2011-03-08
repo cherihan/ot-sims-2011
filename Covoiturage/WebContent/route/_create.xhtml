@@ -17,6 +17,9 @@
         <h:outputLabel value="Au départ de" escape="false"/>
 				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
 					<f:selectItem itemLabel="Ici" itemValue="here" />
+          <ui:repeat var="#{beansRoute.user_fav_pos}" value="ufp">
+            <f:selectItem itemLabel="#{ufp.label}" itemValue="#{ufp.id}" />  
+          </ui:repeat>
           <f:selectItem itemLabel="Position fav 1" itemValue="ufp-1" />
 					<f:selectItem itemLabel="Autre..." itemValue="other" />
 				</h:selectOneMenu>
@@ -29,7 +32,9 @@
         <h:outputLabel value="Jusqu'à" escape="false"/>
 				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
           <f:selectItem itemLabel="Ici" itemValue="here" />
-          <f:selectItem itemLabel="Position fav 1" itemValue="ufp-1" />
+          <ui:repeat var="#{beansRoute.user_fav_pos}" value="ufp">
+            <f:selectItem itemLabel="#{ufp.label}" itemValue="#{ufp.id}" />  
+          </ui:repeat>
           <f:selectItem itemLabel="Autre..." itemValue="other" />
         </h:selectOneMenu>
         <h:inputText value="#{beansRoute.pos_arrive_other}" styleClass="large hidden other" required="false" />

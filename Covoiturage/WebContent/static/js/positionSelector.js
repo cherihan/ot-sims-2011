@@ -31,20 +31,47 @@ function geolocalisation_success(position) {
 	$('input.lng').each(function(i, elm) {
 		$(this).attr('value', position.coords.longitude);
 	});
+	/*
+	$('.positionSelect select option').each(function(index, obj) {
+		var jObj = $(obj);
+		console.log(jObj.val());
+		if(jObj.val() == 'here') {
+			jObj.attr("disabled", "");
+		}
+	});
+	*/
+	$('.positionSelect select option[value="here"]').each(function(index, obj) {
+		var jObj = $(obj);
+		jObj.html("Ici");
+		jObj.attr("disabled", "");
+	});
 	
 }
 
 function geolocalisation_error(msg) {
 	alert('your position cannot be determined');
-	
+	$('.positionSelect select option[value="here"]').each(function(index, obj) {
+		var jObj = $(obj);
+		jObj.html("Ici - Detection de la position echouee");
+	});
 }
 
 function geolocalisation_detectPosition() {
 	if (geolocalisation_isSupported()) {
+		
+		$('.positionSelect select option[value="here"]').each(function(index, obj) {
+			var jObj = $(obj);
+			jObj.html("Ici - Detection en cours...");
+		});
+		
 		//maximum age of 10 minutes = 600000 milliseconds
 		navigator.geolocation.getCurrentPosition(geolocalisation_success, geolocalisation_error, {maximumAge:600000, timeout:2000});
 	} else {
-		error('geolocalisation not supported');
+		$('.positionSelect select option[value="here"]').each(function(index, obj) {
+			var jObj = $(obj);
+			jObj.html("Ici - Detection non supportee");
+		});
+		//error('geolocalisation not supported');
 	}
 }
 
@@ -75,6 +102,12 @@ $(function() {
 			posDetected=true;
 			geolocalisation_detectPosition();
 		}
+	});
+	
+	
+	$('.positionSelect select option[value="here"]').each(function(index, obj) {
+		var jObj = $(obj);
+		jObj.attr("disabled", "disabled");
 	});
 	
 	

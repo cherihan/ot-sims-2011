@@ -124,13 +124,13 @@ public class DaoRoute {
 		ResultSet res;
 		Route route = null;
 
-		Long date_depart_INT = null;
-		Long date_arrive_INT = null;
+		Integer date_depart_INT = null;
+		Integer date_arrive_INT = null;
 
 		// Converting date
-		date_depart_INT = date_depart.getTime() / 1000;
+		date_depart_INT = DateUtils.getDateAsInteger(date_depart);
 		if (date_arrive != null)
-			date_arrive_INT = date_arrive.getTime() / 1000;
+			date_arrive_INT = DateUtils.getDateAsInteger(date_arrive);
 
 		Position pos_begin = DaoPosition.getPosition(pos_depart_ID);
 		Position pos_end = DaoPosition.getPosition(pos_arrive_ID);
@@ -189,7 +189,11 @@ public class DaoRoute {
 							Position sub_ppos_end = DaoPosition.createPosition(null, sub_pos_end.get("latitude"), sub_pos_end.get("longitude"));
 							
 							
-							Date sub_date_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(route.getDate_begin()) + subduration + global_duration_increment + subdurationIncrement);
+							Date sub_date_begin = DateUtils.getTimestampAsDate(
+													DateUtils.getDateAsInteger( route.getDate_begin() ) 
+													+ subduration 
+													+ global_duration_increment 
+													+ subdurationIncrement);
 							
 							DaoSegment.createSegment(route, sub_ppos_begin, sub_ppos_end, subduration, sub_date_begin, segmentCounter);
 							
