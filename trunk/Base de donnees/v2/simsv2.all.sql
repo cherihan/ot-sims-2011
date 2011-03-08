@@ -847,7 +847,7 @@ CREATE PROCEDURE route_add_segment (
 	IN _pos_begin INT(11),
 	IN _pos_end INT(11),
 	IN _duration INT(11),
-	IN _date_begin INT(11),
+	IN _date_begin BIGINT(20),
 	IN _order INT(11)
 )
 BEGIN

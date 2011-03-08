@@ -30,6 +30,8 @@ public class DaoSegment {
 
 			query = "call route_add_segment(" + rte.getId() + ", "
 					+ pos_begin.getId() + ", " + pos_end.getId() + ", "+duration+", "+DateUtils.getDateAsInteger(date_begin)+", "+order+")";
+			
+			
 			res = con.execute(query);
 			
 		} catch (ClassNotFoundException ex) {

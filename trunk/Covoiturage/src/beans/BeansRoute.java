@@ -7,11 +7,13 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 
 
 import dao.DaoRoute;
 import dao.DaoPosition;
+import dao.DaoUser_fav_position;
 
 import utilities.Constantes;
 import utilities.FacesUtil;
@@ -22,6 +24,7 @@ import model.Route;
 import model.Segment;
 import model.User;
 import model.Route_type;
+import model.User_fav_position;
 
 public class BeansRoute {
 
@@ -44,6 +47,8 @@ public class BeansRoute {
 	protected Integer seat_number = null;
 	protected Integer time_delta = null;
 	private Integer distance_radius = null;
+	
+	protected ArrayList<User_fav_position> user_fav_pos = null;
 	
 	
 	
@@ -122,7 +127,7 @@ public class BeansRoute {
 	 * Create new route
 	 */
 	public String createRoute() {
-		Route createdRoute = null;
+		//Route createdRoute = null;
 		route_type = Route_type.PROVIDE_CAR;
 		if (minutes_to_depart == null 
 				|| pos_depart == null
@@ -193,8 +198,9 @@ public class BeansRoute {
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_depart_other);
 			posBegin = DaoPosition.createPosition(pos_depart_other, coords.get("latitude"), coords.get("longitude"));
 		}else{
-			//TODO UPDATE
-			posBegin = DaoPosition.getPosition(1);
+			Integer ufp_id = Integer.valueOf(pos_depart);
+			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
+			posBegin = ufp.getPositionObj();
 		}
 		return posBegin;
 	}
@@ -219,8 +225,9 @@ public class BeansRoute {
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_arrive_other);
 			posEnd = DaoPosition.createPosition(pos_arrive_other, coords.get("latitude"), coords.get("longitude"));
 		}else{
-			//TODO UPDATE
-			posEnd = DaoPosition.getPosition(1);
+			Integer ufp_id = Integer.valueOf(pos_arrive);
+			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
+			posEnd = ufp.getPositionObj();
 		}
 		
 		return posEnd;
@@ -351,4 +358,22 @@ public class BeansRoute {
 		return retour;
 	}
 
+	public ArrayList<User_fav_position> getUser_fav_pos() {
+		ArrayList<User_fav_position> retour = new ArrayList<User_fav_position>();
+		Hashtable<Integer, User_fav_position> input = DaoUser_fav_position.getFavoritePositionsOfUser(FacesUtil.getUser());
+		Collection<User_fav_position> inpc = input.values();
+		Iterator<User_fav_position> it = inpc.iterator();
+		while(it.hasNext()) {
+			User_fav_position ufp = it.next();
+			retour.add(ufp);
+		}
+		return retour;
+	}
+
+	public void setUser_fav_pos(ArrayList<User_fav_position> user_fav_pos) {
+		this.user_fav_pos = user_fav_pos;
+	}
+	
+	
+	
 }
