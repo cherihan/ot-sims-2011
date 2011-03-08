@@ -50,13 +50,23 @@ public class FacesUtil {
 						User.class).setValue(fc.getELContext(), usr);
 	}
 	
-	public static void setRouteList(List<Route> routeList){
+//	public static void setRouteList(List<Route> routeList){
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//
+//		fc.getApplication()
+//				.getExpressionFactory()
+//				.createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
+//						List.class).setValue(fc.getELContext(), routeList);
+//	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Route> getRouteList() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 
-		fc.getApplication()
+		return (List<Route>) fc
+				.getApplication()
 				.getExpressionFactory()
 				.createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
-						List.class).setValue(fc.getELContext(), routeList);
+						List.class).getValue(fc.getELContext());
 	}
-
 }
