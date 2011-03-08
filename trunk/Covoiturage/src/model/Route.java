@@ -343,7 +343,10 @@ public class Route {
 	} 
 	
 	public Boolean getIsPassegerListEmpty() {
+		if (passagerslist != null){
 		return passagerslist.length == 0;
+		}else
+			return true;
 	}
 
 	public void setIsPassegerListEmpty(Boolean isPassegerListEmpty) {
