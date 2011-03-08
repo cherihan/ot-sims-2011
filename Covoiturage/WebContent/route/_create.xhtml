@@ -13,28 +13,22 @@
 		<ui:insert name="begin-form" />
 		<h:form id="create-route-form">
       <div class="detectPosition"></div>
-			<div class="section positionSelect">
-        <h:outputLabel value="Au départ de" escape="false"/>
-				<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
-					<f:selectItem itemLabel="Ici" itemValue="here" />
-          <ui:repeat var="#{beansRoute.user_fav_pos}" value="ufp">
-            <f:selectItem itemLabel="#{ufp.label}" itemValue="#{ufp.id}" />  
-          </ui:repeat>
-          <f:selectItem itemLabel="Position fav 1" itemValue="ufp-1" />
-					<f:selectItem itemLabel="Autre..." itemValue="other" />
-				</h:selectOneMenu>
-				<h:inputText value="#{beansRoute.pos_depart_other}" styleClass="large hidden other" required="false" />
-        <h:inputText value="#{beansRoute.pos_depart_coords_lat}" styleClass="hidden lat" required="false" />
-        <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
-        
-			</div>
-			<div class="section positionSelect">
+		<div class="section positionSelect">
+	        <h:outputLabel value="Au départ de" escape="false"/>
+			<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+				<f:selectItem itemLabel="Ici" itemValue="here" />
+	          	<f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
+				<f:selectItem itemLabel="Autre..." itemValue="other" />
+			</h:selectOneMenu>
+			<h:inputText value="#{beansRoute.pos_depart_other}" styleClass="large hidden other" required="false" />
+	        <h:inputText value="#{beansRoute.pos_depart_coords_lat}" styleClass="hidden lat" required="false" />
+	        <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
+	    </div>
+	  <div class="section positionSelect">
         <h:outputLabel value="Jusqu'à" escape="false"/>
 				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
           <f:selectItem itemLabel="Ici" itemValue="here" />
-          <ui:repeat var="#{beansRoute.user_fav_pos}" value="ufp">
-            <f:selectItem itemLabel="#{ufp.label}" itemValue="#{ufp.id}" />  
-          </ui:repeat>
+	      <f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
           <f:selectItem itemLabel="Autre..." itemValue="other" />
         </h:selectOneMenu>
         <h:inputText value="#{beansRoute.pos_arrive_other}" styleClass="large hidden other" required="false" />

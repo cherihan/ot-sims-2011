@@ -10,6 +10,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
+
 import dao.DaoRoute;
 import dao.DaoPosition;
 import dao.DaoUser_fav_position;
@@ -48,7 +50,6 @@ public class BeansRoute {
 	protected Boolean is_my_route = false;
 	protected Boolean is_created_route = false;
 	protected ArrayList<User_fav_position> user_fav_pos = null;
-
 	private List<Route> route_list = new ArrayList<Route>();
 	protected String messageErr;
 
@@ -399,20 +400,23 @@ public class BeansRoute {
 	}
 
 	public ArrayList<User_fav_position> getUser_fav_pos() {
+		Hashtable<Integer, User_fav_position> input = DaoUser_fav_position.getFavoritePositionsOfUser(FacesUtil.getUser());
 		ArrayList<User_fav_position> retour = new ArrayList<User_fav_position>();
-		Hashtable<Integer, User_fav_position> input = DaoUser_fav_position
-				.getFavoritePositionsOfUser(FacesUtil.getUser());
-		Collection<User_fav_position> inpc = input.values();
-		Iterator<User_fav_position> it = inpc.iterator();
-		while (it.hasNext()) {
-			User_fav_position ufp = it.next();
-			retour.add(ufp);
-		}
+		retour.addAll(input.values());
+		System.out.println(retour);
 		return retour;
 	}
-
-	public void setUser_fav_pos(ArrayList<User_fav_position> user_fav_pos) {
-		this.user_fav_pos = user_fav_pos;
+	
+	public Collection<SelectItem> getUser_fav_pos_select_items() {
+		ArrayList<SelectItem> retour = new ArrayList<SelectItem>();
+		Collection<User_fav_position> ufp_list = getUser_fav_pos();
+		Iterator<User_fav_position> it = ufp_list.iterator();
+		User_fav_position ufp = null;
+		while (it.hasNext()) {
+			ufp = it.next();
+			retour.add(new SelectItem(ufp.getId(), ufp.getLabel()));
+		}
+		return retour;
 	}
 
 }
