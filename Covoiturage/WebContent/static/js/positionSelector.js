@@ -43,7 +43,6 @@ function geolocalisation_success(position) {
 	$('.positionSelect select option[value="here"]').each(function(index, obj) {
 		var jObj = $(obj);
 		jObj.html("Ici");
-		jObj.attr("disabled", "");
 		jObj.removeAttr("disabled");
 
 	});
