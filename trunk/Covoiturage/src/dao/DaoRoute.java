@@ -320,7 +320,7 @@ public class DaoRoute {
 
 			String query = "call route_search_of_owner(" + usr_id + ", "
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
-					+ DateUtils.getDateAsInteger(date_departure_end) + rtp_id
+					+ DateUtils.getDateAsInteger(date_departure_end)+",0," + rtp_id
 					+ ")";
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
