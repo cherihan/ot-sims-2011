@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import model.User;
 
 import utilities.Constantes;
+import utilities.FacesUtil;
 import utilities.ValidatorOfData;
 
 import dao.DaoUser;
@@ -118,6 +119,7 @@ public class BeansUser {
 	
 	public String toIndex() {
 		messageErr = "";
+		FacesUtil.setRouteList(user.getAllRouteOfUser());
 		return "index";
 	}
 
