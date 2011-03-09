@@ -170,24 +170,25 @@ public class BeansRoute {
 		Date full_date_depart = c.getTime();
 
 		User currentUser = FacesUtil.getUser();
-
+		
 		try {
-
+			
 			Position posBegin = null;
 			Position posEnd = null;
-
+			
 			posBegin = this.getSelectedPositionBegin();
 			posEnd = this.getSelectedPositionEnd();
-
-			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR,
-					posBegin.getId(), posEnd.getId(), full_date_depart, null,
-					null, currentUser.getId(), seat_number, null);
-			if (route != null) {
+			
+			
+			
+			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR, posBegin.getId(), posEnd.getId(),
+					full_date_depart, null, null, currentUser.getId(), seat_number, null);
+			if (route != null){
 				is_created_route = true;
 				route.setPassagers(new Hashtable<Integer, Passager>());
 				System.out.println("new route created");
 				return "show";
-			} else {
+			}else{
 				this.messageErr = Constantes.UNEXPECTED_ERROR;
 				return "actuel";
 			}
@@ -197,62 +198,58 @@ public class BeansRoute {
 			return "actuel";
 		}
 	}
-
+	
 	protected Position getSelectedPositionBegin() throws Exception {
-		Position posBegin = null;
-		if (pos_depart.equals("here")) {
+		Position posBegin=null;
+		if(pos_depart.equals("here")) {
 			Double lat = Double.valueOf(pos_depart_coords_lat);
 			Double lng = Double.valueOf(pos_depart_coords_lng);
-			if (lat == 0)
+			if(lat == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
-			if (lng == 0)
+			if(lng == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
 			Hashtable<String, Double> coords = new Hashtable<String, Double>();
 			coords.put("latitude", lat);
 			coords.put("longitude", lng);
 			String address = GoogleGeoApiCached.getNearAddressFromCoord(coords);
 			posBegin = DaoPosition.createPosition(address, lat, lng);
-		} else if (pos_depart.equals("other")) {
+		}else if(pos_depart.equals("other")) {
 			Hashtable<String, Double> coords;
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_depart_other);
-			posBegin = DaoPosition.createPosition(pos_depart_other,
-					coords.get("latitude"), coords.get("longitude"));
-		} else {
+			posBegin = DaoPosition.createPosition(pos_depart_other, coords.get("latitude"), coords.get("longitude"));
+		}else{
 			Integer ufp_id = Integer.valueOf(pos_depart);
-			User_fav_position ufp = DaoUser_fav_position
-					.getUser_fav_position(ufp_id);
+			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
 			posBegin = ufp.getPositionObj();
 		}
 		return posBegin;
 	}
-
+	
 	protected Position getSelectedPositionEnd() throws Exception {
-		Position posEnd = null;
-
-		if (pos_arrive.equals("here")) {
+		Position posEnd=null;
+		
+		if(pos_arrive.equals("here")) {
 			Double lat = Double.valueOf(pos_arrive_coords_lat);
 			Double lng = Double.valueOf(pos_arrive_coords_lng);
-			if (lat == 0)
+			if(lat == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
-			if (lng == 0)
+			if(lng == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
 			Hashtable<String, Double> coords = new Hashtable<String, Double>();
 			coords.put("latitude", lat);
 			coords.put("longitude", lng);
 			String address = GoogleGeoApiCached.getNearAddressFromCoord(coords);
 			posEnd = DaoPosition.createPosition(address, lat, lng);
-		} else if (pos_arrive.equals("other")) {
+		}else if(pos_arrive.equals("other")) {
 			Hashtable<String, Double> coords;
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_arrive_other);
-			posEnd = DaoPosition.createPosition(pos_arrive_other,
-					coords.get("latitude"), coords.get("longitude"));
-		} else {
+			posEnd = DaoPosition.createPosition(pos_arrive_other, coords.get("latitude"), coords.get("longitude"));
+		}else{
 			Integer ufp_id = Integer.valueOf(pos_arrive);
-			User_fav_position ufp = DaoUser_fav_position
-					.getUser_fav_position(ufp_id);
+			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
 			posEnd = ufp.getPositionObj();
 		}
-
+		
 		return posEnd;
 	}
 
@@ -268,28 +265,26 @@ public class BeansRoute {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 		}
-
+		
 		/*
-		 * Position from = DaoPosition.getPositionByAddress(pos_depart);
-		 * Position to = DaoPosition.getPositionByAddress(pos_arrive);
-		 */
-
+		Position from = DaoPosition.getPositionByAddress(pos_depart);
+		Position to = DaoPosition.getPositionByAddress(pos_arrive);
+		*/
+		
 		Position posBegin = null;
 		Position posEnd = null;
-
+		
 		posBegin = this.getSelectedPositionBegin();
 		posEnd = this.getSelectedPositionEnd();
+		
 
 		Date date_departure_begin = new Date();
-		date_departure_begin.setTime(date_departure_begin.getTime()
-				+ (minutes_to_depart - time_delta) * 60 * 1000);
-
+		date_departure_begin.setTime(date_departure_begin.getTime() + (minutes_to_depart - time_delta)*60*1000);
+		
 		Date date_departure_end = new Date();
-		date_departure_end.setTime(date_departure_end.getTime()
-				+ (minutes_to_depart + time_delta) * 60 * 1000);
+		date_departure_end.setTime(date_departure_end.getTime() + (minutes_to_depart + time_delta)*60*1000);
 
-		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin,
-				posEnd, date_departure_begin, date_departure_end,
+		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin, posEnd, date_departure_begin, date_departure_end,
 				distance_radius, Route_type.PROVIDE_CAR);
 		route_list.clear();
 		route_list.addAll(table.values());
@@ -367,15 +362,15 @@ public class BeansRoute {
 	public void setRoute_list(List<Route> route_list) {
 		this.route_list = route_list;
 	}
-
+	
 	public ArrayList<Position> getSegments() {
 		ArrayList<Position> retour = new ArrayList<Position>();
 		ArrayList<Segment> input = DaoRoute.getSegments(this.route);
-		System.out.println("Numberelementssss : " + input.size());
-		int i = 0;
-		int n = input.size();
-		while (i < n) {
-			Segment seg = input.get(i);
+		System.out.println("Numberelementssss : "+input.size());
+		int i=0;
+		int n=input.size();
+		while(i < n) {
+			Segment seg = input.get(i); 
 			retour.add(seg.getPos_beginObj());
 			retour.add(seg.getPos_endObj());
 			i++;
@@ -418,5 +413,10 @@ public class BeansRoute {
 		}
 		return retour;
 	}
-
+	
+	public String toHome(){
+		messageErr = "";
+		System.out.println("toHome");
+		return "home";
+	}
 }
