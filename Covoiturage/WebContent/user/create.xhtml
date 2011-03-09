@@ -11,7 +11,9 @@
 
 <ui:define name="body">
 	<h:form>
-		<div><h:outputText value="#{beansUser.messageErr}" styleClass="msg error" /></div>
+		<c:if test="${!empty beansUser.messageErr}">
+			<div><h:outputText value="#{beansUser.messageErr}" styleClass="msg error" /></div>
+		</c:if>
 		<br/>
 		
 		<div class="section">
