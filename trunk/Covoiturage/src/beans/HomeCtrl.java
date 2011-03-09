@@ -10,14 +10,7 @@ public class HomeCtrl {
 	Boolean userNotConnected;
 	
 	public Boolean getUserConnected() {
-		
-		User utilisateur = FacesUtil.getUser();
-		
-		System.out.println("User email : " + utilisateur.getEmail() );
-		
-		if(utilisateur == null ||utilisateur.getEmail() == null)return false;
-				
-		return true;
+		return FacesUtil.getUserConnected();
 	}
 	
 	

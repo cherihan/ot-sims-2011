@@ -33,12 +33,17 @@ public class FacesUtil {
 
 	public static User getUser() {
 		FacesContext fc = FacesContext.getCurrentInstance();
-
-		return (User) fc
-				.getApplication()
-				.getExpressionFactory()
-				.createValueExpression(fc.getELContext(), "#{beansUser.user}",
-						User.class).getValue(fc.getELContext());
+		
+		if (fc == null) {
+			return null;
+		}
+		else {
+			return (User) fc
+			.getApplication()
+			.getExpressionFactory()
+			.createValueExpression(fc.getELContext(), "#{beansUser.user}",
+					User.class).getValue(fc.getELContext());
+		}
 	}
 
 	public static void setUser(User usr) {
@@ -68,5 +73,14 @@ public class FacesUtil {
 				.getExpressionFactory()
 				.createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
 						List.class).getValue(fc.getELContext());
+	}
+	
+	public static Boolean getUserConnected() {
+		
+		User utilisateur = FacesUtil.getUser();
+				
+		if(utilisateur == null ||utilisateur.getEmail() == null)return false;
+				
+		return true;
 	}
 }
