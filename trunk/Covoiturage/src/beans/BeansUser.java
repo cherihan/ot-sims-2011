@@ -154,7 +154,7 @@ public class BeansUser {
 			return "actuel";
 		}
 
-		// /// TODO
+		// /// TODO se pignoler
 
 		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
@@ -244,6 +244,13 @@ public class BeansUser {
 			userTemp.setEmail(null);
 			return "actuel";
 		}
+		
+		if (!ValidatorOfData.validatePassWord(userTemp.getPassword())) {
+			messageErr = Constantes.PASSWORD_FORM_NOT_CORRECT;
+			userTemp.setPassword("");
+			return "actuel";
+		}
+		
 		// ///
 		if (userTemp.getEmail().equals("")) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;

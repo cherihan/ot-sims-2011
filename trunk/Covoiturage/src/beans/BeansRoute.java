@@ -17,6 +17,7 @@ import dao.DaoPosition;
 import dao.DaoUser_fav_position;
 
 import utilities.Constantes;
+import utilities.DateUtils;
 import utilities.FacesUtil;
 
 import model.Passager;
@@ -101,7 +102,18 @@ public class BeansRoute {
 	public void setPos_arrive(String pos_arrive) {
 		this.pos_arrive = pos_arrive;
 	}
+	
+	String depart_date_choice=null;
+	
+	public String getDepart_date_choice() {
+		return this.depart_date_choice;
+	}
+	
+	public void setDepart_date_choice(String ch) {
+		this.depart_date_choice=ch;
+	}
 
+	
 	public Integer getMinutes_to_depart() {
 		return minutes_to_depart;
 	}
@@ -109,6 +121,7 @@ public class BeansRoute {
 	public void setMinutes_to_depart(Integer minutes_to_depart) {
 		this.minutes_to_depart = minutes_to_depart;
 	}
+	
 
 	/**
 	 * @return
@@ -164,10 +177,8 @@ public class BeansRoute {
 		} else {
 			seat_number = null;
 		}
-
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis((c.getTimeInMillis() / 1000 + minutes_to_depart * 60) * 1000);
-		Date full_date_depart = c.getTime();
+		
+		Date full_date_depart = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + minutes_to_depart * 60);
 
 		User currentUser = FacesUtil.getUser();
 		
@@ -271,9 +282,15 @@ public class BeansRoute {
 	}
 
 	public String search() throws Exception {
-		if (minutes_to_depart == null || pos_depart == null
-				|| pos_arrive == null || time_delta == null
-				|| distance_radius == null) {
+		if (pos_depart == null
+				|| pos_arrive == null 
+				|| depart_date_choice == null
+				|| distance_radius == null
+				|| distance_radius == null
+				//|| time_delta == null
+				//|| minutes_to_depart == null 
+				
+				) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 		}
@@ -300,20 +317,41 @@ public class BeansRoute {
 		
 		if(distance_radius.equals("exact")) {
 			precision_meters = (int) Math.round(Math.min(30000, Math.max(500, distance / 400 )));
-		}else if(distance_radius.equals("low")) {
+		}else if(distance_radius.equals("high")) {
 			precision_meters = (int) Math.round(Math.min(50000, Math.max(1000, distance / 200 )));
 		}else if(distance_radius.equals("medium")) {
 			precision_meters = (int) Math.round(Math.min(80000, Math.max(1500, distance / 20 )));
-		}else if(distance_radius.equals("high")) {
+		}else if(distance_radius.equals("low")) {
 			precision_meters = (int) Math.round(Math.min(100000, Math.max(2000, distance / 5 )));
 		}
-
+		/*
 		Date date_departure_begin = new Date();
 		date_departure_begin.setTime(date_departure_begin.getTime() + (minutes_to_depart - time_delta)*60*1000);
 		
 		Date date_departure_end = new Date();
 		date_departure_end.setTime(date_departure_end.getTime() + (minutes_to_depart + time_delta)*60*1000);
-
+		*/
+		
+		Date date_departure_begin = new Date();
+		Date date_departure_end = new Date();
+		
+		if(depart_date_choice.equals("5min")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 10*60);
+		}else if(depart_date_choice.equals("thisHour")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 70*60);
+		}else if(depart_date_choice.equals("today")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 10*60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 24*60*60);
+		}else if(depart_date_choice.equals("tomorow")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 48*60*60);
+		}else if(depart_date_choice.equals("aftertomorow")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 76*60*60);
+		}
+		
 		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin, posEnd, date_departure_begin, date_departure_end,
 				precision_meters, Route_type.PROVIDE_CAR);
 		route_list.clear();
