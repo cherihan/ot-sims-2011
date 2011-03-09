@@ -247,7 +247,7 @@ public class BeansUser {
 			return "actuel";
 		}
 		
-		if (!ValidatorOfData.validatePassWord(userTemp.getPassword())) {
+		if ( ! userTemp.getPassword().equals("") && !ValidatorOfData.validatePassWord(userTemp.getPassword())) {
 			messageErr = Constantes.PASSWORD_FORM_NOT_CORRECT;
 			userTemp.setPassword("");
 			return "actuel";
