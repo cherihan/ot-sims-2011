@@ -4,11 +4,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 <meta name="viewport" content="width=device-width" />
-<title><ui:insert name="browser_title">Title</ui:insert></title>
+<title><ui:insert name="browser_title">Sharide--<ui:insert name="title">Title</ui:insert></ui:insert></title>
 <link rel="stylesheet" type="text/css"
 	href="/Covoiturage/static/style/global.css" />
 <script language="javascript" src="/Covoiturage/static/js/jquery-1.5.min.js"></script>
@@ -24,7 +25,9 @@
 <h1><ui:insert name="title">Title</ui:insert></h1>
 </div>
 </div>
-<div id="body"><ui:insert name="body">Body</ui:insert></div>
+<div id="body">
+	<ui:insert name="body">Body</ui:insert>
+</div>
 <div id="footer"><ui:insert name="pied">Sharide<br/>Don't let an empty seat in your car!</ui:insert>
 </div>
 </body>
