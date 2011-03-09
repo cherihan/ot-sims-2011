@@ -71,6 +71,11 @@ hr {
 	font-style: italic;
 	margin-bottom: 20px;
 }
+.minimsg {
+	color: gray;
+	size: 2em;
+}
+
 ul.msg {
 	margin-top: 0px;
 	margin-bottom: 25px;
