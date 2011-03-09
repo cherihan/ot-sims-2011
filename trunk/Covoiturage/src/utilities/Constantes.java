@@ -11,7 +11,8 @@ public class Constantes {
 	public static String DATA_FORM_NOT_CORRECT = "☹ Le format des données est incorrect";
 	public static String MOBILE_NUMBER_FORM_NOT_CORRECT = "☹ Le format du numéro de téléphone est incorrect";
 	public static String PASSWORD_OR_USER_NOT_CORRECT = "☹ Mot de passe ou e-mail incorrect";
-	public static String PASSWORD_FORM_NOT_CORRECT = "☹ Le mot de passe ne respecte pas la forme validée";
+	public static String PASSWORD_FORM_NOT_CORRECT = "☹ Le mot de passe ne respecte pas la forme validée (min 6 characteres)";
 	public static String UNEXPECTED_ERROR = "☠ Une erreur inattendue est survenue";
 	public static String ROUTE_ALREADY_PASSSAGER = "☺ Déjà passager du trajet";
+	public static String INVALID_ADDRESS = "Addresse introuvable";
 }

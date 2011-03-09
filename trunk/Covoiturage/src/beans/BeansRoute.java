@@ -216,10 +216,16 @@ public class BeansRoute {
 		}else if(pos_depart.equals("other")) {
 			Hashtable<String, Double> coords;
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_depart_other);
+			if( coords == null ) {
+				throw new Exception(Constantes.INVALID_ADDRESS);
+			}
 			posBegin = DaoPosition.createPosition(pos_depart_other, coords.get("latitude"), coords.get("longitude"));
 		}else{
 			Integer ufp_id = Integer.valueOf(pos_depart);
 			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
+			if( ufp == null ) {
+				throw new Exception(Constantes.INVALID_ADDRESS);
+			}
 			posBegin = ufp.getPositionObj();
 		}
 		return posBegin;
@@ -243,10 +249,16 @@ public class BeansRoute {
 		}else if(pos_arrive.equals("other")) {
 			Hashtable<String, Double> coords;
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_arrive_other);
+			if( coords == null ) {
+				throw new Exception(Constantes.INVALID_ADDRESS);
+			}
 			posEnd = DaoPosition.createPosition(pos_arrive_other, coords.get("latitude"), coords.get("longitude"));
 		}else{
 			Integer ufp_id = Integer.valueOf(pos_arrive);
 			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
+			if( ufp == null ) {
+				throw new Exception(Constantes.INVALID_ADDRESS);
+			}
 			posEnd = ufp.getPositionObj();
 		}
 		
@@ -274,8 +286,13 @@ public class BeansRoute {
 		Position posBegin = null;
 		Position posEnd = null;
 		
-		posBegin = this.getSelectedPositionBegin();
-		posEnd = this.getSelectedPositionEnd();
+		try {
+			posBegin = this.getSelectedPositionBegin();
+			posEnd = this.getSelectedPositionEnd();
+		} catch(Exception e) {
+			messageErr = e.getMessage();
+			return "actuel";
+		}
 		
 
 		Date date_departure_begin = new Date();
