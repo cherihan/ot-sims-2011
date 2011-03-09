@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import utilities.Constantes;
+import utilities.FacesUtil;
 import model.Criterion;
 import model.Position;
 import model.User;
@@ -48,9 +49,7 @@ public class DaoUser {
 				query = "call user_create_short('" + ConnexionBD.escape(email) + "', '" + ConnexionBD.escape(password)
 						+ "', '" + ConnexionBD.escape(firstName) + "', '" + ConnexionBD.escape(lastName) + "', '"
 						+ ConnexionBD.escape(mobilePhone) + "')";
-				
-				System.out.println(query);
-				
+
 				res = con.execute(query);
 				if (res.first())
 					user = new User(res);
@@ -128,7 +127,24 @@ public class DaoUser {
 
 		try {
 			con = ConnexionBD.getConnexion();
-			String query = "call user_update(" + userTemp.getId() + ", '"
+			
+			String query = "call user_get_user_by_email('" + ConnexionBD.escape(userTemp.getEmail()) + "')";
+
+			ResultSet res = con.execute(query);
+			
+			
+			if (res.first()) // There is result -> email is already used
+			{
+				String emailInSession = FacesUtil.getUser().getEmail();				
+				String emailInDB = res.getString("usr_email");
+				
+				
+				if(!emailInSession.equals(emailInDB))	
+				throw new Exception(Constantes.USER_ALREADY_SAVED);
+			}
+				
+			
+			 query = "call user_update(" + userTemp.getId() + ", '"
 					+ ConnexionBD.escape(userTemp.getEmail()) + "', '"
 					+ ConnexionBD.escape(userTemp.getPassword()) + "', '"
 					+ ConnexionBD.escape(userTemp.getFirstname()) + "', '"
@@ -167,10 +183,6 @@ public class DaoUser {
 		} catch (SQLException ex) {
 			messageErr = Constantes.PROBLEME_CONNECTION_DB;
 			System.err.println(messageErr + " : " + ex);
-			throw new Exception(messageErr);
-		} catch (Exception e) {
-			messageErr = Constantes.UNEXPECTED_ERROR;
-			System.err.println(messageErr + " : " + e);
 			throw new Exception(messageErr);
 		}
 
