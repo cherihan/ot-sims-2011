@@ -4,15 +4,20 @@
   xmlns:f="http://java.sun.com/jsf/core"
   xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
   xmlns:a4j="http://richfaces.org/a4j">
 
 <ui:composition template="/template/template.xhtml">
   <ui:define name="body">
-    <div class="msg error"><h:outputText value="#{beansRoute.messageErr}" /></div>
+    <c:if test="${!empty beansRoute.messageErr}">
+			<div><h:outputText value="#{beansRoute.messageErr}" styleClass="msg error" /></div>
+		</c:if>
     <h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
     <ui:insert name="begin-form" />
-    <h:form id="create-route-form">
-      <div class="detectPosition"></div>
+   	<h:form id="create-route-form">
+     
+     <div class="detectPosition"></div>
+      
     <div class="section positionSelect">
           <h:outputLabel value="Au départ de" escape="false"/>
       <h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
@@ -24,6 +29,7 @@
           <h:inputText value="#{beansRoute.pos_depart_coords_lat}" styleClass="hidden lat" required="false" />
           <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
       </div>
+      
     <div class="section positionSelect">
         <h:outputLabel value="Jusqu'à" escape="false"/>
         <h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
@@ -35,6 +41,7 @@
         <h:inputText value="#{beansRoute.pos_arrive_coords_lat}" styleClass="hidden lat" required="false" />
         <h:inputText value="#{beansRoute.pos_arrive_coords_lng}" styleClass="hidden lng" required="false" />
       </div>
+      
       <div class="section">
         <h:outputLabel value="Dans" />
         <h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large" required="true">

@@ -5,13 +5,16 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
 	template="/template/template.xhtml">
 
 	<ui:define name="title">Édition de mon profil</ui:define>
 
 	<ui:define name="body">
 		<h:form>
-			<div><h:outputText value="#{beansUser.messageErr}" styleClass="msg error"/></div>
+			<c:if test="${!empty beansUser.messageErr}">
+				<div><h:outputText value="#{beansUser.messageErr}" styleClass="msg error" /></div>
+			</c:if>
 			<div class="section">
 			<br/>			
 				<h:outputLabel value="E-mail :" />
@@ -19,7 +22,7 @@
 			</div>
 			
 			<div class="section">
-				<p><font size="2"  color="gray">Si vous voulez garder votre mot de passe actuel, laissez le champ du mot de passe vide.</font></p>
+				<p class="minimsg">Si vous voulez garder votre mot de passe actuel, laissez le champ du mot de passe vide.</p>
 				<h:outputLabel value="Mot de passe :" />
 				<h:inputSecret value="#{beansUser.userTemp.password}" styleClass="large" />
 				<h:outputLabel value="Confirmation :" />
@@ -61,7 +64,7 @@
 			</div>
 			
 			<div class="section">
-				<h:outputLabel value="Date de naissance :" />
+				<h:outputLabel value="Tranche d'âge :" />
 				<h:selectOneMenu value="#{beansUser.userTemp.birthdateByYear}" styleClass="large">
 					<f:selectItem itemLabel="Mineur(e)" itemValue="1992"/>
 					<f:selectItem itemLabel="Jeune" itemValue="1980"/>
