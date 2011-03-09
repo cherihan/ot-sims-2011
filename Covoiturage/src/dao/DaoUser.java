@@ -48,7 +48,9 @@ public class DaoUser {
 				query = "call user_create_short('" + ConnexionBD.escape(email) + "', '" + ConnexionBD.escape(password)
 						+ "', '" + ConnexionBD.escape(firstName) + "', '" + ConnexionBD.escape(lastName) + "', '"
 						+ ConnexionBD.escape(mobilePhone) + "')";
-
+				
+				System.out.println(query);
+				
 				res = con.execute(query);
 				if (res.first())
 					user = new User(res);
