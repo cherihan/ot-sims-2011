@@ -48,6 +48,10 @@
    <from-outcome>search</from-outcome>
    <to-view-id>/route/search.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>index</from-outcome>
+   <to-view-id>/route/index.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <navigation-case>
@@ -60,10 +64,6 @@
   <navigation-case>
    <from-outcome>edit</from-outcome>
    <to-view-id>/user/edit.xhtml</to-view-id>
-  </navigation-case>
-  <navigation-case>
-   <from-outcome>index</from-outcome>
-   <to-view-id>/route/index.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
