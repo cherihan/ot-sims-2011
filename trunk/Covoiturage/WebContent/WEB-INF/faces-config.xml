@@ -15,11 +15,11 @@
  <managed-bean>
   <managed-bean-name>beansRoute</managed-bean-name>
   <managed-bean-class>beans.BeansRoute</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-scope>session</managed-bean-scope>
   <managed-property>
    <property-name>parameter</property-name>
    <property-class>java.lang.String</property-class>
-   <value>#{param.parameter}</value>
+   <value>#{parameter}</value>
   </managed-property>
  </managed-bean>
  <navigation-rule>
