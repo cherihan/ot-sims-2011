@@ -209,7 +209,7 @@ BEGIN
 		) ON DUPLICATE KEY UPDATE ufp_label=_label;
 	ELSE
 		
-		UPDATE user_fav_pos_ufp SET ufp_position= _ pos_id WHERE ufp_id = __ufp_id;
+		UPDATE user_fav_pos_ufp SET ufp_position= _pos_id WHERE ufp_id = __ufp_id;
 		
 	END IF;
 	
