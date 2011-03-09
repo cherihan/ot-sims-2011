@@ -14,6 +14,7 @@
 	</ui:define>
 
 	<ui:define name="body">
+	
 		<div class="ride_details">
 		<div class="from"><span><h:outputText escape="false" value="De : "/></span><h:outputText
 			value="#{beansRoute.route.position_beginObj.address}" /></div>
@@ -72,17 +73,10 @@
       initializeGoogleMap(polyline);
     });
     </script>   
-		<h:panelGroup rendered="#{beansRoute.is_created_route}">
-			<div>
-			 <h:form>
-				<h:commandButton value="Retour" action="home" styleClass="large" />
-			</h:form>
-			</div>
-		</h:panelGroup>	
-		<h:panelGroup rendered="#{!beansRoute.is_created_route}">
-			<div><h:commandButton value="Autres trajets" styleClass="large" />
-			</div>
-		</h:panelGroup>
+    <h:form>
+<h:commandButton value="Home" styleClass="large" action="home" rendered="#{beansRoute.is_created_route}"/>
+<h:commandButton value="Retour" styleClass="large" onclick="history.go(-1)" rendered="#{!beansRoute.is_created_route}"/>
+	</h:form>
 	</ui:define>
 </ui:composition>
 </html>
