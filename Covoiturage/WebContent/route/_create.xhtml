@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j">
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:rich="http://richfaces.org/rich"
+  xmlns:a4j="http://richfaces.org/a4j">
 
 <ui:composition template="/template/template.xhtml">
-	<ui:define name="body">
-		<div class="msg error"><h:outputText value="#{beansRoute.messageErr}" /></div>
-		<h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
-		<ui:insert name="begin-form" />
-		<h:form id="create-route-form">
+  <ui:define name="body">
+    <div class="msg error"><h:outputText value="#{beansRoute.messageErr}" /></div>
+    <h:messages styleClass="msg" errorClass="error" fatalClass="error"/>
+    <ui:insert name="begin-form" />
+    <h:form id="create-route-form">
       <div class="detectPosition"></div>
-		<div class="section positionSelect">
-	        <h:outputLabel value="Au départ de" escape="false"/>
-			<h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
-				<f:selectItem itemLabel="Ici" itemValue="here" />
-	          	<f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
-				<f:selectItem itemLabel="Autre..." itemValue="other" />
-			</h:selectOneMenu>
-			<h:inputText value="#{beansRoute.pos_depart_other}" styleClass="large hidden other" required="false" />
-	        <h:inputText value="#{beansRoute.pos_depart_coords_lat}" styleClass="hidden lat" required="false" />
-	        <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
-	    </div>
-	  <div class="section positionSelect">
+    <div class="section positionSelect">
+          <h:outputLabel value="Au départ de" escape="false"/>
+      <h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+        <f:selectItem itemLabel="Ici" itemValue="here" />
+              <f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
+        <f:selectItem itemLabel="Autre..." itemValue="other" />
+      </h:selectOneMenu>
+      <h:inputText value="#{beansRoute.pos_depart_other}" styleClass="large hidden other" required="false" />
+          <h:inputText value="#{beansRoute.pos_depart_coords_lat}" styleClass="hidden lat" required="false" />
+          <h:inputText value="#{beansRoute.pos_depart_coords_lng}" styleClass="hidden lng" required="false" />
+      </div>
+    <div class="section positionSelect">
         <h:outputLabel value="Jusqu'à" escape="false"/>
-				<h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
+        <h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
           <f:selectItem itemLabel="Ici" itemValue="here" />
-	      <f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
+        <f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
           <f:selectItem itemLabel="Autre..." itemValue="other" />
         </h:selectOneMenu>
         <h:inputText value="#{beansRoute.pos_arrive_other}" styleClass="large hidden other" required="false" />
         <h:inputText value="#{beansRoute.pos_arrive_coords_lat}" styleClass="hidden lat" required="false" />
         <h:inputText value="#{beansRoute.pos_arrive_coords_lng}" styleClass="hidden lng" required="false" />
-			</div>
-			<div class="section">
-				<h:outputLabel value="Dans" />
-				<h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large" required="true">
-					<f:selectItem itemLabel="5mn" itemValue="5" />
-					<f:selectItem itemLabel="10mn" itemValue="10" />
-					<f:selectItem itemLabel="20mn" itemValue="20" />
-					<f:selectItem itemLabel="30mn" itemValue="30" />
-					<f:selectItem itemLabel="40mn" itemValue="40" />
-					<f:selectItem itemLabel="50mn" itemValue="50" />
-					<f:selectItem itemLabel="1h" itemValue="60" />
-				</h:selectOneMenu>
-			</div>
-			<ui:insert name="form-end" />
-		</h:form>
-	</ui:define>
+      </div>
+      <div class="section">
+        <h:outputLabel value="Dans" />
+        <h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large" required="true">
+          <f:selectItem itemLabel="5mn" itemValue="5" />
+          <f:selectItem itemLabel="10mn" itemValue="10" />
+          <f:selectItem itemLabel="20mn" itemValue="20" />
+          <f:selectItem itemLabel="30mn" itemValue="30" />
+          <f:selectItem itemLabel="40mn" itemValue="40" />
+          <f:selectItem itemLabel="50mn" itemValue="50" />
+          <f:selectItem itemLabel="1h" itemValue="60" />
+        </h:selectOneMenu>
+      </div>
+      <ui:insert name="form-end" />
+    </h:form>
+  </ui:define>
 
 </ui:composition>
 </html>

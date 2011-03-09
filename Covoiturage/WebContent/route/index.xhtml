@@ -6,27 +6,27 @@
       xmlns:rich="http://richfaces.org/rich"
       xmlns:a4j="http://richfaces.org/a4j">
 
-	<ui:composition template="/template/template.xhtml" >
-		<ui:define name="title">Trajets</ui:define>
+  <ui:composition template="/template/template.xhtml" >
+    <ui:define name="title">Trajets</ui:define>
 
-		<ui:define name="body">		
-			<ul id="rides">			
-				<a4j:repeat value="#{beansRoute.route_list}" var="route">				
-				<li class="ride">	
-					<a4j:form ajaxSubmit="true">
-					<a4j:region id="list" > 			
-						<a4j:commandLink action="show">
-							<f:param name="parameter" value="#{route.id}" />
-							<div class="from"><span>De :</span>#{route.position_beginObj.address}</div>
-							<div class="to"><span>À :</span>#{route.position_endObj.address}</div>
-							<div class="countdown">#{route.delay_from_now}mn</div>
-							<div class="matching">#{route.seatDots}</div>
-						</a4j:commandLink>
-					</a4j:region>
-					</a4j:form>								
-				</li>				
-				</a4j:repeat>
-			</ul>			
-		</ui:define>
-	</ui:composition>
+    <ui:define name="body">   
+      <ul id="rides">     
+        <a4j:repeat value="#{beansRoute.route_list}" var="route">       
+        <li class="ride"> 
+          <a4j:form ajaxSubmit="true">
+          <a4j:region id="list" >       
+            <a4j:commandLink action="show">
+              <f:param name="parameter" value="#{route.id}" />
+              <div class="from"><span>De :</span>#{route.position_beginObj.address}</div>
+              <div class="to"><span>À :</span>#{route.position_endObj.address}</div>
+              <div class="countdown">#{route.delay_from_now}mn</div>
+              <div class="matching">#{route.seatDots}</div>
+            </a4j:commandLink>
+          </a4j:region>
+          </a4j:form>               
+        </li>       
+        </a4j:repeat>
+      </ul>     
+    </ui:define>
+  </ui:composition>
 </html>
