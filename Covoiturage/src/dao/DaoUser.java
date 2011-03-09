@@ -35,11 +35,14 @@ public class DaoUser {
 
 		try {
 
-			con = ConnexionBD.getConnexion();
+			con = null;
 
 			String query;
 
 			try {
+				
+				con = ConnexionBD.getConnexion();
+				
 				query = "call user_get_user_by_email('" + ConnexionBD.escape(email) + "')";
 
 				res = con.execute(query);
@@ -249,5 +252,30 @@ public class DaoUser {
 		}
 		return list;
 	}
+	
+//	public static void main(String[] args) {
+//		
+//		try {
+//			con = ConnexionBD.getConnexion();
+//			User user = null;
+//			String query = "call user_create_short('nn@nn.com', 'Dounia1988', 'Othman', 'BENTRIA', '0677665544')";
+//			ResultSet res = con.execute(query);
+//			
+//			if (res.first()) user = new User(res);				
+//			
+//			if(user != null) System.out.println("mobile phone : " + user.getMobilphone());
+//			else System.out.println("null");
+//			
+//			
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 
 }
