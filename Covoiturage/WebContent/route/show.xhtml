@@ -36,11 +36,11 @@
 		</div>
 		<div>Passagers :</div>
 		<div>
-			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty} and #{!beansRoute.is_my_route}">
+			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty and !beansRoute.is_my_route}">
 				<div><h:outputText escape="false" value="Soyez le premier passager à bord"/></div>
 				<div><h:outputText escape="false" value="En cliquant sur le bouton ci-dessous"/></div>
 			</h:panelGroup>
-			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty} and #{beansRoute.is_my_route}">
+			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty and beansRoute.is_my_route}">
 				<div><h:outputText escape="false" value="Pas de passager"/></div>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{!beansRoute.route.isPassegerListEmpty}">
