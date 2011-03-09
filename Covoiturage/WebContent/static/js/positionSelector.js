@@ -92,6 +92,22 @@ $(function() {
 			var jSelect = $(this);
 			positionSelectUpdateState(jSelect);
 		});
+		
+		jSelect.click(function() {
+			var jSelect = $(this);
+			positionSelectUpdateState(jSelect);
+		});
+		
+		jSelect.blur(function() {
+			var jSelect = $(this);
+			positionSelectUpdateState(jSelect);
+		});
+		
+		jSelect.select(function() {
+			var jSelect = $(this);
+			positionSelectUpdateState(jSelect);
+		});
+		
 		positionSelectUpdateState(jSelect);
 		
 	});
