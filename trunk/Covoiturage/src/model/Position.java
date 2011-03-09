@@ -1,5 +1,7 @@
 package model;
 
+import google_api.GoogleGeoApi;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
@@ -111,6 +113,23 @@ public class Position {
 		hs.put("latitude", this.getLatitude());
 		hs.put("longitude", this.getLongitude());
 		return hs;
+	}
+
+	public Double getDistanceInMeterWith(Position posEnd) {
+		Double distance=null;
+		
+		Double ptStartLat = this.getLatitude();
+		Double ptStartLng = this.getLongitude();
+
+		Double ptEndLat = posEnd.getLatitude();
+		Double ptEndLng = posEnd.getLongitude();
+
+		Double seg1X = ((ptEndLat - ptStartLat) / GoogleGeoApi.LATITUDE_CONVERS);
+		Double seg1Y = ((ptEndLng - ptStartLng) / GoogleGeoApi.LONGITUDE_CONVERS);
+
+		distance = Math.sqrt(Math.pow(seg1X, 2) + Math.pow(seg1Y, 2));
+
+		return distance;
 	}
 	
 

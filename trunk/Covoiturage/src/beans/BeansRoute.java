@@ -45,7 +45,7 @@ public class BeansRoute {
 	protected Integer minutes_to_depart = null;
 	protected Integer seat_number = null;
 	protected Integer time_delta = null;
-	private Integer distance_radius = null;
+	private String distance_radius = null;
 
 	protected Boolean is_my_route = false;
 	protected Boolean is_created_route = false;
@@ -294,6 +294,19 @@ public class BeansRoute {
 			return "actuel";
 		}
 		
+		Integer precision_meters=1000;
+		
+		Double distance = posBegin.getDistanceInMeterWith(posEnd);
+		
+		if(distance_radius.equals("exact")) {
+			precision_meters = (int) Math.round(Math.min(30000, Math.max(500, distance / 400 )));
+		}else if(distance_radius.equals("low")) {
+			precision_meters = (int) Math.round(Math.min(50000, Math.max(1000, distance / 200 )));
+		}else if(distance_radius.equals("medium")) {
+			precision_meters = (int) Math.round(Math.min(80000, Math.max(1500, distance / 20 )));
+		}else if(distance_radius.equals("high")) {
+			precision_meters = (int) Math.round(Math.min(100000, Math.max(2000, distance / 5 )));
+		}
 
 		Date date_departure_begin = new Date();
 		date_departure_begin.setTime(date_departure_begin.getTime() + (minutes_to_depart - time_delta)*60*1000);
@@ -302,17 +315,17 @@ public class BeansRoute {
 		date_departure_end.setTime(date_departure_end.getTime() + (minutes_to_depart + time_delta)*60*1000);
 
 		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin, posEnd, date_departure_begin, date_departure_end,
-				distance_radius, Route_type.PROVIDE_CAR);
+				precision_meters, Route_type.PROVIDE_CAR);
 		route_list.clear();
 		route_list.addAll(table.values());
 		return "index";
 	}
 
-	public void setDistance_radius(Integer distance_radius) {
+	public void setDistance_radius(String distance_radius) {
 		this.distance_radius = distance_radius;
 	}
 
-	public Integer getDistance_radius() {
+	public String getDistance_radius() {
 		return distance_radius;
 	}
 

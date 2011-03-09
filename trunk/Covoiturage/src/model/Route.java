@@ -360,13 +360,24 @@ public class Route {
 
 	public long getDelay_from_now() {
 		if (date_begin != null){
-			long begin = this.date_begin.getTime();
-			long now = new Date().getTime();
-			long delta =  begin - now;
+			int begin = DateUtils.getDateAsInteger(this.getDate_begin());
+			int now = DateUtils.getDateAsInteger(new Date());
+			int delta =  begin - now;
 			long minutes = delta / 1000 / 60;
 			return minutes;
 		}else{
 			return 0;
+		}
+	}
+	
+	public String getDelay_from_now_text() {
+		if (date_begin != null){
+			int begin = DateUtils.getDateAsInteger(this.getDate_begin());
+			int now = DateUtils.getDateAsInteger(new Date());
+			int delta =  begin - now;
+			return DateUtils.getIntervalAsText(delta);
+		}else{
+			return "Inconnu";
 		}
 	}
 	
