@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
 	template="/template/template.xhtml">
 
 	<ui:define name="title">Profil utilisateur</ui:define>
@@ -43,9 +44,25 @@
 		</div>	
 		
 		<div class="section">
-			<h:outputLabel value="Anniversaire :" />
+			<h:outputLabel value="Tranche d'âge :" />
 			<div class="readonly">
-				<h:outputText value="#{beansUser.birthdateString}" />
+				<c:choose>
+					<c:when test="${beansUser.birthdateByYear == '1992'}">
+						Mineur(e)
+					</c:when>
+					<c:when test="${beansUser.birthdateByYear == '1980'}">
+						Jeune
+					</c:when>
+					<c:when test="${beansUser.birthdateByYear == '1960'}">
+						Adulte
+					</c:when>
+					<c:when test="${beansUser.birthdateByYear == '1940'}">
+						Senior
+					</c:when>
+					<c:when test="${beansUser.birthdateByYear == '1900'}">
+						Senior++
+					</c:when>
+				</c:choose>
 			</div>
 		</div>	
 		
