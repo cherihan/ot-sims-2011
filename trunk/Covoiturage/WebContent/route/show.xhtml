@@ -71,11 +71,14 @@
       </ui:repeat>
       initializeGoogleMap(polyline);
     });
-    </script>
+    </script>   
 		<h:panelGroup rendered="#{beansRoute.is_created_route}">
-			<div><h:commandButton value="Retour" styleClass="large" />
+			<div>
+			 <h:form>
+				<h:commandButton value="Retour" action="home" styleClass="large" />
+			</h:form>
 			</div>
-		</h:panelGroup>
+		</h:panelGroup>	
 		<h:panelGroup rendered="#{!beansRoute.is_created_route}">
 			<div><h:commandButton value="Autres trajets" styleClass="large" />
 			</div>
