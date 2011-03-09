@@ -33,16 +33,16 @@ public class FacesUtil {
 
 	public static User getUser() {
 		FacesContext fc = FacesContext.getCurrentInstance();
-		
+
 		if (fc == null) {
 			return null;
-		}
-		else {
+		} else {
 			return (User) fc
-			.getApplication()
-			.getExpressionFactory()
-			.createValueExpression(fc.getELContext(), "#{beansUser.user}",
-					User.class).getValue(fc.getELContext());
+					.getApplication()
+					.getExpressionFactory()
+					.createValueExpression(fc.getELContext(),
+							"#{beansUser.user}", User.class)
+					.getValue(fc.getELContext());
 		}
 	}
 
@@ -54,16 +54,16 @@ public class FacesUtil {
 				.createValueExpression(fc.getELContext(), "#{beansUser.user}",
 						User.class).setValue(fc.getELContext(), usr);
 	}
-	
-//	public static void setRouteList(List<Route> routeList){
-//		FacesContext fc = FacesContext.getCurrentInstance();
-//
-//		fc.getApplication()
-//				.getExpressionFactory()
-//				.createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
-//						List.class).setValue(fc.getELContext(), routeList);
-//	}
-	
+
+	// public static void setRouteList(List<Route> routeList){
+	// FacesContext fc = FacesContext.getCurrentInstance();
+	//
+	// fc.getApplication()
+	// .getExpressionFactory()
+	// .createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
+	// List.class).setValue(fc.getELContext(), routeList);
+	// }
+
 	@SuppressWarnings("unchecked")
 	public static List<Route> getRouteList() {
 		FacesContext fc = FacesContext.getCurrentInstance();
@@ -71,16 +71,18 @@ public class FacesUtil {
 		return (List<Route>) fc
 				.getApplication()
 				.getExpressionFactory()
-				.createValueExpression(fc.getELContext(), "#{beansRoute.route_list}",
-						List.class).getValue(fc.getELContext());
+				.createValueExpression(fc.getELContext(),
+						"#{beansRoute.route_list}", List.class)
+				.getValue(fc.getELContext());
 	}
-	
+
 	public static Boolean getUserConnected() {
-		
+
 		User utilisateur = FacesUtil.getUser();
-				
-		if(utilisateur == null ||utilisateur.getEmail() == null)return false;
-				
+
+		if (utilisateur == null || utilisateur.getEmail() == null)
+			return false;
+
 		return true;
 	}
 }
