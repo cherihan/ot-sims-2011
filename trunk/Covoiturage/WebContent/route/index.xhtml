@@ -4,13 +4,14 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:rich="http://richfaces.org/rich"
+			xmlns:c="http://java.sun.com/jstl/core"
       xmlns:a4j="http://richfaces.org/a4j">
 
   <ui:composition template="/template/template.xhtml" >
     <ui:define name="title">Trajets</ui:define>
 
-    <ui:define name="body">   
-      <ul id="rides">     
+    <ui:define name="body">
+      <ul id="rides">
         <a4j:repeat value="#{beansRoute.route_list}" var="route">       
         <li class="ride"> 
           <a4j:form ajaxSubmit="true">
@@ -26,7 +27,10 @@
           </a4j:form>               
         </li>       
         </a4j:repeat>
-      </ul>     
+      </ul>
+      <c:if test="${empty beansRoute.route_list}">
+      	<p class="minimsg">☹ Ooops, il n'y a pas encore de trajet correspondant à votre recherche.</p>
+      </c:if>
     </ui:define>
   </ui:composition>
 </html>
