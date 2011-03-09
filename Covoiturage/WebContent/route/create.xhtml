@@ -10,6 +10,22 @@
 
 	<ui:define name="title">Nouveau trajet</ui:define>
 	<ui:define name="form-end">
+  
+     <div class="section">
+        <h:outputLabel value="Date du depart" />
+        <h:selectOneMenu value="#{beansRoute.minutes_to_depart}" class="large" required="true">
+          <f:selectItem itemLabel="Dans 5mn" itemValue="5" />
+          <f:selectItem itemLabel="Dans 10mn" itemValue="10" />
+          <f:selectItem itemLabel="Dans 20mn" itemValue="20" />
+          <f:selectItem itemLabel="Dans 30mn" itemValue="30" />
+          <f:selectItem itemLabel="Dans 40mn" itemValue="40" />
+          <f:selectItem itemLabel="Dans 50mn" itemValue="50" />
+          <f:selectItem itemLabel="Dans 1h" itemValue="60" />
+          <f:selectItem itemLabel="Dans 2h" itemValue="120" />
+          <f:selectItem itemLabel="Dans 3h" itemValue="180" />
+        </h:selectOneMenu>
+      </div>
+  
 		<div class="section" id="seat-number-section">
 			<h:outputText value="Avec "/>
 			<h:selectOneMenu value="#{beansRoute.seat_number}" styleClass="large" id="seat-number">

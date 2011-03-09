@@ -78,6 +78,14 @@ function geolocalisation_isSupported() {
 	return navigator.geolocation;
 }
 
+function positionSelectUpdateStateAll() {
+	$('.positionSelect').each(function (i, elm) {
+		var jDiv = $(this);
+		var jSelect = jDiv.find('select');
+		positionSelectUpdateState(jSelect);
+	});
+}
+
 
 $(function() {
 	$('.positionSelect').each(function (i, elm) {
@@ -125,5 +133,5 @@ $(function() {
 		}
 	});	
 	
-
+	setInterval("positionSelectUpdateStateAll()", 300);
 });

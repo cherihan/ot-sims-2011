@@ -14,19 +14,32 @@
 				<h:outputLabel value="Precision de la recherche :" />
 				<h:selectOneMenu value="#{beansRoute.distance_radius}" styleClass="large">
 					<f:selectItem itemLabel="Exacte" itemValue="exact"/>
-					<f:selectItem itemLabel="Basse" itemValue="low"/>
-					<f:selectItem itemLabel="Moyenne" itemValue="medium"/>
 					<f:selectItem itemLabel="Haute" itemValue="high"/>
+          <f:selectItem itemLabel="Moyenne" itemValue="medium"/>
+          <f:selectItem itemLabel="Basse" itemValue="low"/>
 				</h:selectOneMenu>
 			</div>
-			<div class="section">
+      
+      
+      <div class="section">
+        <h:outputLabel value="Date du départ" />
+        <h:selectOneMenu value="#{beansRoute.depart_date_choice}" class="large" required="true">
+          <f:selectItem itemLabel="Dans 5mn" itemValue="5min" />
+          <f:selectItem itemLabel="La prochaine heure" itemValue="thisHour" />
+          <f:selectItem itemLabel="Aujourd'hui" itemValue="today" />
+          <f:selectItem itemLabel="Demain" itemValue="tomorow" />
+          <f:selectItem itemLabel="Après-demain" itemValue="aftertomorow" />
+        </h:selectOneMenu>
+      </div>
+      
+			<!--  div class="section">
 				<h:outputLabel value="plus ou moins" />
 				<h:selectOneMenu value="#{beansRoute.time_delta}" styleClass="large">
 					<f:selectItem itemLabel="5mn" itemValue="5"/>
 					<f:selectItem itemLabel="10mn" itemValue="10"/>
 					<f:selectItem itemLabel="30mn" itemValue="30"/>
 				</h:selectOneMenu>
-			</div>
+			</div -->
 			<h:commandButton action="#{beansRoute.search}" value="Chercher" styleClass="large" />
 		</ui:define>
 	</ui:composition>
