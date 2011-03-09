@@ -294,6 +294,10 @@ public class BeansUser {
 
 		return "disconnect";
 	}
+	
+	public String getBirthdateByYear() {
+		return this.user.getBirthdateByYear();
+	}
 
 	// public static void main(String[] args) {
 	//
