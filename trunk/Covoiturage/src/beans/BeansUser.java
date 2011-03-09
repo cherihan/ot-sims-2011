@@ -21,6 +21,8 @@ public class BeansUser {
 	protected String messageErr;
 	protected String confirmPassword;
 	protected String birthdateString;
+	
+	protected String trancheAge;
 
 	public BeansUser() {
 		user = new User();
@@ -154,7 +156,7 @@ public class BeansUser {
 			return "actuel";
 		}
 
-		// /// TODO se pignoler
+		// /// TODO
 
 		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
@@ -295,9 +297,35 @@ public class BeansUser {
 		return "disconnect";
 	}
 	
-	public String getBirthdateByYear() {
-		return this.user.getBirthdateByYear();
+	public String getTrancheAge()
+	{
+		int a =  user.getBirthdate().getYear();
+		System.out.println(a);
+		switch (a) {
+		case 92:
+			return "Mineur(e)";
+			
+		case 80:
+			return "Jeune";
+			
+		case 60:
+			return "Adulte";
+			
+		case 40:
+			return "Senior";
+			
+		case 20:
+			return "Senior++";
+
+		default:
+			return "Senioooor";
+		}
 	}
+	
+	public void setTrancheAge(String trancheAge) {
+		this.trancheAge = trancheAge;
+	}	
+
 
 	// public static void main(String[] args) {
 	//
