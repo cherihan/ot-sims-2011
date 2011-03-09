@@ -34,12 +34,16 @@ public class LoginRequired implements Filter {
 		System.out.println(req.getQueryString());
 		System.out.println(page);
 		
-	    if ((! FacesUtil.getUserConnected())
-		    	&& page.contains("route/create")) {
-	    	resp.sendRedirect("/Covoiturage/user/login.jsf");
-	    } else {
-	            chain.doFilter(request, response);
-	    }
+//	    if ((! FacesUtil.getUserConnected())
+//		    	&& page.contains("route/create.jsf")) {
+//	    	resp.sendRedirect("/Covoiturage/user/login.jsf");
+//	    	chain.doFilter(request, response);
+//	    } else {
+//	            chain.doFilter(request, response);
+//	    }
+	    
+	    chain.doFilter(request, response);
+	    
 	}
 
 
