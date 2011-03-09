@@ -270,6 +270,7 @@ public class BeansUser {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			messageErr = e.getMessage();
+			return "actuel";
 		}
 		user = userUpdate;
 
@@ -318,7 +319,7 @@ public class BeansUser {
 			return "Senior++";
 
 		default:
-			return "Senioooor";
+			return "Pas encore défini ";
 		}
 	}
 	
