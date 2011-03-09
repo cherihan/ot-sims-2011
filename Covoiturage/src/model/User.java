@@ -427,7 +427,7 @@ public class User {
 		//   -> l'action est sans effet
 		try {
 			Position fav_position = DaoPosition.getPositionByAddress(position);
-			DaoUser_fav_position.createUser_fav_position(posLabel, this.getId(), fav_position.getId());
+			DaoUser_fav_position.createOrUpdateByLabelUser_fav_position(posLabel, this.getId(), fav_position.getId());
 		} catch (Exception e) {
 		
 		}
