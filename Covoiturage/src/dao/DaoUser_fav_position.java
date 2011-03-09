@@ -55,6 +55,39 @@ public class DaoUser_fav_position {
 		return ufp;
 
 	}
+	
+	public static User_fav_position createOrUpdateByLabelUser_fav_position(String label, int usr_id, int pos_id)
+			throws Exception {
+
+		con = null;
+		String messageErr = null;
+		ResultSet res;
+		User_fav_position ufp = null;
+
+		try {
+
+			con = ConnexionBD.getConnexion();
+
+			String query;
+
+			query = "call user_add_or_edit_by_label_pos_fav("+usr_id+", "+pos_id+", '" + ConnexionBD.escape(label) + "')";
+			res = con.execute(query);
+			if (res.first())
+				ufp = new User_fav_position(res);
+			
+		} catch (ClassNotFoundException ex) {
+			messageErr = Constantes.CLASS_DB_NOT_FOUND;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		} catch (SQLException ex) {
+			messageErr = Constantes.PROBLEME_CONNECTION_DB;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		}
+
+		return ufp;
+
+	}
 
 	public static User_fav_position getUser_fav_position(int ufp_id) {
 		User_fav_position ufp = null;

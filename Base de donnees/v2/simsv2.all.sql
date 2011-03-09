@@ -1343,6 +1343,38 @@ BEGIN
 	
 END //
 
+-- Insert or update name of a user favorite place
+DROP PROCEDURE IF EXISTS user_add_or_edit_by_label_pos_fav //
+CREATE PROCEDURE user_add_or_edit_by_label_pos_fav (
+	IN _usr_id INT(11),
+	IN _pos_id INT(11),
+	IN _label VARCHAR(100)
+)
+BEGIN
+	
+	DECLARE __ufp_id INT(11);
+	
+	SELECT ufp_id INTO __ufp_id FROM user_fav_pos_ufp WHERE ufp_label = _label AND ufp_user = _usr_id;
+	
+	IF __ufp_id IS NULL THEN
+	
+		INSERT INTO user_fav_pos_ufp (ufp_id, ufp_user, ufp_position, ufp_label ) VALUES
+		(
+			NULL,
+			_usr_id,
+			_pos_id,
+			_label
+		) ON DUPLICATE KEY UPDATE ufp_label=_label;
+	ELSE
+		
+		UPDATE user_fav_pos_ufp SET ufp_position= _ pos_id WHERE ufp_id = __ufp_id;
+		
+	END IF;
+	
+	SELECT * FROM user_fav_pos_ufp WHERE ufp_user = _usr_id AND ufp_position = _pos_id;
+	
+END //
+
 
 
 -- Delete a user favorite place
