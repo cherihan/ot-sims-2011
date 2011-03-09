@@ -182,6 +182,8 @@ public class BeansRoute {
 
 		User currentUser = FacesUtil.getUser();
 		
+		if(currentUser == null) return "home";
+		
 		try {
 			
 			Position posBegin = null;
