@@ -64,11 +64,13 @@
 		<hr />
 		    <div id="map_canvas" style="width:300px;height:300px;"></div>
     <script type="text/javascript">
+    $(function() {
       var polyline = new Array();
       <ui:repeat value="#{beansRoute.segments}" var="pos">
           polyline.push({"lat":#{pos.latitude}, "lng":#{pos.longitude}});
       </ui:repeat>
       initializeGoogleMap(polyline);
+    });
     </script>
 		<h:panelGroup rendered="#{beansRoute.is_created_route}">
 			<div><h:commandButton value="Retour" styleClass="large" />
