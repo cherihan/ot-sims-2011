@@ -11,12 +11,12 @@
 		<ui:define name="title">Recherche</ui:define>
 		<ui:define name="form-end">
 			<div class="section">
-				<h:outputLabel value="Dans un rayon de" />
+				<h:outputLabel value="Precision de la recherche :" />
 				<h:selectOneMenu value="#{beansRoute.distance_radius}" styleClass="large">
-					<f:selectItem itemLabel="1km" itemValue="1"/>
-					<f:selectItem itemLabel="2km" itemValue="2"/>
-					<f:selectItem itemLabel="3km" itemValue="3"/>
-					<f:selectItem itemLabel="4km" itemValue="4"/>
+					<f:selectItem itemLabel="Exacte" itemValue="exact"/>
+					<f:selectItem itemLabel="Basse" itemValue="low"/>
+					<f:selectItem itemLabel="Moyenne" itemValue="medium"/>
+					<f:selectItem itemLabel="Haute" itemValue="high"/>
 				</h:selectOneMenu>
 			</div>
 			<div class="section">

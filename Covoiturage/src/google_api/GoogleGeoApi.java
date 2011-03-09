@@ -27,8 +27,8 @@ public class GoogleGeoApi {
 	private static final int POLYLINE_INTERVAL_SIZE_MAX = 8000;
 	
 
-	private static final double LATITUDE_CONVERS = 0.000009;
-	private static final double LONGITUDE_CONVERS = 0.000014;
+	public static final double LATITUDE_CONVERS = 0.000009;
+	public static final double LONGITUDE_CONVERS = 0.000014;
 
 	public static String api_key = "ABQIAAAAnrqyN8PQj6Xnh3pejC_7JRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTvtmOkjl2kxp54yXOXd3Wg2pLyDg";
 
