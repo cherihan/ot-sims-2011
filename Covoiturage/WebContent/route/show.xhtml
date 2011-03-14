@@ -54,10 +54,12 @@
 			</h:panelGroup>
 		</div>
 		<h:panelGroup rendered="#{!beansRoute.is_my_route}">
-			<div><h:commandButton value="Se joindre au trajet"
-				styleClass="large" /></div>
+			<div>
+        <h:commandButton value="Se joindre au trajet" styleClass="large" onclick="alert('Fonctionnalité pas encore prise en charge.');return false;" />
+      </div>
 		</h:panelGroup>
-		<hr />
+		
+    <hr />
 
 		<div><h:outputText escape="false" value="Détails du trajets : "/></div>
 		<div class="msg"><h:outputText
@@ -71,7 +73,11 @@
       <ui:repeat value="#{beansRoute.segments}" var="pos">
           polyline.push({"lat":#{pos.latitude}, "lng":#{pos.longitude}});
       </ui:repeat>
-      initializeGoogleMap(polyline);
+      if(polyline.length > 0) {
+    	  initializeGoogleMap(polyline);
+      }else{
+    	 $('#map_canvas').hide(); 
+      }
     });
     </script>   
     <h:form>
