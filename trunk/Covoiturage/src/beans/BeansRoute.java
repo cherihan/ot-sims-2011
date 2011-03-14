@@ -66,6 +66,9 @@ public class BeansRoute {
 	public String showCtrl() {
 		System.out.println("Route selectionnée : ");
 		System.out.println(getRoute());
+		System.out.println(getRoute().getPosition_begin());
+		System.out.println(getRoute().getPosition_beginObj());
+		System.out.println(getRoute().getPosition_beginObj().getAddress());
 		return "show";
 	}
 
@@ -529,7 +532,7 @@ public class BeansRoute {
 		
 		//this.messageErr;
 
-		this.parameter="";;
+		this.parameter=null;
 	}
 	
 	public String getUserPhone() {
