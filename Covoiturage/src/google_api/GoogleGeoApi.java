@@ -11,6 +11,8 @@ import java.util.Hashtable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import utilities.Constantes;
+
 public class GoogleGeoApi {
 
 	/**
@@ -181,13 +183,13 @@ public class GoogleGeoApi {
 			JSONObject responseJson = new JSONObject(responseText);
 
 			if (!responseJson.getString("status").equals("OK")) {
-				throw new Exception();
+				throw new Exception(Constantes.INVALID_ROUTE_WAYPOINTS);
 			}
 
 			JSONArray results = responseJson.getJSONArray("routes");
 
 			if (results.length() == 0) {
-				throw new Exception();
+				throw new Exception(Constantes.INVALID_ROUTE_WAYPOINTS);
 			}
 			JSONObject route = (JSONObject) results.get(0);
 			JSONArray legs = route.getJSONArray("legs");

@@ -138,8 +138,15 @@ public class DaoRoute {
 		Hashtable<Integer, Hashtable<Integer, Double>> waypoints = new Hashtable<Integer, Hashtable<Integer, Double>>();
 		
 		
+		
+		
 		// Inserting
 		try {
+			
+			ArrayList<Hashtable<String, Object>> directionResult = GoogleGeoApi
+			.getDirection(pos_begin.getCoords(), pos_end.getCoords(),
+					"driving", waypoints);
+			
 			con = ConnexionBD.getConnexion();
 
 			String query = "call route_create(" + type + ", " + pos_depart_ID
@@ -158,9 +165,7 @@ public class DaoRoute {
 				if(insertSegments) {
 					
 					System.out.println("Recuperation des segments");
-					ArrayList<Hashtable<String, Object>> directionResult = GoogleGeoApi
-							.getDirection(pos_begin.getCoords(), pos_end.getCoords(),
-									"driving", waypoints);
+					
 					System.out.println("Fin Recuperation des segments");
 					
 					// translate(Ajout des segments composants le trajet)
@@ -219,6 +224,10 @@ public class DaoRoute {
 			throw new Exception(messageErr);
 		} catch (SQLException ex) {
 			messageErr = Constantes.PROBLEME_CONNECTION_DB;
+			System.err.println(messageErr + " : " + ex);
+			throw new Exception(messageErr);
+		} catch (Exception ex) {
+			messageErr = ex.getMessage();
 			System.err.println(messageErr + " : " + ex);
 			throw new Exception(messageErr);
 		}

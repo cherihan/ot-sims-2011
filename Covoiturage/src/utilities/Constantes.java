@@ -15,4 +15,5 @@ public class Constantes {
 	public static String UNEXPECTED_ERROR = "☠ Une erreur inattendue est survenue";
 	public static String ROUTE_ALREADY_PASSSAGER = "☺ Déjà passager du trajet";
 	public static String INVALID_ADDRESS = "Addresse introuvable";
+	public static String INVALID_ROUTE_WAYPOINTS = "Impossible de determiner un itineraire";
 }
