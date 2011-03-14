@@ -30,12 +30,9 @@
 		<div>Conducteur :</div>
 		<div>
 		<div class="people_link">
-			<h:form>
-      			<h:commandButton
-					action="show"
-					value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" />
-			</h:form>
-			<a href="tel://#{beansRoute.route.ownerObj.mobilphone}" title="Tel : #{beansRoute.route.ownerObj.mobilphone}" class="button large" >☎</a>
+			<h:form><h:commandButton				
+				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" action="show" /></h:form>             	
+			<a href="tel://#{beansRoute.route.ownerObj.mobilphone}" title="Tel : #{beansRoute.route.ownerObj.mobilphone}" class="button large" >☎ </a>
 		</div>
 		</div>
 		<div>Passagers :</div>
@@ -85,7 +82,7 @@
     </script>   
     <h:form>
 <h:commandButton value="Home" styleClass="large" action="home" rendered="#{beansRoute.is_created_route}"/>
-<h:commandButton value="Retour" styleClass="large" onclick="history.go(-1)" rendered="#{!beansRoute.is_created_route}"/>
+<h:commandButton value="Retour" styleClass="large" action="retour" rendered="#{!beansRoute.is_created_route}"/>
 	</h:form>
 	</ui:define>
 </ui:composition>
