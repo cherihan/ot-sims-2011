@@ -55,7 +55,7 @@ function geolocalisation_success(position) {
 function geolocalisation_error(msg) {
 	$('.positionSelect select option[value="here"]').each(function(index, obj) {
 		var jObj = $(obj);
-		jObj.html("Ici - Détection de la position échouée");
+		jObj.html("Ici - Erreur de localisation");
 	});
 }
 
@@ -64,7 +64,7 @@ function geolocalisation_detectPosition() {
 		
 		$('.positionSelect select option[value="here"]').each(function(index, obj) {
 			var jObj = $(obj);
-			jObj.html("Ici - Détection en cours...");
+			jObj.html("Ici - Localisation en cours...");
 		});
 		
 		//maximum age of 10 minutes = 600000 milliseconds
@@ -72,7 +72,7 @@ function geolocalisation_detectPosition() {
 	} else {
 		$('.positionSelect select option[value="here"]').each(function(index, obj) {
 			var jObj = $(obj);
-			jObj.html("Ici - Détection non supportée");
+			jObj.html("Ici - Localisation impossible");
 		});
 		//error('geolocalisation not supported');
 	}
