@@ -22,8 +22,6 @@ public class BeansUser {
 	protected String birthdateString;
 	
 	protected String trancheAge;
-	
-	private Integer user_id_param;
 
 	public BeansUser() {
 		user = new User();
@@ -35,15 +33,7 @@ public class BeansUser {
 	 * @return the user
 	 */
 	public User getUser() {
-		return user;			
-	}
-	
-	public User getShown_user() {
-		if (user_id_param == null) {
-			return user;
-		} else {
-			return DaoUser.getUser(user_id_param);
-		}
+		return user;
 	}
 
 	/**
@@ -309,7 +299,6 @@ public class BeansUser {
 	
 	public String getTrancheAge()
 	{
-		@SuppressWarnings("deprecation")
 		int a =  user.getBirthdate().getYear();
 		System.out.println(a);
 		switch (a) {
