@@ -522,4 +522,8 @@ public class BeansRoute {
 
 		this.parameter="";;
 	}
+	
+	public String getUserPhone() {
+		return this.getRoute().getOwnerObj().getMobilphone();
+	}
 }
