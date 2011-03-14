@@ -4,7 +4,11 @@ function positionSelectUpdateState(jSelect) {
 	var jDiv = jSelect.parents('.positionSelect');
 	var jOther = jDiv.find('input.other');
 	var jSelect = jDiv.find('select');
-	if(jSelect.attr('value') == 'other') {
+	var val = jSelect.attr('value');
+	if(val == undefined) {
+		val = jSelect.val();
+	}
+	if(val == 'other') {
 		jOther.show();
 		jSelect.hide();
 	}else{
@@ -25,10 +29,10 @@ function geolocalisation_success(position) {
 
 	//document.getElementById('localisation').value=+position.coords.latitude+';'+position.coords.longitude;
 	$('input.lat').each(function(i, elm) {
-		$(this).attr('value', position.coords.latitude);
+		$(this).val(position.coords.latitude);
 	});
 	$('input.lng').each(function(i, elm) {
-		$(this).attr('value', position.coords.longitude);
+		$(this).val(position.coords.longitude);
 	});
 	/*
 	$('.positionSelect select option').each(function(index, obj) {
