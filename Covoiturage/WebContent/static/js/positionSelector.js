@@ -5,7 +5,7 @@ function positionSelectUpdateState(jSelect) {
 	var jOther = jDiv.find('input.other');
 	var jSelect = jDiv.find('select');
 	var val = jSelect.attr('value');
-	if(val == undefined) {
+	if(val == undefined || val == "") {
 		val = jSelect.val();
 	}
 	if(val == 'other') {
