@@ -67,9 +67,10 @@ hr {
 
 /* Messages */
 
-.msg {	
+.msg {
+	display: inline-block;
 	font-style: italic;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .minimsg {
 	color: gray;
