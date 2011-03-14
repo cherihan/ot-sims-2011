@@ -151,7 +151,7 @@ public class User {
 	}
 
 	public User(ResultSet sqlrow) throws SQLException {
-		super();
+		//super();
 
 		this.id = (sqlrow.getInt("usr_id"));
 		this.firstname = sqlrow.getString("usr_firstname");

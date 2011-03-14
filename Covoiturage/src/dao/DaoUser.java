@@ -251,16 +251,17 @@ public class DaoUser {
 		}
 		return list;
 	}
-	
+//	
 //	public static void main(String[] args) {
 //		
 //		try {
 //			con = ConnexionBD.getConnexion();
 //			User user = null;
-//			String query = "call user_create_short('nn@nn.com', 'Dounia1988', 'Othman', 'BENTRIA', '0677665544')";
+//			String query = "call user_create_short('ndsddddn@nn.com', 'Dounia1988', 'Othman', 'BENTRIA', '0677665544')";
 //			ResultSet res = con.execute(query);
+//			System.out.println(res);
 //			
-//			if (res.first()) user = new User(res);				
+//			user = new User(res);				
 //			
 //			if(user != null) System.out.println("mobile phone : " + user.getMobilphone());
 //			else System.out.println("null");
@@ -274,7 +275,7 @@ public class DaoUser {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//
+////
 //	}
 
 }

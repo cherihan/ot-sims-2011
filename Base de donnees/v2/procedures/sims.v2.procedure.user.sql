@@ -69,10 +69,11 @@ BEGIN
 						_usr_firstname, -- _usr_firstname, 
 						_usr_lastname, -- _usr_lastname, 
 						'male', -- _usr_genre, 
+						_usr_mobilphone,
 						__usr_id
 					);
 	
-	UPDATE user_usr SET usr_mobilphone = _usr_mobilphone WHERE usr_id = __usr_id;
+	-- UPDATE user_usr SET usr_mobilphone = _usr_mobilphone WHERE usr_id = __usr_id;
 	
 	SELECT * FROM user_usr WHERE usr_id=__usr_id;
 	
@@ -87,14 +88,15 @@ CREATE PROCEDURE _user_create (
 	IN _usr_firstname VARCHAR(100),
 	IN _usr_lastname VARCHAR(100),
 	IN _usr_genre ENUM('male','female'),
+	IN _usr_mobilphone VARCHAR(100),
 	OUT _usr_id INT(11)
 )
 BEGIN
 	INSERT INTO user_usr 	(usr_email, usr_password, usr_firstname, usr_lastname, usr_genre, usr_registrationdate, usr_lastlogindate	, usr_description	, usr_mobilphone) VALUES
-							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() 				, ''				, '');
+							(_usr_email, '', _usr_firstname, _usr_lastname, _usr_genre, UNIX_TIMESTAMP(), UNIX_TIMESTAMP() 				, ''				, _usr_mobilphone);
 	SELECT LAST_INSERT_ID() INTO _usr_id;
 	
-	call user_update_password(_usr_id, _usr_password_not_encrypted);
+	call _user_update_password(_usr_id, _usr_password_not_encrypted);
 	
 END //
 
@@ -110,6 +112,19 @@ BEGIN
 	UPDATE user_usr SET usr_password = MD5(CONCAT(_usr_id,_usr_password_not_encrypted)) WHERE usr_id = _usr_id;
 	
 	SELECT * FROM user_usr WHERE usr_id=_usr_id;
+	
+END //
+
+
+
+DROP PROCEDURE IF EXISTS _user_update_password //
+CREATE PROCEDURE _user_update_password (
+	IN _usr_id INT(11),
+	IN _usr_password_not_encrypted VARCHAR(100)
+)
+BEGIN	
+	
+	UPDATE user_usr SET usr_password = MD5(CONCAT(_usr_id,_usr_password_not_encrypted)) WHERE usr_id = _usr_id;
 	
 END //
 
