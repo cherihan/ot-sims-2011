@@ -369,7 +369,7 @@ public class BeansRoute {
 		route_list.clear();
 		route_list.addAll(table.values());
 		
-		this.resetAllFields();
+		//this.resetAllFields();
 		return "index";
 	}
 
