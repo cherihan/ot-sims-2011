@@ -4,20 +4,21 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:rich="http://richfaces.org/rich"
-			xmlns:c="http://java.sun.com/jstl/core"
-      xmlns:a4j="http://richfaces.org/a4j">
+	  xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j" >
 
   <ui:composition template="/template/template.xhtml" >
     <ui:define name="title">Trajets</ui:define>
 
     <ui:define name="body">
+
       <ul id="rides">
         <a4j:repeat value="#{beansRoute.route_list}" var="route">       
         <li class="ride"> 
           <a4j:form ajaxSubmit="true">
           <a4j:region id="list" >       
-            <a4j:commandLink action="#{beansRoute.showCtrl}">
-              <f:param name="parameter" value="#{route.id}" />
+            <a4j:commandLink action="show">
+              <f:param name="route_id" value="#{route.id}" />
               <div class="from"><span>De :</span>#{route.position_beginObj.address}</div>
               <div class="to"><span>À :</span>#{route.position_endObj.address}</div>
               <div class="countdown">#{route.delay_from_now_text}</div>
@@ -30,6 +31,7 @@
       </ul>
       <c:if test="${empty beansRoute.route_list}">
       	<p class="minimsg">☹ Ooops, il n'y a pas encore de trajet correspondant à votre recherche.</p>
+      	<h:form><h:commandButton value="Retour" styleClass="large" action="retour" /></h:form>
       </c:if>
     </ui:define>
   </ui:composition>
