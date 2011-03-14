@@ -7,7 +7,10 @@
 	xmlns:rich="http://richfaces.org/rich"	
 	template="/template/template.xhtml">
 
-	<ui:define name="title">Profil utilisateur</ui:define>
+	<ui:define name="title">
+	<h:outputLabel value="Mon Profil" rendered="#{beansRoute.is_my_route}" />
+	<h:outputLabel value="Profil " rendered="#{!beansRoute.is_my_route}" />
+	</ui:define>
 
 	<ui:define name="body">
 		<div class="section">
@@ -79,9 +82,9 @@
 		</div>	
 		<hr/>
 		
-		<h:form rendered="#{beansRoute.is_my_route}">	
+		<h:form>	
 			<div class="section">
-				<h:commandButton action="#{beansUser.toEdit}" value="Modifier mon profil" styleClass="large" />				
+				<h:commandButton value="Retour" styleClass="large" action="retour" />				
 			</div>
 		</h:form>
 		
