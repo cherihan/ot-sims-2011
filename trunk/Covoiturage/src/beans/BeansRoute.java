@@ -62,6 +62,12 @@ public class BeansRoute {
 	public String getParameter() {
 		return parameter;
 	}
+	
+	public String showCtrl() {
+		System.out.println("Route selectionnée : ");
+		System.out.println(getRoute());
+		return "show";
+	}
 
 	/**
 	 * @param parameter
@@ -127,10 +133,12 @@ public class BeansRoute {
 	 * @return
 	 */
 	public Route getRoute() {
-		if (parameter != null && parameter.length() != 0) {
-			int rte_id = Integer.parseInt(parameter);
-			route = DaoRoute.getRoute(rte_id);
-			parameter = null;
+		if(route == null) {
+			if (parameter != null && parameter.length() != 0) {
+				int rte_id = Integer.parseInt(parameter);
+				route = DaoRoute.getRoute(rte_id);
+				parameter = null;
+			}
 		}
 
 		return route;
