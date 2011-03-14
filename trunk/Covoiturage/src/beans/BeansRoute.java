@@ -137,6 +137,7 @@ public class BeansRoute {
 			if (parameter != null && parameter.length() != 0) {
 				int rte_id = Integer.parseInt(parameter);
 				route = DaoRoute.getRoute(rte_id);
+				is_created_route = false;
 				parameter = null;
 			}
 		}
@@ -521,8 +522,8 @@ public class BeansRoute {
 		this.time_delta = null;
 		this.distance_radius = null;
 
-		this.is_my_route = false;
-		this.is_created_route = false;
+		//this.is_my_route = false;
+		//this.is_created_route = false;
 		this.user_fav_pos = null;
 		this.route_list = new ArrayList<Route>();
 		
@@ -533,5 +534,16 @@ public class BeansRoute {
 	
 	public String getUserPhone() {
 		return this.getRoute().getOwnerObj().getMobilphone();
+	}
+	
+	public String joinVoyage(){
+		try {
+			if (route != null && FacesUtil.getUserConnected())
+			DaoRoute.route_add_passager(route.getId(), FacesUtil.getUser().getId());
+		} catch (Exception e) {
+			messageErr = Constantes.UNEXPECTED_ERROR;
+			e.printStackTrace();
+		}
+		return "show";
 	}
 }
