@@ -9,6 +9,8 @@ import java.util.Set;
 
 import dao.DaoPosition;
 import dao.DaoRoute;
+import dao.DaoUser;
+import dao.DaoUser_fav_position;
 
 import model.Position;
 import model.Route;
@@ -33,8 +35,17 @@ public class testGoogleApi {
 		String typeTest="";
 		
 		//typeTest="googleDirection";
-		typeTest="createRoute";
+		//typeTest="createRoute";
 		//typeTest="googleDirection";
+		typeTest="createUser";
+		
+		
+		if(typeTest.equals("createUser")) {
+				DaoUser.createUser("ndsddddddn@nn.com", "Dounia1988", "Othman", "BENTRIA", "0677665544");
+				
+		
+		}
+		
 		
 		if(typeTest.equals("googleDirection")) {
 			Route r1;
