@@ -31,11 +31,10 @@
 		<div>
 		<div class="people_link">
 			<h:form>
-      <h:commandButton
-				action="show"
-				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large"></h:form>
-             	<f:param name="user_id_param" value="#{beansRoute.route.ownerObj.id}" />
-			</h:commandButton>
+      			<h:commandButton
+					action="show"
+					value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" />
+			</h:form>
 			<a href="tel://#{beansRoute.route.ownerObj.mobilphone}" title="Tel : #{beansRoute.route.ownerObj.mobilphone}" class="button large" >☎</a>
 		</div>
 		</div>
