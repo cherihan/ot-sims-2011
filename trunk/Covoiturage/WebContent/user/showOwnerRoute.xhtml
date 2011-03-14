@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"	
+	template="/template/template.xhtml">
+
+	<ui:define name="title">Profil utilisateur</ui:define>
+
+	<ui:define name="body">
+		<div class="section">
+			<h:outputLabel value="Prénom :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.firstname}" />
+			</div>
+			<h:outputLabel value="Nom :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.lastname}" />
+			</div>
+		</div>	
+		
+		<div class="section">
+			<h:outputLabel value="E-mail :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.email}" />
+			</div>
+		</div>	
+		
+		<div class="section">	
+			<h:outputLabel value="Note :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.note}" />
+			</div>
+		</div>	
+		
+		<div class="section">	
+			<h:outputLabel value="Genre :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.genre}" />
+			</div>
+		</div>	
+		
+		<div class="section">
+			<h:outputLabel value="Tranche d'âge :" />
+			<div class="readonly">
+				<h:outputLabel value="#{beansRoute.trancheAge}" />				
+			</div>
+		</div>	
+		
+		<div class="section">
+			<h:outputLabel value="Numéro de portable :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.mobilphone}" />
+			</div>
+		</div>	
+		
+		<div class="section">
+			<h:outputLabel value="Domicile :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.favoritePositionHome}" />
+			</div>
+		</div>
+		
+		<div class="section">
+			<h:outputLabel value="Bureau :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.favoritePositionWork}" />
+			</div>
+		</div>
+		
+		
+		<div class="section">
+			<h:outputLabel value="Description :" />
+			<div class="readonly">
+				<h:outputText value="#{beansRoute.route.ownerObj.description}" />
+			</div>
+		</div>	
+		<hr/>
+		
+		<h:form rendered="#{beansRoute.is_my_route}">	
+			<div class="section">
+				<h:commandButton action="#{beansUser.toEdit}" value="Modifier mon profil" styleClass="large" />				
+			</div>
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>
