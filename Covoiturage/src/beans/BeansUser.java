@@ -22,6 +22,8 @@ public class BeansUser {
 	protected String birthdateString;
 	
 	protected String trancheAge;
+	
+	private Integer user_id_param;
 
 	public BeansUser() {
 		user = new User();
@@ -33,7 +35,15 @@ public class BeansUser {
 	 * @return the user
 	 */
 	public User getUser() {
-		return user;
+		return user;			
+	}
+	
+	public User getShown_user() {
+		if (user_id_param == null) {
+			return user;
+		} else {
+			return DaoUser.getUser(user_id_param);
+		}
 	}
 
 	/**

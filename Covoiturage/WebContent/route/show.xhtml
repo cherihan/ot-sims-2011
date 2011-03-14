@@ -29,10 +29,13 @@
 		<hr />
 		<div>Conducteur :</div>
 		<div>
-		<div class="people_link"><h:commandButton
-			value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" />
-    
-		<a href="tel://#{beansRoute.userPhone}" title="Tel : #{beansRoute.userPhone}" class="button large" >☎</a>
+		<div class="people_link">
+			<h:commandButton
+				action="show_user"
+				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large">
+             	<f:param name="user_id_param" value="#{beansRoute.route.ownerObj.id}" />
+			</h:commandButton>
+			<a href="tel://#{beansRoute.userPhone}" title="Tel : #{beansRoute.userPhone}" class="button large" >☎</a>
 		</div>
 		</div>
 		<div>Passagers :</div>
