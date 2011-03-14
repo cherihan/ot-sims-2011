@@ -133,6 +133,7 @@ form .timestamp {
 	margin: 0px 0px 8px 0px;
 }
 
+/* Form spécial JSF */
 form td > label {
 	display: inline-block;
 	margin-left: 6px;
