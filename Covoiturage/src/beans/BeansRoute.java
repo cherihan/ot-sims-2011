@@ -345,7 +345,7 @@ public class BeansRoute {
 		*/
 		
 		Date date_departure_begin = new Date();
-		Date date_departure_end = new Date();
+		Date date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 24*60*60);
 		
 		if(depart_date_choice.equals("5min")) {
 			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
