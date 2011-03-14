@@ -105,7 +105,7 @@ $(function() {
 			var jSelect = $(this);
 			positionSelectUpdateState(jSelect);
 		});
-		
+		/*
 		jSelect.blur(function() {
 			var jSelect = $(this);
 			positionSelectUpdateState(jSelect);
@@ -115,6 +115,7 @@ $(function() {
 			var jSelect = $(this);
 			positionSelectUpdateState(jSelect);
 		});
+		*/
 		
 		positionSelectUpdateState(jSelect);
 		
