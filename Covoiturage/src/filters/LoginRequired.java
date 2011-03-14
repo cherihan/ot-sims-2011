@@ -11,11 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.HomeCtrl;
-
-import model.User;
-
-import utilities.FacesUtil;
 
 public class LoginRequired implements Filter {
 
@@ -27,7 +22,8 @@ public class LoginRequired implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-        HttpServletResponse resp = (HttpServletResponse) response;
+        @SuppressWarnings("unused")
+		HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
 
 		String page = req.getRequestURL().toString();
