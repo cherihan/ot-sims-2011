@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import dao.DaoRoute;
@@ -52,29 +53,9 @@ public class BeansRoute {
 	protected ArrayList<User_fav_position> user_fav_pos = null;
 	private List<Route> route_list = new ArrayList<Route>();
 	protected String messageErr;
-
-	private String parameter;
-
-	/**
-	 * @return the parameter
-	 */
-	public String getParameter() {
-		return parameter;
-	}
 	
-	public String showCtrl() {
-		System.out.println("Route selectionnée : ");
-		System.out.println(getRoute());
-		return "show";
-	}
+	protected String trancheAge;
 
-	/**
-	 * @param parameter
-	 *            the parameter to set
-	 */
-	public void setParameter(String parameter) {
-		this.parameter = parameter;
-	}
 
 	public Integer getSeat_number() {
 		return seat_number;
@@ -131,18 +112,14 @@ public class BeansRoute {
 	/**
 	 * @return
 	 */
-	public Route getRoute() {
-		if(route == null) {
-			if (parameter != null && parameter.length() != 0) {
-				int rte_id = Integer.parseInt(parameter);
-				System.out.println(parameter);
-				System.out.println(rte_id);
+	public Route getRoute() {		
+		String parameterRouteId=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("route_id"); 
+				
+			if (parameterRouteId != null && parameterRouteId.length() != 0) {
+				int rte_id = Integer.parseInt(parameterRouteId);
 				route = DaoRoute.getRoute(rte_id);
-				is_created_route = false;
-				parameter = null;
-			}
-		}
-		route = DaoRoute.getRoute(route);
+				is_created_route = false;							
+			}		
 
 		return route;
 	}
@@ -531,7 +508,6 @@ public class BeansRoute {
 		
 		//this.messageErr;
 
-		//this.parameter=null;
 	}
 	
 	public String getUserPhone() {
@@ -548,4 +524,34 @@ public class BeansRoute {
 		}
 		return "show";
 	}
+	
+	public String getTrancheAge()
+	{
+		int a =  route.getOwnerObj().getBirthdate().getYear();
+		System.out.println(a);
+		switch (a) {
+		case 92:
+			return "Mineur(e)";
+			
+		case 80:
+			return "Jeune";
+			
+		case 60:
+			return "Adulte";
+			
+		case 40:
+			return "Senior";
+			
+		case 20:
+			return "Senior++";
+
+		default:
+			return "Pas encore d�fini ";
+		}
+	}
+	
+	public void setTrancheAge(String trancheAge) {
+		this.trancheAge = trancheAge;
+	}
+	
 }
