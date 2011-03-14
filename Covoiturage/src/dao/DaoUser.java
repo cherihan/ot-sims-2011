@@ -163,12 +163,11 @@ public class DaoUser {
 						
 			ResultSet curseur = null;
 				
-			if(userTemp.getPassword().length() ==0)
+			if(userTemp.getPassword().length() == 0)
 			{
 				curseur = con.execute(query);
 			}
 			else{
-				
 				con.execute(query);
 				curseur = con.execute(queryChangePassWord);
 			}
