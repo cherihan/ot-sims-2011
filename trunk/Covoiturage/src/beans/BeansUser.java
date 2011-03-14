@@ -309,6 +309,7 @@ public class BeansUser {
 	
 	public String getTrancheAge()
 	{
+		@SuppressWarnings("deprecation")
 		int a =  user.getBirthdate().getYear();
 		System.out.println(a);
 		switch (a) {
