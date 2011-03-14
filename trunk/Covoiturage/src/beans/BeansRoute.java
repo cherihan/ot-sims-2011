@@ -66,9 +66,6 @@ public class BeansRoute {
 	public String showCtrl() {
 		System.out.println("Route selectionnée : ");
 		System.out.println(getRoute());
-		System.out.println(getRoute().getPosition_begin());
-		System.out.println(getRoute().getPosition_beginObj());
-		System.out.println(getRoute().getPosition_beginObj().getAddress());
 		return "show";
 	}
 
@@ -139,11 +136,14 @@ public class BeansRoute {
 		if(route == null) {
 			if (parameter != null && parameter.length() != 0) {
 				int rte_id = Integer.parseInt(parameter);
+				System.out.println(parameter);
+				System.out.println(rte_id);
 				route = DaoRoute.getRoute(rte_id);
 				is_created_route = false;
 				parameter = null;
 			}
 		}
+		route = DaoRoute.getRoute(route);
 
 		return route;
 	}
@@ -532,7 +532,7 @@ public class BeansRoute {
 		
 		//this.messageErr;
 
-		this.parameter=null;
+		//this.parameter=null;
 	}
 	
 	public String getUserPhone() {
