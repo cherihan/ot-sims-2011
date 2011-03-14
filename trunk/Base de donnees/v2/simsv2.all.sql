@@ -1203,7 +1203,7 @@ CREATE PROCEDURE user_create (
 BEGIN
 	DECLARE __usr_id INT(11);
 	
-	call _user_create(_usr_email, _usr_password_not_encrypted, _usr_firstname, _usr_lastname, _usr_genre, __usr_id);
+	call _user_create(_usr_email, _usr_password_not_encrypted, _usr_firstname, _usr_lastname, _usr_genre, '', __usr_id);
 	
 	SELECT * FROM user_usr WHERE usr_id=__usr_id;
 	
