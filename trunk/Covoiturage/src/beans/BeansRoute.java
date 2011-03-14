@@ -200,6 +200,7 @@ public class BeansRoute {
 				is_created_route = true;
 				route.setPassagers(new Hashtable<Integer, Passager>());
 				System.out.println("new route created");
+				this.resetAllFields();
 				return "show";
 			}else{
 				this.messageErr = Constantes.UNEXPECTED_ERROR;
@@ -358,6 +359,8 @@ public class BeansRoute {
 				precision_meters, Route_type.PROVIDE_CAR);
 		route_list.clear();
 		route_list.addAll(table.values());
+		
+		this.resetAllFields();
 		return "index";
 	}
 
@@ -487,6 +490,36 @@ public class BeansRoute {
 	public String toHome(){
 		messageErr = "";
 		System.out.println("toHome");
+		this.resetAllFields();
 		return "home";
+	}
+	
+	public void resetAllFields() {
+		//this.Route route = new Route();
+
+		this.pos_depart = null;
+		this.pos_depart_other = null;
+		this.pos_depart_coords_lat = null;
+		this.pos_depart_coords_lng = null;
+
+		this.pos_arrive = null;
+		this.pos_arrive_other = null;
+		this.pos_arrive_coords_lat = null;
+		this.pos_arrive_coords_lng = null;
+
+		this.route_type = null;
+		this.minutes_to_depart = null;
+		this.seat_number = null;
+		this.time_delta = null;
+		this.distance_radius = null;
+
+		this.is_my_route = false;
+		this.is_created_route = false;
+		this.user_fav_pos = null;
+		this.route_list = new ArrayList<Route>();
+		
+		//this.messageErr;
+
+		this.parameter="";;
 	}
 }

@@ -2,7 +2,6 @@ package beans;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import model.Route;
@@ -319,7 +318,7 @@ public class BeansUser {
 			return "Senior++";
 
 		default:
-			return "Pas encore défini ";
+			return "Pas encore dï¿½fini ";
 		}
 	}
 	
