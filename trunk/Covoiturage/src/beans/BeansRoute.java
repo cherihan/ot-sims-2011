@@ -54,9 +54,6 @@ public class BeansRoute {
 	protected ArrayList<User_fav_position> user_fav_pos = null;
 	private List<Route> route_list = new ArrayList<Route>();
 	protected String messageErr;
-	
-	protected String trancheAge;
-
 
 	public Integer getSeat_number() {
 		return seat_number;
@@ -89,18 +86,17 @@ public class BeansRoute {
 	public void setPos_arrive(String pos_arrive) {
 		this.pos_arrive = pos_arrive;
 	}
-	
-	String depart_date_choice=null;
-	
+
+	String depart_date_choice = null;
+
 	public String getDepart_date_choice() {
 		return this.depart_date_choice;
 	}
-	
+
 	public void setDepart_date_choice(String ch) {
-		this.depart_date_choice=ch;
+		this.depart_date_choice = ch;
 	}
 
-	
 	public Integer getMinutes_to_depart() {
 		return minutes_to_depart;
 	}
@@ -108,23 +104,23 @@ public class BeansRoute {
 	public void setMinutes_to_depart(Integer minutes_to_depart) {
 		this.minutes_to_depart = minutes_to_depart;
 	}
-	
 
 	/**
 	 * @return
 	 */
-	public Route getRoute() {		
-		String parameterRouteId=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("route_id"); 
-				
-			if (parameterRouteId != null && parameterRouteId.length() != 0) {
-				int rte_id = Integer.parseInt(parameterRouteId);
-				route = DaoRoute.getRoute(rte_id);
-				if (route != null)
-					route.setPassagers(DaoPassager.getPassagers(route.getId()));
-				else
-					route = new Route();
-				is_created_route = false;							
-			}		
+	public Route getRoute() {
+		String parameterRouteId = (String) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap().get("route_id");
+
+		if (parameterRouteId != null && parameterRouteId.length() != 0) {
+			int rte_id = Integer.parseInt(parameterRouteId);
+			route = DaoRoute.getRoute(rte_id);
+			if (route != null)
+				route.setPassagers(DaoPassager.getPassagers(route.getId()));
+			else
+				route = new Route();
+			is_created_route = false;
+		}
 
 		return route;
 	}
@@ -170,32 +166,33 @@ public class BeansRoute {
 		} else {
 			seat_number = null;
 		}
-		
-		Date full_date_depart = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + minutes_to_depart * 60);
+
+		Date full_date_depart = DateUtils.getTimestampAsDate(DateUtils
+				.getDateAsInteger(new Date()) + minutes_to_depart * 60);
 
 		User currentUser = FacesUtil.getUser();
-		
-		if(currentUser == null) return "home";
-		
+
+		if (currentUser == null)
+			return "home";
+
 		try {
-			
+
 			Position posBegin = null;
 			Position posEnd = null;
-			
+
 			posBegin = this.getSelectedPositionBegin();
 			posEnd = this.getSelectedPositionEnd();
-			
-			
-			
-			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR, posBegin.getId(), posEnd.getId(),
-					full_date_depart, null, null, currentUser.getId(), seat_number, null);
-			if (route != null){
+
+			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR,
+					posBegin.getId(), posEnd.getId(), full_date_depart, null,
+					null, currentUser.getId(), seat_number, null);
+			if (route != null) {
 				is_created_route = true;
 				route.setPassagers(DaoPassager.getPassagers(route.getId()));
 				System.out.println("new route created");
 				this.resetAllFields();
 				return "show";
-			}else{
+			} else {
 				this.messageErr = Constantes.UNEXPECTED_ERROR;
 				return "actuel";
 			}
@@ -205,70 +202,74 @@ public class BeansRoute {
 			return "actuel";
 		}
 	}
-	
+
 	protected Position getSelectedPositionBegin() throws Exception {
-		Position posBegin=null;
-		if(pos_depart.equals("here")) {
+		Position posBegin = null;
+		if (pos_depart.equals("here")) {
 			Double lat = Double.valueOf(pos_depart_coords_lat);
 			Double lng = Double.valueOf(pos_depart_coords_lng);
-			if(lat == 0)
+			if (lat == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
-			if(lng == 0)
+			if (lng == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
 			Hashtable<String, Double> coords = new Hashtable<String, Double>();
 			coords.put("latitude", lat);
 			coords.put("longitude", lng);
 			String address = GoogleGeoApiCached.getNearAddressFromCoord(coords);
 			posBegin = DaoPosition.createPosition(address, lat, lng);
-		}else if(pos_depart.equals("other")) {
+		} else if (pos_depart.equals("other")) {
 			Hashtable<String, Double> coords;
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_depart_other);
-			if( coords == null ) {
+			if (coords == null) {
 				throw new Exception(Constantes.INVALID_ADDRESS);
 			}
-			posBegin = DaoPosition.createPosition(pos_depart_other, coords.get("latitude"), coords.get("longitude"));
-		}else{
+			posBegin = DaoPosition.createPosition(pos_depart_other,
+					coords.get("latitude"), coords.get("longitude"));
+		} else {
 			Integer ufp_id = Integer.valueOf(pos_depart);
-			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
-			if( ufp == null ) {
+			User_fav_position ufp = DaoUser_fav_position
+					.getUser_fav_position(ufp_id);
+			if (ufp == null) {
 				throw new Exception(Constantes.INVALID_ADDRESS);
 			}
 			posBegin = ufp.getPositionObj();
 		}
 		return posBegin;
 	}
-	
+
 	protected Position getSelectedPositionEnd() throws Exception {
-		Position posEnd=null;
-		
-		if(pos_arrive.equals("here")) {
+		Position posEnd = null;
+
+		if (pos_arrive.equals("here")) {
 			Double lat = Double.valueOf(pos_arrive_coords_lat);
 			Double lng = Double.valueOf(pos_arrive_coords_lng);
-			if(lat == 0)
+			if (lat == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
-			if(lng == 0)
+			if (lng == 0)
 				throw new Exception(Constantes.DATAS_NOT_FILL_IN);
 			Hashtable<String, Double> coords = new Hashtable<String, Double>();
 			coords.put("latitude", lat);
 			coords.put("longitude", lng);
 			String address = GoogleGeoApiCached.getNearAddressFromCoord(coords);
 			posEnd = DaoPosition.createPosition(address, lat, lng);
-		}else if(pos_arrive.equals("other")) {
+		} else if (pos_arrive.equals("other")) {
 			Hashtable<String, Double> coords;
 			coords = GoogleGeoApiCached.getCoordOfAddress(pos_arrive_other);
-			if( coords == null ) {
+			if (coords == null) {
 				throw new Exception(Constantes.INVALID_ADDRESS);
 			}
-			posEnd = DaoPosition.createPosition(pos_arrive_other, coords.get("latitude"), coords.get("longitude"));
-		}else{
+			posEnd = DaoPosition.createPosition(pos_arrive_other,
+					coords.get("latitude"), coords.get("longitude"));
+		} else {
 			Integer ufp_id = Integer.valueOf(pos_arrive);
-			User_fav_position ufp = DaoUser_fav_position.getUser_fav_position(ufp_id);
-			if( ufp == null ) {
+			User_fav_position ufp = DaoUser_fav_position
+					.getUser_fav_position(ufp_id);
+			if (ufp == null) {
 				throw new Exception(Constantes.INVALID_ADDRESS);
 			}
 			posEnd = ufp.getPositionObj();
 		}
-		
+
 		return posEnd;
 	}
 
@@ -278,82 +279,98 @@ public class BeansRoute {
 	}
 
 	public String search() throws Exception {
-		if (pos_depart == null
-				|| pos_arrive == null 
-				|| depart_date_choice == null
+		if (pos_depart == null || pos_arrive == null
+				|| depart_date_choice == null || distance_radius == null
 				|| distance_radius == null
-				|| distance_radius == null
-				//|| time_delta == null
-				//|| minutes_to_depart == null 
-				
-				) {
+		// || time_delta == null
+		// || minutes_to_depart == null
+
+		) {
 			messageErr = Constantes.DATAS_NOT_FILL_IN;
 			return "actuel";
 		}
-		
+
 		/*
-		Position from = DaoPosition.getPositionByAddress(pos_depart);
-		Position to = DaoPosition.getPositionByAddress(pos_arrive);
-		*/
-		
+		 * Position from = DaoPosition.getPositionByAddress(pos_depart);
+		 * Position to = DaoPosition.getPositionByAddress(pos_arrive);
+		 */
+
 		Position posBegin = null;
 		Position posEnd = null;
-		
+
 		try {
 			posBegin = this.getSelectedPositionBegin();
 			posEnd = this.getSelectedPositionEnd();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			messageErr = e.getMessage();
 			return "actuel";
 		}
-		
-		Integer precision_meters=1000;
-		
+
+		Integer precision_meters = 1000;
+
 		Double distance = posBegin.getDistanceInMeterWith(posEnd);
-		
-		if(distance_radius.equals("exact")) {
-			precision_meters = (int) Math.round(Math.min(30000, Math.max(500, distance / 400 )));
-		}else if(distance_radius.equals("high")) {
-			precision_meters = (int) Math.round(Math.min(50000, Math.max(1000, distance / 200 )));
-		}else if(distance_radius.equals("medium")) {
-			precision_meters = (int) Math.round(Math.min(80000, Math.max(1500, distance / 20 )));
-		}else if(distance_radius.equals("low")) {
-			precision_meters = (int) Math.round(Math.min(100000, Math.max(2000, distance / 5 )));
+
+		if (distance_radius.equals("exact")) {
+			precision_meters = (int) Math.round(Math.min(30000,
+					Math.max(500, distance / 400)));
+		} else if (distance_radius.equals("high")) {
+			precision_meters = (int) Math.round(Math.min(50000,
+					Math.max(1000, distance / 200)));
+		} else if (distance_radius.equals("medium")) {
+			precision_meters = (int) Math.round(Math.min(80000,
+					Math.max(1500, distance / 20)));
+		} else if (distance_radius.equals("low")) {
+			precision_meters = (int) Math.round(Math.min(100000,
+					Math.max(2000, distance / 5)));
 		}
 		/*
+		 * Date date_departure_begin = new Date();
+		 * date_departure_begin.setTime(date_departure_begin.getTime() +
+		 * (minutes_to_depart - time_delta)*60*1000);
+		 * 
+		 * Date date_departure_end = new Date();
+		 * date_departure_end.setTime(date_departure_end.getTime() +
+		 * (minutes_to_depart + time_delta)*60*1000);
+		 */
+
 		Date date_departure_begin = new Date();
-		date_departure_begin.setTime(date_departure_begin.getTime() + (minutes_to_depart - time_delta)*60*1000);
-		
-		Date date_departure_end = new Date();
-		date_departure_end.setTime(date_departure_end.getTime() + (minutes_to_depart + time_delta)*60*1000);
-		*/
-		
-		Date date_departure_begin = new Date();
-		Date date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 24*60*60);
-		
-		if(depart_date_choice.equals("5min")) {
-			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
-			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 10*60);
-		}else if(depart_date_choice.equals("thisHour")) {
-			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
-			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 70*60);
-		}else if(depart_date_choice.equals("today")) {
-			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 10*60);
-			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 24*60*60);
-		}else if(depart_date_choice.equals("tomorow")) {
-			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
-			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 48*60*60);
-		}else if(depart_date_choice.equals("aftertomorow")) {
-			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) - 5*60);
-			date_departure_end = DateUtils.getTimestampAsDate(DateUtils.getDateAsInteger(new Date()) + 76*60*60);
+		Date date_departure_end = DateUtils.getTimestampAsDate(DateUtils
+				.getDateAsInteger(new Date()) + 24 * 60 * 60);
+
+		if (depart_date_choice.equals("5min")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) - 5 * 60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) + 10 * 60);
+		} else if (depart_date_choice.equals("thisHour")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) - 5 * 60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) + 70 * 60);
+		} else if (depart_date_choice.equals("today")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) - 10 * 60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) + 24 * 60 * 60);
+		} else if (depart_date_choice.equals("tomorow")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) - 5 * 60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) + 48 * 60 * 60);
+		} else if (depart_date_choice.equals("aftertomorow")) {
+			date_departure_begin = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) - 5 * 60);
+			date_departure_end = DateUtils.getTimestampAsDate(DateUtils
+					.getDateAsInteger(new Date()) + 76 * 60 * 60);
 		}
-		
-		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin, posEnd, date_departure_begin, date_departure_end,
+
+		Hashtable<Integer, Route> table = DaoRoute.route_search(posBegin,
+				posEnd, date_departure_begin, date_departure_end,
 				precision_meters, Route_type.PROVIDE_CAR);
 		route_list.clear();
 		route_list.addAll(table.values());
-		
-		//this.resetAllFields();
+
+		// this.resetAllFields();
 		return "index";
 	}
 
@@ -428,15 +445,15 @@ public class BeansRoute {
 	public void setRoute_list(List<Route> route_list) {
 		this.route_list = route_list;
 	}
-	
+
 	public ArrayList<Position> getSegments() {
 		ArrayList<Position> retour = new ArrayList<Position>();
 		ArrayList<Segment> input = DaoRoute.getSegments(this.route);
-		System.out.println("Numberelementssss : "+input.size());
-		int i=0;
-		int n=input.size();
-		while(i < n) {
-			Segment seg = input.get(i); 
+		System.out.println("Numberelementssss : " + input.size());
+		int i = 0;
+		int n = input.size();
+		while (i < n) {
+			Segment seg = input.get(i);
 			retour.add(seg.getPos_beginObj());
 			retour.add(seg.getPos_endObj());
 			i++;
@@ -461,13 +478,14 @@ public class BeansRoute {
 	}
 
 	public ArrayList<User_fav_position> getUser_fav_pos() {
-		Hashtable<Integer, User_fav_position> input = DaoUser_fav_position.getFavoritePositionsOfUser(FacesUtil.getUser());
+		Hashtable<Integer, User_fav_position> input = DaoUser_fav_position
+				.getFavoritePositionsOfUser(FacesUtil.getUser());
 		ArrayList<User_fav_position> retour = new ArrayList<User_fav_position>();
 		retour.addAll(input.values());
 		System.out.println(retour);
 		return retour;
 	}
-	
+
 	public Collection<SelectItem> getUser_fav_pos_select_items() {
 		ArrayList<SelectItem> retour = new ArrayList<SelectItem>();
 		Collection<User_fav_position> ufp_list = getUser_fav_pos();
@@ -479,16 +497,16 @@ public class BeansRoute {
 		}
 		return retour;
 	}
-	
-	public String toHome(){
+
+	public String toHome() {
 		messageErr = "";
 		System.out.println("toHome");
 		this.resetAllFields();
 		return "home";
 	}
-	
+
 	public void resetAllFields() {
-		//this.Route route = new Route();
+		// this.Route route = new Route();
 
 		this.pos_depart = null;
 		this.pos_depart_other = null;
@@ -506,28 +524,32 @@ public class BeansRoute {
 		this.time_delta = null;
 		this.distance_radius = null;
 
-		//this.is_my_route = false;
-		//this.is_created_route = false;
+		// this.is_my_route = false;
+		// this.is_created_route = false;
 		this.user_fav_pos = null;
 		this.route_list = new ArrayList<Route>();
-		
-		//this.messageErr;
+
+		// this.messageErr;
 
 	}
-	
+
 	public String getUserPhone() {
 		return this.getRoute().getOwnerObj().getMobilphone();
 	}
-	
-	public String joinVoyage(){
+
+	public String joinVoyage() {
 		try {
 			System.out.println("Join route - cm");
-			if (route != null && FacesUtil.getUserConnected()){
-				DaoRoute.route_add_passager(route.getId(), FacesUtil.getUser().getId());
+			if (route != null && FacesUtil.getUserConnected()) {
+				DaoRoute.route_add_passager(route.getId(), FacesUtil.getUser()
+						.getId());
 				route.setPassagers(DaoPassager.getPassagers(route.getId()));
-				System.out.println("Passagers null ? " + (DaoPassager.getPassagers(route.getId()).size()==0) + " - cm");
-				System.out.println("Passager list null ? " + route.getIsPassegerListEmpty() + " - cm");
-			}else
+				System.out.println("Passagers null ? "
+						+ (DaoPassager.getPassagers(route.getId()).size() == 0)
+						+ " - cm");
+				System.out.println("Passager list null ? "
+						+ route.getIsPassegerListEmpty() + " - cm");
+			} else
 				System.out.println("Route null - cm");
 		} catch (Exception e) {
 			messageErr = Constantes.UNEXPECTED_ERROR;
@@ -535,34 +557,5 @@ public class BeansRoute {
 		}
 		return "actuel";
 	}
-	
-	public String getTrancheAge()
-	{
-		int a =  route.getOwnerObj().getBirthdate().getYear();
-		System.out.println(a);
-		switch (a) {
-		case 92:
-			return "Mineur(e)";
-			
-		case 80:
-			return "Jeune";
-			
-		case 60:
-			return "Adulte";
-			
-		case 40:
-			return "Senior";
-			
-		case 20:
-			return "Senior++";
 
-		default:
-			return "Pas encore d�fini ";
-		}
-	}
-	
-	public void setTrancheAge(String trancheAge) {
-		this.trancheAge = trancheAge;
-	}
-	
 }
