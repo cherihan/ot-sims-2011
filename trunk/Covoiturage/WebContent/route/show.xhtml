@@ -31,8 +31,7 @@
 		<div>
 		<div class="people_link">
 			<h:form><h:commandButton				
-				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" action="show" /></h:form>             	
-			<a href="tel://#{beansRoute.route.ownerObj.mobilphone}" title="Tel : #{beansRoute.route.ownerObj.mobilphone}" class="button large" >☎ </a>
+				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" action="show" /></h:form>             			<button onclick="window.location='tel://#{beansRoute.route.ownerObj.mobilphone}' " class="large">☎</button>
 		</div>
 		</div>
 		<div>Passagers :</div>

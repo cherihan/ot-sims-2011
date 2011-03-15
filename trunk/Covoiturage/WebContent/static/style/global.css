@@ -150,6 +150,7 @@ form td {
 .people_link {
 	position: relative;
 	width: 100%;
+	margin-bottom: 10px;
 }
 .people_link > * {
 	display: inline-block;
@@ -165,6 +166,13 @@ form td {
 	top: 0px;
 	width: 15%;
 	margin-top: 0px;
+}
+
+.people_link *:first-child *,
+.people_link *:last-child * {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
 }
 
 /* Ride lists */
