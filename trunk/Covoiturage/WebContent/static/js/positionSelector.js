@@ -140,3 +140,19 @@ $(function() {
 	
 	setInterval("positionSelectUpdateStateAll()", 300);
 });
+
+
+function formLoading(formu) {
+	jform = $(formu);
+	jform.find('*').hide();
+	jform.append('<div><img src="../img/loading.gif" alt="Loading.../><br />Chargement en cours</div>');
+}
+
+$(function() {
+	$('form').each(function (i, elm) {
+		$(elm).submit(function() {
+			formLoading(this);
+			return true;
+		});
+	});
+});
