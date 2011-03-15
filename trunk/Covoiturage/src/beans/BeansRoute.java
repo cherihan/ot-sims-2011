@@ -12,6 +12,7 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import dao.DaoPassager;
 import dao.DaoRoute;
 import dao.DaoPosition;
 import dao.DaoUser_fav_position;
@@ -118,6 +119,10 @@ public class BeansRoute {
 			if (parameterRouteId != null && parameterRouteId.length() != 0) {
 				int rte_id = Integer.parseInt(parameterRouteId);
 				route = DaoRoute.getRoute(rte_id);
+				if (route != null)
+					route.setPassagers(DaoPassager.getPassagers(route.getId()));
+				else
+					route = new Route();
 				is_created_route = false;							
 			}		
 
@@ -186,7 +191,7 @@ public class BeansRoute {
 					full_date_depart, null, null, currentUser.getId(), seat_number, null);
 			if (route != null){
 				is_created_route = true;
-				route.setPassagers(new Hashtable<Integer, Passager>());
+				route.setPassagers(DaoPassager.getPassagers(route.getId()));
 				System.out.println("new route created");
 				this.resetAllFields();
 				return "show";
@@ -516,13 +521,19 @@ public class BeansRoute {
 	
 	public String joinVoyage(){
 		try {
-			if (route != null && FacesUtil.getUserConnected())
-			DaoRoute.route_add_passager(route.getId(), FacesUtil.getUser().getId());
+			System.out.println("Join route - cm");
+			if (route != null && FacesUtil.getUserConnected()){
+				DaoRoute.route_add_passager(route.getId(), FacesUtil.getUser().getId());
+				route.setPassagers(DaoPassager.getPassagers(route.getId()));
+				System.out.println("Passagers null ? " + (DaoPassager.getPassagers(route.getId()).size()==0) + " - cm");
+				System.out.println("Passager list null ? " + route.getIsPassegerListEmpty() + " - cm");
+			}else
+				System.out.println("Route null - cm");
 		} catch (Exception e) {
 			messageErr = Constantes.UNEXPECTED_ERROR;
 			e.printStackTrace();
 		}
-		return "show";
+		return "actuel";
 	}
 	
 	public String getTrancheAge()
