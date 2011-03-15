@@ -239,7 +239,11 @@ public class BeansUser {
 			userTemp.setEmail(null);
 			return "actuel";
 		}
-		// /// TODO
+		if (!ValidatorOfData.validatePhone(userTemp.getMobilphone())) {
+			messageErr = Constantes.MOBILE_NUMBER_FORM_NOT_CORRECT;
+			userTemp.setMobilphone("");
+			return "actuel";
+		}
 		if (!ValidatorOfData.validateData(userTemp.getFirstname())) {
 			messageErr = Constantes.DATA_FORM_NOT_CORRECT;
 			userTemp.setEmail(null);
