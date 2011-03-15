@@ -173,6 +173,17 @@ form td {
 	display: inline-block;
 	margin: 0px;
 	padding: 0px;
+	width: 100%;
+}
+
+.fakebutton {
+	color: black;
+	text-decoration: none;
+	height: 32px;
+	text-align: center;
+	border: 1px solid gray;
+	-moz-border-radius		: 10px;
+	-webkit-border-radius	: 10px;
 }
 
 /* Ride lists */
