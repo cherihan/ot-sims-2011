@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jstl/core">
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j">
 
 <ui:composition template="/template/template.xhtml">
 
@@ -30,9 +31,12 @@
 		<div>Conducteur :</div>
 		<div>
 		<div class="people_link">
-			<h:form><h:commandButton				
-				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" action="show" /></h:form>
-			<a href="tel://#{beansRoute.route.ownerObj.mobilphone}" class="large button fakebutton">☎</a>
+			<h:form><a4j:commandButton				
+				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" action="show">				
+				<f:param name="user_id" value="#{beansRoute.route.ownerObj.id}" />
+				</a4j:commandButton>
+		 	</h:form>
+			<button onclick="window.location='tel://#{beansRoute.route.ownerObj.mobilphone}' " class="large">☎</button>
 		</div>
 		</div>
 		<div>Passagers :</div>
@@ -46,8 +50,11 @@
 			</h:panelGroup>
 			<h:panelGroup rendered="#{!beansRoute.route.isPassegerListEmpty}">
 				<ui:repeat value="#{beansRoute.route.passagerslist}" var="passager">
-					<div class="people_link"><h:commandButton
-						value="#{passager.userObj.fullname}" styleClass="large" />
+					<div class="people_link">
+						<a4j:commandButton
+							value="#{passager.userObj.fullname}" styleClass="large" >
+							<f:param name="user_id" value="#{passager.userObj.id}" />
+						</a4j:commandButton>
 					<button class="large">☎</button>
 					</div>
 				</ui:repeat>
