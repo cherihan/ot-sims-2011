@@ -58,7 +58,7 @@
 				<h:outputText value="#{beansRoute.route.ownerObj.mobilphone}" />
 			</div>
 		</div>	
-		
+	<h:panelGroup rendered="#{beansRoute.is_my_route}" >
 		<div class="section">
 			<h:outputLabel value="Domicile :" />
 			<div class="readonly">
@@ -72,7 +72,7 @@
 				<h:outputText value="#{beansRoute.route.ownerObj.favoritePositionWork}" />
 			</div>
 		</div>
-		
+	</h:panelGroup>		
 		
 		<div class="section">
 			<h:outputLabel value="Description :" />
