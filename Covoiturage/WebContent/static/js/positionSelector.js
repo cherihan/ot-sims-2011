@@ -10,7 +10,7 @@ function positionSelectUpdateState(jSelect) {
 	}
 	if(val == 'other') {
 		jOther.show();
-		jSelect.hide();
+		//jSelect.hide();
 	}else{
 		jOther.hide();
 	}
