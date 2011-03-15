@@ -42,12 +42,14 @@
 			</div>
 		</div>	
 		
+	 <h:panelGroup rendered="#{beansUser.trancheAge != ''}">
 		<div class="section">
 			<h:outputLabel value="Tranche d'âge :" />
 			<div class="readonly">
 				<h:outputLabel value="#{beansUser.trancheAge}" />				
 			</div>
 		</div>	
+	</h:panelGroup>
 		
 		<div class="section">
 			<h:outputLabel value="Numéro de portable :" />
@@ -56,27 +58,30 @@
 			</div>
 		</div>	
 		
+	<h:panelGroup rendered="#{beansUser.user.favoritePositionHome != ''}">
 		<div class="section">
 			<h:outputLabel value="Domicile :" />
 			<div class="readonly">
 				<h:outputText value="#{beansUser.user.favoritePositionHome}" />
 			</div>
 		</div>
-		
+	</h:panelGroup>
+	<h:panelGroup rendered="#{beansUser.user.favoritePositionWork != ''}">	
 		<div class="section">
 			<h:outputLabel value="Bureau :" />
 			<div class="readonly">
 				<h:outputText value="#{beansUser.user.favoritePositionWork}" />
 			</div>
 		</div>
-		
-		
+	</h:panelGroup>	
+	<h:panelGroup rendered="#{beansUser.user.description != ''}">	
 		<div class="section">
 			<h:outputLabel value="Description :" />
 			<div class="readonly"> 
 				<h:inputTextarea value="#{beansUser.user.description}" readonly="true" styleClass="large" rows="5"/>
 			</div>
-		</div>	
+		</div>
+	</h:panelGroup>	
 		<hr/>
 		
 		<h:form>	
