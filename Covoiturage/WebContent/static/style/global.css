@@ -256,7 +256,7 @@ form td {
 
 .ride div,
 .ride_details div {
-	height: 25px;
+	min-height: 25px;
 }
 
 .ride .countdown {
@@ -291,6 +291,11 @@ form td {
 
 .ride a:visited {
 	color: black;
+}
+
+.ride .from,
+.ride_details .from {
+	margin-bottom: 4px;
 }
 
 .ride .to span,
