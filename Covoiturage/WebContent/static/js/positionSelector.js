@@ -145,7 +145,7 @@ $(function() {
 function formLoading(formu) {
 	jform = $(formu);
 	jform.find('*').hide();
-	jform.append('<div><img src="../img/loading.gif" alt="Loading.../><br />Chargement en cours</div>');
+	jform.append(('<div style="text-align:center;"><img src="/Covoiturage/static/img/loading.gif" alt="Loading..."/><br/>Chargement en cours</div>'));
 }
 
 $(function() {
