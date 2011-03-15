@@ -145,11 +145,17 @@ $(function() {
 function formLoading(formu) {
 	jform = $(formu);
 	jform.find('*').hide();
-	jform.append(('<div style="text-align:center;"><img src="/Covoiturage/static/img/loading.gif" alt="Loading..."/><br/>Chargement en cours</div>'));
+	jform.find('.formLoading').show();
 }
 
 $(function() {
+	var newImg = new Image();
+	newImg.src="/Covoiturage/static/img/loading.gif";
+	
 	$('form').each(function (i, elm) {
+		
+		$(elm).append(('<div style="text-align:center;display:none;" class="formLoading"><img src="/Covoiturage/static/img/loading.gif" alt="Loading..."/><br/>Chargement en cours</div>'));
+		
 		$(elm).submit(function() {
 			formLoading(this);
 			return true;
