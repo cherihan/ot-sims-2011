@@ -1113,7 +1113,7 @@ DELIMITER ;
 
 		SELECT usr.*, psg.*
 			FROM  passager_psg as psg
-				INNER JOIN user_usr ON psg.psg_user = usr.usr_id		
+				INNER JOIN user_usr usr ON psg.psg_user = usr.usr_id		
 			WHERE 
 					psg_route = _rte_id
 				AND (psg_type = _pgt_id OR _pgt_id = 0 );
