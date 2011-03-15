@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 import model.Route;
 import model.User;
 
@@ -11,6 +13,7 @@ import utilities.Constantes;
 import utilities.FacesUtil;
 import utilities.ValidatorOfData;
 
+import dao.DaoRoute;
 import dao.DaoUser;
 
 public class BeansUser {
@@ -22,6 +25,8 @@ public class BeansUser {
 	protected String birthdateString;
 	
 	protected String trancheAge;
+	
+	private User otherUser;
 
 	public BeansUser() {
 		user = new User();
@@ -104,6 +109,83 @@ public class BeansUser {
 		this.birthdateString = birthdateString;
 	}
 
+	
+	/**
+	 * @return the otherUser
+	 */
+	public User getOtherUser() {
+		
+		String parameterUserId=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("user_id"); 
+		System.out.println("otherUser :" + parameterUserId );
+		if (parameterUserId != null && parameterUserId.length() != 0) {
+			int user_id = Integer.parseInt(parameterUserId);
+			otherUser = DaoUser.getUser(user_id);										
+		}	
+		
+		return otherUser;
+	}
+
+	/**
+	 * @param otherUser the otherUser to set
+	 */
+	public void setOtherUser(User otherUser) {
+		this.otherUser = otherUser;
+	}
+	
+	
+	private boolean autreUser;
+	
+	public boolean isAutreUser() {
+		
+		if(otherUser != null && user !=null)
+		return (otherUser.getId() != user.getId());
+		
+		return true;
+	}
+	
+	public void setAutreUser(boolean autreUser) {
+		this.autreUser = autreUser;
+	}
+	
+	private String trancheAgeOtherUser;
+	
+
+	/**
+	 * @return the trancheAgeOtherUser
+	 */
+	public String getTrancheAgeOtherUser() {	
+		int a =  otherUser.getBirthdate().getYear();		
+		switch (a) {
+		case 92:
+			return "Mineur(e)";
+			
+		case 80:
+			return "Jeune";
+			
+		case 60:
+			return "Adulte";
+			
+		case 40:
+			return "Senior";
+			
+		case 20:
+			return "Senior++";
+
+		default:
+			return "Pas encore défini ";
+		}
+	}
+
+	/**
+	 * @param trancheAgeOtherUser the trancheAgeOtherUser to set
+	 */
+	public void setTrancheAgeOtherUser(String trancheAgeOtherUser) {
+		this.trancheAgeOtherUser = trancheAgeOtherUser;
+	}
+
+	
+	
+	
 	public String toLogin() {
 		messageErr = "";
 		return "login";
