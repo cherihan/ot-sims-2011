@@ -8,68 +8,68 @@
 	template="/template/template.xhtml">
 
 	<ui:define name="title">
-	<h:outputLabel value="Mon Profil" rendered="#{beansRoute.is_my_route}" />
-	<h:outputLabel value="Profil " rendered="#{!beansRoute.is_my_route}" />
+	<h:outputLabel value="Mon Profil" rendered="#{!beansUser.autreUser}" />
+	<h:outputLabel value="Profil " rendered="#{beansUser.autreUser}" />
 	</ui:define>
 
 	<ui:define name="body">
 		<div class="section">
 			<h:outputLabel value="Prénom :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.firstname}" />
+				<h:outputText value="#{beansUser.otherUser.firstname}" />
 			</div>
 			<h:outputLabel value="Nom :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.lastname}" />
+				<h:outputText value="#{beansUser.otherUser.lastname}" />
 			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="E-mail :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.email}" />
+				<h:outputText value="#{beansUser.otherUser.email}" />
 			</div>
 		</div>	
 		
 		<div class="section">	
 			<h:outputLabel value="Note :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.note}" />
+				<h:outputText value="#{beansUser.otherUser.note}" />
 			</div>
 		</div>	
 		
 		<div class="section">	
 			<h:outputLabel value="Genre :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.genre}" />
+				<h:outputText value="#{beansUser.otherUser.genre}" />
 			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="Tranche d'âge :" />
 			<div class="readonly">
-				<h:outputLabel value="#{beansRoute.trancheAge}" />				
+				<h:outputLabel value="#{beansUser.trancheAgeOtherUser}" />				
 			</div>
 		</div>	
 		
 		<div class="section">
 			<h:outputLabel value="Numéro de portable :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.mobilphone}" />
+				<h:outputText value="#{beansUser.otherUser.mobilphone}" />
 			</div>
 		</div>	
-	<h:panelGroup rendered="#{beansRoute.is_my_route}" >
+	<h:panelGroup rendered="#{!beansUser.autreUser}" >
 		<div class="section">
 			<h:outputLabel value="Domicile :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.favoritePositionHome}" />
+				<h:outputText value="#{beansUser.otherUser.favoritePositionHome}" />
 			</div>
 		</div>
 		
 		<div class="section">
 			<h:outputLabel value="Bureau :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.favoritePositionWork}" />
+				<h:outputText value="#{beansUser.otherUser.favoritePositionWork}" />
 			</div>
 		</div>
 	</h:panelGroup>		
@@ -77,7 +77,7 @@
 		<div class="section">
 			<h:outputLabel value="Description :" />
 			<div class="readonly">
-				<h:outputText value="#{beansRoute.route.ownerObj.description}" />
+				<h:outputText value="#{beansUser.otherUser.description}" />
 			</div>
 		</div>	
 		<hr/>
