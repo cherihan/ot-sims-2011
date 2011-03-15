@@ -145,6 +145,7 @@ $(function() {
 function formLoading(formu) {
 	jform = $(formu);
 	jform.find('*').hide();
+	jform.find('.formLoading').find('*').show();
 	jform.find('.formLoading').show();
 }
 
