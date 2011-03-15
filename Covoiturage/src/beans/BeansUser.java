@@ -172,7 +172,7 @@ public class BeansUser {
 			return "Senior++";
 
 		default:
-			return "Pas encore défini ";
+			return "";
 		}
 	}
 
@@ -404,7 +404,7 @@ public class BeansUser {
 			return "Senior++";
 
 		default:
-			return "Pas encore défini ";
+			return "";
 		}
 	}
 	
