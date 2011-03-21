@@ -16,6 +16,10 @@
 
 	<ui:define name="body">
 
+		<c:if test="${!empty beansRoute.messageErr}">
+			<div><h:outputText value="#{beansRoute.messageErr}" styleClass="msg error" /></div>
+		</c:if>
+
 		<div class="ride_details">
 		<div class="from"><span><h:outputText escape="false"
 			value="De : " /></span><h:outputText
@@ -31,8 +35,7 @@
 		#{route.seatDots}</div>
 		</div>
 		<h:panelGroup rendered="#{beansRoute.route.ownerObj.email == beansUser.user.email}">		
-			<h:form>
-				<h:commandButton action="#{beansRoute.modify}"  value="Modifier" styleClass="large" />
+			<h:form>				
 				<h:commandButton action="#{beansRoute.delete}" value="Supprimer" styleClass="large" />
 			</h:form>		
 		</h:panelGroup>
@@ -42,7 +45,7 @@
 		<div>
 		<div class="people_link"><h:form>
 			<a4j:commandButton value="#{beansRoute.route.ownerObj.fullname}"
-				styleClass="large" action="show">
+				styleClass="large" action="#{beansRoute.toShow}">
 				<f:param name="user_id" value="#{beansRoute.route.ownerObj.id}" />
 			</a4j:commandButton>
 		</h:form>
@@ -65,7 +68,7 @@
 			<ui:repeat value="#{beansRoute.route.passagerslist}" var="passager">
 				<div class="people_link"><h:form>
 					<a4j:commandButton value="#{passager.userObj.fullname}"
-						styleClass="large" action="show">
+						styleClass="large" action="#{beansRoute.toShow}">
 						<f:param name="user_id" value="#{passager.userObj.id}" />
 					</a4j:commandButton>
 				</h:form>
@@ -102,7 +105,7 @@
     });
     </script>
 		<h:form>
-			<h:commandButton value="Home" styleClass="large" action="home"
+			<h:commandButton value="Accueil" styleClass="large" action="home"
 				rendered="#{beansRoute.is_created_route}" />
 			<h:commandButton value="Retour" styleClass="large" action="retour"
 				rendered="#{!beansRoute.is_created_route}" />
