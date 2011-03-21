@@ -45,6 +45,14 @@ h1 {
 	text-shadow: 1px 1px 1px white;
 }
 
+#home_logo {
+	position:absolute;
+	top: 15px;
+}
+#page_title {
+	margin-left: 35px;
+}
+
 /* Content */
 
 img {
