@@ -179,9 +179,19 @@ public class BeansRoute {
 
 			Position posBegin = null;
 			Position posEnd = null;
+			
+			try {
+				posBegin = this.getSelectedPositionBegin();	
+				posEnd = this.getSelectedPositionEnd();
+			}catch (java.lang.NumberFormatException e) {			
+				messageErr = Constantes.ERROR_IN_AUTOMATIC_LOCALISATION;
+				return "actuel";
+			} 
+			catch (Exception e) {
+				messageErr = e.getMessage();
+				return "actuel";
+			}
 
-			posBegin = this.getSelectedPositionBegin();
-			posEnd = this.getSelectedPositionEnd();
 
 			route = DaoRoute.createRoute(Route_type.PROVIDE_CAR,
 					posBegin.getId(), posEnd.getId(), full_date_depart, null,
@@ -191,6 +201,7 @@ public class BeansRoute {
 				route.setPassagers(DaoPassager.getPassagers(route.getId()));
 				System.out.println("new route created");
 				this.resetAllFields();
+				messageErr = "";
 				return "show";
 			} else {
 				this.messageErr = Constantes.UNEXPECTED_ERROR;
@@ -464,6 +475,8 @@ public class BeansRoute {
 			retour.add(seg.getPos_endObj());
 			i++;
 		}
+		
+		messageErr = "";
 		return retour;
 	}
 
@@ -489,6 +502,8 @@ public class BeansRoute {
 		ArrayList<User_fav_position> retour = new ArrayList<User_fav_position>();
 		retour.addAll(input.values());
 		System.out.println(retour);
+		
+		messageErr = "";
 		return retour;
 	}
 
@@ -501,6 +516,8 @@ public class BeansRoute {
 			ufp = it.next();
 			retour.add(new SelectItem(ufp.getId(), ufp.getLabel()));
 		}
+		
+		messageErr = "";
 		return retour;
 	}
 
@@ -567,17 +584,39 @@ public class BeansRoute {
 	public String delete()
 	{		
 		//TODO
+		try {			
+			DaoRoute.deleteRoute(route.getId());			
+		} catch (Exception e) {
+			messageErr = e.getMessage();
+			e.printStackTrace();
+			return "actuel";
+		}		
 		
-		System.out.println("La Suppréssion d'un trajet n'a pas encore intégrée");
+		messageErr = Constantes.DELETE_ROAD_SUCCESSFUL;	
+		
+		User currentUser = FacesUtil.getUser();
+		List<Route> list = FacesUtil.getRouteList();
+		System.out.println(currentUser.getAllRouteOfUser().size());
+		list.clear();
+		list.addAll(currentUser.getAllRouteOfUser());
+		
 		return "retour";
 	}
 	
-	public String modify()
-	{		
-		//TODO
-		
-		System.out.println("La mo d'un trajet n'a pas encore intégrée");
-		return "retour";
+	public String toShow()
+	{
+		messageErr = "";
+		return "show";
 	}
+	
+	public String toIndex() {
+		messageErr = "";
+		User currentUser = FacesUtil.getUser();
+		List<Route> list = FacesUtil.getRouteList();
+		System.out.println(currentUser.getAllRouteOfUser().size());
+		list.clear();
+		list.addAll(currentUser.getAllRouteOfUser());
 
+		return "index";
+	}
 }
