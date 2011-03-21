@@ -30,7 +30,14 @@
 			value="#{beansRoute.route.empty_seats}" /> places libres
 		#{route.seatDots}</div>
 		</div>
+		<h:panelGroup rendered="#{beansRoute.route.ownerObj.email == beansUser.user.email}">		
+			<h:form>
+				<h:commandButton action="#{beansRoute.modify}"  value="Modifier" styleClass="large" />
+				<h:commandButton action="#{beansRoute.delete}" value="Supprimer" styleClass="large" />
+			</h:form>		
+		</h:panelGroup>
 		<hr />
+		
 		<div>Conducteur :</div>
 		<div>
 		<div class="people_link"><h:form>
