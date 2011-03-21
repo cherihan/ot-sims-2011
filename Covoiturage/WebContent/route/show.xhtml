@@ -15,13 +15,16 @@
 	</ui:define>
 
 	<ui:define name="body">
-	
+
 		<div class="ride_details">
-		<div class="from"><span><h:outputText escape="false" value="De : "/></span><h:outputText
+		<div class="from"><span><h:outputText escape="false"
+			value="De : " /></span><h:outputText
 			value="#{beansRoute.route.position_beginObj.address}" /></div>
-		<div class="to"><span><h:outputText escape="false" value="À : "/></span><h:outputText
+		<div class="to"><span><h:outputText escape="false"
+			value="À : " /></span><h:outputText
 			value="#{beansRoute.route.position_endObj.address}" /></div>
-		<div class="countdown"><h:outputText escape="false" value="Départ "/><span><h:outputText
+		<div class="countdown"><h:outputText escape="false"
+			value="Départ " /><span><h:outputText
 			value="#{beansRoute.route.delay_from_now_text}" /></span></div>
 		<div class="matching"><h:outputText
 			value="#{beansRoute.route.empty_seats}" /> places libres
@@ -30,51 +33,53 @@
 		<hr />
 		<div>Conducteur :</div>
 		<div>
-		<div class="people_link">
-			<h:form><a4j:commandButton				
-				value="#{beansRoute.route.ownerObj.fullname}" styleClass="large" action="show">				
+		<div class="people_link"><h:form>
+			<a4j:commandButton value="#{beansRoute.route.ownerObj.fullname}"
+				styleClass="large" action="show">
 				<f:param name="user_id" value="#{beansRoute.route.ownerObj.id}" />
-				</a4j:commandButton>
-		 	</h:form>
-			<button onclick="window.location='tel://#{beansRoute.route.ownerObj.mobilphone}' " class="large">☎</button>
+			</a4j:commandButton>
+		</h:form>
+		<button
+			onclick="window.location='tel://#{beansRoute.route.ownerObj.mobilphone}' "
+			class="large">☎</button>
 		</div>
 		</div>
 		<div>Passagers :</div>
-		<div>
-			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty and !beansRoute.is_my_route}">
-				<div><h:outputText escape="false" value="Soyez le premier passager à bord"/></div>
-				<div><h:outputText escape="false" value="En cliquant sur le bouton ci-dessous"/></div>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{beansRoute.route.isPassegerListEmpty and beansRoute.is_my_route}">
-				<div><h:outputText escape="false" value="Pas de passager"/></div>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{!beansRoute.route.isPassegerListEmpty}">
-				<ui:repeat value="#{beansRoute.route.passagerslist}" var="passager">
-					<div class="people_link">
-						<a4j:commandButton
-							value="#{passager.userObj.fullname}" styleClass="large" >
-							<f:param name="user_id" value="#{passager.userObj.id}" />
-						</a4j:commandButton>
-					<button class="large">☎</button>
-					</div>
-				</ui:repeat>
-			</h:panelGroup>
-		</div>
+		<div><h:panelGroup
+			rendered="#{beansRoute.route.isPassegerListEmpty and !beansRoute.is_my_route}">
+			<div><h:outputText escape="false"
+				value="Soyez le premier passager à bord" /></div>
+			<div><h:outputText escape="false"
+				value="En cliquant sur le bouton ci-dessous" /></div>
+		</h:panelGroup> <h:panelGroup
+			rendered="#{beansRoute.route.isPassegerListEmpty and beansRoute.is_my_route}">
+			<div><h:outputText escape="false" value="Pas de passager" /></div>
+		</h:panelGroup> <h:panelGroup rendered="#{!beansRoute.route.isPassegerListEmpty}">
+			<ui:repeat value="#{beansRoute.route.passagerslist}" var="passager">
+				<div class="people_link"><a4j:commandButton
+					value="#{passager.userObj.fullname}" styleClass="large">
+					<f:param name="user_id" value="#{passager.userObj.id}" />
+				</a4j:commandButton>
+				<button class="large">☎</button>
+				</div>
+			</ui:repeat>
+		</h:panelGroup></div>
 		<h:panelGroup rendered="#{!beansRoute.is_my_route}">
-			<div>
-        <h:commandButton value="Se joindre au trajet" styleClass="large" onclick="alert('Fonctionnalité pas encore prise en charge.');return false;" />
-      </div>
+			<div><h:form>
+				<h:commandButton value="Se joindre au trajet" styleClass="large"
+					action="#{beansRoute.joinVoyage}"/>
+			</h:form></div>
 		</h:panelGroup>
-		
-    <hr />
 
-		<div><h:outputText escape="false" value="Détails du trajets : "/></div>
+		<hr />
+
+		<div><h:outputText escape="false" value="Détails du trajets : " /></div>
 		<div class="msg"><h:outputText
 			value="#{beansRoute.route.comment}" /></div>
 
 		<hr />
-		    <div id="map_canvas" style="width:300px;height:300px;"></div>
-    <script type="text/javascript">
+		<div id="map_canvas" style="width: 300px; height: 300px;"></div>
+		<script type="text/javascript">
     $(function() {
       var polyline = new Array();
       <ui:repeat value="#{beansRoute.segments}" var="pos">
@@ -86,11 +91,13 @@
     	 $('#map_canvas').hide(); 
       }
     });
-    </script>   
-    <h:form>
-<h:commandButton value="Home" styleClass="large" action="home" rendered="#{beansRoute.is_created_route}"/>
-<h:commandButton value="Retour" styleClass="large" action="retour" rendered="#{!beansRoute.is_created_route}"/>
-	</h:form>
+    </script>
+		<h:form>
+			<h:commandButton value="Home" styleClass="large" action="home"
+				rendered="#{beansRoute.is_created_route}" />
+			<h:commandButton value="Retour" styleClass="large" action="retour"
+				rendered="#{!beansRoute.is_created_route}" />
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
