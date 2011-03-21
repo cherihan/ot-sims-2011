@@ -17,4 +17,6 @@ public class Constantes {
 	public static String INVALID_ADDRESS = "Addresse introuvable";
 	public static String INVALID_ROUTE_WAYPOINTS = "☠ Impossible de determiner un itineraire";
 	public static String ERROR_IN_AUTOMATIC_LOCALISATION = "☹ Erreur dans la localisation automatique";
+	public static String ERROR_IN_DELETING_ROAD = "☹ Erreur dans la suppression de la route";
+	public static String DELETE_ROAD_SUCCESSFUL = "☺ Route supprimée avec succées";
 }
