@@ -203,15 +203,6 @@ public class BeansUser {
 		return "edit";
 	}
 	
-	public String toIndex() {
-		messageErr = "";
-		List<Route> list = FacesUtil.getRouteList();
-		System.out.println(user.getAllRouteOfUser().size());
-		list.clear();
-		list.addAll(user.getAllRouteOfUser());
-
-		return "index";
-	}
 
 	/**
 	 * 
