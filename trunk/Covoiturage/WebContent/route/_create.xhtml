@@ -20,7 +20,7 @@
       
     <div class="section positionSelect">
           <h:outputLabel value="Au départ de" escape="false"/>
-      <h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="true">
+      <h:selectOneMenu value="#{beansRoute.pos_depart}" styleClass="large" required="false">
         <f:selectItem itemLabel="Ici" itemValue="here" />
               <f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
         <f:selectItem itemLabel="Autre..." itemValue="other" />
@@ -32,7 +32,7 @@
       
     <div class="section positionSelect">
         <h:outputLabel value="Jusqu'à" escape="false"/>
-        <h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="true">
+        <h:selectOneMenu value="#{beansRoute.pos_arrive}" styleClass="large" required="false">
           <f:selectItem itemLabel="Ici" itemValue="here" />
         <f:selectItems value="#{beansRoute.user_fav_pos_select_items}"/>
           <f:selectItem itemLabel="Autre..." itemValue="other" />
