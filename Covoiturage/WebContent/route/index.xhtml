@@ -11,13 +11,17 @@
     <ui:define name="title">Trajets</ui:define>
 
     <ui:define name="body">
+    
+		<c:if test="${!empty beansRoute.messageErr}">
+			<div><h:outputText value="#{beansRoute.messageErr}" styleClass="msg error" /></div>
+		</c:if>
 
       <ul id="rides">
         <a4j:repeat value="#{beansRoute.route_list}" var="route">       
         <li class="ride"> 
           <a4j:form ajaxSubmit="true">
           <a4j:region id="list" >       
-            <a4j:commandLink action="show">
+            <a4j:commandLink action="#{beansRoute.toShow}">
               <f:param name="route_id" value="#{route.id}" />
               <div class="from"><span>De :</span>#{route.position_beginObj.address}</div>
               <div class="to"><span>À :</span>#{route.position_endObj.address}</div>
