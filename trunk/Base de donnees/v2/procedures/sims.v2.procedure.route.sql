@@ -112,6 +112,16 @@
 	END //
 
 
+	DROP PROCEDURE IF EXISTS route_del_by_id //
+	CREATE PROCEDURE route_del_by_id (
+		IN _rte_id INT(11)
+	)
+	BEGIN
+		
+		DELETE FROM  segment_seg WHERE seg_route = _rte_id;
+		DELETE FROM passager_psg WHERE psg_route = _rte_id;
+		DELETE FROM route_rte WHERE rte_id = _rte_id;
+	END //
 
 	DROP PROCEDURE IF EXISTS route_join //
 	CREATE PROCEDURE route_join (
