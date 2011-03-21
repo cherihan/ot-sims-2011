@@ -299,9 +299,13 @@ public class BeansRoute {
 		Position posEnd = null;
 
 		try {
-			posBegin = this.getSelectedPositionBegin();
+			posBegin = this.getSelectedPositionBegin();	
 			posEnd = this.getSelectedPositionEnd();
-		} catch (Exception e) {
+		}catch (java.lang.NumberFormatException e) {			
+			messageErr = Constantes.ERROR_IN_AUTOMATIC_LOCALISATION;
+			return "actuel";
+		} 
+		catch (Exception e) {
 			messageErr = e.getMessage();
 			return "actuel";
 		}
@@ -371,6 +375,8 @@ public class BeansRoute {
 		route_list.addAll(table.values());
 
 		// this.resetAllFields();
+		
+		messageErr = "";
 		return "index";
 	}
 
@@ -556,6 +562,22 @@ public class BeansRoute {
 			e.printStackTrace();
 		}
 		return "actuel";
+	}
+		
+	public String delete()
+	{		
+		//TODO
+		
+		System.out.println("La Suppréssion d'un trajet n'a pas encore intégrée");
+		return "retour";
+	}
+	
+	public String modify()
+	{		
+		//TODO
+		
+		System.out.println("La mo d'un trajet n'a pas encore intégrée");
+		return "retour";
 	}
 
 }
