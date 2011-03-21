@@ -56,10 +56,12 @@
 			<div><h:outputText escape="false" value="Pas de passager" /></div>
 		</h:panelGroup> <h:panelGroup rendered="#{!beansRoute.route.isPassegerListEmpty}">
 			<ui:repeat value="#{beansRoute.route.passagerslist}" var="passager">
-				<div class="people_link"><a4j:commandButton
-					value="#{passager.userObj.fullname}" styleClass="large">
-					<f:param name="user_id" value="#{passager.userObj.id}" />
-				</a4j:commandButton>
+				<div class="people_link"><h:form>
+					<a4j:commandButton value="#{passager.userObj.fullname}"
+						styleClass="large" action="show">
+						<f:param name="user_id" value="#{passager.userObj.id}" />
+					</a4j:commandButton>
+				</h:form>
 				<button class="large">☎</button>
 				</div>
 			</ui:repeat>
@@ -67,7 +69,7 @@
 		<h:panelGroup rendered="#{!beansRoute.is_my_route}">
 			<div><h:form>
 				<h:commandButton value="Se joindre au trajet" styleClass="large"
-					action="#{beansRoute.joinVoyage}"/>
+					action="#{beansRoute.joinVoyage}" />
 			</h:form></div>
 		</h:panelGroup>
 
