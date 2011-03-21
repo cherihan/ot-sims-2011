@@ -6,10 +6,10 @@ body {
 	font-family: Verdana, sans-serif;
 	height: 100%;
 	
-	background: -webkit-gradient(linear, left top, left bottom, from(white), to(#d6d6d6));
-	background: -moz-linear-gradient(top,  white,  #d6d6d6);
+	background: -webkit-gradient(linear, left top, left bottom, from(white), to(#e6e6e6));
+	background: -moz-linear-gradient(top,  white,  #e6e6e6);
 	background-repeat: no-repeat;
-	background-color: #d6d6d6;
+	background-color: #e6e6e6;
 }
 
 #body {
