@@ -134,19 +134,16 @@ public class DaoRoute {
 
 		Position pos_begin = DaoPosition.getPosition(pos_depart_ID);
 		Position pos_end = DaoPosition.getPosition(pos_arrive_ID);
-		
+
 		Hashtable<Integer, Hashtable<Integer, Double>> waypoints = new Hashtable<Integer, Hashtable<Integer, Double>>();
-		
-		
-		
-		
+
 		// Inserting
 		try {
-			
+
 			ArrayList<Hashtable<String, Object>> directionResult = GoogleGeoApi
-			.getDirection(pos_begin.getCoords(), pos_end.getCoords(),
-					"driving", waypoints);
-			
+					.getDirection(pos_begin.getCoords(), pos_end.getCoords(),
+							"driving", waypoints);
+
 			con = ConnexionBD.getConnexion();
 
 			String query = "call route_create(" + type + ", " + pos_depart_ID
@@ -160,55 +157,68 @@ public class DaoRoute {
 				res = con.execute(query);
 				if (res.first())
 					route = new Route(res);
-				
+
 				Boolean insertSegments = true;
-				if(insertSegments) {
-					
+				if (insertSegments) {
+
 					System.out.println("Recuperation des segments");
-					
+
 					System.out.println("Fin Recuperation des segments");
-					
+
 					// translate(Ajout des segments composants le trajet)
 					int directionResultSize = directionResult.size();
 					int directionResultI;
-					int segmentCounter=0;
-					int global_duration_increment=0;
+					int segmentCounter = 0;
+					int global_duration_increment = 0;
 					System.out.println("Debut ajout des segments");
 					for (directionResultI = 0; directionResultI < directionResultSize; directionResultI++) {
 						// Character value = (Character)itValue.next();
-	
+
 						Hashtable<String, Object> step = (Hashtable<String, Object>) directionResult
 								.get(directionResultI);
-						
+
 						ArrayList<Hashtable<String, Object>> segments = (ArrayList<Hashtable<String, Object>>) step
 								.get("segments");
-						
-						
-						int subdurationIncrement=0;
+
+						int subdurationIncrement = 0;
 						for (int i2 = 0; i2 < segments.size(); i2++) {
-							Hashtable<String, Double> sub_pos_begin = (Hashtable<String, Double>) segments.get(i2).get("begin");
-							Hashtable<String, Double> sub_pos_end = (Hashtable<String, Double>) segments.get(i2).get("end");
-							Integer subduration = (int) Math.round(((Double) segments.get(i2).get("duration")));
-							
-							Position sub_ppos_begin = DaoPosition.createPosition(null, sub_pos_begin.get("latitude"), sub_pos_begin.get("longitude"));
-							Position sub_ppos_end = DaoPosition.createPosition(null, sub_pos_end.get("latitude"), sub_pos_end.get("longitude"));
-							
-							
-							Date sub_date_begin = DateUtils.getTimestampAsDate(
-													DateUtils.getDateAsInteger( route.getDate_begin() ) 
-													+ subduration 
-													+ global_duration_increment 
-													+ subdurationIncrement);
-							
-							DaoSegment.createSegment(route, sub_ppos_begin, sub_ppos_end, subduration, sub_date_begin, segmentCounter);
-							
-							subdurationIncrement+=subduration;
+							Hashtable<String, Double> sub_pos_begin = (Hashtable<String, Double>) segments
+									.get(i2).get("begin");
+							Hashtable<String, Double> sub_pos_end = (Hashtable<String, Double>) segments
+									.get(i2).get("end");
+							Integer subduration = (int) Math
+									.round(((Double) segments.get(i2).get(
+											"duration")));
+
+							Position sub_ppos_begin = DaoPosition
+									.createPosition(null,
+											sub_pos_begin.get("latitude"),
+											sub_pos_begin.get("longitude"));
+							Position sub_ppos_end = DaoPosition.createPosition(
+									null, sub_pos_end.get("latitude"),
+									sub_pos_end.get("longitude"));
+
+							Date sub_date_begin = DateUtils
+									.getTimestampAsDate(DateUtils
+											.getDateAsInteger(route
+													.getDate_begin())
+											+ subduration
+											+ global_duration_increment
+											+ subdurationIncrement);
+
+							DaoSegment.createSegment(route, sub_ppos_begin,
+									sub_ppos_end, subduration, sub_date_begin,
+									segmentCounter);
+
+							subdurationIncrement += subduration;
 							segmentCounter++;
 						}
-						global_duration_increment+=(Double)step.get("duration");
-	
+						global_duration_increment += (Double) step
+								.get("duration");
+
 					}
-					System.out.println("Fin ajout de  "+segmentCounter+" segments");
+					System.out.println("Fin ajout de  " + segmentCounter
+							+ " segments");
 				}
 
 			} catch (MySQLIntegrityConstraintViolationException ex) {
@@ -255,10 +265,6 @@ public class DaoRoute {
 		}
 	}
 
-	public static Route getRoute(Route rte) {
-		return DaoRoute.getRoute(rte.getId());
-	}
-
 	public static Hashtable<Integer, Passager> getPassagers(int rte_id) {
 		return DaoPassager.getPassagers(rte_id);
 	}
@@ -292,11 +298,16 @@ public class DaoRoute {
 
 		try {
 			con = ConnexionBD.getConnexion();
-			//String query = "call route_search_with_date_and_delta("
+			// String query = "call route_search_with_date_and_delta("
 			String query = "call route_search_with_date_and_delta_using_subtraject("
-					+ pos_begin.getId() + ", " + pos_end.getId() + ", "
-					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
-					+ DateUtils.getDateAsInteger(date_departure_end) + ", "
+					+ pos_begin.getId()
+					+ ", "
+					+ pos_end.getId()
+					+ ", "
+					+ DateUtils.getDateAsInteger(date_departure_begin)
+					+ ", "
+					+ DateUtils.getDateAsInteger(date_departure_end)
+					+ ", "
 					+ location_appro + ", " + rtp_id + ")";
 			System.out.println(query);
 			ResultSet curseur = con.execute(query);
@@ -329,8 +340,8 @@ public class DaoRoute {
 
 			String query = "call route_search_of_owner(" + usr_id + ", "
 					+ DateUtils.getDateAsInteger(date_departure_begin) + ", "
-					+ DateUtils.getDateAsInteger(date_departure_end)+",0," + rtp_id
-					+ ")";
+					+ DateUtils.getDateAsInteger(date_departure_end) + ",0,"
+					+ rtp_id + ")";
 			ResultSet curseur = con.execute(query);
 			while (curseur.next()) {
 				rte = new Route(curseur);
@@ -340,7 +351,12 @@ public class DaoRoute {
 		}
 		return list;
 	}
-	
+
+	/**
+	 * 
+	 * @param rte
+	 * @return
+	 */
 	public static ArrayList<Segment> getSegments(Route rte) {
 		ArrayList<Segment> retour = new ArrayList<Segment>();
 		try {
@@ -359,6 +375,22 @@ public class DaoRoute {
 		} catch (Exception e) {
 		}
 		return retour;
+	}
+
+	public static void deleteRoute(int rte_id) throws Exception {
+		try {
+			con = ConnexionBD.getConnexion();
+
+			// TODO
+			// Procedure à creer
+			String query = "call route_del_by_id(' " + rte_id + "')";
+			con.execute(query);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(Constantes.ERROR_IN_DELETING_ROAD);
+		}
+
 	}
 
 }
